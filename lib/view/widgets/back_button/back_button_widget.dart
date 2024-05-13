@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vidyaveechi_website/controller/timetable_controller/timetable_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/google_poppins_widget.dart';
+
 class BackButtonContainerWidget extends StatelessWidget {
   const BackButtonContainerWidget({
     super.key,
@@ -11,6 +14,12 @@ class BackButtonContainerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pop(context);
+        final timeTableController = Get.put(TimeTableController());
+
+        timeTableController.periodController.clear();
+        timeTableController.subjectNamecontroller.clear();
+        timeTableController.startTimeviewController.clear();
+        timeTableController.endTimeviewController.clear();
       },
       child: Container(
         height: 30,
@@ -20,10 +29,7 @@ class BackButtonContainerWidget extends StatelessWidget {
         ),
         child: Center(
           child: GooglePoppinsWidgets(
-              text: 'BACK',
-              color: cWhite,
-              fontsize: 12,
-              fontWeight: FontWeight.bold),
+              text: 'BACK', color: cWhite, fontsize: 12, fontWeight: FontWeight.bold),
         ),
       ),
     );
