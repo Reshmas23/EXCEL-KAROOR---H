@@ -112,10 +112,13 @@ class FeesAndBillsController extends GetxController {
               .doc(selectedFeeMonthContoller.text.trim())
               .collection('StudentsFees')
               .doc(docid)
-              .set(feesDetail.toMap())
-              .then((value) async {
-            feestypeNameContoller.clear();
+              .set(feesDetail.toMap());
+        });
+      }
+                  feestypeNameContoller.clear();
             feesContoller.clear();
+            selectAllClass.value=false;
+            selectedClassList.clear();
             feesDueContoller.clear();
             seletedFeeDateContoller.clear();
             selectedFeeMonthContoller.clear();
@@ -128,9 +131,6 @@ class FeesAndBillsController extends GetxController {
             selectedClassList.clear();
             allClassList.clear();
             showToast(msg: 'Fees Genrated Completed');
-          });
-        });
-      }
     } catch (e) {
       showToast(msg: 'Somthing went wrong please try again');
       buttonstate.value = ButtonState.fail;
@@ -200,6 +200,8 @@ class FeesAndBillsController extends GetxController {
       }
       feestypeNameContoller.clear();
       feesContoller.clear();
+             selectAllClass.value=false;
+            selectedClassList.clear();
       feesDueContoller.clear();
       seletedFeeDateContoller.clear();
       selectedFeeMonthContoller.clear();
@@ -392,6 +394,7 @@ class FeesAndBillsController extends GetxController {
   RxList feeMonthList = [].obs;
   RxList feeDateList = [].obs;
 
+  RxString feeMonthDatadowpdown = 'd'.obs;
   RxString feeMonthData = 'd'.obs;
   RxString feeDateData = 'd'.obs;
   RxString feetypeName = ''.obs;
