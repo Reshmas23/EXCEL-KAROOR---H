@@ -118,9 +118,10 @@ class OurTutionCenterContainer extends StatelessWidget {
                                 width: 400,
                                 child: Column(
                                   children: [
-                                    Expanded(
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
                                       child: SizedBox(
-                                        height: 400,
+                                        height: 300,
                                         child: Image.network(
                                           images[index],
                                           fit: BoxFit.cover,
