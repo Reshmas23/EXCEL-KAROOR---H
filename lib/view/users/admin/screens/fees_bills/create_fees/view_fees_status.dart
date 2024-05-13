@@ -243,7 +243,7 @@ class AllClassessFeesDataList extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.find<FeesAndBillsController>().pendingAmountCalculate(data['docid']);
     Get.find<FeesAndBillsController>()
-        .bugCalculateTotalamount(data['docid'], data['totalStudents']);
+        .bugCalculateTotalamount(data['docid']??'', data['totalStudents']??0);
     Get.find<FeesAndBillsController>().collectedAmountCalculate(
       data['docid'],
     );
