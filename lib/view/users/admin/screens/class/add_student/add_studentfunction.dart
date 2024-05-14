@@ -7,10 +7,13 @@ import 'package:vidyaveechi_website/view/widgets/custom_showDilog/custom_showdil
 addStudentToClass(BuildContext context, String classDocid) {
   Get.find<ClassController>().allstudentList.clear();
   customShowDilogBox2(
-      context: context,
-      title: 'All Student',
-      children: [AllStudentDropDown()],
-      doyouwantActionButton: true,
-      actiononTapfuction: () async => await Get.find<ClassController>()
-          .addStudentToClassController(classDocid));
+    context: context,
+    title: 'All Student',
+    children: [AllStudentDropDown()],
+    doyouwantActionButton: true,
+    actiononTapfuction: () async {
+      await Get.find<ClassController>().addStudentToClassController(classDocid);
+      Navigator.pop(context);
+    },
+  );
 }

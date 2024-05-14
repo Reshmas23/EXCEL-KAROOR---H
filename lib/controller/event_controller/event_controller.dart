@@ -109,8 +109,7 @@ class EventController extends GetxController {
         .doc(UserCredentialsController.batchId!)
         .collection('AdminEvents')
         .doc(id)
-        .delete()
-        .then((value) => Navigator.pop(context ));
+        .delete();
   }
 
 

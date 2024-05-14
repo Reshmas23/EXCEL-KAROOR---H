@@ -11,51 +11,58 @@ import 'package:vidyaveechi_website/view/widgets/custom_showdialouge/custom_show
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/textformFiledContainer/textformFiledBlueContainer.dart';
 
-
 editFunctionOfMeeting(BuildContext context, MeetingModel data) {
   final MeetingController meetingController = Get.put(MeetingController());
   customShowDilogBox(
     context: context,
     title: 'Edit Meeting',
     children: [
-    Form(
-      key:meetingController.formKey ,
-      child: Column(
-        children: [
+      Form(
+        key: meetingController.formKey,
+        child: Column(
+          children: [
             TextFormFiledHeightnoColor(
-          validator: checkFieldEmpty,
-          controller: meetingController.edittopicController,
-            hintText: data.topic, title: 'Topic'),
-        TextFormFiledHeightnoColor(
-          validator: checkFieldDateIsValid,
-          onTap: () {
-            meetingController.selectDate(context, meetingController.editdateController);
-          },
-           controller: meetingController.editdateController,
-            hintText: data.date, title: 'Date🗓️ '),
-        TextFormFiledHeightnoColor(
-          validator: checkFieldEmpty,
-           controller: meetingController.edittimeController,
-            hintText: data.time, title: 'Time '),
-        TextFormFiledHeightnoColor(
-          validator: checkFieldEmpty,
-           controller: meetingController.editcategoryController,
-            hintText: data.category, title: 'Category'),
-        TextFormFiledHeightnoColor(
-          validator: checkFieldEmpty,
-           controller: meetingController.editvenueController,
-            hintText: data.venue, title: 'Venue'),
-        TextFormFiledHeightnoColor(
-          validator: checkFieldEmpty,
-           controller: meetingController.editmemberController,
-            hintText: data.members, title: 'Expected Members'),
-        TextFormFiledHeightnoColor(
-          validator: checkFieldEmpty,
-           controller: meetingController.editspecialguestController,
-            hintText: data.specialGuest, title: 'Special Guest'),
-        ],
-      ),
-    )
+                validator: checkFieldEmpty,
+                controller: meetingController.edittopicController,
+                hintText: data.topic,
+                title: 'Topic'),
+            TextFormFiledHeightnoColor(
+                validator: checkFieldDateIsValid,
+                onTap: () {
+                  meetingController.selectDate(
+                      context, meetingController.editdateController);
+                },
+                controller: meetingController.editdateController,
+                hintText: data.date,
+                title: 'Date🗓️ '),
+            TextFormFiledHeightnoColor(
+                validator: checkFieldEmpty,
+                controller: meetingController.edittimeController,
+                hintText: data.time,
+                title: 'Time '),
+            TextFormFiledHeightnoColor(
+                validator: checkFieldEmpty,
+                controller: meetingController.editcategoryController,
+                hintText: data.category,
+                title: 'Category'),
+            TextFormFiledHeightnoColor(
+                validator: checkFieldEmpty,
+                controller: meetingController.editvenueController,
+                hintText: data.venue,
+                title: 'Venue'),
+            TextFormFiledHeightnoColor(
+                validator: checkFieldEmpty,
+                controller: meetingController.editmemberController,
+                hintText: data.members,
+                title: 'Expected Members'),
+            TextFormFiledHeightnoColor(
+                validator: checkFieldEmpty,
+                controller: meetingController.editspecialguestController,
+                hintText: data.specialGuest,
+                title: 'Special Guest'),
+          ],
+        ),
+      )
       // Row(
       //   mainAxisAlignment: MainAxisAlignment.end,
       //   children: [
@@ -83,16 +90,15 @@ editFunctionOfMeeting(BuildContext context, MeetingModel data) {
       //     ),
       //   ],
       // ),
-    ],doyouwantActionButton: true,
+    ],
+    doyouwantActionButton: true,
     actiononTapfuction: () {
-     if (meetingController.formKey .currentState! .validate()) {
-              meetingController.updateMeeting(
-        data.meetingId, context);
-            }
-    // meetingController.updateMeeting(
-    //     data.meetingId, context);
+      if (meetingController.formKey.currentState!.validate()) {
+        meetingController.updateMeeting(data.meetingId, context);
+      }
+      // meetingController.updateMeeting(
+      //     data.meetingId, context);
     },
-    
     actiontext: 'Update',
   );
 }
@@ -133,7 +139,7 @@ allviewFunctionOfMeeting(BuildContext context, MeetingModel data) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const TextFontWidget(
+                  const TextFontWidget(
                     text: "   Topic",
                     fontsize: 12,
                     fontWeight: FontWeight.bold,
@@ -152,7 +158,7 @@ allviewFunctionOfMeeting(BuildContext context, MeetingModel data) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const TextFontWidget(
+                  const TextFontWidget(
                     text: "   Time",
                     fontsize: 12,
                     fontWeight: FontWeight.bold,
@@ -171,7 +177,7 @@ allviewFunctionOfMeeting(BuildContext context, MeetingModel data) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const TextFontWidget(
+                  const TextFontWidget(
                     text: "   Date",
                     fontsize: 12,
                     fontWeight: FontWeight.bold,
@@ -190,7 +196,7 @@ allviewFunctionOfMeeting(BuildContext context, MeetingModel data) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const TextFontWidget(
+                  const TextFontWidget(
                     text: "   Category",
                     fontsize: 12,
                     fontWeight: FontWeight.bold,
@@ -210,7 +216,7 @@ allviewFunctionOfMeeting(BuildContext context, MeetingModel data) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const TextFontWidget(
+                  const TextFontWidget(
                     text: "   Venue",
                     fontsize: 12,
                     fontWeight: FontWeight.bold,
@@ -229,7 +235,7 @@ allviewFunctionOfMeeting(BuildContext context, MeetingModel data) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const TextFontWidget(
+                  const TextFontWidget(
                     text: "  Expected Members",
                     fontsize: 12,
                     fontWeight: FontWeight.bold,
@@ -248,7 +254,7 @@ allviewFunctionOfMeeting(BuildContext context, MeetingModel data) {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const TextFontWidget(
+                  const TextFontWidget(
                     text: "   Special Guest",
                     fontsize: 12,
                     fontWeight: FontWeight.bold,

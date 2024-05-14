@@ -95,7 +95,8 @@ class LeaveApplicationData extends StatelessWidget {
                             const SizedBox(height: 5),
                             Text(
                               '${data['leaveReason']}',
-                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 5),
                             Text(
@@ -106,13 +107,17 @@ class LeaveApplicationData extends StatelessWidget {
                                 'from ${data['leaveFromDate']} to ${data['leaveToDate']}. Therefore, I humbly request',
                                 style: const TextStyle(fontSize: 16)),
                             const SizedBox(height: 5),
-                            const Text('you to grant leave.', style: TextStyle(fontSize: 16)),
+                            const Text('you to grant leave.',
+                                style: TextStyle(fontSize: 16)),
                             const SizedBox(height: 20),
-                            const Text('Thanking You,', style: TextStyle(fontSize: 16)),
+                            const Text('Thanking You,',
+                                style: TextStyle(fontSize: 16)),
                             const SizedBox(height: 5),
-                            const Text('Yours sincerely,', style: TextStyle(fontSize: 16)),
+                            const Text('Yours sincerely,',
+                                style: TextStyle(fontSize: 16)),
                             const SizedBox(height: 5),
-                            Text('${data['studentParent']}', style: const TextStyle(fontSize: 16)),
+                            Text('${data['studentParent']}',
+                                style: const TextStyle(fontSize: 16)),
                             const SizedBox(height: 5),
                             Text('Date: ${data['applyLeaveDate']} ',
                                 style: const TextStyle(fontSize: 16))
@@ -130,7 +135,9 @@ class LeaveApplicationData extends StatelessWidget {
       child: Container(
         height: 45,
         decoration: BoxDecoration(
-          color: index % 2 == 0 ? const Color.fromARGB(255, 246, 246, 246) : Colors.blue[50],
+          color: index % 2 == 0
+              ? const Color.fromARGB(255, 246, 246, 246)
+              : Colors.blue[50],
         ),
         child: Row(
           children: [
@@ -155,7 +162,9 @@ class LeaveApplicationData extends StatelessWidget {
                   fontsize: 12,
                   color: cWhite,
                   index: index,
-                  text: data['id'] != null ? data['id'].toString() : 'List is Empty',
+                  text: data['id'] != null
+                      ? data['id'].toString()
+                      : 'List is Empty',
                 ),
               ),
             ),
@@ -201,7 +210,11 @@ class LeaveApplicationData extends StatelessWidget {
                   // width: 150,
                   index: index,
                   // ignore: unnecessary_null_comparison
-                  text: compare == null ? 'Compare value not available' : '$compare Days',
+                  text: compare == null
+                      ? 'Compare value not available'
+                      : compare == 0
+                          ? 'For ${compare + 1} Day'
+                          : 'For ${compare + 1} Days',
                 ),
                 //  compare != null ? '$compare Days' : 'Compare value not available',
               ),
@@ -255,9 +268,13 @@ class LeaveApplicationData extends StatelessWidget {
                             fontsize: 12,
                             color: cWhite,
                             index: index,
-                            text: snapshot.data!.docs[index]['parentPhoneNumber'] == null
+                            text: snapshot.data!.docs[index]
+                                        ['parentPhoneNumber'] ==
+                                    null
                                 ? 'Phone Number not available'
-                                : snapshot.data!.docs[index]['parentPhoneNumber'].toString());
+                                : snapshot
+                                    .data!.docs[index]['parentPhoneNumber']
+                                    .toString());
                       }),
                 ],
               ),

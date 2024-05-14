@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vidyaveechi_website/controller/meeting_controller/meeting_controller.dart';
 import 'package:vidyaveechi_website/model/meeting_model/meeting_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
@@ -7,7 +9,7 @@ import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_containe
 
 class AllMeetingsDataList extends StatelessWidget {
   final int index;
-   final MeetingModel data;
+  final MeetingModel data;
   const AllMeetingsDataList({
     required this.index,
     required this.data,
@@ -16,9 +18,10 @@ class AllMeetingsDataList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MeetingController meetingController = Get.put(MeetingController());
     return Container(
       height: 45,
-       decoration: BoxDecoration(
+      decoration: BoxDecoration(
         color: index % 2 == 0
             ? const Color.fromARGB(255, 246, 246, 246)
             : Colors.blue[50],
@@ -52,7 +55,7 @@ class AllMeetingsDataList extends StatelessWidget {
             flex: 4,
             child: GestureDetector(
               onTap: () {
-                 allviewFunctionOfMeeting(context, data);
+                allviewFunctionOfMeeting(context, data);
               },
               child: Row(
                 children: [
@@ -64,7 +67,7 @@ class AllMeetingsDataList extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Expanded(
+                  Expanded(
                     child: TextFontWidget(
                       text: data.topic,
                       fontsize: 12,
@@ -78,11 +81,11 @@ class AllMeetingsDataList extends StatelessWidget {
           const SizedBox(
             width: 01,
           ),
-           Expanded(
+          Expanded(
             flex: 3,
             child: GestureDetector(
               onTap: () {
-                 allviewFunctionOfMeeting(context, data);
+                allviewFunctionOfMeeting(context, data);
               },
               child: Row(
                 children: [
@@ -94,7 +97,7 @@ class AllMeetingsDataList extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Expanded(
+                  Expanded(
                     child: TextFontWidget(
                       text: data.date,
                       fontsize: 12,
@@ -105,14 +108,14 @@ class AllMeetingsDataList extends StatelessWidget {
               ),
             ),
           ), //////////////////////////////////date
-           const SizedBox(
+          const SizedBox(
             width: 01,
           ),
           Expanded(
             flex: 3,
             child: GestureDetector(
               onTap: () {
-                 allviewFunctionOfMeeting(context, data);
+                allviewFunctionOfMeeting(context, data);
               },
               child: Row(
                 children: [
@@ -124,7 +127,7 @@ class AllMeetingsDataList extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Expanded(
+                  Expanded(
                     child: TextFontWidget(
                       text: data.time,
                       fontsize: 12,
@@ -154,7 +157,7 @@ class AllMeetingsDataList extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Expanded(
+                  Expanded(
                     child: TextFontWidget(
                       text: data.venue,
                       fontsize: 12,
@@ -171,17 +174,24 @@ class AllMeetingsDataList extends StatelessWidget {
           Expanded(
             flex: 3,
             child: GestureDetector(
-              onTap: () {
-                editFunctionOfMeeting(context, data);
-              },
-              child:DataContainerWidget(
+                onTap: () {
+                  meetingController.edittopicController.text = data.topic;
+                  meetingController.editdateController.text = data.date;
+                  meetingController.edittimeController.text = data.time;
+                  meetingController.editcategoryController.text = data.category;
+                  meetingController.editvenueController.text = data.venue;
+                  meetingController.editmemberController.text = data.members;
+                  meetingController.editspecialguestController.text =
+                      data.specialGuest;
+                  editFunctionOfMeeting(context, data);
+                },
+                child: DataContainerWidget(
                     rowMainAccess: MainAxisAlignment.center,
                     color: cWhite,
                     // width: 150,
                     index: index,
-                    headerTitle: ' Update 🖋️')
-            ),
-          ),  //............................. Student Class
+                    headerTitle: ' Update 🖋️')),
+          ), //............................. Student Class
 
           const SizedBox(
             width: 01,
@@ -190,14 +200,14 @@ class AllMeetingsDataList extends StatelessWidget {
             flex: 3,
             child: GestureDetector(
               onTap: () {
-                deleteFunctionOfMeetings(context,data);
+                deleteFunctionOfMeetings(context, data);
               },
-              child:DataContainerWidget(
-                    rowMainAccess: MainAxisAlignment.center,
-                    color: cWhite,
-                    // width: 150,
-                    index: index,
-                    headerTitle: ' Remove 🗑️'),
+              child: DataContainerWidget(
+                  rowMainAccess: MainAxisAlignment.center,
+                  color: cWhite,
+                  // width: 150,
+                  index: index,
+                  headerTitle: ' Remove 🗑️'),
             ),
           ), //............................. Status [Active or DeActivate]
         ],

@@ -16,7 +16,7 @@ class AchievementDataList extends StatelessWidget {
     super.key,
   });
 
-  final AchievementsController noticeController =
+  final AchievementsController achievementController =
       Get.put(AchievementsController());
   @override
   Widget build(BuildContext context) {
@@ -90,10 +90,18 @@ class AchievementDataList extends StatelessWidget {
             child: Center(
               child: GestureDetector(
                 onTap: () {
+                  achievementController.editstudentNameController.text =
+                      data.studentName;
+                  achievementController.editadmissionNumberController.text =
+                      data.admissionNumber;
+                  achievementController.editdateController.text =
+                      data.dateofAchievement;
+                  achievementController.editachievementController.text =
+                      data.achievementHead;
                   editFunctionOfAchievements(context, data);
                   // editFunctionOfNotice(context, data);
                 },
-                child:DataContainerWidget(
+                child: DataContainerWidget(
                     rowMainAccess: MainAxisAlignment.center,
                     color: cWhite,
                     // width: 150,

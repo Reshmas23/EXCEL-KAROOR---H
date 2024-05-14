@@ -137,7 +137,6 @@ class AchievementsController extends GetxController {
         .collection('AdminAchievements')
         .doc(uid)
         .delete()
-        .then((value) => Navigator.pop(context ))
         .then((value) => showToast(msg: 'Successfully Deleted!'));
   }
 

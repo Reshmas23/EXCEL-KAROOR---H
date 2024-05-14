@@ -173,6 +173,9 @@ class GeneralInsructions extends StatelessWidget {
                                                 children: [
                                                   GestureDetector(
                                                     onTap: () {
+                                                      generalInsructionController
+                                                          .instructionController
+                                                          .text = data.instruction;
                                                       customShowDilogBox(
                                                           context: context,
                                                           title: 'Edit',
