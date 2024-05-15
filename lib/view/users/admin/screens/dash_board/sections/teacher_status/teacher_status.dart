@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
-import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
-import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
-import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
+import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 
 class TotalTeacherViewContainer extends StatelessWidget {
@@ -12,29 +11,32 @@ class TotalTeacherViewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: ResponsiveWebSite.isMobile(context) ? 320 : 420,
-      width: ResponsiveWebSite.isMobile(context) ? double.infinity : 450,
-      decoration: BoxDecoration(
-          color: cWhite, border: Border.all(color: cBlack.withOpacity(0.1))),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 25, left: 20),
-            child: TextFontWidget(
-              text: "All Teachers",
-              fontsize: ResponsiveWebSite.isMobile(context) ? 12 : 17,
-              fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        height: ResponsiveWebSite.isMobile(context) ? 320 : 420,
+        width: ResponsiveWebSite.isMobile(context) ? double.infinity : 450,
+        decoration:
+            BoxDecoration(color: cWhite, border: Border.all(color: cBlack.withOpacity(0.1))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 25, left: 20),
+              child: TextFontWidget(
+                text: "All Teachers",
+                fontsize: ResponsiveWebSite.isMobile(context) ? 12 : 17,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: AllTeacherStatusListView(),
-            ),
-          )
-        ],
+            const Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: AllTeacherStatusListView(),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -45,101 +47,152 @@ class AllTeacherStatusListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final date = DateTime.now();
-    DateTime parseDate = DateTime.parse(date.toString());
-    final month = DateFormat('MMMM-yyyy');
-    // ignore: unused_local_variable
-    String monthwise = month.format(parseDate);
-    final DateFormat formatter = DateFormat('dd-MM-yyyy');
-    String formatted = formatter.format(parseDate);
-    return StreamBuilder(
-        stream: server
-            .collection('SchoolListCollection')
-            .doc(UserCredentialsController.schoolId)
-            .collection(UserCredentialsController.batchId!)
-            .doc(UserCredentialsController.batchId)
-            .collection('TodayActiveClasses')
-            .doc(formatted)
-            .collection('Classes')
-            .snapshots(),
-        builder: (context, snaps) {
-          if (snaps.hasData) {
-            return  snaps.data!.docs.isEmpty
-                ? const Text('Please take attendece in application !!!')
-                :   ListView.separated(
-                itemBuilder: (context, index) {
-                  final data = snaps.data!.docs[index].data();
-                  return Container(
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 176, 238, 178)
-                            .withOpacity(0.1),
-                        border:
-                            Border.all(color: Colors.grey.withOpacity(0.1))),
-                    child: ListTile(
-                      leading: const CircleAvatar(
-                        radius: 15,
-                        child: CircleAvatar(
-                          backgroundColor: cWhite,
-                          radius: 10,
-                        ),
-                      ),
-                      title: StreamBuilder(
-                          stream: server
-                              .collection('SchoolListCollection')
-                              .doc(UserCredentialsController.schoolId)
-                              .collection('Teachers')
-                              .doc(data['teacherDocid'])
-                              .snapshots(),
-                          builder: (context, teacherSnap) {
-                            if (teacherSnap.hasData) {
-                              return TextFontWidget(
-                                text: teacherSnap.data!.data()!['teacherName'],
-                                fontsize: ResponsiveWebSite.isMobile(context)
-                                    ? 11
-                                    : 12,
-                                fontWeight: FontWeight.w500,
-                              );
-                            } else {
-                              return TextFontWidget(
-                                text: '........',
-                                fontsize: ResponsiveWebSite.isMobile(context)
-                                    ? 11
-                                    : 12,
-                                fontWeight: FontWeight.w500,
-                              );
-                            }
-                          }),
-                      subtitle: Row(
-                        children: [
-                          Expanded(
-                            child: TextFontWidget(
-                              text: data['subjectName'],
-                              fontsize:
-                                  ResponsiveWebSite.isMobile(context) ? 11 : 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+    RxBool status = true.obs;
+    return Column(
+      children: [
+        const Row(
+          children: [
+            Expanded(flex: 7, child: CatrgoryTableHeaderWidget(headerTitle: 'Tr Name')),
+            SizedBox(
+              width: 02,
+            ),
+            Expanded(flex: 5, child: CatrgoryTableHeaderWidget(headerTitle: 'incharge')),
+            SizedBox(
+              width: 02,
+            ),
+            Expanded(flex: 7, child: CatrgoryTableHeaderWidget(headerTitle: 'Current class')),
+            SizedBox(
+              width: 02,
+            ),
+            Expanded(flex: 6, child: CatrgoryTableHeaderWidget(headerTitle: 'Rate/hour')),
+            SizedBox(
+              width: 02,
+            ),
+            Expanded(flex: 6, child: CatrgoryTableHeaderWidget(headerTitle: 'Total hour')),
+            SizedBox(
+              width: 02,
+            ),
+            Expanded(flex: 4, child: CatrgoryTableHeaderWidget(headerTitle: 'Status')),
+            SizedBox(
+              width: 02,
+            ),
+          ],
+        ),
+        ListView.separated(
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 1,
+          ),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return Container(
+              height: 45,
+              color: index % 2 == 0 ? const Color.fromARGB(255, 246, 246, 246) : Colors.blue[50],
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: Center(
+                      child: DataContainerWidget(
+                          rowMainAccess: MainAxisAlignment.center,
+                          color: cWhite,
+                          // width: 150,
+                          index: index,
+                          headerTitle: '  rani'),
+                    ), //....................No
+                  ),
+                  const SizedBox(
+                    width: 02,
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: Center(
+                      child: DataContainerWidget(
+                          rowMainAccess: MainAxisAlignment.center,
+                          color: cWhite,
+                          index: index,
+                          headerTitle: 'XI'),
+                    ),
+                  ), //................................................. Months
+                  const SizedBox(
+                    width: 02,
+                  ),
+                  Expanded(
+                    flex: 7,
+                    child: Center(
+                      child: DataContainerWidget(
+                        rowMainAccess: MainAxisAlignment.center,
+                        color: cWhite,
+                        index: index,
+                        headerTitle: 'X',
                       ),
                     ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 05,
-                  );
-                },
-                itemCount: snaps.data!.docs.length);
-          } else if (snaps.data == null) {
-            return TextFontWidget(
-              text: 'PLease take attendence',
-              fontsize: ResponsiveWebSite.isMobile(context) ? 11 : 12,
-              fontWeight: FontWeight.w500,
+                  ),
+                  const SizedBox(
+                    width: 02,
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Container(
+                      color: index % 2 == 0
+                          ? const Color.fromARGB(255, 246, 246, 246)
+                          : Colors.blue[50],
+                      child: Center(
+                        child: DataContainerWidget(
+                          rowMainAccess: MainAxisAlignment.center,
+                          color: cWhite,
+                          index: index,
+                          headerTitle: "100",
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 02,
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Center(
+                      child: DataContainerWidget(
+                        rowMainAccess: MainAxisAlignment.center,
+                        color: cWhite,
+                        index: index,
+                        headerTitle: "10",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 02,
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: GestureDetector(
+                      onTap: () {
+                        // status.value == true ? status.value = false : status.value = true;
+                      },
+                      child: Obx(
+                        () => SizedBox(
+                          width: 10,
+                          height: 20,
+                          child: Image.asset(
+                            status.value == true
+                                ? 'webassets/png/active.png'
+                                : 'webassets/png/shape.png',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 02,
+                  ),
+                ],
+              ),
             );
-          } else {
-            return const LoadingWidget();
-          }
-        });
+          },
+        ),
+      ],
+    );
   }
 }
