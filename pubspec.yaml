@@ -101,6 +101,11 @@ dependencies:
   skeletonizer: ^1.1.0
   firebase_app_check:
   syncfusion_flutter_xlsio:
+  connectivity_plus:
+  pdf: 
+  path_provider: 
+  printing:
+  csv: 
 
 dev_dependencies:
   flutter_test:

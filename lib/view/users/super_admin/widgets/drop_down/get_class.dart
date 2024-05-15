@@ -5,19 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/view/users/super_admin/controllers/temp_Collection_controller/temp_students_controller/temp_student_controller.dart';
 
+import '../../controllers/add_student_firebase/add_student_toFirebase_controller.dart';
 import '../../controllers/temp_Collection_controller/temp_gurdian_cotroller/temp_guardian_controller.dart';
 import '../../controllers/temp_Collection_controller/temp_parent_controller/temp_parent_controller.dart';
 
 var classesListValue;
 
 class GetClassesListDropDownButton extends StatefulWidget {
- final TempStudentController tempStudentController =
+  TempStudentController tempStudentController =
       Get.put(TempStudentController());
- final TempGuardianController tempGuardianController =
+  TempGuardianController tempGuardianController =
       Get.put(TempGuardianController());
- final TempParentController tempParentController = Get.put(TempParentController());
- final String schoolID;
- final String batchyearID;
+  AddStudentToFirebaseController addStudentToFirebase =
+      Get.put(AddStudentToFirebaseController());
+  TempParentController tempParentController = Get.put(TempParentController());
+  String schoolID;
+  String batchyearID;
   GetClassesListDropDownButton(
       {Key? key, required this.schoolID, required this.batchyearID})
       : super(key: key);
@@ -87,11 +90,16 @@ class _GeClasseslListDropDownButtonState
                   () {
                     widget.tempStudentController.classID.value =
                         categoryIDObject['docid'];
+
                     widget.tempParentController.classID.value =
                         categoryIDObject['docid'];
-                    classesListValue = categoryIDObject;
+
                     widget.tempGuardianController.classID.value =
                         categoryIDObject['docid'];
+
+                    widget.addStudentToFirebase.classID.value =
+                        categoryIDObject['docid'];
+
                     classesListValue = categoryIDObject;
                   },
                 );

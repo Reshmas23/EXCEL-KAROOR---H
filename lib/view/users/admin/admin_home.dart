@@ -56,7 +56,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         builder: (context, snap) {
           if (snap.hasData) {
             return snap.data?.data()?['active'] == false
-                ? Scaffold(
+                ? const Scaffold(
                     body: SafeArea(
                         child: Center(
                       child: TextFontWidget(
