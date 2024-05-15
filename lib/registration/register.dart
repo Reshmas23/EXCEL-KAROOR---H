@@ -35,7 +35,7 @@ class _RegistrationState extends State<Registration> {
                 // color: cred,
                 child: Form(
                   key: formKey,
-                  child: Column(
+                  child:  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
