@@ -8,8 +8,8 @@ import 'package:vidyaveechi_website/view/users/super_admin/widgets/drop_down/sel
 import '../../../widgets/drop_down/get_class.dart';
 
 class ParentTempCollection extends StatelessWidget {
- final TempParentController tempParentController = Get.put(TempParentController());
- final String schoolID;
+  TempParentController tempParentController = Get.put(TempParentController());
+  String schoolID;
   ParentTempCollection({super.key, required this.schoolID});
 
   @override
@@ -76,9 +76,13 @@ class ParentTempCollection extends StatelessWidget {
                                 color: const Color.fromARGB(255, 190, 220, 245),
                                 child: Row(
                                   children: [
-                                    const SizedBox(height: 10,),
+                                          const  SizedBox(
+                            width: 10,
+                          ),
                                     Text('${index + 1}'),
-                                    const SizedBox(height: 10,),
+                                          const  SizedBox(
+                            width: 10,
+                          ),
                                     Text(
                                         snaps.data!.docs[index]['parentName']),
                                     IconButton(

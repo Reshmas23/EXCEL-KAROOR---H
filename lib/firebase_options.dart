@@ -53,12 +53,12 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDhC-ugCUkmO9M01elVu7XezVO70dYvHdQ',
-    appId: '1:1084658282710:web:cbadc13cc6266048495977',
-    messagingSenderId: '1084658282710',
-    projectId: 'excelkarror-april-02',
-    authDomain: 'excelkarror-april-02.firebaseapp.com',
-    storageBucket: 'excelkarror-april-02.appspot.com',
-    measurementId: 'G-ETD0JXX2CE',
+    apiKey: 'AIzaSyBz5M5obKCNCx5ogAhyEiLFanqEydmuQMQ',
+    appId: '1:252235220748:web:71df987b42f1fc1618eb29',
+    messagingSenderId: '252235220748',
+    projectId: 'excel-karoor-15-may',
+    authDomain: 'excel-karoor-15-may.firebaseapp.com',
+    storageBucket: 'excel-karoor-15-may.appspot.com',
+    measurementId: 'G-JDVFV305KF',
   );
 }

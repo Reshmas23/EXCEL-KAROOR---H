@@ -4,20 +4,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/add_student_firebase/add_student_toFirebase_controller.dart';
 import '../../controllers/temp_Collection_controller/temp_gurdian_cotroller/temp_guardian_controller.dart';
 import '../../controllers/temp_Collection_controller/temp_parent_controller/temp_parent_controller.dart';
 import '../../controllers/temp_Collection_controller/temp_students_controller/temp_student_controller.dart';
 
 var schoolBatchYearListValue;
 
-// ignore: must_be_immutable
 class GetBatchYearListDropDownButton extends StatefulWidget {
   var schoolID;
- final TempStudentController tempStudentController =
+  TempStudentController tempStudentController =
       Get.put(TempStudentController());
- final TempGuardianController tempGuardianController =
+  TempGuardianController tempGuardianController =
       Get.put(TempGuardianController());
- final TempParentController tempParentController = Get.put(TempParentController());
+  AddStudentToFirebaseController addStudentToFirebase = Get.put(AddStudentToFirebaseController());
+  TempParentController tempParentController = Get.put(TempParentController());
   GetBatchYearListDropDownButton({required this.schoolID, Key? key})
       : super(key: key);
 
@@ -82,12 +83,19 @@ class _GeClasseslListDropDownButtonState
                   () {
                     widget.tempStudentController.batchYear.value =
                         categoryIDObject['id'];
+
                     widget.tempParentController.batchYear.value =
                         categoryIDObject['id'];
+
                     widget.tempGuardianController.batchYear.value =
                         categoryIDObject['id'];
-                    schoolBatchYearListValue = categoryIDObject;
-                    log('Getx batchyear ${widget.tempStudentController.batchYear.value}');
+
+                 
+                    widget.addStudentToFirebase.batchYear.value =
+                        categoryIDObject['id'];
+                        
+                           schoolBatchYearListValue = categoryIDObject;
+                    // log('Getx batchyear ${widget.tempStudentController.batchYear.value}');
                   },
                 );
               },
