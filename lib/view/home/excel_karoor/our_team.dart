@@ -113,40 +113,14 @@ class OurTutionCenterContainer extends StatelessWidget {
                            // controller: sscrollcontroller,
                             itemBuilder: (context, index) {
                             //  final data = CreateEmployeeClassModel.fromMap(snapshot.data!.docs[index].data());
-                              return SizedBox(
-                                height: 400,
-                                width: 400,
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SizedBox(
-                                        height: 300,
-                                        child: Image.network(
-                                          images[index],
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(top: 05),
-                                    //   child: Text(
-                                    //    personNameList[index],
-                                    //     style: const TextStyle(
-                                    //         color: cWhite,
-                                    //         fontWeight: FontWeight.w400),
-                                    //   ),
-                                    // ),
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(bottom: 20),
-                                    //   child: GooglePoppinsWidgets(
-                                    //     text: personOccu[index],
-                                    //     fontsize: 10,
-                                    //     color: cWhite,
-                                    //     fontWeight: FontWeight.w200,
-                                    //   ),
-                                    // )
-                                  ],
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  height: 300,
+                                  child: Image.network(
+                                    images[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               );
                             },
@@ -172,30 +146,11 @@ class OurTutionCenterContainer extends StatelessWidget {
                                       height: 100,
                                       width: 100,
                                       // color: Colors.amber,
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              child: Image.network(
-                                                images[index],
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          // Text(
-                                          //    personNameList[index],
-                                          //   style: const TextStyle(
-                                          //       color: cWhite,
-                                          //       fontWeight: FontWeight.w400),
-                                          // ),
-                                          // GooglePoppinsWidgets(
-                                          //   text: personOccu[index],
-                                          //   fontsize: 10,
-                                          //   color: cWhite,
-                                          //   fontWeight: FontWeight.w200,
-                                          // )
-                                        ],
+                                      child: Expanded(flex: 1,
+                                        child: Image.network(
+                                          images[index],
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     );
                                 }
