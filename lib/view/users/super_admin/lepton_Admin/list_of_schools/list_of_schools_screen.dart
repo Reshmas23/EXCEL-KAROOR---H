@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vidyaveechi_website/view/users/super_admin/lepton_Admin/list_of_schools/details.dart';
 
 import '../../widgets/buttonContainer.dart';
+import 'details.dart';
 
 class SchoolsListScreen extends StatefulWidget {
   static const String route = '/SchooList';
@@ -16,7 +16,9 @@ class SchoolsListScreen extends StatefulWidget {
 class _SchoolsListScreenState extends State<SchoolsListScreen> {
   @override
   Widget build(BuildContext context) {
- 
+    int columnCount = 3;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
         body: SafeArea(
       child: Column(

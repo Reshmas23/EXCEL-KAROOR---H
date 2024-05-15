@@ -4,8 +4,6 @@ import 'package:awesome_side_sheet/Enums/sheet_position.dart';
 import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//import 'package:progress_state_button/progress_button.dart';
-import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
 import 'package:vidyaveechi_website/controller/subject_controller/subject_controller.dart';
 import 'package:vidyaveechi_website/model/subject_model/subject_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
@@ -67,9 +65,9 @@ createSubjectFunction(BuildContext context, String classId) {
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.zero,
                   ),
-                  value: subjectController.subjectColor!.value,
+                  value: subjectController.subjectColor.value,
                   onChanged: (Color? newValue) {
-                    subjectController.subjectColor!.value = newValue ??
+                    subjectController.subjectColor.value = newValue ??
                         Colors.amber; // Update selectColor in controller
                     log('COL :${newValue?.value.toRadixString(16)}');
                   },
@@ -129,7 +127,7 @@ createSubjectFunction(BuildContext context, String classId) {
                     builder: (context, snap) {
                       if (snap.hasData) {
                         if (snap.data!.docs.isEmpty) {
-                          return  Center(
+                          return  const Center(
                             child: TextFontWidget(
                                 text: "No class found add new classes",
                                 fontsize: 12.5),
@@ -187,11 +185,7 @@ createSubjectFunction(BuildContext context, String classId) {
                                                       ),
                                                       GestureDetector(
                                                         onTap: () {
-                                                          Get.find<
-                                                                  ClassController>()
-                                                              .deleteClass(
-                                                                  data.docid,
-                                                                  context);
+                                                     subjectController.deleteSubject(data.docid,context);
                                                         },
                                                         child: const Icon(
                                                           Icons.delete,

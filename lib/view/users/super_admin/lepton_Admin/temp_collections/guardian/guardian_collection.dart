@@ -8,8 +8,8 @@ import '../../../controllers/temp_Collection_controller/temp_gurdian_cotroller/t
 import '../../../widgets/drop_down/get_class.dart';
 
 class GuardianTempCollection extends StatelessWidget {
- final TempGuardianController tempGuardianController = Get.put(TempGuardianController());
- final String schoolID;
+  TempGuardianController tempGuardianController = Get.put(TempGuardianController());
+  String schoolID;
   GuardianTempCollection({super.key, required this.schoolID});
 
   @override
@@ -76,9 +76,13 @@ class GuardianTempCollection extends StatelessWidget {
                                 color: const Color.fromARGB(255, 190, 220, 245),
                                 child: Row(
                                   children: [
-                                    const SizedBox(height: 10,),
+                                          const  SizedBox(
+                            width: 10,
+                          ),
                                     Text('${index + 1}'),
-                                    const SizedBox(height: 10,),
+                                          const  SizedBox(
+                            width: 10,
+                          ),
                                     Text(
                                         snaps.data!.docs[index]['guardianName']),
                                     IconButton(

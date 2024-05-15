@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:vidyaveechi_website/view/home/screens/footer/widgets/Iconbackbutton.dart';
-import 'package:vidyaveechi_website/view/users/super_admin/controllers/password_controller/password_controller.dart';
 import 'package:vidyaveechi_website/view/users/super_admin/widgets/responsive.dart';
 
 import '../../../colors/colors.dart';
 import '../../../fonts/fonts.dart';
+import '../controllers/password_controller/password_controller.dart';
 import 'admin_home_screen.dart';
 
 class LeptonAdminLoginScreen extends StatelessWidget {
   LeptonAdminLoginScreen({Key? key}) : super(key: key);
 
   final _hideGetxController = Get.put(PasswordField());
-  final String adminpassword = '';
+  String adminpassword = '';
   static const String route = '/adminLoginScreen';
 
   final TextEditingController _leptonIdController = TextEditingController();
 
-  final TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +40,8 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                       height: height,
                       color: const Color.fromARGB(255, 6, 71, 157),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           IconButtonBackWidget(
                             color: cWhite,
@@ -146,10 +146,6 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.email),
-                            ),
                             contentPadding: const EdgeInsets.only(top: 16.0),
                             hintText: 'Enter your ID',
                             hintStyle: ralewayStyle.copyWith(
@@ -202,10 +198,6 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                                     _hideGetxController.toggleObscureSecond();
                                   },
                                 ),
-                                prefixIcon: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.password),
-                                ),
                                 contentPadding:
                                     const EdgeInsets.only(top: 16.0),
                                 hintText: 'Enter Password',
@@ -240,11 +232,27 @@ class LeptonAdminLoginScreen extends StatelessWidget {
                           onTap: () async {
                             if (_leptonIdController.text.trim() ==
                                     'openadminpanel' &&
-                                passwordController.text.trim() == 'Lemon4you') {
-                              Get.off(const LeptonHomePage());
-                            } else {
-                              return;
-                            }
+                                passwordController.text.trim() ==
+                                    'Lemon4you') {
+                                      Get.to(()=>const LeptonHomePage());
+                                    }
+                            // try {
+                            //   await FirebaseAuth.instance
+                            //       .signInWithEmailAndPassword(
+                            //           email: _leptonIdController.text.trim(),
+                            //           password: passwordController.text.trim())
+                            //       .then(
+                            //         (value) => Navigator.pushNamed(
+                            //           context,
+                            //           LeptonHomePage.route,
+                            //         ),
+                            //       );
+                            //   // .then((value) => Get.to(SchoolStudentHomeNew(
+                            //   //       schoolID: schoolId,
+                            //   //       classID: classID,
+                            //   //       studentEmailid: emailController.text.trim(),
+                            //   //     )));
+                            // } catch (e) {}
                           },
                           borderRadius: BorderRadius.circular(16.0),
                           child: Ink(
