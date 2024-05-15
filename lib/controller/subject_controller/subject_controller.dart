@@ -145,6 +145,59 @@ class SubjectController extends GetxController {
         .update({'subjectNameedit': status});
   }
 
+  Future<void> deleteSubject(String docid, BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(),
+          title: const Text('Alert'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                    'Once you delete a Subject all data will be lost \n Are you sure ?')
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: () async {
+                try {
+                  await _firebase
+                      .doc(Get.find<ClassController>()
+                          .classModelData
+                          .value!
+                          .docid)
+                      .collection("subjects")
+                      .doc(docid)
+                      .delete()
+                      .then((value) => showToast(msg: 'Subject Deleted'));
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                  }
+                } catch (e) {
+                  showToast(msg: 'Somthing went wrong please try again');
+                  if (kDebugMode) {
+                    log(e.toString());
+                  }
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> updateSubjectName(String docid) async {
     //................. Update Class Name
     //.... Update Class Name

@@ -19,11 +19,11 @@ class LeptonHomePage extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                            Get.off(const SchoolsListScreen());
-         
+                Get.to(() => const SchoolsListScreen());
               },
               child: ButtonContainerWidget(
                 curving: 30,
+                
                 colorindex: 0,
                 height: 200,
                 width: 400,
@@ -39,7 +39,8 @@ class LeptonHomePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-             Get.off(RequestedSchoolsListScreen());
+                Get.to(() => RequestedSchoolsListScreen());
+                // Navigator.pushNamed(context, RequestedSchoolsListScreen.route);
               },
               child: ButtonContainerWidget(
                 curving: 30,

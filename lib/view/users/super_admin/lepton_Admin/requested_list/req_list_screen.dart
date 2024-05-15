@@ -9,9 +9,9 @@ import '../../controllers/school_approve_controller/school_approve_controller.da
 import '../../widgets/buttonContainer.dart';
 
 class RequestedSchoolsListScreen extends StatelessWidget {
- final AddNewSchoolController addNewSchoolController =
+  AddNewSchoolController addNewSchoolController =
       Get.put(AddNewSchoolController());
- final SchoolApproveController schoolApproveController =
+  SchoolApproveController schoolApproveController =
       Get.put(SchoolApproveController());
         static const String route = '/requestedSchools';
 
@@ -104,7 +104,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 10,),
+                                                const  SizedBox(
+                            height: 10,
+                          ),
                                           Flexible(
                                             child: Text(
                                               schoolApproveController
@@ -115,7 +117,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          const SizedBox(height: 10,),
+                                                const  SizedBox(
+                            height: 10,
+                          ),
                                           Flexible(
                                             child: Text(
                                               schoolApproveController
@@ -127,7 +131,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 20,),
+                                                const  SizedBox(
+                            height: 20,
+                          ),
                                           Flexible(
                                             child: Text(
                                               "Country : India",
@@ -138,7 +144,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 10,),
+                                                const  SizedBox(
+                            height: 10,
+                          ),
                                           Flexible(
                                             child: Text(
                                               "State : Kerala",
@@ -149,7 +157,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 10,),
+                                                const  SizedBox(
+                            height: 10,
+                          ),
                                           Flexible(
                                             child: Text(
                                               "City : ${schoolApproveController.reqschools[index].district}",
@@ -160,7 +170,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 10,),
+                                                const  SizedBox(
+                            height: 10,
+                          ),
                                           Flexible(
                                             child: Text(
                                               "Place : ${schoolApproveController.reqschools[index].place}",
@@ -171,7 +183,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 20,),
+                                                const  SizedBox(
+                            height: 20,
+                          ),
                                           Flexible(
                                             child: Text(
                                               "Email  : ${schoolApproveController.reqschools[index].email}",
@@ -181,7 +195,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 10,),
+                                                const  SizedBox(
+                            height: 10,
+                          ),
                                           Flexible(
                                             child: Text(
                                               "Password  : ${schoolApproveController.reqschools[index].password}",
@@ -191,7 +207,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 10,),
+                                                const  SizedBox(
+                            height: 10,
+                          ),
                                           Flexible(
                                             child: Text(
                                               "Phone No  : ${schoolApproveController.reqschools[index].phoneNumber}",
@@ -201,7 +219,9 @@ class RequestedSchoolsListScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                        const SizedBox(height: 30,),
+                                                const  SizedBox(
+                            height: 30,
+                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceEvenly,

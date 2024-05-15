@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:vidyaveechi_website/view/users/super_admin/lepton_Admin/temp_collections/parents/parent_collection.dart';
 import 'package:vidyaveechi_website/view/users/super_admin/lepton_Admin/temp_collections/students/student_collection.dart';
 import 'package:vidyaveechi_website/view/users/super_admin/lepton_Admin/temp_collections/teachers/teacher_collection.dart';
 import 'package:vidyaveechi_website/view/users/super_admin/widgets/buttonContainer.dart';
 
+import '../Add_student/add_student.dart';
 import 'guardian/guardian_collection.dart';
 
 getTempDilogBox(BuildContext context, String schoolID) {
@@ -17,7 +19,7 @@ getTempDilogBox(BuildContext context, String schoolID) {
           child: ListBody(
             children: <Widget>[
               SizedBox(
-                height: 500,
+                height: 600,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -85,6 +87,23 @@ getTempDilogBox(BuildContext context, String schoolID) {
                         height: 100,
                         width: 200,
                         child: const Center(child: Text('Teachers')),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return AddStudentToFirebase(schoolID: schoolID);
+                          },
+                        ));
+                      },
+                      child: ButtonContainerWidget(
+                        curving: 20,
+                        colorindex: 0,
+                        height: 100,
+                        width: 200,
+                        child:
+                            const Center(child: Text('Add Students AutoMatic')),
                       ),
                     ),
                   ],
