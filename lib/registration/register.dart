@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vidyaveechi_website/registration/controller/registration_controller.dart';
@@ -173,7 +172,7 @@ class _RegistrationState extends State<Registration> {
                         ),
                       )
                     ],
-                  ),
+                  ),   
                 ),
               )),
               Expanded(

@@ -200,7 +200,9 @@ class StudentController extends GetxController {
                             Get.find<ParentController>().stParnetEmail.value,
                         parentpassword: '123456',
                         studentemail: stEmailController.text.trim(),
-                        studentpassword: _randomstring);
+                        studentpassword: _randomstring,
+                      schoolName:   UserCredentialsController.schoolName??'',
+                        );
                   }).then((value) async {
                     buttonstate.value = ButtonState.success;
                     showToast(msg: "Student Added Successfully");
@@ -297,6 +299,8 @@ class StudentController extends GetxController {
     required String parentpassword,
     required String studentemail,
     required String studentpassword,
+      required String schoolName,
+
   }) async {
     try {
       Map<String, dynamic> emailData = {
@@ -340,7 +344,7 @@ class StudentController extends GetxController {
 </head>
 
 <body>
-    <h1>Congratulations on successfully creating your account with Vidyaveechi at MTHSS Tuition Center!</h1>
+    <h1>Congratulations on successfully creating your account with $schoolName at $schoolName Tuition Center!</h1>
 
     <p>Here are your account details:</p>
 
@@ -356,7 +360,7 @@ class StudentController extends GetxController {
 
     <p>Thank you for joining us! If you have any questions or need assistance, feel free to reach out.</p>
 
-    <p class="signature">Best regards,<br>[ ${UserCredentialsController.schoolName}} ]<br>Vidyaveechi - ${UserCredentialsController.schoolName} Tuition Center</p>
+    <p class="signature">Best regards,<br>[ ${UserCredentialsController.schoolName}} ]<br>$schoolName - ${UserCredentialsController.schoolName} Tuition Center</p>
 </body>
 
 </html>

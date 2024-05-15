@@ -361,8 +361,17 @@ class EditExamTimeTableAddWidget extends StatelessWidget {
                   width: double.infinity,
                   height: 60,
                   color: screenContainerbackgroundColor,
-                  child: const Center(
-                    child: TextFontWidget(text: 'Edit Time Table', fontsize: 25),
+                  child: const Row(
+                    children: [
+                      Expanded(
+                        flex: 1, child: BackButton()),
+                      Expanded(
+                        flex: 9,
+                        child: Center(
+                          child: TextFontWidget(text: 'Edit Time Table', fontsize: 25),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 sh10,

@@ -4,8 +4,8 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/registration_controller/registation_controller.dart';
-
 import 'package:vidyaveechi_website/view/colors/colors.dart';
+import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/drop_down/registration/regist_classDropDown.dart';
 import 'package:vidyaveechi_website/view/fonts/google_poppins_widget.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
@@ -55,66 +55,78 @@ class RegisrationPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4)),
                       height: 600,
                       width: ResponsiveWebSite.isMobile(context) ? 300 : 400,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: GooglePoppinsWidgets(
-                              text: 'REGISTRATION',
-                              fontsize:
-                                  ResponsiveWebSite.isMobile(context) ? 18 : 25,
-                              fontWeight: FontWeight.bold,
+                      child:  Form(
+                        key:regirationCrtl.formKey ,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10, bottom: 10),
+                              child: GooglePoppinsWidgets(
+                                text: 'REGISTRATION',
+                                fontsize:
+                                    ResponsiveWebSite.isMobile(context) ? 18 : 25,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: GetSchoolListDropDownButton(),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsets.only(top: 10, left: 10, right: 10),
-                            child: RegSelectClassDropDown(),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 10),
-                            child: TextFormFiledBlueContainerWidget1(
-                                controller: regirationCrtl.stNameController,
-                                hintText: 'Student name',
-                                title: 'Student name',
-                                labelText: 'Student name'),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: TextFormFiledBlueContainerWidget1(
-                                controller: regirationCrtl.stEmailController,
-                                hintText: 'Email',
-                                title: 'Email',
-                                labelText: 'Email'),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: TextFormFiledBlueContainerWidget1(
-                                controller: regirationCrtl.stPhoneController,
-                                hintText: 'Phone number',
-                                title: 'Phone number',
-                                labelText: 'Phone number'),
-                          ),
-                          Obx(() => Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: SizedBox(
-                                  width: 250,
-                                  child: ProgressButtonWidget(
-                                      buttonstate:
-                                          regirationCrtl.buttonstate.value,
-                                      text: 'Send Request',
-                                      function: () {
-                                        regirationCrtl
-                                            .classWiseStudentCreation();
-                                      }),
-                                ),
-                              )),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: GetSchoolListDropDownButton(),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(top: 10, left: 10, right: 10),
+                              child: RegSelectClassDropDown(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
+                              child: TextFormFiledBlueContainerWidget1(
+                                validator: checkFieldEmpty,
+                                  controller: regirationCrtl.stNameController,
+                                  hintText: 'Student name',
+                                  title: 'Student name',
+                                  labelText: 'Student name'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              child: TextFormFiledBlueContainerWidget1(
+                                validator: checkFieldEmailIsValid,
+                                  controller: regirationCrtl.stEmailController,
+                                  hintText: 'Email',
+                                  title: 'Email',
+                                  labelText: 'Email'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              child: TextFormFiledBlueContainerWidget1(
+                                validator: checkFieldPhoneNumberIsValid,
+                                  controller: regirationCrtl.stPhoneController,
+                                  hintText: 'Phone number',
+                                  title: 'Phone number',
+                                  labelText: 'Phone number'),
+                            ),
+                            Obx(() => Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: SizedBox(
+                                    width: 250,
+                                    child: ProgressButtonWidget(
+                                        buttonstate:
+                                            regirationCrtl.buttonstate.value,
+                                        text: 'Send Request',
+                                        function: () {
+                                          if (regirationCrtl
+                                              .formKey.currentState!
+                                              .validate()) {
+                                            regirationCrtl
+                                              .classWiseStudentCreation();
+                                          }
+                                          // regirationCrtl
+                                          //     .classWiseStudentCreation();
+                                        }),
+                                  ),
+                                )),
+                          ],
+                        ),
                       ),
                     ),
                   ),
