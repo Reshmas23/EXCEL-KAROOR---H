@@ -13,7 +13,6 @@ import 'package:vidyaveechi_website/view/users/admin/screens/students/student_de
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/button_container/button_container.dart';
-import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class AllClassListView extends StatelessWidget {
   final ClassController classController = Get.put(ClassController());
@@ -51,8 +50,8 @@ class AllClassListView extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const RouteSelectedTextContainer(
-                              width: 180, title: 'All Classes'),
+                          // const RouteSelectedTextContainer(
+                          //     width: 180, title: 'All Classes'),
                           const Spacer(),
                           GestureDetector(
                             onTap: () {
@@ -91,16 +90,30 @@ class AllClassListView extends StatelessWidget {
                                 width: 01,
                               ),
                               Expanded(
+                                  flex: 2,
+                                  child: CatrgoryTableHeaderWidget(
+                                      headerTitle: 'Class Id')),
+                              SizedBox(
+                                width: 01,
+                              ),
+                              Expanded(
                                   flex: 4,
                                   child: CatrgoryTableHeaderWidget(
-                                      headerTitle: 'Class')),
+                                      headerTitle: 'Class Name')),
+                              SizedBox(
+                                width: 01,
+                              ),
+                              Expanded(
+                                  flex: 4,
+                                  child: CatrgoryTableHeaderWidget(
+                                      headerTitle: 'Class Teacher')),
                               SizedBox(
                                 width: 01,
                               ),
                               Expanded(
                                   flex: 2,
                                   child: CatrgoryTableHeaderWidget(
-                                      headerTitle: 'Last Class Active Status')),
+                                      headerTitle: 'Last  Active Status')),
                               SizedBox(
                                 width: 01,
                               ),
