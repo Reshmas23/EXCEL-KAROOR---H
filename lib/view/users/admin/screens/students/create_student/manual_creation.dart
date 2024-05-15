@@ -21,7 +21,7 @@ class ManualStudentCreation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> createStudentListWidget = [
-       TextFontWidget(
+       const TextFontWidget(
         text: 'Add New Student',
         fontsize: 18,
         fontWeight: FontWeight.bold,
@@ -42,7 +42,7 @@ class ManualStudentCreation extends StatelessWidget {
                 validator: checkFieldEmailIsValid,
                 widget: Row(
                   children: [
-                     TextFontWidget(
+                     const TextFontWidget(
                         text: 'Student have no email ID?', fontsize: 10.5),
                     SizedBox(
                       height: 05,
@@ -63,7 +63,7 @@ class ManualStudentCreation extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                         TextFontWidget(
+                         const TextFontWidget(
                             text: '  Student have no email ID?',
                             fontsize: 10.5),
                         SizedBox(
@@ -88,7 +88,7 @@ class ManualStudentCreation extends StatelessWidget {
                         color: themeColorBlue,
                         border: Border.all(color: cBlack.withOpacity(0.4)),
                       ),
-                      child:  Center(
+                      child:  const Center(
                         child: TextFontWidget(
                           text: "Auto - Creation",
                           fontsize: 12.5,
@@ -112,7 +112,7 @@ class ManualStudentCreation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             TextFontWidget(
+             const TextFontWidget(
               text: 'Gender *',
               fontsize: 12.5,
             ),
@@ -145,7 +145,7 @@ class ManualStudentCreation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             TextFontWidget(text: 'Select Class *', fontsize: 12.5),
+             const TextFontWidget(text: 'Select Class *', fontsize: 12.5),
             const SizedBox(
               height: 05,
             ),
@@ -162,7 +162,7 @@ class ManualStudentCreation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           TextFontWidget(text: 'Date of birth 🗓️ *', fontsize: 12.5),
+           const TextFontWidget(text: 'Date of birth 🗓️ *', fontsize: 12.5),
             
             const SizedBox(
               height: 05,
@@ -291,7 +291,7 @@ class ManualStudentCreation extends StatelessWidget {
                             decoration: BoxDecoration(
                                 border:
                                     Border.all(color: cBlack.withOpacity(0.3))),
-                            child:  Column(
+                            child:  const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
@@ -422,7 +422,7 @@ class ManualStudentCreation extends StatelessWidget {
                           decoration: BoxDecoration(
                               border:
                                   Border.all(color: cBlack.withOpacity(0.3))),
-                          child:  Column(
+                          child:  const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
