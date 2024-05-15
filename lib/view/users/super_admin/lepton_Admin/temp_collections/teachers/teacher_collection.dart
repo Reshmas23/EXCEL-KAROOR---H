@@ -6,9 +6,9 @@ import 'package:vidyaveechi_website/view/users/super_admin/widgets/buttonContain
 import '../../../controllers/temp_Collection_controller/temp_teacher_controller/temp_teacher_controller.dart';
 
 class TeacherTempCollection extends StatelessWidget {
- final TempTeacherController tempTeacherController =
+  TempTeacherController tempTeacherController =
       Get.put(TempTeacherController());
- final String schoolID;
+  String schoolID;
   TeacherTempCollection({super.key, required this.schoolID});
 
   @override
@@ -44,9 +44,13 @@ class TeacherTempCollection extends StatelessWidget {
                                 color: const Color.fromARGB(255, 190, 220, 245),
                                 child: Row(
                                   children: [
-                                    const SizedBox(height: 10,),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
                                     Text('${index + 1}'),
-                                    const SizedBox(height: 10,),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
                                     Text(
                                         snaps.data!.docs[index]['teacherName']),
                                     IconButton(

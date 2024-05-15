@@ -11,12 +11,10 @@ import '../../controllers/super_admin_Controller/super_admin_controller.dart';
 import '../../widgets/buttonContainer.dart';
 
 class DetailsSchoolsScreen extends StatefulWidget {
-  static const String route = '/schoolDetails';
-  final SuperAdminController superAdminController =
-      Get.put(SuperAdminController());
+  SuperAdminController superAdminController = Get.put(SuperAdminController());
   DetailsSchoolsScreen({super.key, required this.schoolSnap});
 
-  final QueryDocumentSnapshot<Map<String, dynamic>> schoolSnap;
+  QueryDocumentSnapshot<Map<String, dynamic>> schoolSnap;
 
   @override
   State<DetailsSchoolsScreen> createState() => _DetailsSchoolsScreenState();
@@ -28,6 +26,7 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
     log('School Idd${widget.schoolSnap['docid']}');
     int columnCount = 4;
     double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -52,9 +51,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
+                              const  SizedBox(
+                            height: 10,
+                          ),
                         Text(
                           widget.schoolSnap['schoolName'],
                           style: GoogleFonts.montserrat(
@@ -62,9 +61,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                               fontSize: 18,
                               fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                              const  SizedBox(
+                            height: 10,
+                          ),
                         Text(
                           widget.schoolSnap['postedDate'],
                           style: GoogleFonts.poppins(
@@ -72,9 +71,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                              const  SizedBox(
+                            height: 20,
+                          ),
                         Text(
                           "Country : India",
                           style: GoogleFonts.poppins(
@@ -82,9 +81,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                              const  SizedBox(
+                            height: 10,
+                          ),
                         Text(
                           "State : Kerala",
                           style: GoogleFonts.poppins(
@@ -92,9 +91,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                              const  SizedBox(
+                            height: 10,
+                          ),
                         Text(
                           "City : ${widget.schoolSnap['district']}",
                           style: GoogleFonts.poppins(
@@ -102,9 +101,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                              const  SizedBox(
+                            height: 10,
+                          ),
                         Text(
                           "Place : ${widget.schoolSnap['place']}",
                           style: GoogleFonts.poppins(
@@ -112,9 +111,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                              const  SizedBox(
+                            height: 20,
+                          ),
                         Text(
                           "Email  : ${widget.schoolSnap['email']}",
                           style: GoogleFonts.poppins(
@@ -122,9 +121,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                              const  SizedBox(
+                            height: 10,
+                          ),
                         Text(
                           "Password  : ${widget.schoolSnap['password']}",
                           style: GoogleFonts.poppins(
@@ -132,9 +131,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                              const  SizedBox(
+                            height: 10,
+                          ),
                         Text(
                           "Phone No  : ${widget.schoolSnap['phoneNumber']}",
                           style: GoogleFonts.poppins(
@@ -142,12 +141,12 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                              const  SizedBox(
+                            height: 30,
+                          ),
+                              const  SizedBox(
+                            height: 10,
+                          ),
                         Text(
                           "Status : ${widget.schoolSnap['deactive']}",
                           style: GoogleFonts.poppins(
@@ -158,9 +157,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
+                                  const  SizedBox(
+                            width: 20,
+                          ),
                             GestureDetector(
                               onTap: () async {
                                 widget.superAdminController.activateSchool(
@@ -182,9 +181,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 20,
-                            ),
+                                  const  SizedBox(
+                            width: 20,
+                          ),
                             GestureDetector(
                               onTap: () async {
                                 await widget.superAdminController
@@ -207,9 +206,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 20,
-                            ),
+                                  const  SizedBox(
+                            width: 20,
+                          ),
                             ButtonContainerWidget(
                               curving: 10,
                               colorindex: 6,
@@ -228,9 +227,9 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                           ],
                         )
                       ]),
-                  const SizedBox(
-                    width: 20,
-                  ),
+                        const  SizedBox(
+                            width: 20,
+                          ),
                   Container(
                     height: double.infinity - 10,
                     width: 1,
@@ -258,6 +257,7 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: GestureDetector(
                                       onTap: () {
+                                        print("object");
                                         if (index == 1) {
                                           getTempDilogBox(context,
                                               widget.schoolSnap['docid']);
