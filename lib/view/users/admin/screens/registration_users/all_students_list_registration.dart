@@ -240,7 +240,7 @@ class AllStudentsListRegistration extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            Text("*****Add New Students"),
+                            Text("*****Add New Students",style: TextStyle(color: Colors.red),),
                             SizedBox(
                               height: 10,
                             ),
