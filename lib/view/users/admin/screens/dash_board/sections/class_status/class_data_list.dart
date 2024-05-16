@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 
 class ClassDataList extends StatelessWidget {
-  const ClassDataList({super.key, required this.index});
+  const ClassDataList({
+    super.key,
+    required this.index,
+    required this.classData,
+    required this.presentStudents,
+    required this.absentStudents,
+    required this.currentTr,
+    required this.status,
+  });
   final int index;
+  final dynamic classData;
+  final String currentTr;
+  final String presentStudents;
+  final String absentStudents;
+  final bool status;
 
   @override
   Widget build(BuildContext context) {
-    RxBool status = true.obs;
     return Container(
       height: 45,
       color: index % 2 == 0
@@ -19,11 +30,12 @@ class ClassDataList extends StatelessWidget {
         children: [
           Expanded(
             flex: 3,
-            child: DataContainerWidget(
-              rowMainAccess: MainAxisAlignment.center,
-              color: cWhite,
-              index: index,
-              headerTitle: '  class x',
+            child: Center(
+              child: DataContainerWidget(
+                  rowMainAccess: MainAxisAlignment.center,
+                  color: cWhite,
+                  index: index,
+                  headerTitle: classData['className']),
             ),
           ),
           const SizedBox(
@@ -31,36 +43,28 @@ class ClassDataList extends StatelessWidget {
           ),
           Expanded(
             flex: 5,
-            child: DataContainerWidget(
-              rowMainAccess: MainAxisAlignment.center,
-              color: cWhite,
-              index: index,
-              headerTitle: 'class tr',
-            ),
-          ),
-          const SizedBox(
-            width: 02,
-          ),
-          Expanded(
-            flex: 5,
-            child: DataContainerWidget(
-              rowMainAccess: MainAxisAlignment.center,
-              color: cWhite,
-              index: index,
-              headerTitle: 'current tr',
-            ),
-          ),
-          const SizedBox(
-            width: 02,
-          ),
-          Expanded(
-            flex: 2,
             child: Center(
               child: DataContainerWidget(
                 rowMainAccess: MainAxisAlignment.center,
                 color: cWhite,
                 index: index,
-                headerTitle: "100",
+                headerTitle: classData['classTeacherName'] == null
+                    ? '  ${classData['classTeacherName']}'
+                    : 'not found',
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 02,
+          ),
+          Expanded(
+            flex: 5,
+            child: Center(
+              child: DataContainerWidget(
+                rowMainAccess: MainAxisAlignment.center,
+                color: cWhite,
+                index: index,
+                headerTitle: currentTr,
               ),
             ),
           ),
@@ -74,7 +78,7 @@ class ClassDataList extends StatelessWidget {
                 rowMainAccess: MainAxisAlignment.center,
                 color: cWhite,
                 index: index,
-                headerTitle: "100",
+                headerTitle: presentStudents,
               ),
             ),
           ),
@@ -83,21 +87,47 @@ class ClassDataList extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: Obx(
-              () => SizedBox(
-                width: 10,
-                height: 20,
-                child: Image.asset(
-                  status.value == true
-                      ? 'webassets/png/active.png'
-                      : 'webassets/png/shape.png',
-                ),
+            child: Center(
+              child: DataContainerWidget(
+                rowMainAccess: MainAxisAlignment.center,
+                color: cWhite,
+                index: index,
+                headerTitle: absentStudents,
               ),
             ),
           ),
           const SizedBox(
             width: 02,
           ),
+          Expanded(
+            flex: 2,
+            child: SizedBox(
+              width: 10,
+              height: 20,
+              child: Image.asset(
+                status == true
+                    ? 'webassets/png/active.png'
+                    : 'webassets/png/shape.png',
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 02,
+          ),
+          // Expanded(
+          //   flex: 2,
+          //   child: Center(
+          //     child: DataContainerWidget(
+          //       rowMainAccess: MainAxisAlignment.center,
+          //       color: cWhite,
+          //       index: index,
+          //       headerTitle: absentStudents,
+          //     ),
+          //   ),
+          // ),
+          // const SizedBox(
+          //   width: 02,
+          // ),
         ],
       ),
     );
