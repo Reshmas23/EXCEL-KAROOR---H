@@ -92,16 +92,16 @@ class _AllClassListViewContainerState extends State<AllClassListViewContainer> {
             ),
           ],
         ),
-        ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 1,
+        Expanded(
+          child: ListView.separated(
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 1,
+            ),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return ClassDataList(index: index);
+            },
           ),
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 2,
-          itemBuilder: (context, index) {
-            return ClassDataList(index: index);
-          },
         ),
       ],
     );
