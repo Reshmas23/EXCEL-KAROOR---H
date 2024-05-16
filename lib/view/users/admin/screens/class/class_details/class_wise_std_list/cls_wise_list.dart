@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
-import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/result/widget/data_container_marks.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
-import 'package:vidyaveechi_website/view/widgets/textformFiledContainer/textformFiledBlueContainer.dart';
 
 class ClassWiseStudentList extends StatelessWidget {
   const ClassWiseStudentList({super.key});
@@ -38,28 +36,28 @@ class ClassWiseStudentList extends StatelessWidget {
                   width: double.infinity,
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: 250,
-                              height: ResponsiveWebSite.isMobile(context) ? 80 : 100,
-                              color: cWhite,
-                              child:  Padding(
-                                padding: const EdgeInsets.only(top: 10,bottom: 10),
-                                child: TextFormFiledBlueContainerWidget(
-                                      // controller: studentController.stNameController,
-                                      hintText: "Enter Therapy Type",
-                                      title: 'Therapy Type ',
-                                      validator: checkFieldEmpty,
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.end,
+                      //   children: [
+                      //     Padding(
+                      //       padding: const EdgeInsets.all(8.0),
+                      //       child: Container(
+                      //         width: 250,
+                      //         height: ResponsiveWebSite.isMobile(context) ? 80 : 100,
+                      //         color: cWhite,
+                      //         child:  Padding(
+                      //           padding: const EdgeInsets.only(top: 10,bottom: 10),
+                      //           child: TextFormFiledBlueContainerWidget(
+                      //                 // controller: studentController.stNameController,
+                      //                 hintText: "Enter Therapy Type",
+                      //                 title: 'Therapy Type ',
+                      //                 validator: checkFieldEmpty,
+                      //               ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(
                         height: 580,
                         width: ResponsiveWebSite.isMobile(context)
@@ -92,13 +90,13 @@ class ClassWiseStudentList extends StatelessWidget {
                                   SizedBox(
                                     width: 1,
                                   ),
-                                  Expanded(
-                                      flex: 2,
-                                      child: CatrgoryTableHeaderWidget(
-                                          headerTitle: "Date")),
-                                  SizedBox(
-                                    width: 1,
-                                  ),
+                                  // Expanded(
+                                  //     flex: 2,
+                                  //     child: CatrgoryTableHeaderWidget(
+                                  //         headerTitle: "Date")),
+                                  // SizedBox(
+                                  //   width: 1,
+                                  // ),
                                   // Expanded(
                                   //     flex: 2,
                                   //     child: CatrgoryTableHeaderWidget(
@@ -109,7 +107,7 @@ class ClassWiseStudentList extends StatelessWidget {
                                   Expanded(
                                       flex: 2,
                                       child: CatrgoryTableHeaderWidget(
-                                          headerTitle: "Status/Comment")),
+                                          headerTitle: "Status")),
                                 ],
                               ),
                               SizedBox(
@@ -157,18 +155,18 @@ class ClassWiseStudentList extends StatelessWidget {
                                             width: 1,
                                           ),
 
-                                          Expanded(
-                                            flex: 2,
-                                            child: DataContainerMarksWidget(
-                                                rowMainAccess:
-                                                    MainAxisAlignment.start,
-                                                color: cWhite,
-                                                index: index,
-                                                headerTitle: " 23/04/2024"),
-                                          ),
-                                          const SizedBox(
-                                            width: 1,
-                                          ),
+                                          // Expanded(
+                                          //   flex: 2,
+                                          //   child: DataContainerMarksWidget(
+                                          //       rowMainAccess:
+                                          //           MainAxisAlignment.start,
+                                          //       color: cWhite,
+                                          //       index: index,
+                                          //       headerTitle: " 23/04/2024"),
+                                          // ),
+                                          // const SizedBox(
+                                          //   width: 1,
+                                          // ),
                                         //  Expanded(
                                     //         flex: 2,
                                     //         child: Container(
