@@ -8,11 +8,11 @@ import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 
-class ClassDataListWidget extends StatelessWidget {
+class ListOfClassWidget extends StatelessWidget {
   final AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> classStatus;
   final ClassModel data;
   final int index;
-  const ClassDataListWidget({
+  const ListOfClassWidget({
     required this.index,
     super.key,
     required this.data,
@@ -64,6 +64,7 @@ class ClassDataListWidget extends StatelessWidget {
             flex: 4,
             child: DataContainerWidget(
                 rowMainAccess: MainAxisAlignment.start,
+                
                 color: cWhite,
                 index: index,
                 headerTitle: "     ${data.className}"),
@@ -135,9 +136,18 @@ class ClassDataListWidget extends StatelessWidget {
                         headerTitle: '...');
                   }
                 }),
-          ), // ...................................Total Number of Students
+          ), 
+          // ...................................Total Number of Students
           const SizedBox(
             width: 01,
+          ),
+          Expanded(
+            flex: 2,
+            child: DataContainerWidget(
+                rowMainAccess: MainAxisAlignment.center,
+                color: cWhite,
+                index: index,
+                headerTitle: "Name"),
           ),
         ],
       ),
