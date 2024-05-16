@@ -9,6 +9,8 @@ import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/class/class_details/class_details.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/class/create_class/create_class.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/class/view_class_students/data_list.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/all_students_list_registration.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/widget_list_of_classes.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
@@ -25,12 +27,12 @@ class ListOfClassesRegistration extends StatelessWidget {
         // List<Widget> widgetlist = [];
         Obx(
       () => classController.ontapClass.value == true
-          ? ClassDetailsContainer()
+          ? AllStudentsListRegistration()
           : SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Container(
                 color: screenContainerbackgroundColor,
-                height: 1000,
+                height: 800,
                 width: 1200,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 25),
@@ -51,6 +53,7 @@ class ListOfClassesRegistration extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          Spacer(),
                           // const RouteSelectedTextContainer(
                           //     width: 180, title: 'All Classes'),
                           // const Spacer(),
@@ -65,7 +68,7 @@ class ListOfClassesRegistration extends StatelessWidget {
                                 width: 180,
                                 child: const Center(
                                   child: TextFontWidgetRouter(
-                                    text: 'Create / EDIT',
+                                    text: 'Create / Edit',
                                     fontsize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: cWhite,
@@ -163,7 +166,7 @@ class ListOfClassesRegistration extends StatelessWidget {
                                               classController.ontapClass.value =
                                                   true;
                                             },
-                                            child: ClassDataListWidget(
+                                            child: ListOfClassWidget(
                                               classStatus: snaps,
                                               data: data,
                                               index: index,

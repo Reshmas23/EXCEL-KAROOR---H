@@ -24,7 +24,9 @@ import 'package:vidyaveechi_website/view/users/admin/screens/notice/notice_edit_
 import 'package:vidyaveechi_website/view/users/admin/screens/notifications/admin_notification_create.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/parents/all_parents_list.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/list_of_classes_registration.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/non_teachUsers.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/teachers_regi.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/registrationStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/view_allStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/timetable/timetable_main_screen.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
@@ -88,8 +90,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                         children: [
                                           SizedBox(
                                             height: 60,
-                                            child: Image.asset(
-                                              logoImage,
+                                            child: Image.asset(logoImage,
                                               fit: BoxFit.fill,
                                             ),
                                           ),
@@ -161,8 +162,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                   children: [
                                     SizedBox(
                                       height: 60,
-                                      child: Image.asset(
-                                        logoImage,
+                                      child: Image.asset(logoImage,
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -215,11 +215,13 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 }
 
 List<Widget> pages = [
-  const AdminDashBoardSections(),
-  ListOfClassesRegistration(),
   AllTeacherListContainer(),
-  // AllNonTeachUsersListContainer(),
+  ListOfClassesRegistration(),
+AllNonTeachUsersListContainer(),
+  const AdminDashBoardSections(),
+  RegistrationStudentList(),
   AllStudentListContainer(),
+
 
   AllParentsListContainer(),
   AllClassListView(),
