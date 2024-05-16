@@ -1,18 +1,25 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/admin_section/teacher_controller/teacher_controller.dart';
+import 'package:vidyaveechi_website/excel_File_Controller/excel_fileController.dart';
+import 'package:vidyaveechi_website/model/teacher_model/teacher_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/create_teacher/create_newteachers.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/list_of_teacher/table_of_tr.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/teachers_details/teachers_details.dart';
+import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
+import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
+import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class AllTeacherListContainer extends StatelessWidget {
   final TeacherController teacherController = Get.put(TeacherController());
+  final ExcelFileController excelController = Get.put(ExcelFileController());
   AllTeacherListContainer({super.key});
 
   @override
@@ -135,80 +142,66 @@ class AllTeacherListContainer extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5, right: 5),
                           child: SizedBox(
-                            child: ListView.separated(
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      // teacherController.teacherModelData
-                                      //     .value = data;
-                                      // teacherController.ontapviewteacher
-                                      //     .value = true;
-                                    },
-                                    child: AllTeachersDataList(
-                                      index: index,
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    height: 02,
-                                  );
-                                },
-                                itemCount: 20),
+                      
                             // width: 1100,
-                            // child: StreamBuilder(
-                            //   stream: server
-                            //       .collection('SchoolListCollection')
-                            //       .doc(UserCredentialsController.schoolId)
-                            //       .collection('Teachers')
-                            //       .snapshots(),
-                            //   builder: (context, snaPS) {
-                            //     if (snaPS.hasData) {
-                            //       return ListView.separated(
-                            //           itemBuilder: (context, index) {
-                            //             final data = TeacherModel.fromMap(
-                            //                 snaPS.data!.docs[index].data());
-                            //             return GestureDetector(
-                            //               onTap: () {
-                            //                 teacherController.teacherModelData
-                            //                     .value = data;
-                            //                 teacherController.ontapviewteacher
-                            //                     .value = true;
-                            //               },
-                            //               child: AllTeachersDataList(
-                            //                 index: index,
-                            //                 data: data,
-                            //               ),
-                            //             );
-                            //           },
-                            //           separatorBuilder: (context, index) {
-                            //             return const SizedBox(
-                            //               height: 02,
-                            //             );
-                            //           },
-                            //           itemCount: snaPS.data!.docs.length);
-                            //     } else {
-                            //       return const LoadingWidget();
-                            //     }
-                            //   },
-                            // ),
+                            child: StreamBuilder(
+                              stream: server
+                                  .collection('SchoolListCollection')
+                                  .doc(UserCredentialsController.schoolId)
+                                  .collection('Teachers')
+                                  .snapshots(),
+                              builder: (context, snaPS) {
+                                if (snaPS.hasData) {
+                                  return ListView.separated(
+                                      itemBuilder: (context, index) {
+                                        final data = TeacherModel.fromMap(
+                                            snaPS.data!.docs[index].data());
+                                        return GestureDetector(
+                                          onTap: () {
+                                            teacherController.teacherModelData
+                                                .value = data;
+                                            teacherController.ontapviewteacher
+                                                .value = true;
+                                          },
+                                          child: AllTeachersDataList(
+                                            index: index,
+                                            data: data,
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          height: 02,
+                                        );
+                                      },
+                                      itemCount: snaPS.data!.docs.length);
+                                } else {
+                                  return const LoadingWidget();
+                                }
+                              },
+                            ),
                           ),
                         ),
                       ),
-                       Expanded(
+                      Expanded(
                           child: Row(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(left: 10,right: 20),
-                            child: SizedBox(
-                              height: 30,
-                              child: RouteSelectedTextContainer(
-                                  title: 'Upload Excel 📃'),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 20),
+                            child: GestureDetector(
+                              onTap: () async {
+                                await excelController.pickExcelForTeachers();
+                              },
+                              child: const SizedBox(
+                                height: 30,
+                                child: RouteSelectedTextContainer(
+                                    title: 'Upload Excel 📃'),
+                              ),
                             ),
                           ),
                           GestureDetector(
-                            onTap: (){
-                                    createTeacherFunction(context);
+                            onTap: () {
+                              createTeacherFunction(context);
                             },
                             child: const SizedBox(
                               height: 30,

@@ -19,6 +19,7 @@ class TeacherModel {
   String? imageId;
   String? imageUrl;
   String? classID;
+  String? cardID;
   TeacherModel({
     this.teacherName,
     this.teacherEmail,
@@ -37,6 +38,7 @@ class TeacherModel {
     this.imageId,
     this.imageUrl,
     this.classID,
+    this.cardID,
   });
 
   TeacherModel copyWith({
@@ -57,6 +59,7 @@ class TeacherModel {
     String? imageId,
     String? imageUrl,
     String? classID,
+    String? cardID,
   }) {
     return TeacherModel(
       teacherName: teacherName ?? this.teacherName,
@@ -76,54 +79,59 @@ class TeacherModel {
       imageId: imageId ?? this.imageId,
       imageUrl: imageUrl ?? this.imageUrl,
       classID: classID ?? this.classID,
+      cardID: cardID ?? this.cardID,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'teacherName': teacherName ?? "",
-      'teacherEmail': teacherEmail ?? "",
-      'password': password ?? "",
-      'houseName': houseName ?? "",
-      'houseNumber': houseNumber ?? "",
-      'place': place ?? "",
-      'gender': gender ?? "",
-      'district': district ?? "",
-      'altPhoneNo': altPhoneNo ?? "",
-      'employeeID': employeeID ?? "",
-      'createdAt': createdAt ?? "",
-      'teacherPhNo': teacherPhNo ?? "",
-      'docid': docid ?? "",
+      'teacherName': teacherName,
+      'teacherEmail': teacherEmail,
+      'password': password,
+      'houseName': houseName,
+      'houseNumber': houseNumber,
+      'place': place,
+      'gender': gender,
+      'district': district,
+      'altPhoneNo': altPhoneNo,
+      'employeeID': employeeID,
+      'createdAt': createdAt,
+      'teacherPhNo': teacherPhNo,
+      'docid': docid,
       'userRole': userRole,
-      'imageId': imageId ?? "",
-      'imageUrl': imageUrl ?? "",
-      'classID': classID ?? "",
+      'imageId': imageId,
+      'imageUrl': imageUrl,
+      'classID': classID,
+      'cardID': cardID,
     };
   }
 
   factory TeacherModel.fromMap(Map<String, dynamic> map) {
     return TeacherModel(
       teacherName:
-          map['teacherName'] != null ? map['teacherName'] as String : "",
+          map['teacherName'] != null ? map['teacherName'] ??'' : null,
       teacherEmail:
-          map['teacherEmail'] != null ? map['teacherEmail'] as String : "",
-      password: map['password'] != null ? map['password'] as String : "",
-      houseName: map['houseName'] != null ? map['houseName'] as String : "",
+          map['teacherEmail'] != null ? map['teacherEmail'] ??'' : null,
+      password: map['password'] != null ? map['password'] ??'' : null,
+      houseName: map['houseName'] != null ? map['houseName'] ??'' : null,
       houseNumber:
-          map['houseNumber'] != null ? map['houseNumber'] as String : "",
-      place: map['place'] != null ? map['place'] as String : "",
-      gender: map['gender'] != null ? map['gender'] as String : "",
-      district: map['district'] != null ? map['district'] as String : "",
-      altPhoneNo: map['altPhoneNo'] != null ? map['altPhoneNo'] as String : "",
-      employeeID: map['employeeID'] != null ? map['employeeID'] as String : "",
-      createdAt: map['createdAt'] != null ? map['createdAt'] as String : "",
+          map['houseNumber'] != null ? map['houseNumber'] ??'' : null,
+      place: map['place'] != null ? map['place'] ??'' : null,
+      gender: map['gender'] != null ? map['gender'] ??'' : null,
+      district: map['district'] != null ? map['district'] ??'' : null,
+      altPhoneNo:
+          map['altPhoneNo'] != null ? map['altPhoneNo'] ??'' : null,
+      employeeID:
+          map['employeeID'] != null ? map['employeeID'] ??'' : null,
+      createdAt: map['createdAt'] != null ? map['createdAt'] ??'' : null,
       teacherPhNo:
-          map['teacherPhNo'] != null ? map['teacherPhNo'] as String : "",
-      docid: map['docid'] != null ? map['docid'] as String : "",
-      userRole: map['userRole'] as String,
-      imageId: map['imageId'] != null ? map['imageId'] as String : "",
-      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : "",
-      classID: map['classID'] != null ? map['classID'] as String : "",
+          map['teacherPhNo'] != null ? map['teacherPhNo'] ??'' : null,
+      docid: map['docid'] != null ? map['docid'] ??'' : null,
+      userRole: map['userRole'] ??'',
+      imageId: map['imageId'] != null ? map['imageId'] ??'' : null,
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] ??'' : null,
+      classID: map['classID'] != null ? map['classID'] ??'' : null,
+      cardID: map['cardID'] != null ? map['cardID'] ??'' : null,
     );
   }
 
@@ -134,7 +142,7 @@ class TeacherModel {
 
   @override
   String toString() {
-    return 'TeacherModel(teacherName: $teacherName, teacherEmail: $teacherEmail, password: $password, houseName: $houseName, houseNumber: $houseNumber, place: $place, gender: $gender, district: $district, altPhoneNo: $altPhoneNo, employeeID: $employeeID, createdAt: $createdAt, teacherPhNo: $teacherPhNo, docid: $docid, userRole: $userRole, imageId: $imageId, imageUrl: $imageUrl, classID: $classID)';
+    return 'TeacherModel(teacherName: $teacherName, teacherEmail: $teacherEmail, password: $password, houseName: $houseName, houseNumber: $houseNumber, place: $place, gender: $gender, district: $district, altPhoneNo: $altPhoneNo, employeeID: $employeeID, createdAt: $createdAt, teacherPhNo: $teacherPhNo, docid: $docid, userRole: $userRole, imageId: $imageId, imageUrl: $imageUrl, classID: $classID, cardID: $cardID)';
   }
 
   @override
@@ -157,7 +165,8 @@ class TeacherModel {
         other.userRole == userRole &&
         other.imageId == imageId &&
         other.imageUrl == imageUrl &&
-        other.classID == classID;
+        other.classID == classID &&
+        other.cardID == cardID;
   }
 
   @override
@@ -178,6 +187,7 @@ class TeacherModel {
         userRole.hashCode ^
         imageId.hashCode ^
         imageUrl.hashCode ^
-        classID.hashCode;
+        classID.hashCode ^
+        cardID.hashCode;
   }
 }

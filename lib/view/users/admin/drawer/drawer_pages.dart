@@ -1,12 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:vidyaveechi_website/controller/registration_controller/registation_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
-import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
-import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
-import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/dashboard_textFontWidget.dart';
 
 class DrawerSelectedPagesSection extends StatelessWidget {
@@ -22,8 +17,7 @@ class DrawerSelectedPagesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RegistrationController registrationController =
-        Get.put(RegistrationController());
+  
     return Column(
       children: [
         Container(
@@ -74,30 +68,30 @@ class DrawerSelectedPagesSection extends StatelessWidget {
                 ),
               ),
             ), ////////////////////////////////........sub....7
-            // ListTile(
-            //   tileColor: selectedIndex == 8
-            //       ? themeColorBlue.withOpacity(0.1)
-            //       : Colors.transparent,
-            //   onTap: () {
-            //     index = 8;
-            //     onTap.call(index);
-            //   },
-            //   title: DashboardTextFontWidget(
-            //     title: 'Teacher Registration',
-            //   ),
-            // ),///////////////////////..........sub........
-            // ListTile(
-            //   tileColor: selectedIndex == 8
-            //       ? themeColorBlue.withOpacity(0.1)
-            //       : Colors.transparent,
-            //   onTap: () {
-            //     index = 8;
-            //     onTap.call(index);
-            //   },
-            //   title: DashboardTextFontWidget(
-            //     title: 'Non Teaching Staff Registration',
-            //   ),
-            // ),////////////////////...........sub
+            ListTile(
+              tileColor: selectedIndex == 2
+                  ? themeColorBlue.withOpacity(0.1)
+                  : Colors.transparent,
+              onTap: () {
+                index = 2;
+                onTap.call(index);
+              },
+              title: DashboardTextFontWidget(
+                title: 'Teacher Registration',
+              ),
+            ),///////////////////////..........sub........
+            ListTile(
+              tileColor: selectedIndex == 3
+                  ? themeColorBlue.withOpacity(0.1)
+                  : Colors.transparent,
+              onTap: () {
+                index = 3;
+                onTap.call(index);
+              },
+              title: DashboardTextFontWidget(
+                title: 'Non Teaching Staff Registration',
+              ),
+            ),////////////////////...........sub
           ],
         ), 
         // ListTile(
