@@ -36,7 +36,7 @@ class RouteSelectedTextContainer extends StatelessWidget {
             alignment: Alignment.center,
             child: TextFontWidgetRouter(
               text: title,
-              fontsize: 14,
+              fontsize: 12,
               fontWeight: FontWeight.w500,
               color: Colors.white,
             ),
