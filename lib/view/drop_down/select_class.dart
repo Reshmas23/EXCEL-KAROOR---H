@@ -40,6 +40,7 @@ class SelectClassDropDown extends StatelessWidget {
       onChanged: (value) async {
         if (value != null) {
           classCtrl.className.value = value.className;
+          classCtrl.classId.value = value.classId;
           classCtrl.classDocID.value = value.docid;
           log("message ${classCtrl.classDocID.value}");
         }

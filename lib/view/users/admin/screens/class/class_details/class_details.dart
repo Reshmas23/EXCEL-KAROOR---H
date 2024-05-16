@@ -220,11 +220,21 @@ class ClassDetailsContainer extends StatelessWidget {
                                                     children: [
                                                       const Icon(Icons.person),
                                                       const TextFontWidget(
-                                                        text: " Reshma Suresh ",
+                                                        text: "class teacher ",
                                                         fontsize: 12,
                                                         color: themeColorBlue,
                                                       ),
                                                       const Spacer(),
+                                                      BlueContainerWidget(
+                                                          color: themeColorBlue,
+                                                          fontSize: 12,
+                                                          title: 'Assign Class Teacher',
+                                                          width: 125,
+                                                          fontWeight: FontWeight.w500,
+                                                        ),
+                                                        const SizedBox(
+                                                        width: 10,
+                                                      ),
                                                       GestureDetector(
                                                         onTap: () {
                                                           classController
@@ -342,7 +352,7 @@ class ClassDetailsContainer extends StatelessWidget {
 
                           // height: 300,
                           child: TabBarView(children: [
-                            const ClassWiseStudentList(),
+                             ClassWiseStudentList(),
                             // const FeesHistory(), //........................ Student FEES
                             AttendenceHistory(), //.......................... Student Attendence
                             ExamHistory() //............................ Student Exam History

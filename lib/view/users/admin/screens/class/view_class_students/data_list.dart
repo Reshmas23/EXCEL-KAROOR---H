@@ -66,7 +66,7 @@ class ClassDataListWidget extends StatelessWidget {
                 rowMainAccess: MainAxisAlignment.center,
                 color: cWhite,
                 index: index,
-                headerTitle: "6565464654"),
+                headerTitle: "     ${data.classId}"),
           ),
           const SizedBox(
             width: 01,

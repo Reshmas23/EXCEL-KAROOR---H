@@ -166,11 +166,13 @@ class AllClassListView extends StatelessWidget {
                                           final data = ClassModel.fromMap(
                                               snaps.data!.docs[index].data());
                                           return GestureDetector(
-                                            onTap: () {
+                                            onTap: ()async {
+                                           
                                               classController
                                                   .classModelData.value = data;
                                               classController.ontapClass.value =
                                                   true;
+                                                    await classController.getFirstSubjectId();
                                             },
                                             child: ClassDataListWidget(
                                               classStatus: snaps,
