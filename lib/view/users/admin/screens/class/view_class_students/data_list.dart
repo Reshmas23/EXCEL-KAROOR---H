@@ -135,9 +135,18 @@ class ClassDataListWidget extends StatelessWidget {
                         headerTitle: '...');
                   }
                 }),
-          ), // ...................................Total Number of Students
+          ), 
+          // ...................................Total Number of Students
           const SizedBox(
             width: 01,
+          ),
+          Expanded(
+            flex: 2,
+            child: DataContainerWidget(
+                rowMainAccess: MainAxisAlignment.center,
+                color: cWhite,
+                index: index,
+                headerTitle: "Name"),
           ),
         ],
       ),

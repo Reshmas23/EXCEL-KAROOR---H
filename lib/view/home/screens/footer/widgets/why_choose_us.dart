@@ -27,7 +27,7 @@ class WhyChooseUs extends StatelessWidget {
               width: double.infinity,
               child: GoogleMonstserratWidgets(
                   text:
-                      " EXCEL KAROOR - the ultimate digitalized school infra app that streamlines infrastructure management and enhances school operations. With VidyaVeechi, schools can easily manage their facilities, assets, and resources with just a few clicks."
+                      " EXCEL KAROOR - the ultimate digitalized school infra app that streamlines infrastructure management and enhances school operations. With EXCEL KAROOR, schools can easily manage their facilities, assets, and resources with just a few clicks."
                       "EXCEL KAROOR provides a comprehensive range of features to manage schools' infrastructure, including live updates of attendance, a list of classes, a list of teachers, and notices and events as notifications. EXCEL KAROOR also offers online payment facilities, with a bill generation option for easy payment processing."
                       "EXCEL KAROOR also facilitates seamless learning through recorded and live classes. With student, parent, admin, teacher, and guardian logins, EXCEL KAROOR provides a customizable and secure platform for all stakeholders to manage and access information relevant to them."
                       "Join us on this exciting journey towards a more streamlined and efficient school infrastructure management system with EXCEL KAROOR. Experience the convenience and flexibility of a digitalized school infra app that takes your school's operations to the next level.",

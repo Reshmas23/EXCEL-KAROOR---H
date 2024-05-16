@@ -8,9 +8,6 @@ import 'package:vidyaveechi_website/view/constant/const.dart';
 import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/progess_button/progress_button.dart';
-
-
-
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
@@ -278,25 +275,28 @@ class CreateAdmin extends StatelessWidget {
                   child: adminListWidgets[
                       0] ///////////////////....................Create New Admin
                   )),
-          Container(
-            height: 60,
-            width: double.infinity,
-            color: screenContainerbackgroundColor,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      adminController.ontapCreateAdmin.value = false;
-                    },
-                    child: const RouteNonSelectedTextContainer(title: 'Home'),
-                  ),
-                  // const Spacer(),
-                  const RouteSelectedTextContainer(
-                      width: 140, title: 'Create Admin'),
-                ],
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Container(
+              height: 30,
+              width: double.infinity,
+              color: screenContainerbackgroundColor,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 25, right: 25),
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        adminController.ontapCreateAdmin.value = false;
+                      },
+                      child: const RouteNonSelectedTextContainer(title: 'Home'),
+                    ),
+                    // const Spacer(),
+                    const RouteSelectedTextContainer(
+                        width: 140, title: 'Create Admin'),
+                  ],
+                ),
               ),
             ),
           ),

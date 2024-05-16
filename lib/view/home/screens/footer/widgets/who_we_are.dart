@@ -37,7 +37,7 @@ class WhoWeAre extends StatelessWidget {
           shrinkWrap: true,
 
           children: const [
-            WhoWeAre_01(),
+            // WhoWeAre_01(),
             // const SizedBox(height: 10),
             WhoWeAre_02(),
           ],

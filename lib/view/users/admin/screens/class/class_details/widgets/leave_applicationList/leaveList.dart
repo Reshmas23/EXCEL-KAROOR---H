@@ -8,11 +8,13 @@ import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_creden
 import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 
+// ignore: must_be_immutable
 class LeaveApplicationData extends StatelessWidget {
   final int index;
   final dynamic data;
   final int compare;
-  const LeaveApplicationData({
+   int compareResult = 0;
+   LeaveApplicationData({
     required this.index,
     required this.data,
     super.key,
@@ -21,6 +23,7 @@ class LeaveApplicationData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     compareResult =compare+1;
     return InkWell(
       onTap: () {
         showDialog(
@@ -201,7 +204,7 @@ class LeaveApplicationData extends StatelessWidget {
                   // width: 150,
                   index: index,
                   // ignore: unnecessary_null_comparison
-                  text: compare == null ? 'Compare value not available' : '$compare Days',
+                   text:compareResult == null ? 'Compare value not available' : '$compareResult Days',
                 ),
                 //  compare != null ? '$compare Days' : 'Compare value not available',
               ),

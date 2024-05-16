@@ -53,8 +53,8 @@ createClassFunction(BuildContext context) {
             child: TextFormFiledBlueContainerWidgetWithOutColor(
               controller: Get.find<ClassController>().classFeeController,
               hintText:
-                  " Enter teacher fee for this subject per/ 1 month eg :1000,5000",
-              title: 'Subject Fee',
+                  " Enter Class fee for this Class per/ 1 month eg :1000,5000",
+              title: 'Class Fee',
               validator: checkFieldEmpty,
             ),
           ),

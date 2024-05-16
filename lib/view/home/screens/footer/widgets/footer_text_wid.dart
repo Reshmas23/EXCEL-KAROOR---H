@@ -159,8 +159,8 @@ class ConnecWidget extends StatelessWidget {
               child: ListView.separated(
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () async{
-                      await  connectnav[index];
+                      onTap: () {
+                       connectnav[index]();
                       },
                       child: OnHoverText(builder: (isHoverd) {
                         final color = isHoverd
@@ -304,10 +304,10 @@ Future<void> _launchInstaUrl() async {
 }
 
 var connectnav = [
-  _launchFacebookUrl(),
-  _launchInstaUrl(),
+  _launchFacebookUrl,
+  _launchInstaUrl,
  // _launchTwitterUrl(),
-  _launchyouTubeUrl(),
+  _launchyouTubeUrl,
 ];
 var legalnav = [
   const TermsAndConditions(),

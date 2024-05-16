@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vidyaveechi_website/registration/controller/registration_controller.dart';
@@ -35,7 +34,7 @@ class _RegistrationState extends State<Registration> {
                 // color: cred,
                 child: Form(
                   key: formKey,
-                  child: Column(
+                  child:  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -173,7 +172,7 @@ class _RegistrationState extends State<Registration> {
                         ),
                       )
                     ],
-                  ),
+                  ),   
                 ),
               )),
               Expanded(

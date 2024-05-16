@@ -51,57 +51,106 @@ class DrawerSelectedPagesSection extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        ListTile(
+        ExpansionTile(
           leading: SizedBox(
               height: 25,
               width: 25,
-              child: Image.asset('webassets/png/registation_setting.png')),
-          tileColor: selectedIndex == 1
-              ? themeColorBlue.withOpacity(0.1)
-              : Colors.transparent,
-          onTap: () {
-            index = 1;
-            registrationController.ontapRegiStudentList.value = false;
-            onTap.call(index);
-          },
+              child: Image.asset('webassets/png/attendance.png')),
           title: DashboardTextFontWidget(
-            title: 'Registered Student',
+            title: 'Registration',
           ),
-          trailing: StreamBuilder(
-              stream: server
-                  .collection('SchoolListCollection')
-                  .doc(UserCredentialsController.schoolId)
-                  .collection(UserCredentialsController.batchId!)
-                  .doc(UserCredentialsController.batchId)
-                  .collection('RegStudentsNotifierCounter')
-                  .doc('count')
-                  .snapshots(),
-              builder: (context, classSnap) {
-                if (classSnap.hasData) {
-                  return classSnap.data?.data() == null
-                      ? const SizedBox()
-                      : classSnap.data?.data()?['counter'] == 0
-                          ? const SizedBox()
-                          : CircleAvatar(
-                              radius: 11,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 37, 211, 102),
-                              child: Center(
-                                child: TextFontWidget(
-                                  color: cWhite,
-                                  text: "${classSnap.data?.data()?['counter']}",
-                                  fontsize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            );
-                } else if (classSnap.data == null) {
-                  return const SizedBox();
-                } else {
-                  return const SizedBox();
-                }
-              }),
-        ),
+          children: <Widget>[
+            Container(
+              color: selectedIndex == 1
+                  ? themeColorBlue.withOpacity(0.1)
+                  : Colors.transparent,
+              child: ListTile(
+                onTap: () {
+                  index = 1;
+                  onTap.call(index);
+                },
+                title: DashboardTextFontWidget(
+                  title: 'Student Registration',
+                ),
+              ),
+            ), ////////////////////////////////........sub....7
+            // ListTile(
+            //   tileColor: selectedIndex == 8
+            //       ? themeColorBlue.withOpacity(0.1)
+            //       : Colors.transparent,
+            //   onTap: () {
+            //     index = 8;
+            //     onTap.call(index);
+            //   },
+            //   title: DashboardTextFontWidget(
+            //     title: 'Teacher Registration',
+            //   ),
+            // ),///////////////////////..........sub........
+            // ListTile(
+            //   tileColor: selectedIndex == 8
+            //       ? themeColorBlue.withOpacity(0.1)
+            //       : Colors.transparent,
+            //   onTap: () {
+            //     index = 8;
+            //     onTap.call(index);
+            //   },
+            //   title: DashboardTextFontWidget(
+            //     title: 'Non Teaching Staff Registration',
+            //   ),
+            // ),////////////////////...........sub
+          ],
+        ), 
+        // ListTile(
+        //   leading: SizedBox(
+        //       height: 25,
+        //       width: 25,
+        //       child: Image.asset('webassets/png/registation_setting.png')),
+        //   tileColor: selectedIndex == 1
+        //       ? themeColorBlue.withOpacity(0.1)
+        //       : Colors.transparent,
+        //   onTap: () {
+        //     index = 1;
+        //     registrationController.ontapRegiStudentList.value = false;
+        //     onTap.call(index);
+        //   },
+        //   title: DashboardTextFontWidget(
+        //     title: 'Registered Student',
+        //   ),
+        //   trailing: StreamBuilder(
+        //       stream: server
+        //           .collection('SchoolListCollection')
+        //           .doc(UserCredentialsController.schoolId)
+        //           .collection(UserCredentialsController.batchId!)
+        //           .doc(UserCredentialsController.batchId)
+        //           .collection('RegStudentsNotifierCounter')
+        //           .doc('count')
+        //           .snapshots(),
+        //       builder: (context, classSnap) {
+        //         if (classSnap.hasData) {
+        //           return classSnap.data?.data() == null
+        //               ? const SizedBox()
+        //               : classSnap.data?.data()?['counter'] == 0
+        //                   ? const SizedBox()
+        //                   : CircleAvatar(
+        //                       radius: 11,
+        //                       backgroundColor:
+        //                           const Color.fromARGB(255, 37, 211, 102),
+        //                       child: Center(
+        //                         child: TextFontWidget(
+        //                           color: cWhite,
+        //                           text: "${classSnap.data?.data()?['counter']}",
+        //                           fontsize: 10,
+        //                           fontWeight: FontWeight.bold,
+        //                         ),
+        //                       ),
+        //                     );
+        //         } else if (classSnap.data == null) {
+        //           return const SizedBox();
+        //         } else {
+        //           return const SizedBox();
+        //         }
+        //       }),
+        // ),
         ListTile(
           leading: SizedBox(
               height: 20,
