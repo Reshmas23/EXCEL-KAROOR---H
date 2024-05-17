@@ -178,7 +178,7 @@ class ClassWiseStudentList extends StatelessWidget {
                                                                   index: index,
                                                                   headerTitle:
                                                                       "No data "),
-                                                        )
+                                                        ),
                                                 // Obx(() => classController
                                                 //               .firstSubjectId
                                                 //               .value ==
