@@ -10,7 +10,7 @@ import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'sections/total_members/total_members_section.dart';
 
 class AdminDashBoardSections extends StatelessWidget {
- const  AdminDashBoardSections({super.key});
+  const AdminDashBoardSections({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AdminDashBoardSections extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 25, top: 25),
                 child: TextFontWidget(
                   text: 'Admin Dashboard',
@@ -32,34 +32,35 @@ class AdminDashBoardSections extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    top: 25,
-                    left: ResponsiveWebSite.isMobile(context) ? 05 : 10),
-                child:  TotalMembersSection(),
+                padding:
+                    EdgeInsets.only(top: 25, left: ResponsiveWebSite.isMobile(context) ? 05 : 10),
+                child: TotalMembersSection(),
 
                 ///.............. Total Members Section
               ),
               ResponsiveWebSite.isMobile(context)
-                  ? const Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 10,
+                  ? const SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 10,
+                            ),
+                            child: TotalStudentAttendanceContainer(),
                           ),
-                          child: TotalStudentAttendanceContainer(),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 10,
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 10,
+                            ),
+                            child:
+                                TotalClassViewContainer(), /////////........ Others --- Attendance
                           ),
-                          child:
-                              TotalClassViewContainer(), /////////........ Others --- Attendance
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 10, right: 0, left: 0),
-                          child: TotalClassViewContainer(),
-                        ),
-                      ],
+                          Padding(
+                            padding: EdgeInsets.only(top: 10, right: 0, left: 0),
+                            child: TotalTeacherViewContainer(),
+                          ),
+                        ],
+                      ),
                     )
                   : const SingleChildScrollView(
                       // scrollDirection: Axis.horizontal,
@@ -68,16 +69,14 @@ class AdminDashBoardSections extends StatelessWidget {
                           Expanded(
                             flex: 2,
                             child: Padding(
-                              padding:
-                                  EdgeInsets.only(top: 10, right: 0, left: 10),
+                              padding: EdgeInsets.only(top: 10, right: 0, left: 10),
                               child: TotalStudentAttendanceContainer(),
                             ),
                           ),
                           Expanded(
                             flex: 3,
                             child: Padding(
-                              padding:
-                                  EdgeInsets.only(top: 10, right: 0, left: 05),
+                              padding: EdgeInsets.only(top: 10, right: 0, left: 05),
                               child:
                                   TotalClassViewContainer(), /////////........ Others --- Attendance
                             ),
@@ -85,8 +84,7 @@ class AdminDashBoardSections extends StatelessWidget {
                           Expanded(
                             flex: 2,
                             child: Padding(
-                              padding:
-                                  EdgeInsets.only(top: 10, right: 10, left: 10),
+                              padding: EdgeInsets.only(top: 10, right: 10, left: 10),
                               child: TotalTeacherViewContainer(),
                             ),
                           ),

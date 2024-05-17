@@ -125,14 +125,7 @@ class CreatedFeesStatus extends StatelessWidget {
                                       child: CatrgoryTableHeaderWidget(headerTitle: 'Due Date')),
                                   SizedBox(
                                     width: 01,
-                                  ),
-                                  // Expanded(
-                                  //     flex: 2,
-                                  //     child: CatrgoryTableHeaderWidget(
-                                  //         headerTitle: 'Fee per student')),
-                                  // SizedBox(
-                                  //   width: 01,
-                                  // ),
+                                  ),                                
                                   Expanded(
                                       flex: 2,
                                       child: CatrgoryTableHeaderWidget(headerTitle: 'Collected')),
