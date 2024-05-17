@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:vidyaveechi_website/controller/all_classes_container/all_classes_container.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/dash_board/sections/class_status/class_data_list.dart';
@@ -15,7 +14,6 @@ class TotalClassViewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final allClassesController = Get.put(AllClassesController());
     return Container(
       height: ResponsiveWebSite.isMobile(context) ? 320 : 420,
       width: ResponsiveWebSite.isMobile(context) ? double.infinity : 450,
@@ -51,9 +49,6 @@ class AllClassListViewContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final date = DateTime.now();
     DateTime parseDate = DateTime.parse(date.toString());
-    final month = DateFormat('MMMM-yyyy');
-    // ignore: unused_local_variable
-    String monthwise = month.format(parseDate);
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     String formatted = formatter.format(parseDate);
     return Column(
@@ -138,17 +133,17 @@ class AllClassListViewContainer extends StatelessWidget {
                           .collection('Classes')
                           .doc(classData['docid'])
                           .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
+                      builder: (context, currentSnapshot) {
+                        if (currentSnapshot.connectionState ==
                             ConnectionState.waiting) {
                           return const Center(
                               child: CircularProgressIndicator());
-                        } else if (snapshot.hasError) {
+                        } else if (currentSnapshot.hasError) {
                           return Center(
-                              child:
-                                  Text('An error occurred: ${snapshot.error}'));
-                        } else if (!snapshot.hasData ||
-                            !snapshot.data!.exists) {
+                              child: Text(
+                                  'An error occurred: ${currentSnapshot.error}'));
+                        } else if (!currentSnapshot.hasData ||
+                            !currentSnapshot.data!.exists) {
                           return ClassDataList(
                             index: index,
                             classData: classData,
@@ -158,28 +153,46 @@ class AllClassListViewContainer extends StatelessWidget {
                             status: false,
                           );
                         } else {
-                          final data = snapshot.data!.data() ?? {};
+                          final data = currentSnapshot.data!.data() ?? {};
                           return StreamBuilder(
-                              stream: server
-                                  .collection('SchoolListCollection')
-                                  .doc(UserCredentialsController.schoolId)
-                                  .collection('Teachers')
-                                  .doc(data['teacherDocid'])
-                                  .snapshots(),
-                              builder: (context, trSnap) {
+                            stream: server
+                                .collection('SchoolListCollection')
+                                .doc(UserCredentialsController.schoolId)
+                                .collection('Teachers')
+                                .doc(data['teacherDocid'])
+                                .snapshots(),
+                            builder: (context, trSnap) {
+                              if (trSnap.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              } else if (trSnap.hasError) {
+                                return Center(
+                                    child: Text(
+                                        'An error occurred:  ${trSnap.error}'));
+                              } else if (!trSnap.hasData ||
+                                  !trSnap.data!.exists) {
                                 return ClassDataList(
                                   index: index,
                                   classData: classData,
-                                  currentTr: trSnap.data!['teacherName'],
-                                  absentStudents:
-                                      data['absentStudents']?.toString() ??
-                                          "--",
-                                  presentStudents:
-                                      data['presentStudents']?.toString() ??
-                                          "--",
-                                  status: true,
+                                  currentTr: '-',
+                                  absentStudents: "-",
+                                  presentStudents: "-",
+                                  status: false,
                                 );
-                              });
+                              }
+                              return ClassDataList(
+                                index: index,
+                                classData: classData,
+                                currentTr: trSnap.data!['teacherName'],
+                                absentStudents:
+                                    data['absentStudents']?.toString() ?? "--",
+                                presentStudents:
+                                    data['presentStudents']?.toString() ?? "--",
+                                status: true,
+                              );
+                            },
+                          );
                         }
                       },
                     );
