@@ -61,6 +61,28 @@ class ClassDataListWidget extends StatelessWidget {
             width: 01,
           ),
           Expanded(
+            flex: 2,
+            child: DataContainerWidget(
+                rowMainAccess: MainAxisAlignment.center,
+                color: cWhite,
+                index: index,
+                headerTitle: "     ${data.classId}"),
+          ),
+          const SizedBox(
+            width: 01,
+          ),
+          Expanded(
+            flex: 4,
+            child: DataContainerWidget(
+                rowMainAccess: MainAxisAlignment.start,
+                color: cWhite,
+                index: index,
+                headerTitle: "     ${data.className}"),
+          ),
+          const SizedBox(
+            width: 01,
+          ),
+           Expanded(
             flex: 4,
             child: DataContainerWidget(
                 rowMainAccess: MainAxisAlignment.start,

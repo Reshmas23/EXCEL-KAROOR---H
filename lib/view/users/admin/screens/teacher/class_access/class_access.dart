@@ -135,6 +135,7 @@ classAccessFunction(BuildContext context) {
                                                               ClassController>()
                                                           .setClassForbatchYear(
                                                               data.className,
+                                                              data.classId,
                                                               data.docid,
                                                               data.classfee!),
                                                       child: const Icon(

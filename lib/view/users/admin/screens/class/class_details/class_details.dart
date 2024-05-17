@@ -5,6 +5,7 @@ import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/class/add_student/add_studentfunction.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/class/class_details/attendence_history_status/attendence_history_status.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/class/class_details/class_wise_std_list/cls_wise_list.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/class/class_details/exam_history_status/exam_history_status.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/class/class_details/widgets/leave_applicationList/leaveApplicationList.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/class/subject/create_subject.dart';
@@ -26,7 +27,7 @@ class ClassDetailsContainer extends StatelessWidget {
     final data = classController.classModelData.value;
     classController.getClassBoyCount();
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Obx(() {
         return classController.ontapLeaveApplication.value == true
             ? LeaveApplicationList()
@@ -219,11 +220,21 @@ class ClassDetailsContainer extends StatelessWidget {
                                                     children: [
                                                       const Icon(Icons.person),
                                                       const TextFontWidget(
-                                                        text: " Reshma Suresh ",
+                                                        text: "class teacher ",
                                                         fontsize: 12,
                                                         color: themeColorBlue,
                                                       ),
                                                       const Spacer(),
+                                                      BlueContainerWidget(
+                                                          color: themeColorBlue,
+                                                          fontSize: 12,
+                                                          title: 'Assign Class Teacher',
+                                                          width: 125,
+                                                          fontWeight: FontWeight.w500,
+                                                        ),
+                                                        const SizedBox(
+                                                        width: 10,
+                                                      ),
                                                       GestureDetector(
                                                         onTap: () {
                                                           classController
@@ -308,9 +319,9 @@ class ClassDetailsContainer extends StatelessWidget {
                                 labelColor: themeColorBlue,
                                 labelStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
                                 tabs: [
-                                  // Tab(
-                                  //   text: 'FEES',
-                                  // ),
+                                  Tab(
+                                    text: 'STUDENTS',
+                                  ),
                                   Tab(
                                     text: 'ATTENDANCE',
                                   ),
@@ -341,6 +352,7 @@ class ClassDetailsContainer extends StatelessWidget {
 
                           // height: 300,
                           child: TabBarView(children: [
+                             ClassWiseStudentList(),
                             // const FeesHistory(), //........................ Student FEES
                             AttendenceHistory(), //.......................... Student Attendence
                             ExamHistory() //............................ Student Exam History

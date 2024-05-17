@@ -27,7 +27,7 @@ createClassFunction(BuildContext context) {
       // t
       body: Column(
         children: [
-           Row(
+           const Row(
             children: [
               BackButton(),
               Padding(
@@ -48,8 +48,25 @@ createClassFunction(BuildContext context) {
               validator: checkFieldEmpty,
             ),
           ),
+           Padding(
+            padding: const EdgeInsets.only(left: 08, right: 08),
+            child: TextFormFiledBlueContainerWidget(
+               controller: Get.find<ClassController>().classIdController,
+              hintText: "  Enter Class Id",
+              title: 'Class Id',
+              validator: checkFieldEmpty,
+            ),
+          ),
+           Padding(
+            padding: const EdgeInsets.only(left: 08, right: 08),
+            child: TextFormFiledBlueContainerWidget(
+              hintText: "  Enter Class Teacher",
+              title: 'Class Teacher',
+             // validator: checkFieldEmpty,
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 08, right: 08, top: 10),
+            padding: const EdgeInsets.only(left: 08, right: 08,),
             child: TextFormFiledBlueContainerWidgetWithOutColor(
               controller: Get.find<ClassController>().classFeeController,
               hintText:
@@ -84,7 +101,7 @@ createClassFunction(BuildContext context) {
                   builder: (context, snap) {
                     if (snap.hasData) {
                       if (snap.data!.docs.isEmpty) {
-                        return  Center(
+                        return  const Center(
                           child: TextFontWidget(
                               text: "No class found add new classes",
                               fontsize: 12.5),
@@ -166,6 +183,7 @@ createClassFunction(BuildContext context) {
                                                                     ClassController>()
                                                                 .setClassForbatchYear(
                                                                     data.className,
+                                                                    data.classId,
                                                                     data.docid,
                                                                     data.classfee!),
                                                             child: const Icon(
