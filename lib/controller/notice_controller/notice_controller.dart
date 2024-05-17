@@ -16,7 +16,7 @@ class NoticeController extends GetxController {
   RxBool parentValue = RxBool(false);
   RxBool teacherValue = RxBool(false);
 
-   final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   Rx<ButtonState> buttonstate = ButtonState.idle.obs;
 
@@ -28,30 +28,35 @@ class NoticeController extends GetxController {
   // final Rx<String> noticeSubmissionDateController = ''.obs;
   // final Rx<String> noticeOccasionDateController = ''.obs;
 
-   TextEditingController noticeHeadingController = TextEditingController();
-   TextEditingController noticePublishedDateController = TextEditingController();
-   TextEditingController noticeSubjectController = TextEditingController();
-   TextEditingController noticeDateofoccationController = TextEditingController();
-   TextEditingController noticeDateofSubmissionController = TextEditingController();
-    TextEditingController editnoticePublishedDateController = TextEditingController();
-   TextEditingController editnoticeDateofoccationController = TextEditingController();
-   TextEditingController editnoticeDateofSubmissionController = TextEditingController();
-   TextEditingController noticevenueController = TextEditingController();
-   TextEditingController noticeGuestController = TextEditingController();
-   TextEditingController noticeSignedByController = TextEditingController();
+  TextEditingController noticeHeadingController = TextEditingController();
+  TextEditingController noticePublishedDateController = TextEditingController();
+  TextEditingController noticeSubjectController = TextEditingController();
+  TextEditingController noticeDateofoccationController =
+      TextEditingController();
+  TextEditingController noticeDateofSubmissionController =
+      TextEditingController();
+  TextEditingController editnoticePublishedDateController =
+      TextEditingController();
+  TextEditingController editnoticeDateofoccationController =
+      TextEditingController();
+  TextEditingController editnoticeDateofSubmissionController =
+      TextEditingController();
+  TextEditingController noticevenueController = TextEditingController();
+  TextEditingController noticeGuestController = TextEditingController();
+  TextEditingController noticeSignedByController = TextEditingController();
 
-    Future<void> createNotice() async {
-    final uuid =const  Uuid().v1();
+  Future<void> createNotice() async {
+    final uuid = const Uuid().v1();
     final noticeDetails = NoticeModel(
-      subject: noticeSubjectController.text,
-      publishedDate: noticePublishedDateController.text, 
-      heading: noticeHeadingController.text, 
-      dateofoccation: noticeDateofoccationController.text, 
-      venue: noticevenueController.text,  
-      chiefGuest: noticeGuestController.text, 
-      dateOfSubmission: noticeDateofSubmissionController.text, 
-      signedBy: noticeSignedByController.text, 
-      noticeId: uuid);
+        subject: noticeSubjectController.text,
+        publishedDate: noticePublishedDateController.text,
+        heading: noticeHeadingController.text,
+        dateofoccation: noticeDateofoccationController.text,
+        venue: noticevenueController.text,
+        chiefGuest: noticeGuestController.text,
+        dateOfSubmission: noticeDateofSubmissionController.text,
+        signedBy: noticeSignedByController.text,
+        noticeId: uuid);
 
     // final Map<String, dynamic> eventData = eventDetails.toMap();
 
@@ -76,7 +81,6 @@ class NoticeController extends GetxController {
         buttonstate.value = ButtonState.success;
         print(UserCredentialsController.batchId!);
 
-
         showToast(msg: "Notice Created Successfully");
         await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
           buttonstate.value = ButtonState.idle;
@@ -90,9 +94,10 @@ class NoticeController extends GetxController {
       log("Error .... $e");
     }
   }
-   Future<void> updateNotice(String noticeId ,BuildContext context) async {
+
+  Future<void> updateNotice(String noticeId, BuildContext context) async {
     // ignore: unused_local_variable
-  //  String edit = snapshot.data!.docs[index]['eventName'];
+    //  String edit = snapshot.data!.docs[index]['eventName'];
     server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
@@ -101,31 +106,34 @@ class NoticeController extends GetxController {
         .collection('AdminNotices')
         .doc(noticeId)
         .update({
-        'subject':  noticeSubjectController.text,
-        'publishedDate': editnoticePublishedDateController.text,
-        'heading': noticeHeadingController.text,
-        'dateofoccation': editnoticeDateofoccationController.text,
-        'venue': noticevenueController.text,
-        'chiefGuest': noticeGuestController.text,
-        'dateOfSubmission': editnoticeDateofSubmissionController.text,
-        'signedBy': noticeSignedByController.text,
-        }).then((value) {
-        noticeSubjectController.clear();
-        editnoticePublishedDateController.clear();
-        noticeHeadingController.clear();
-        editnoticeDateofoccationController.clear();
-        noticevenueController.clear();
-        noticeGuestController.clear();
-        editnoticeDateofSubmissionController.clear();
-        noticeSignedByController.clear();          
+          'subject': noticeSubjectController.text,
+          'publishedDate': editnoticePublishedDateController.text,
+          'heading': noticeHeadingController.text,
+          'dateofoccation': editnoticeDateofoccationController.text,
+          'venue': noticevenueController.text,
+          'chiefGuest': noticeGuestController.text,
+          'dateOfSubmission': editnoticeDateofSubmissionController.text,
+          'signedBy': noticeSignedByController.text,
         })
-        .then((value) => Navigator.pop(context ))
+        .then((value) {
+          noticeSubjectController.clear();
+          editnoticePublishedDateController.clear();
+          noticeHeadingController.clear();
+          editnoticeDateofoccationController.clear();
+          noticevenueController.clear();
+          noticeGuestController.clear();
+          editnoticeDateofSubmissionController.clear();
+          noticeSignedByController.clear();
+        })
+        .then((value) => Navigator.pop(context))
         .then((value) => showToast(msg: 'Notice Updated!'));
   }
 
-   Future<void> deleteNotice( String noticeId,BuildContext context)async{
-    log("noticeId -----------$noticeId",);
-     // ignore: unused_local_variable
+  Future<void> deleteNotice(String noticeId, BuildContext context) async {
+    log(
+      "noticeId -----------$noticeId",
+    );
+    // ignore: unused_local_variable
     // String delete = snapshot.data!.docs[index]['eventName'];
     server
         .collection('SchoolListCollection')
@@ -134,24 +142,21 @@ class NoticeController extends GetxController {
         .doc(UserCredentialsController.batchId!)
         .collection('AdminNotices')
         .doc(noticeId)
-        .delete()
-        .then((value) => Navigator.pop(context ));
-        
+        .delete();
   }
 
-  
+  Future<void> selectDate(
+      BuildContext context, TextEditingController controller) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
 
-   Future<void> selectDate(BuildContext context, TextEditingController controller) async {
-  final DateTime? pickedDate = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(2000),
-    lastDate: DateTime(2101),
-  );
-
-  if (pickedDate != null) {
-    String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-    controller.text = formattedDate;
+    if (pickedDate != null) {
+      String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
+      controller.text = formattedDate;
+    }
   }
-}
 }

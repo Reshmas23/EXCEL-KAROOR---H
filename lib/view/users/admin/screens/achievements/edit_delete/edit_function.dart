@@ -17,43 +17,54 @@ editFunctionOfAchievements(BuildContext context, AchievementModel data) {
       children: [
         Form(
           key: achievementsController.formKey,
-          child: Column(children: [
-          TextFormFiledHeightnoColor(
-             validator: checkFieldEmpty,
-            controller: achievementsController.editstudentNameController,
-              hintText: data.studentName, title: 'Student Name'),
-          TextFormFiledHeightnoColor(
-             validator: checkFieldEmpty,
-            controller: achievementsController.editadmissionNumberController,
-              hintText: data.admissionNumber, title: 'Admission Number'),
-          TextFormFiledHeightnoColor(
-            onTap: () {
-              achievementsController.selectDate(context, achievementsController.editdateController);
-            },
-             validator: checkFieldEmpty,
-            controller: achievementsController.editdateController,
-              hintText: data.dateofAchievement, title: 'Date'),
-          TextFormFiledHeightnoColor(
-             validator: checkFieldEmpty,
-            controller: achievementsController.editachievementController,
-              hintText: data.achievementHead, title: 'Achievement'),
-              ],),
+          child: Column(
+            children: [
+              TextFormFiledHeightnoColor(
+                  validator: checkFieldEmpty,
+                  controller: achievementsController.editstudentNameController,
+                  hintText: data.studentName,
+                  title: 'Student Name'),
+              TextFormFiledHeightnoColor(
+                  validator: checkFieldEmpty,
+                  controller:
+                      achievementsController.editadmissionNumberController,
+                  hintText: data.admissionNumber,
+                  title: 'Admission Number'),
+              TextFormFiledHeightnoColor(
+                  onTap: () {
+                    achievementsController.selectDate(
+                        context, achievementsController.editdateController);
+                  },
+                  validator: checkFieldEmpty,
+                  controller: achievementsController.editdateController,
+                  hintText: data.dateofAchievement,
+                  title: 'Date'),
+              TextFormFiledHeightnoColor(
+                  validator: checkFieldEmpty,
+                  controller: achievementsController.editachievementController,
+                  hintText: data.achievementHead,
+                  title: 'Achievement'),
+            ],
+          ),
         )
       ],
-      
       doyouwantActionButton: true,
       actiononTapfuction: () {
-      if(achievementsController  .formKey.currentState! .validate()) {
-        achievementsController.updateAchievement(
-          data.studentName,data.achievementHead,data.dateofAchievement,data.admissionNumber,
-          data.uid,context);
-      }
+        if (achievementsController.formKey.currentState!.validate()) {
+          achievementsController.updateAchievement(
+              data.studentName,
+              data.achievementHead,
+              data.dateofAchievement,
+              data.admissionNumber,
+              data.uid,
+              context);
+        }
       },
       actiontext: 'Update');
 }
 
 deleteFunctionOfAchievement(BuildContext context, AchievementModel data) {
-    final AchievementsController achievementsController =
+  final AchievementsController achievementsController =
       Get.put(AchievementsController());
   customShowDilogBox(
       context: context,
@@ -65,8 +76,8 @@ deleteFunctionOfAchievement(BuildContext context, AchievementModel data) {
       ],
       actiononTapfuction: () {
         print(data.uid);
-       achievementsController.deleteAchievements(data.uid,context);
-       Navigator.pop(context);
+        achievementsController.deleteAchievements(data.uid, context);
+        Navigator.pop(context);
       },
       doyouwantActionButton: true);
 }

@@ -102,6 +102,18 @@ class AllNoticeDataList extends StatelessWidget {
             child: Center(
               child: GestureDetector(
                 onTap: () {
+                  noticeController.noticeHeadingController.text = data.heading;
+                  noticeController.editnoticePublishedDateController.text =
+                      data.publishedDate;
+                  noticeController.noticeSubjectController.text = data.subject;
+                  noticeController.editnoticeDateofoccationController.text =
+                      data.dateofoccation;
+                  noticeController.noticevenueController.text = data.venue;
+                  noticeController.editnoticeDateofSubmissionController.text =
+                      data.dateOfSubmission;
+                  noticeController.noticeGuestController.text = data.chiefGuest;
+                  noticeController.noticeSignedByController.text =
+                      data.signedBy;
                   editFunctionOfNotice(context, data);
                 },
                 child: DataContainerWidget(
@@ -128,11 +140,11 @@ class AllNoticeDataList extends StatelessWidget {
                         data.noticeId,
                         context,
                       );
-                      Navigator.pop(context );
+                      Navigator.pop(context);
                     },
                   );
                 },
-                child:DataContainerWidget(
+                child: DataContainerWidget(
                     rowMainAccess: MainAxisAlignment.center,
                     color: cWhite,
                     // width: 150,
