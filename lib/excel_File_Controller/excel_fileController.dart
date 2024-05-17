@@ -103,7 +103,7 @@ class ExcelFileController extends GetxController {
   Future<void> createTeacherAsPerExcelData() async {
     try {
       for (var i = 0; i < excelList.length; i++) {
-        final ranNo = getRandomNumber(4);
+        final ranNo = getRandomNumber(3);
         final ranString = getRandomNumber(6);
         String teacherName = excelList[i].teacherName!.replaceAll(' ', '');
         final String teacherEmail = '${teacherName + ranNo}@gmail.com';

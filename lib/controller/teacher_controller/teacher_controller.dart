@@ -19,11 +19,6 @@ class TeachersController extends GetxController {
     allTeacherList =
         firebase.docs.map((e) => TeacherModel.fromMap(e.data())).toList();
 
-    // for (var i = 0; i < firebase.docs.length; i++) {
-    //   final list =
-    //       firebase.docs.map((e) => TeacherModel.fromMap(e.data())).toList();
-    //   allclassList.add(list[i]);
-    // }
     return allTeacherList;
-}
+  }
 }

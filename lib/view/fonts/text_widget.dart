@@ -31,7 +31,7 @@ class TextFontWidget extends StatelessWidget {
         letterSpacing: letterSpacing,
         fontSize: fontsize,
         fontWeight: fontWeight,
-        color: Colors.black,
+        color:color ?? Colors.black,
       ),
     );
   }

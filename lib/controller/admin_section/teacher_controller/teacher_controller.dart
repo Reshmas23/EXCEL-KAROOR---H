@@ -24,6 +24,8 @@ class TeacherController extends GetxController {
   RxString dobSelectedDate = ''.obs;
   RxString joiningSelectedDate = ''.obs;
   RxBool ontapviewteacher = false.obs;
+
+  RxBool teacherEditDetail = false.obs;
   Rxn<TeacherModel> teacherModelData = Rxn<TeacherModel>();
   final formKey = GlobalKey<FormState>();
 

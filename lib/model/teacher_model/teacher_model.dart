@@ -85,53 +85,47 @@ class TeacherModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'teacherName': teacherName,
-      'teacherEmail': teacherEmail,
-      'password': password,
-      'houseName': houseName,
-      'houseNumber': houseNumber,
-      'place': place,
-      'gender': gender,
-      'district': district,
-      'altPhoneNo': altPhoneNo,
-      'employeeID': employeeID,
-      'createdAt': createdAt,
-      'teacherPhNo': teacherPhNo,
-      'docid': docid,
+      'teacherName': teacherName??"",
+      'teacherEmail': teacherEmail??"",
+      'password': password??'',
+      'houseName': houseName??'',
+      'houseNumber': houseNumber??'',
+      'place': place??'',
+      'gender': gender??'',
+      'district': district??'',
+      'altPhoneNo': altPhoneNo??'',
+      'employeeID': employeeID??'',
+      'createdAt': createdAt??'',
+      'teacherPhNo': teacherPhNo??'',
+      'docid': docid??'',
       'userRole': userRole,
-      'imageId': imageId,
-      'imageUrl': imageUrl,
-      'classID': classID,
-      'cardID': cardID,
+      'imageId': imageId??'',
+      'imageUrl': imageUrl??'',
+      'classID': classID??'',
+      'cardID': cardID??'',
     };
   }
 
   factory TeacherModel.fromMap(Map<String, dynamic> map) {
     return TeacherModel(
-      teacherName:
-          map['teacherName'] != null ? map['teacherName'] ??'' : null,
-      teacherEmail:
-          map['teacherEmail'] != null ? map['teacherEmail'] ??'' : null,
-      password: map['password'] != null ? map['password'] ??'' : null,
-      houseName: map['houseName'] != null ? map['houseName'] ??'' : null,
-      houseNumber:
-          map['houseNumber'] != null ? map['houseNumber'] ??'' : null,
-      place: map['place'] != null ? map['place'] ??'' : null,
-      gender: map['gender'] != null ? map['gender'] ??'' : null,
-      district: map['district'] != null ? map['district'] ??'' : null,
-      altPhoneNo:
-          map['altPhoneNo'] != null ? map['altPhoneNo'] ??'' : null,
-      employeeID:
-          map['employeeID'] != null ? map['employeeID'] ??'' : null,
-      createdAt: map['createdAt'] != null ? map['createdAt'] ??'' : null,
-      teacherPhNo:
-          map['teacherPhNo'] != null ? map['teacherPhNo'] ??'' : null,
-      docid: map['docid'] != null ? map['docid'] ??'' : null,
-      userRole: map['userRole'] ??'',
-      imageId: map['imageId'] != null ? map['imageId'] ??'' : null,
-      imageUrl: map['imageUrl'] != null ? map['imageUrl'] ??'' : null,
-      classID: map['classID'] != null ? map['classID'] ??'' : null,
-      cardID: map['cardID'] != null ? map['cardID'] ??'' : null,
+      teacherName: map['teacherName'] ?? "",
+      teacherEmail: map['teacherEmail'] ?? "",
+      password: map['password'] ?? "",
+      houseName: map['houseName'] ?? '',
+      houseNumber: map['houseNumber'] ?? '',
+      place: map['place'] ?? '',
+      gender: map['gender'] ?? '',
+      district: map['district'] ?? '',
+      altPhoneNo: map['altPhoneNo'] ?? '',
+      employeeID: map['employeeID'] ?? '',
+      createdAt: map['createdAt'] ?? '',
+      teacherPhNo: map['teacherPhNo'] ?? '',
+      docid: map['docid'] ?? '',
+      userRole: map['userRole'] ?? '',
+      imageId: map['imageId'] ?? '',
+      imageUrl: map['imageUrl'] ?? '',
+      classID: map['classID'] ?? '',
+      cardID: map['cardID'] ?? '',
     );
   }
 
