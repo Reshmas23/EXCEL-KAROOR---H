@@ -475,7 +475,7 @@ class ClassController extends GetxController {
         .collection('Subjects')
         .get()
         .then((value) {
-    firstSubjectId.value =  value.docs[0].data()['docid'] ;
+    firstSubjectId.value =  value.docs[0].data()['docid'] ;  ///////////////////error on the index
       log("dddd ${firstSubjectId.value }");
     });
   } 
