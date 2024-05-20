@@ -25,6 +25,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/notifications/admin
 import 'package:vidyaveechi_website/view/users/admin/screens/parents/all_parents_list.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/list_of_classes_registration.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/non_teachStaff/non_teachusers.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/student/class_list.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/teacher/teachers_regi.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/registrationStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/view_allStudents.dart';
@@ -217,9 +218,11 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 }
 
 List<Widget> pages = [
+AllClassListContainer(),
+  ListOfClassesRegistration(),
+
   AllNonTeachStaffListContainer(),
   AllTeacherListContainer(),
-  ListOfClassesRegistration(),
   AllTeacherListContainer(),
   const AdminDashBoardSections(),
   RegistrationStudentList(),
