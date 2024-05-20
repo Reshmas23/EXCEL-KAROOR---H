@@ -172,7 +172,7 @@ class AllClassListView extends StatelessWidget {
                                                   .classModelData.value = data;
                                               classController.ontapClass.value =
                                                   true;
-                                                    await classController.getFirstSubjectId();
+                                                    // await classController.getFirstSubjectId();
                                             },
                                             child: ClassDataListWidget(
                                               classStatus: snaps,

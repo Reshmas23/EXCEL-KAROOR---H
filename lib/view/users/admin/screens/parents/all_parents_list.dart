@@ -124,7 +124,12 @@ class AllParentsListContainer extends StatelessWidget {
                                     SizedBox(
                                       width: 02,
                                     ),
-
+                                      Expanded(
+                                        flex: 4,
+                                        child: CatrgoryTableHeaderWidget(headerTitle: 'Student Name')),
+                                    SizedBox(
+                                      width: 02,
+                                    ),
                                     Expanded(
                                         flex: 3,
                                         child: CatrgoryTableHeaderWidget(headerTitle: 'Class ')),

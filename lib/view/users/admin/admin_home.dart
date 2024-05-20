@@ -27,6 +27,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/teachers_regi.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/registrationStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/view_allStudents.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/teacher/view_allTeachers.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/timetable/timetable_main_screen.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
@@ -216,14 +217,15 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 }
 
 List<Widget> pages = [
-  AllTeacherListContainer(),
-  ListOfClassesRegistration(),
-  AllTeacherListContainer(),
   const AdminDashBoardSections(),
-  RegistrationStudentList(),
-  AllStudentListContainer(),
+   ListOfClassesRegistration(),
 
-  AllParentsListContainer(),
+  AllTeacherRegistrationListContainer(),
+   RegistrationStudentList(),
+  AllStudentListContainer(),
+  AllTeacherListContainer(),
+ AllParentsListContainer(),
+// AllTeacherListContainer(),
   AllClassListView(),
   CreatedFeesStatus(),
   PeriodWiseStudentsAttendance(),

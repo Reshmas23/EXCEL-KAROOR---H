@@ -98,6 +98,7 @@ class AllParentsDataList extends StatelessWidget {
               ],
             ),
           ), // ................................... Parent Email
+          
           const SizedBox(
             width: 01,
           ),
@@ -123,6 +124,35 @@ class AllParentsDataList extends StatelessWidget {
               ],
             ),
           ), //....................................... parent Phone Number
+          const SizedBox(
+            width: 01,
+          ),
+           Expanded(
+            flex: 4,
+                  child: StreamBuilder(
+                    stream: server
+                    .collection('SchoolListCollection')
+                    .doc(UserCredentialsController.schoolId)
+                    .collection('AllStudents')
+                    .doc(data.studentID)
+                    .snapshots(),
+                    builder: (context, snapshots) {
+                      if (snapshots.hasData) {
+                         return TextFontWidget(
+                        text:  ' ${snapshots.data?.data()?['studentName']??'Not Found'}',
+                        fontsize: 12,
+                        overflow: TextOverflow.ellipsis,
+                      );
+                      }else{
+                      return const TextFontWidget(
+                        text: " No Data",
+                        fontsize: 12,
+                        overflow: TextOverflow.ellipsis,
+                      );
+                      }
+                    }
+                  ),
+                ),
           const SizedBox(
             width: 01,
           ),
@@ -190,9 +220,7 @@ class AllParentsDataList extends StatelessWidget {
           //   ),
           // ),
 
-          const SizedBox(
-            width: 01,
-          ),
+          
           // Expanded(
           //   flex: 3,
           //   child: Row(

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -76,6 +74,13 @@ class ClassWiseStudentList extends StatelessWidget {
                                   width: 1,
                                 ),
                                 Expanded(
+                                    flex: 4,
+                                    child: CatrgoryTableHeaderWidget(
+                                        headerTitle: "Parent Name")),
+                                SizedBox(
+                                  width: 1,
+                                ),
+                                Expanded(
                                     flex: 2,
                                     child: CatrgoryTableHeaderWidget(
                                         headerTitle: "Status from App")),
@@ -108,7 +113,7 @@ class ClassWiseStudentList extends StatelessWidget {
                                       return ListView.separated(
                                         itemBuilder: (context, index) {
                                           final data = clsStdsnaps
-                                              .data!.docs[index]
+                                              .data?.docs[index]
                                               .data();
                                           return Container(
                                             height: 45,
@@ -144,7 +149,7 @@ class ClassWiseStudentList extends StatelessWidget {
                                                                   .start,
                                                           //   color: cWhite,
                                                           index: index,
-                                                          headerTitle: data[
+                                                          headerTitle: data?[
                                                                   'admissionNumber'] ??
                                                               ''),
                                                 ),
@@ -160,9 +165,53 @@ class ClassWiseStudentList extends StatelessWidget {
                                                                   .start,
                                                           // color: cWhite,
                                                           index: index,
-                                                          headerTitle: data[
+                                                          headerTitle: data?[
                                                                   'studentName'] ??
                                                               ''),
+                                                ),
+                                                const SizedBox(
+                                                  width: 1,
+                                                ),
+                                                Expanded(
+                                                  flex: 4,
+                                                  child:
+                                                      StreamBuilder(
+                                                        stream: server
+                                                        .collection('SchoolListCollection')
+                                                        .doc(UserCredentialsController.schoolId)
+                                                        .collection('AllParents')
+                                                        .doc(data?['parentId']==
+                                                        ''?'dd':data?['parentId'])
+                                                        .snapshots(),
+                                                        builder: (context, snapshot) {
+                                                        //  print('-------------${data?['parentId']??"dd"}');
+                                                          if (snapshot.hasData) {
+                                                           if (snapshot.data! .data()==null) {
+                                                          
+                                                               return DataContainerMarksWidget(
+                                                              rowMainAccess: MainAxisAlignment .start,
+                                                              // color: cWhite,
+                                                              index: index,
+                                                              headerTitle:  ' No Parent');
+                                                           }else{
+                                                            return
+                                                                        DataContainerMarksWidget(
+                                                              rowMainAccess: MainAxisAlignment .start,
+                                                              // color: cWhite,
+                                                              index: index,
+                                                              headerTitle:  ' ${snapshot.data?.data()?['parentName']??'Not Found'}');
+                                                           }
+                                                   
+                                                          }else{
+                                                               return DataContainerMarksWidget(
+                                                              rowMainAccess: MainAxisAlignment .start,
+                                                              // color: cWhite,
+                                                              index: index,
+                                                              headerTitle:  ' No Data');
+                                                          }
+                                                        
+                                                        }
+                                                      ),
                                                 ),
                                                 const SizedBox(
                                                   width: 1,

@@ -27,7 +27,7 @@ classAccessFunction(BuildContext context) {
       // t
       body: Column(
         children: [
-           Row(
+           const Row(
             children: [
               BackButton(),
               Padding(
@@ -44,7 +44,7 @@ classAccessFunction(BuildContext context) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 TextFontWidget(text: "Select Class *", fontsize: 12),
+                 const TextFontWidget(text: "Select Class *", fontsize: 12),
                 SelectClassDropDown(),
               ],
             ),
@@ -85,7 +85,7 @@ classAccessFunction(BuildContext context) {
                 builder: (context, snap) {
                   if (snap.hasData) {
                     if (snap.data!.docs.isEmpty) {
-                      return  Center(
+                      return  const Center(
                         child: TextFontWidget(
                             text: "No class found add new classes",
                             fontsize: 12.5),
@@ -134,6 +134,7 @@ classAccessFunction(BuildContext context) {
                                                       onTap: () => Get.find<
                                                               ClassController>()
                                                           .setClassForbatchYear(
+                                                                  data.classTeacherName??'',
                                                               data.className,
                                                               data.classId,
                                                               data.docid,
