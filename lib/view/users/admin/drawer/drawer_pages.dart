@@ -158,7 +158,7 @@ class DrawerSelectedPagesSection extends StatelessWidget {
             onTap.call(index);
           },
           title: DashboardTextFontWidget(
-            title: 'Student',
+            title: 'All Students',
           ),
         ), //////////////////////////////////........................2
         ListTile(
@@ -174,7 +174,7 @@ class DrawerSelectedPagesSection extends StatelessWidget {
             onTap.call(index);
           },
           title: DashboardTextFontWidget(
-            title: 'Teacher',
+            title: 'All Teachers',
           ),
         ), /////////////////////////////......................
         ListTile(
@@ -190,7 +190,7 @@ class DrawerSelectedPagesSection extends StatelessWidget {
             onTap.call(index);
           },
           title: DashboardTextFontWidget(
-            title: 'Parent',
+            title: 'All Parents',
           ),
         ), //////////////////////////////////////........................
 
@@ -208,7 +208,7 @@ class DrawerSelectedPagesSection extends StatelessWidget {
               onTap.call(index);
             },
             title: DashboardTextFontWidget(
-              title: 'Class',
+              title: 'Classes',
             ),
           ),
         ), ///////////////////////////////////////////.........................................5

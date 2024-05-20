@@ -6,13 +6,11 @@ import 'package:vidyaveechi_website/model/class_model/class_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/class/create_class/create_class.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/all_students_list_registration.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/widget_list_of_classes.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
-import 'package:vidyaveechi_website/view/widgets/button_container/button_container.dart';
 
 class ListOfClassesRegistration extends StatelessWidget {
   final ClassController classController = Get.put(ClassController());
@@ -48,35 +46,10 @@ class ListOfClassesRegistration extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        children: [
-                          Spacer(),
-                          // const RouteSelectedTextContainer(
-                          //     width: 180, title: 'All Classes'),
-                          // const Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              createClassFunction(context);
-                            },
-                            child: ButtonContainerWidget(
-                                curving: 30,
-                                colorindex: 0,
-                                height: 40,
-                                width: 180,
-                                child: const Center(
-                                  child: TextFontWidgetRouter(
-                                    text: 'Create / Edit',
-                                    fontsize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: cWhite,
-                                  ),
-                                )),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
+                    
+                      // const SizedBox(
+                      //   height: 25,
+                      // ),
                       Container(
                         color: cWhite,
                         child: const Padding(

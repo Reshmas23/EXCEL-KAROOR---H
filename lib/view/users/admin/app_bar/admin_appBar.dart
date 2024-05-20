@@ -42,13 +42,16 @@ class AppBarAdminPanel extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 40,
-                      width: 40,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(14)),
-                          color: Color.fromARGB(255, 61, 94, 225)),
-                      child: const DrawerIcon(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(14)),
+                            color: Color.fromARGB(255, 61, 94, 225)),
+                        child: const DrawerIcon(),
+                      ),
                     ),
                   ],
                 ),
