@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awesome_side_sheet/Enums/sheet_position.dart';
 import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -319,6 +321,7 @@ class AdminProfileWidgetOne extends StatelessWidget {
             profileCtr.emailController.text =
                 data['collection1']['email'] ?? "";
             profileCtr.gender.value = data['collection1']['gender'] ?? "";
+            log("Image URL: ${data['collection1']['image']}");
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,11 +335,13 @@ class AdminProfileWidgetOne extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           radius: ResponsiveWebSite.isMobile(context) ? 50 : 70,
-                          backgroundColor: cred,
                           backgroundImage: data['collection1']['image'] != null
                               ? NetworkImage(data['collection1']['image'])
                               : const AssetImage('webassets/png/avathar.png')
                                   as ImageProvider,
+                          onBackgroundImageError: (error, stackTrace) {
+                            log('Image load error: $error');
+                          },
                         ),
                       ),
                     ),
@@ -511,6 +516,8 @@ class AdminProfileWidgetOne extends StatelessWidget {
             profileCtr.emailController.text =
                 data['collection2']['email'] ?? "";
             profileCtr.gender.value = data['collection2']['gender'] ?? "";
+            log("Image URL: ${data['collection2']['image']}");
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -523,11 +530,13 @@ class AdminProfileWidgetOne extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           radius: ResponsiveWebSite.isMobile(context) ? 50 : 70,
-                          backgroundColor: cred,
                           backgroundImage: data['collection2']['image'] != null
                               ? NetworkImage(data['collection2']['image'])
                               : const AssetImage('webassets/png/avathar.png')
                                   as ImageProvider,
+                          onBackgroundImageError: (error, stackTrace) {
+                            log('Image load error: $error');
+                          },
                         ),
                       ),
                     ),
