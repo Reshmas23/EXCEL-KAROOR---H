@@ -111,6 +111,7 @@ class ExcelFileController extends GetxController {
             .createUserWithEmailAndPassword(
                 email: teacherEmail, password: ranString)
             .then((authvalue) async {
+          excelList[i].docid = authvalue.user?.uid;
           excelList[i].password = ranString;
           excelList[i].teacherEmail = teacherEmail;
           await server
