@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vidyaveechi_website/controller/all_teachers_controller/all_teachers_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
@@ -12,6 +14,7 @@ class TeacherDataList extends StatelessWidget {
     required this.status,
     required this.currentclass,
     required this.subjectFeefortr,
+    required this.subjectName,
   });
 
   final int index;
@@ -19,8 +22,10 @@ class TeacherDataList extends StatelessWidget {
   final bool status;
   final String currentclass;
   final String subjectFeefortr;
+  final String subjectName;
   @override
   Widget build(BuildContext context) {
+    final allteacherscontroller = Get.put(Allteacherscontroller());
     return Container(
       height: 45,
       color: index % 2 == 0 ? const Color.fromARGB(255, 246, 246, 246) : Colors.blue[50],
@@ -54,9 +59,9 @@ class TeacherDataList extends StatelessWidget {
                       stream: server
                           .collection('SchoolListCollection')
                           .doc(UserCredentialsController.schoolId)
-                          .collection('classes') 
-                          .where('classId', isEqualTo: data['classID']) 
-                          .snapshots(), 
+                          .collection('classes')
+                          .where('classId', isEqualTo: data['classID'])
+                          .snapshots(),
                       builder: (context, classsnapshot) {
                         if (classsnapshot.connectionState == ConnectionState.waiting) {
                           return const Center(child: CircularProgressIndicator()); // Loading state
@@ -71,6 +76,7 @@ class TeacherDataList extends StatelessWidget {
                               headerTitle: '--');
                         } else {
                           final classname = classsnapshot.data!.docs.first;
+                          allteacherscontroller.className.value = classname['className'];
                           return DataContainerWidget(
                               rowMainAccess: MainAxisAlignment.center,
                               color: cWhite,
@@ -91,6 +97,21 @@ class TeacherDataList extends StatelessWidget {
                     color: cWhite,
                     index: index,
                     headerTitle: currentclass)),
+          ),
+          const SizedBox(
+            width: 02,
+          ),
+          Expanded(
+            flex: 7,
+            child: Center(
+                child: DataContainerWidget(
+              rowMainAccess: MainAxisAlignment.center,
+              color: cWhite,
+              index: index,
+              headerTitle: subjectName,
+            )
+                //  SelectTeacherWiseSubjectDropDown(),
+                ),
           ),
           const SizedBox(
             width: 02,

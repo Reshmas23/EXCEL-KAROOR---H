@@ -4,10 +4,10 @@ import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 
 class Allteacherscontroller extends GetxController {
-  Stream<QuerySnapshot> getTeacherSubjectsStream({
-    required String className,
-    required String teacherDocId,
-  }) {
+  RxList teacherList = [].obs;
+  RxString className = ''.obs;
+  RxString teacherDocId = ''.obs;
+  Stream<QuerySnapshot> getTeacherSubjectsStream() {
     // Reference to the specific class collection
     final classCollectionRef = server
         .collection('SchoolListCollection')
@@ -18,7 +18,7 @@ class Allteacherscontroller extends GetxController {
 
     // Return a stream of documents where 'className' is equal to the provided className
     return classCollectionRef
-        .where('className', isEqualTo: className)
+        .where('className', isEqualTo: className.value)
         .snapshots()
         .asyncExpand((classQuerySnapshot) {
       // Check if there are any matching class documents
@@ -29,7 +29,7 @@ class Allteacherscontroller extends GetxController {
         final teacherSubjectCollectionRef = classCollectionRef
             .doc(classDocId)
             .collection('teachers')
-            .doc(teacherDocId)
+            .doc(teacherDocId.value)
             .collection('teacherSubject');
         // Return the stream of the teacherSubject subcollection
         return teacherSubjectCollectionRef.snapshots();
