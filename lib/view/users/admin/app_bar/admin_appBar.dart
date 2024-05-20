@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sidebar_drawer/sidebar_drawer.dart';
+import 'package:vidyaveechi_website/controller/image_upload_controller/image_uploader_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/google_poppins_widget.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
@@ -123,42 +125,75 @@ class AppBarAdminPanel extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 109,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              const Text(
-                                'Stevne Zone',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 0),
-                                child: Text(
-                                  'Admin',
-                                  style: TextStyle(
-                                      color: cBlack.withOpacity(0.5),
-                                      fontSize: 10.7),
+                  child: Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                FutureBuilder(
+                                  future: Get.put(AdminProfileController())
+                                      .fetchData(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    } else if (snapshot.hasError) {
+                                      return Center(
+                                          child:
+                                              Text('Error: ${snapshot.error}'));
+                                    } else {
+                                      final data = snapshot.data;
+                                      if (data != null &&
+                                          data.containsKey('collection1')) {
+                                        return Text(
+                                          data['collection1']
+                                                  ['adminUserName'] ??
+                                              '',
+                                          style: const TextStyle(fontSize: 12),
+                                        );
+                                      } else if (data != null &&
+                                          data.containsKey('collection2')) {
+                                        return Text(
+                                          data['collection2']['userName'] ?? '',
+                                          style: const TextStyle(fontSize: 12),
+                                        );
+                                      } else {
+                                        return const Center(
+                                            child: Text("No data available"));
+                                      }
+                                    }
+                                  },
                                 ),
-                              ),
-                            ],
-                          ),
-                          IconButton(
-                              focusNode: textButtonFocusNode2,
-                              onPressed: () {
-                                showPopupMenu(context);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_drop_down,
-                                size: 18,
-                                color: cBlack,
-                              )),
-                        ],
-                      ),
-                    ],
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0),
+                                  child: Text(
+                                    'Admin',
+                                    style: TextStyle(
+                                        color: cBlack.withOpacity(0.5),
+                                        fontSize: 10.7),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            IconButton(
+                                focusNode: textButtonFocusNode2,
+                                onPressed: () {
+                                  showPopupMenu(context);
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  size: 18,
+                                  color: cBlack,
+                                )),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -261,10 +296,13 @@ class AppBarAdminPanel extends StatelessWidget {
                                       if (classSnap.hasData) {
                                         return classSnap.data?.data() == null
                                             ? const SizedBox()
-                                            : classSnap.data?.data()?['counter'] == 0
+                                            : classSnap.data
+                                                        ?.data()?['counter'] ==
+                                                    0
                                                 ? const SizedBox()
                                                 : GooglePoppinsWidgets(
-                                                    text: "${classSnap.data?.data()?['counter']}",
+                                                    text:
+                                                        "${classSnap.data?.data()?['counter']}",
                                                     fontsize: 11,
                                                     fontWeight: FontWeight.w600,
                                                     color: cWhite,
