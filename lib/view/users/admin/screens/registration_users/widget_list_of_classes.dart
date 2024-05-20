@@ -12,7 +12,8 @@ class ListOfClassWidget extends StatelessWidget {
   final AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> classStatus;
   final ClassModel data;
   final int index;
-  const ListOfClassWidget({
+  const 
+  ListOfClassWidget({
     required this.index,
     super.key,
     required this.data,
@@ -67,7 +68,7 @@ class ListOfClassWidget extends StatelessWidget {
                 
                 color: cWhite,
                 index: index,
-                headerTitle: "     ${data.className}"),
+                headerTitle: "  ${data.className}"),
           ),
           const SizedBox(
             width: 01,
@@ -144,10 +145,11 @@ class ListOfClassWidget extends StatelessWidget {
           Expanded(
             flex: 2,
             child: DataContainerWidget(
-                rowMainAccess: MainAxisAlignment.center,
+                rowMainAccess: MainAxisAlignment.start,
+                
                 color: cWhite,
                 index: index,
-                headerTitle: "Name"),
+                headerTitle: "     ${data.classTeacherName}"),
           ),
         ],
       ),

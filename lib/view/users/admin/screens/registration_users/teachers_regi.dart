@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/admin_section/teacher_controller/teacher_controller.dart';
 import 'package:vidyaveechi_website/excel_File_Controller/excel_fileController.dart';
@@ -52,18 +50,30 @@ class AllTeacherRegistrationListContainer extends StatelessWidget {
                           // const RouteSelectedTextContainer(
                           //     width: 150, title: 'All Teacher'),
                           const Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              teacherController.ontapTeacher.value = true;
-                            },
-                            child: GestureDetector(
-                              onTap: () {
-                                // createTeacherFunction(context);
-                              },
-                              child: const RouteSelectedTextContainer(
-                                  title: 'Edit Deatils'),
-                            ),
-                          )
+                          teacherController.teacherEditDetail.value == true
+                              ? Row(
+                                  children: [
+                                    const RouteSelectedTextContainer(
+                                        title: 'Ready to Edit now !'),
+                                    Checkbox(
+                                      checkColor: cWhite,
+                                      activeColor: cgreen,
+                                      value: true,
+                                      onChanged: (value) {
+                                        teacherController
+                                            .teacherEditDetail.value = false;
+                                      },
+                                    ),
+                                  ],
+                                )
+                              : GestureDetector(
+                                  onTap: () {
+                                    teacherController.teacherEditDetail.value =
+                                        true;
+                                  },
+                                  child: const RouteSelectedTextContainer(
+                                      title: 'Edit Deatils'),
+                                )
                         ],
                       ),
                       Padding(
@@ -120,7 +130,7 @@ class AllTeacherRegistrationListContainer extends StatelessWidget {
                                     width: 02,
                                   ),
                                   Expanded(
-                                      flex: 3,
+                                      flex: 2,
                                       child: CatrgoryTableHeaderWidget(
                                           headerTitle: 'Status')),
                                   SizedBox(
@@ -142,7 +152,6 @@ class AllTeacherRegistrationListContainer extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5, right: 5),
                           child: SizedBox(
-                      
                             // width: 1100,
                             child: StreamBuilder(
                               stream: server
@@ -158,10 +167,10 @@ class AllTeacherRegistrationListContainer extends StatelessWidget {
                                             snaPS.data!.docs[index].data());
                                         return GestureDetector(
                                           onTap: () {
-                                            teacherController.teacherModelData
-                                                .value = data;
-                                            teacherController.ontapviewteacher
-                                                .value = true;
+                                            teacherController
+                                                .teacherModelData.value = data;
+                                            teacherController
+                                                .ontapviewteacher.value = true;
                                           },
                                           child: AllTeachersDataList(
                                             index: index,

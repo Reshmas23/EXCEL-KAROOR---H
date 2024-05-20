@@ -37,8 +37,6 @@ class TeacherController extends GetxController {
       .collection('SchoolListCollection')
       .doc(UserCredentialsController.schoolId);
 
-  
-
   Future<void> createNewTeacher(TeacherModel teacherModel) async {
     buttonstate.value = ButtonState.loading;
     try {
@@ -197,5 +195,18 @@ class TeacherController extends GetxController {
     }
 
     return teacherAttendeceMonthList;
+  }
+
+  Future<void> editTeacherDetails(
+      {required String teacherDocID,
+      required String key,
+      required String value}) async {
+        log('Teacher ID $teacherDocID');
+ await   server
+        .collection('SchoolListCollection')
+        .doc(UserCredentialsController.schoolId)
+        .collection('Teachers')
+        .doc(teacherDocID)
+        .update({key:value});
   }
 }

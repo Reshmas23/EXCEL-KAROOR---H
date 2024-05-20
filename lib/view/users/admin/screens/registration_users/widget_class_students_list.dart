@@ -142,26 +142,42 @@ class ListOfClassStudentsWidgets extends StatelessWidget {
           ),
 
           Expanded(
-            flex: 4,
+            flex: 3,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // SizedBox(
-                //   width: 15,
-                //   child: Image.asset(
-                //     'webassets/png/active.png',
-                //   ),
-                // ),
-                Center(
-                  child: TextFontWidget(
-                    text: "  Name",
-                    fontsize: 12,
-                    overflow: TextOverflow.ellipsis,
+                SizedBox(
+                  width: 15,
+                  child: Center(
+                    child: Image.asset(
+                      'webassets/stickers/icons8-student-100 (1).png',
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child:data.parentId==""? TextFontWidget(
+                        text: " -- ",
+                        fontsize: 12,
+                        overflow: TextOverflow.ellipsis,
+                      ):
+                   StreamBuilder(
+                    stream:  server
+                    .collection('SchoolListCollection')
+                    .doc(UserCredentialsController.schoolId)
+                    .collection('AllParents').doc(data.parentId)
+                    .snapshots(),
+                    builder: (context, snapshot) {
+                      final data =snapshot.data!.data();
+                      return TextFontWidget(
+                        text: " ${data!['parentName']} ",
+                        fontsize: 12,
+                        overflow: TextOverflow.ellipsis,
+                      );
+                    }
                   ),
                 ),
               ],
             ),
-          ), //............................. Status [Active or DeActivate]
+          ), //............................. Parent Name
         ],
       ),
     );
