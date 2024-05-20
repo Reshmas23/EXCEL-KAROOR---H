@@ -15,10 +15,10 @@ import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.d
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
-class AllTeacherRegistrationListContainer extends StatelessWidget {
+class AllTeacherRegistrationList extends StatelessWidget {
   final TeacherController teacherController = Get.put(TeacherController());
   final ExcelFileController excelController = Get.put(ExcelFileController());
-  AllTeacherRegistrationListContainer({super.key});
+  AllTeacherRegistrationList({super.key});
 
   @override
   Widget build(BuildContext context) {
