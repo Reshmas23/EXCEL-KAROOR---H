@@ -15,11 +15,11 @@ class ExcelFileController extends GetxController {
   List<TeacherModel> excelList = [];
   List<TeacherModel> serverTeacherList = [];
 
-  Future<void> pickExcelForTeachers() async {
+  Future<void> pickExcelForTeachers({required String userCollection,required String userRole}) async {
     excelList.clear();
     serverTeacherList.clear();
     try {
-      await getAllSchoolTeachers();
+      await getAllSchoolTeachers(userCollection:userCollection );
       //extract excel data
       final Excel? result = await extractDataFromExcel();
       // excelisLoading.value = true;
@@ -40,7 +40,7 @@ class ExcelFileController extends GetxController {
                   employeeID: firstRow[1]?.value.toString(),
                   createdAt: DateTime.now().toString(),
                   teacherPhNo: firstRow[2]?.value.toString(),
-                  userRole: 'teacher',
+                  userRole: userRole,
                 );
                 excelList.add(teacherModel);
               }
@@ -48,14 +48,14 @@ class ExcelFileController extends GetxController {
             await server
                 .collection('SchoolListCollection')
                 .doc(UserCredentialsController.schoolId)
-                .collection('Teachers')
+                .collection(userCollection)
                 .get()
                 .then((teacherCollectionvalue) {
               if (teacherCollectionvalue.docs.isEmpty) {
-                createTeacherAsPerExcelData();
+                createTeacherAsPerExcelData(userCollection: userCollection);
               } else {
                 comapareDuplicateTeachers().then((value) async {
-                  await createTeacherAsPerExcelData();
+                  await createTeacherAsPerExcelData(userCollection: userCollection);
                 });
               }
             });
@@ -72,11 +72,11 @@ class ExcelFileController extends GetxController {
     }
   }
 
-  Future<void> getAllSchoolTeachers() async {
+  Future<void> getAllSchoolTeachers({required String userCollection}) async {
     await server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
-        .collection('Teachers')
+        .collection(userCollection)
         .get()
         .then((value) {
       final teacherAllData = value.docs.map((e) {
@@ -100,7 +100,7 @@ class ExcelFileController extends GetxController {
     });
   }
 
-  Future<void> createTeacherAsPerExcelData() async {
+  Future<void> createTeacherAsPerExcelData({required String userCollection}) async {
     try {
       for (var i = 0; i < excelList.length; i++) {
         final ranNo = getRandomNumber(3);
@@ -117,7 +117,7 @@ class ExcelFileController extends GetxController {
           await server
               .collection('SchoolListCollection')
               .doc(UserCredentialsController.schoolId)
-              .collection('Teachers')
+              .collection(userCollection)
               .doc(authvalue.user?.uid)
               .set(excelList[i].toMap())
               .then((value) async {

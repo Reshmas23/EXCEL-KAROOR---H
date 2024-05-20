@@ -199,7 +199,7 @@ class AllTeacherListContainer extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 10, right: 20),
                             child: GestureDetector(
                               onTap: () async {
-                                await excelController.pickExcelForTeachers();
+                                await excelController.pickExcelForTeachers(userCollection: 'Teachers',userRole: 'teacher');
                               },
                               child: const SizedBox(
                                 height: 30,
@@ -210,7 +210,7 @@ class AllTeacherListContainer extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              createTeacherFunction(context);
+                              createTeacherFunction(context,'Teacher');
                             },
                             child: const SizedBox(
                               height: 30,

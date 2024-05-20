@@ -37,15 +37,15 @@ class TeacherController extends GetxController {
       .collection('SchoolListCollection')
       .doc(UserCredentialsController.schoolId);
 
-  Future<void> createNewTeacher(TeacherModel teacherModel) async {
+  Future<void> createNewTeacher(TeacherModel teacherModel , String userCollection) async {
     buttonstate.value = ButtonState.loading;
     try {
       await _firebase
-          .collection('TempTeacherList')
+          .collection(userCollection)
           .add(teacherModel.toMap())
           .then((value) async {
         await _firebase
-            .collection('TempTeacherList')
+            .collection(userCollection)
             .doc(value.id)
             .update({"docid": value.id}).then(
           (value) {
