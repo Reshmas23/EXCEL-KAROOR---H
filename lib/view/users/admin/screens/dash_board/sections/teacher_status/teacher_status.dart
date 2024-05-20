@@ -75,6 +75,10 @@ class AllTeacherStatusListView extends StatelessWidget {
                 SizedBox(
                   width: 02,
                 ),
+                Expanded(flex: 7, child: CatrgoryTableHeaderWidget(headerTitle: 'Subject')),
+                SizedBox(
+                  width: 02,
+                ),
                 Expanded(flex: 6, child: CatrgoryTableHeaderWidget(headerTitle: 'Rate/hour')),
                 SizedBox(
                   width: 02,
@@ -111,6 +115,7 @@ class AllTeacherStatusListView extends StatelessWidget {
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         final data = snapshot.data!.docs[index];
+                        allteacherscontroller.teacherDocId.value   = data['docid'];
                         return StreamBuilder(
                           stream: server
                               .collection('SchoolListCollection')
@@ -140,12 +145,11 @@ class AllTeacherStatusListView extends StatelessWidget {
                                 data: data,
                                 currentclass: "--",
                                 subjectFeefortr: "--",
+                                subjectName: '--',
                               );
                             } else {
                               return StreamBuilder(
-                                stream: allteacherscontroller.getTeacherSubjectsStream(
-                                    className: currentsnapshot.data!.docs.first['ClassName'],
-                                    teacherDocId: data['docid']),
+                                stream: allteacherscontroller.getTeacherSubjectsStream(),
                                 builder: (context, allteachersnapshot) {
                                   if (allteachersnapshot.connectionState ==
                                       ConnectionState.waiting) {
@@ -157,12 +161,18 @@ class AllTeacherStatusListView extends StatelessWidget {
                                             'Error: ${allteachersnapshot.error}')); // Error state
                                   } else {
                                     var subjects = allteachersnapshot.data!.docs.first;
+                                    // for (var i = 0; i < currentsnapshot.data!.docs.length; i++) {
+                                    //   allteacherscontroller.teacherList.add(
+                                    //     subjects[i]['subjectFeefortr'].toString(),
+                                    //   );
+                                    // }
                                     return TeacherDataList(
                                       index: index,
                                       status: true,
                                       data: data,
                                       currentclass: currentsnapshot.data!.docs.first['ClassName'],
                                       subjectFeefortr: subjects['subjectFeefortr'].toString(),
+                                      subjectName: subjects['subjectName'].toString(),
                                     );
                                   }
                                 },
