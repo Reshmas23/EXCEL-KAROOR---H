@@ -275,13 +275,13 @@ class RegistrationController extends GetxController {
         .collection(UserCredentialsController.batchId!)
         .doc(UserCredentialsController.batchId!)
         .collection('classes')
-        .doc(Get.find<ClassController>().classDocID.value)
+        .doc(Get.find<ClassController>().ontapClassDocID.value)
         .collection('RegTemp_Students')
         .get();
 
     print(UserCredentialsController.schoolId);
     print(UserCredentialsController.batchId!);
-    print(classController.className.value);
+    print(Get.find<ClassController>().ontapClassDocID.value);
 
     return querySnapshot.docs
         .map((doc) => StudentModel.fromMap(doc.data()))
