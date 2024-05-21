@@ -26,7 +26,6 @@ import 'package:vidyaveechi_website/view/users/admin/screens/parents/all_parents
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/non_teachStaff/non_teachusers.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/student/class_list.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/teacher/teachers_regi_container.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/registrationStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/view_allStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/view_allTeachers.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/timetable/timetable_main_screen.dart';
@@ -229,12 +228,12 @@ List<Widget> pages = [
  //  RegistrationStudentList(),
   AllStudentListContainer(),
   AllTeacherListContainer(),
-  AllTeacherListContainer(),
-  const AdminDashBoardSections(),
-  RegistrationStudentList(),
-  AllStudentListContainer(),
+  // AllTeacherListContainer(),
+  // const AdminDashBoardSections(),
+  // RegistrationStudentList(),
+  // AllStudentListContainer(),
 
-  AllParentsListContainer(),
+  // AllParentsListContainer(),
  AllParentsListContainer(),
 // AllTeacherListContainer(),
   AllClassListView(),

@@ -8,6 +8,7 @@ import 'package:vidyaveechi_website/view/drop_down/select_class.dart';
 
 import '../../../../../controller/registration_controller/registation_controller.dart';
 import '../../../../../model/student_model/student_model.dart';
+import '../../../../fonts/google_poppins_widget.dart';
 
 
 
@@ -21,11 +22,12 @@ class GenerateExcel extends StatefulWidget {
 class _GenerateExcelState extends State<GenerateExcel> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(appBar: AppBar(title: GooglePoppinsWidgets(text: 'Download Excel', fontsize: 16),),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            GooglePoppinsWidgets(text: 'Select class', fontsize: 16),
             SizedBox(height: 80,width: 300,child: SelectClassDropDown(),),
             TextButton(
               style: TextButton.styleFrom(
@@ -105,11 +107,11 @@ class _GenerateExcelState extends State<GenerateExcel> {
 
       for (int i = 0; i < classUsers.length; i++) {
         sheet.getRangeByIndex(i + 2, 1).setText(classUsers[i].studentName);
-        sheet.getRangeByIndex(i + 2, 2).setText(classUsers[i].classId);
+        sheet.getRangeByIndex(i + 2, 2).setText(classUsers[i].nameofClass);
         sheet.getRangeByIndex(i + 2, 3).setText(classUsers[i].studentemail);
         sheet.getRangeByIndex(i + 2, 4).setText(classUsers[i].parentPhoneNumber);
        
-        sheet.getRangeByIndex(i + 2, 5).setText(classUsers[i].parentId);
+        sheet.getRangeByIndex(i + 2, 5).setText(classUsers[i].nameofParent);
       }
 
       // Save and launch the excel.
@@ -118,7 +120,7 @@ class _GenerateExcelState extends State<GenerateExcel> {
       workbook.dispose();
 
       // Save and launch the file.
-      await saveAndLaunchFile(bytes, 'Class $nameofClass.xlsx');
+      await saveAndLaunchFile(bytes, '$nameofClass.xlsx');
     }
 
     // Debug: Completed
