@@ -199,7 +199,9 @@ class AllTeacherRegistrationList extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 10, right: 20),
                             child: GestureDetector(
                               onTap: () async {
-                                await excelController.pickExcelForTeachers(userCollection: 'Teachers',userRole: 'teacher');
+                                await excelController.pickExcelForTeachers(
+                                    userCollection: 'Teachers',
+                                    userRole: 'teacher');
                               },
                               child: const SizedBox(
                                 height: 30,
@@ -210,14 +212,28 @@ class AllTeacherRegistrationList extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              createTeacherFunction(context,'Teacher');
+                              createTeacherFunction(context, 'Teacher');
                             },
                             child: const SizedBox(
                               height: 30,
                               child: RouteSelectedTextContainer(
                                   title: 'Create Teacher'),
                             ),
-                          )
+                          ),
+                          const Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 20),
+                            child: GestureDetector(
+                              onTap: () async {
+                            await    excelController.getAllTeacherCredentialsReport();
+                              },
+                              child: const SizedBox(
+                                height: 30,
+                                child: RouteSelectedTextContainer(
+                                    title: 'Get Credentials Report 📃'),
+                              ),
+                            ),
+                          ),
                         ],
                       ))
                     ],

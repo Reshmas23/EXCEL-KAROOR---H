@@ -141,6 +141,7 @@ class RegistrationController extends GetxController {
   final TextEditingController stEmailController = TextEditingController();
   final TextEditingController stPhoneController = TextEditingController();
     final TextEditingController stParentNameController = TextEditingController();
+        final TextEditingController stadNoController = TextEditingController();
 
   Future<void> classWiseStudentCreation() async {
     buttonstate.value = ButtonState.loading;
@@ -148,7 +149,7 @@ class RegistrationController extends GetxController {
       final uid = uuid.v1();
       final studentDetail = StudentModel(
           admissionNumber: '',
-          alPhoneNumber: '',
+          alPhoneNumber:stadNoController.text.trim(),
           bloodgroup: '',
           classId: classDocID.value,
           createDate: '',
@@ -287,4 +288,5 @@ class RegistrationController extends GetxController {
         .map((doc) => StudentModel.fromMap(doc.data()))
         .toList();
   }
+
 }
