@@ -221,14 +221,19 @@ List<Widget> pages = [
 
 
   const AdminDashBoardSections(),
+
   AllClassListContainer(),
   AllTeacherRegistrationList(),
   AllNonTeachStaffListContainer(),
+
   AllStudentListContainer(),
   AllTeacherListContainer(),
- AllParentsListContainer(),
+  AllParentsListContainer(),
+
   AllClassListView(),
+
   CreatedFeesStatus(),
+  
   PeriodWiseStudentsAttendance(),
   AllTeachersAttendance(),
 

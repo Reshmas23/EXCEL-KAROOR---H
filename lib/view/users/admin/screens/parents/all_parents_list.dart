@@ -43,7 +43,7 @@ class AllParentsListContainer extends StatelessWidget {
                             height: 60,
                             width: double.infinity,
                             child: TextFontWidget(
-                              text: 'All Parent List',
+                              text: 'All Parents List',
                               fontsize: 18,
                               fontWeight: FontWeight.bold,
                             ),

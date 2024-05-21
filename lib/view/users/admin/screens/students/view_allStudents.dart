@@ -16,7 +16,6 @@ import 'package:vidyaveechi_website/view/users/admin/screens/students/student_de
 import 'package:vidyaveechi_website/view/users/admin/screens/students/widget/data_list.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
-import 'package:vidyaveechi_website/view/widgets/button_container/button_container.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
@@ -160,43 +159,43 @@ class AllStudentListContainer extends StatelessWidget {
                             const SizedBox(
                               height: 30,
                             ),
-                            Row(
+                            const Row(
                               children: [
-                                const RouteSelectedTextContainer(
-                                  title: 'All Student',
+                                RouteSelectedTextContainer(
+                                  title: 'All Students',
                                   width: 200,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   width: 20,
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    regiControl.ontapRegiStudentList.value =
-                                        true;
-                                  },
-                                  child: const RouteSelectedTextContainer(
-                                      width: 200, title: 'Registered Student'),
-                                ),
-                                const Spacer(),
-                                GestureDetector(
-                                  onTap: () {
-                                    studentController.ontapCreateStudent.value =
-                                        true;
-                                  },
-                                  child: ButtonContainerWidget(
-                                      curving: 30,
-                                      colorindex: 0,
-                                      height: 35,
-                                      width: 200,
-                                      child: const Center(
-                                        child: TextFontWidgetRouter(
-                                          text: 'Create New Student',
-                                          fontsize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          color: cWhite,
-                                        ),
-                                      )),
-                                )
+                                // GestureDetector(
+                                //   onTap: () {
+                                //     regiControl.ontapRegiStudentList.value =
+                                //         true;
+                                //   },
+                                //   child: const RouteSelectedTextContainer(
+                                //       width: 200, title: 'Registered Student'),
+                                // ),
+                                Spacer(),
+                                // GestureDetector(
+                                //   onTap: () {
+                                //     studentController.ontapCreateStudent.value =
+                                //         true;
+                                //   },
+                                //   child: ButtonContainerWidget(
+                                //       curving: 30,
+                                //       colorindex: 0,
+                                //       height: 35,
+                                //       width: 200,
+                                //       child: const Center(
+                                //         child: TextFontWidgetRouter(
+                                //           text: 'Create New Student',
+                                //           fontsize: 12,
+                                //           fontWeight: FontWeight.bold,
+                                //           color: cWhite,
+                                //         ),
+                                //       )),
+                                // )
                               ],
                             ),
                             const SizedBox(
