@@ -12,14 +12,14 @@ import 'package:vidyaveechi_website/view/widgets/textformFiledContainer/textform
 
 class ClassWiseStudentCreation extends StatelessWidget {
   final StudentController studentController = Get.put(StudentController());
-  
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   ClassWiseStudentCreation({super.key});
 
   @override
   Widget build(BuildContext context) {
     final classSWiseCreationList = [
-       TextFontWidget(
+      TextFontWidget(
         text: 'Add New Student',
         fontsize: 18,
         fontWeight: FontWeight.bold,
@@ -30,7 +30,7 @@ class ClassWiseStudentCreation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             TextFontWidget(text: 'Class *', fontsize: 12.5),
+            TextFontWidget(text: 'Class *', fontsize: 12.5),
             const SizedBox(
               height: 05,
             ),
@@ -41,6 +41,12 @@ class ClassWiseStudentCreation extends StatelessWidget {
           ],
         ),
       ), //////////////////...........1
+      TextFormFiledBlueContainerWidget(
+        controller: studentController.stAdNoController,
+        hintText: "Enter Student Admission ID",
+        title: 'Admission No',
+        validator: checkFieldEmpty,
+      ),
       TextFormFiledBlueContainerWidget(
         controller: studentController.stNameController,
         hintText: "Enter Student Name",
@@ -56,7 +62,16 @@ class ClassWiseStudentCreation extends StatelessWidget {
       Obx(() => ProgressButtonWidget(
           function: () async {
             if (_formKey.currentState!.validate()) {
-              await studentController.classWiseStudentCreation();
+              final String subStringAdNo =
+                  studentController.stAdNoController.text.trim().substring(
+                      studentController.stAdNoController.text.trim().length -
+                          2);
+              final String subStringPhoneNO =
+                  studentController.stPhoneController.text.trim().substring(
+                      studentController.stPhoneController.text.trim().length -
+                          4);
+              await studentController.classWiseStudentCreation(
+                  password: subStringAdNo + subStringPhoneNO);
             }
           },
           buttonstate: studentController.buttonstate.value,
@@ -93,8 +108,7 @@ class ClassWiseStudentCreation extends StatelessWidget {
                             3], ////////////........enter ph.no
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
-                          child: classSWiseCreationList[
-                              4],
+                          child: classSWiseCreationList[4],
                         ), ////////////............create button
                       ],
                     )
