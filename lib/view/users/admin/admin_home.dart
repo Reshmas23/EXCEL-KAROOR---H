@@ -217,6 +217,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 }
 
 List<Widget> pages = [
+  AllClassListContainer(),
 
 
 

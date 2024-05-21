@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/admin_section/parent_controller/parent_controller.dart';
 import 'package:vidyaveechi_website/controller/admin_section/student_controller/student_controller.dart';
+import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/class_wise_creation.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/excel_importCreateStudent.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/manual_creation.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
@@ -17,6 +17,7 @@ import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/rout
 class CreateStudent extends StatelessWidget {
   final StudentController studentController = Get.put(StudentController());
   final ParentController parentController = Get.put(ParentController());
+  final ClassController classController = Get.put(ClassController());
   CreateStudent({super.key});
 
   @override
@@ -25,7 +26,7 @@ class CreateStudent extends StatelessWidget {
     log("BatchID :  ${UserCredentialsController.batchId}");
     log("userrole :  ${UserCredentialsController.userRole}");
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Container(
         color: screenContainerbackgroundColor,
         height: ResponsiveWebSite.isMobile(context) ? 1200 : 820,
@@ -56,8 +57,11 @@ class CreateStudent extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
+                                  classController.ontapStudentCreation.value =
+                                      false;
                                   studentController.ontapCreateStudent.value =
                                       false;
+
                                   // print(studentController
                                   //     .ontapCreateStudent.value);
                                 },
@@ -104,6 +108,8 @@ class CreateStudent extends StatelessWidget {
                           ),
                           child: GestureDetector(
                               onTap: () {
+                                classController.ontapStudentCreation.value =
+                                    false;
                                 studentController.ontapCreateStudent.value =
                                     false;
                               },
@@ -120,10 +126,6 @@ class CreateStudent extends StatelessWidget {
                               // indicatorSize: TabBarIndicatorSize.tab,
                               indicatorColor: Colors.red,
                               tabs: [
-                                          Tab(
-                                    height: 30,
-                                    child: RouteSelectedTextContainer(
-                                        width: 160, title: ' Excel Class Student Creation')),
                                 Tab(
                                     height: 30,
                                     child: RouteSelectedTextContainer(
@@ -140,10 +142,8 @@ class CreateStudent extends StatelessWidget {
             ),
             Expanded(
               child: TabBarView(children: [
-                ExcelClassWiseStudentCreation(),
                 ManualStudentCreation(), /////////////////////////////..................Create A New Student
                 ClassWiseStudentCreation(),
-
               ]),
             )
           ],
