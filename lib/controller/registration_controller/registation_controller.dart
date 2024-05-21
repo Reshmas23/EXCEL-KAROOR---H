@@ -276,7 +276,7 @@ class RegistrationController extends GetxController {
         .collection(UserCredentialsController.batchId!)
         .doc(UserCredentialsController.batchId!)
         .collection('classes')
-        .doc(Get.find<ClassController>().classDocID.value)
+        .doc(Get.find<ClassController>().ontapClassDocID.value)
         .collection('RegTemp_Students')
         .get();
 
