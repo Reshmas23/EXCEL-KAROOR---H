@@ -244,22 +244,7 @@ class AllClassStudentListContainer extends StatelessWidget {
                                       title: 'Create Student'),
                                 ),
                               ),
-                              Padding(
-                                 padding:
-                                    const EdgeInsets.only(left: 10, right: 20),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Get.to(const GenerateExcel());
-                                    //   studentController.ontapCreateStudent.value == true;
-                                    // createTeacherFunction(context, 'Teacher');
-                                  },
-                                  child: const SizedBox(
-                                    height: 30,
-                                    child: RouteSelectedTextContainer(
-                                        title: 'Download excel'),
-                                  ),
-                                ),
-                              )
+                              
                             ],
                           ))
                         ],
