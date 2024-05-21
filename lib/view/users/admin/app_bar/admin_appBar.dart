@@ -145,9 +145,9 @@ class AppBarAdminPanel extends StatelessWidget {
                                     return const Center(
                                         child: CircularProgressIndicator());
                                   } else if (snapshot.hasError) {
-                                    return Center(
+                                    return const Center(
                                         child:
-                                            Text('Error: ${snapshot.error}'));
+                                            Text('Error'));
                                   } else {
                                     final data = snapshot.data;
                                     if (data != null &&
