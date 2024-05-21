@@ -301,7 +301,7 @@ class ExcelFileController extends GetxController {
                     studentName: firstRow[1]?.value.toString() ?? '',
                     password: '',
                     studentemail: '',
-                    userRole: 'student');
+                    userRole: 'student', nameofParent: '', nameofClass: '');
                 excelStudentList.add(studentModel);
               }
             }

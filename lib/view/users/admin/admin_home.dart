@@ -217,24 +217,15 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 }
 
 List<Widget> pages = [
-  AllClassListContainer(),
-
-
-
+  
   const AdminDashBoardSections(),
+
   AllClassListContainer(),
   AllTeacherRegistrationList(),
   AllNonTeachStaffListContainer(),
-  // AllTeacherRegistrationListContainer(),
- //  RegistrationStudentList(),
+  
   AllStudentListContainer(),
   AllTeacherListContainer(),
-  // AllTeacherListContainer(),
-  // const AdminDashBoardSections(),
-  // RegistrationStudentList(),
-  // AllStudentListContainer(),
-
-  // AllParentsListContainer(),
  AllParentsListContainer(),
 // AllTeacherListContainer(),
   AllClassListView(),
