@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/admin_section/student_controller/student_controller.dart';
+import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
@@ -29,7 +30,7 @@ class StudentDetailsContainer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 25, top: 25),
                 child: TextFontWidget(
                   text: 'Student Details',
@@ -63,12 +64,34 @@ class StudentDetailsContainer extends StatelessWidget {
                                       ),
                                       child: GestureDetector(
                                         onTap: () {
+                                                Get.find<ClassController>()
+                                              .ontapStudentsDetail
+                                              .value = false;
+                                          Get.find<ClassController>()
+                                              .ontapClassStudents
+                                              .value = false;
                                           studentController.ontapStudent.value =
                                               false;
                                         },
                                         child:
                                             const RouteNonSelectedTextContainer(
                                                 title: 'Home'),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 08,
+                                        right: 05,
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Get.find<ClassController>()
+                                              .ontapStudentsDetail
+                                              .value = false;
+                                        },
+                                        child:
+                                            const RouteNonSelectedTextContainer(
+                                                title: 'Back'),
                                       ),
                                     ),
                                     const RouteSelectedTextContainer(
