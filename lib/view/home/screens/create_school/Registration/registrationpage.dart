@@ -104,6 +104,17 @@ class RegisrationPage extends StatelessWidget {
                                   hintText: 'Phone number',
                                   title: 'Phone number',
                                   labelText: 'Phone number'),
+                                  
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              child: TextFormFiledBlueContainerWidget1(
+                                validator: checkFieldEmpty,
+                                  controller: regirationCrtl.stParentNameController,
+                                  hintText: 'Parent name',
+                                  title: 'Parent name',
+                                  labelText: 'Parent name'),
+                                  
                             ),
                             Obx(() => Padding(
                                   padding: const EdgeInsets.only(top: 20),

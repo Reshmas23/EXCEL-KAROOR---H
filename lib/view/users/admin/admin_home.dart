@@ -26,7 +26,6 @@ import 'package:vidyaveechi_website/view/users/admin/screens/parents/all_parents
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/list_of_classes_registration.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/non_teachStaff/non_teachusers.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/student/class_list.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/teacher/teachers_regi.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/registrationStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/view_allStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/timetable/timetable_main_screen.dart';
@@ -34,6 +33,8 @@ import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
+
+import 'screens/teacher/view_allTeachers.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   const AdminHomeScreen({super.key});
