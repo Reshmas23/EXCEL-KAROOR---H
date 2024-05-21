@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vidyaveechi_website/controller/admin_section/teacher_controller/teacher_controller.dart';
+import 'package:vidyaveechi_website/controller/admin_section/student_controller/student_controller.dart';
 import 'package:vidyaveechi_website/excel_File_Controller/excel_fileController.dart';
 import 'package:vidyaveechi_website/model/student_model/student_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/student/student_dataList.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/create_newStudent.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/teacher/create_teacher/create_newteachers.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/teachers_details/teachers_details.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
+import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
 
 class AllClassStudentListContainer extends StatelessWidget {
-  final TeacherController teacherController = Get.put(TeacherController());
+  final StudentController studentController = Get.put(StudentController());
   final ExcelFileController excelController = Get.put(ExcelFileController());
   AllClassStudentListContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => teacherController.ontapviewteacher.value == true
+      () => studentController.ontapStudent.value == true
           ? TeachersDetailsContainer()
+          : studentController.ontapCreateStudent.value == true
+                ? CreateStudent()
           : SingleChildScrollView(
               scrollDirection: ResponsiveWebSite.isMobile(context)
                   ? Axis.horizontal
@@ -45,37 +48,46 @@ class AllClassStudentListContainer extends StatelessWidget {
                         fontsize: 18,
                         fontWeight: FontWeight.bold,
                       ),
-                      Row(
-                        children: [
-                          // const RouteSelectedTextContainer(
-                          //     width: 150, title: 'All Teacher'),
-                          const Spacer(),
-                          teacherController.teacherEditDetail.value == true
-                              ? Row(
-                                  children: [
-                                    const RouteSelectedTextContainer(
-                                        title: 'Ready to Edit now !'),
-                                    Checkbox(
-                                      checkColor: cWhite,
-                                      activeColor: cgreen,
-                                      value: true,
-                                      onChanged: (value) {
-                                        teacherController
-                                            .teacherEditDetail.value = false;
-                                      },
-                                    ),
-                                  ],
-                                )
-                              : GestureDetector(
-                                  onTap: () {
-                                    teacherController.teacherEditDetail.value =
-                                        true;
-                                  },
-                                  child: const RouteSelectedTextContainer(
-                                      title: 'Edit Deatils'),
-                                )
-                        ],
-                      ),
+                       GestureDetector(
+                                onTap: () {
+                                  
+                                  // print(studentController
+                                  //     .ontapCreateStudent.value);
+                                },
+                                child: const RouteNonSelectedTextContainer(
+                                    title: 'Home'),
+                              ),
+                      // Row(
+                      //   children: [
+                      //     // const RouteSelectedTextContainer(
+                      //     //     width: 150, title: 'All Teacher'),
+                      //     const Spacer(),
+                      //     studentController.teacherEditDetail.value == true
+                      //         ? Row(
+                      //             children: [
+                      //               const RouteSelectedTextContainer(
+                      //                   title: 'Ready to Edit now !'),
+                      //               Checkbox(
+                      //                 checkColor: cWhite,
+                      //                 activeColor: cgreen,
+                      //                 value: true,
+                      //                 onChanged: (value) {
+                      //                   studentController
+                      //                       .teacherEditDetail.value = false;
+                      //                 },
+                      //               ),
+                      //             ],
+                      //           )
+                      //         : GestureDetector(
+                      //             onTap: () {
+                      //               studentController.teacherEditDetail.value =
+                      //                   true;
+                      //             },
+                      //             child: const RouteSelectedTextContainer(
+                      //                 title: 'Edit Deatils'),
+                      //           )
+                      //   ],
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Container(
@@ -172,10 +184,10 @@ class AllClassStudentListContainer extends StatelessWidget {
                                             snaPS.data!.docs[index].data());
                                         return GestureDetector(
                                           onTap: () {
-                                            // teacherController
+                                            // studentController
                                             //     .teacherModelData.value = data;
-                                            teacherController
-                                                .ontapviewteacher.value = true;
+                                            studentController
+                                                .ontapStudent.value = true;
                                           },
                                           child: AllClassStudentDataList(
                                             index: index,
@@ -217,12 +229,15 @@ class AllClassStudentListContainer extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              createTeacherFunction(context, 'Teacher');
+                              studentController.ontapCreateStudent.value =
+                                        true;
+                           //   studentController.ontapCreateStudent.value == true;
+                             // createTeacherFunction(context, 'Teacher');
                             },
                             child: const SizedBox(
                               height: 30,
                               child: RouteSelectedTextContainer(
-                                  title: 'Create Teacher'),
+                                  title: 'Create Student'),
                             ),
                           )
                         ],

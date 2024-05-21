@@ -23,11 +23,9 @@ import 'package:vidyaveechi_website/view/users/admin/screens/meeting/all_meeting
 import 'package:vidyaveechi_website/view/users/admin/screens/notice/notice_edit_remove.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/notifications/admin_notification_create.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/parents/all_parents_list.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/list_of_classes_registration.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/non_teachStaff/non_teachusers.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/teacher/teachers_regi_container.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/student/class_list.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/teacher/teachers_regi.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/teacher/teachers_regi_container.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/registrationStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/view_allStudents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/view_allTeachers.dart';
@@ -220,11 +218,11 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 }
 
 List<Widget> pages = [
-AllClassListContainer(),
-  ListOfClassesRegistration(),
+
+
 
   const AdminDashBoardSections(),
-   ListOfClassesRegistration(),
+  AllClassListContainer(),
   AllTeacherRegistrationList(),
   AllNonTeachStaffListContainer(),
   // AllTeacherRegistrationListContainer(),
