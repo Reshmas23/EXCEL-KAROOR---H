@@ -1462,10 +1462,10 @@ packages:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "9e8bac2367d03bd902844f59e866c0e7b1e10b0b8fa5a6a926c0d8ae8c344533"
+      sha256: "63108a33f9b0d89f7b6b56cce908b8e519fe433dbbe0efcf41ad3e8bb2081bd9"
       url: "https://pub.dev"
     source: hosted
-    version: "25.2.4"
+    version: "25.2.5"
   syncfusion_flutter_datagrid:
     dependency: "direct main"
     description:
@@ -1518,18 +1518,18 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_xlsio
-      sha256: c14d232b801d1dcf1108d95e5e5c2b5526c7b1b7b8959d4a19afe4896e547359
+      sha256: "048887911817de1c83735790bf3de085e863f4d2d552817099af4e9c866b2ec3"
       url: "https://pub.dev"
     source: hosted
-    version: "25.2.4"
+    version: "25.2.5"
   syncfusion_officecore:
     dependency: transitive
     description:
       name: syncfusion_officecore
-      sha256: "347919e8ca82c54c87956cf0d1d668328cd21331c12de8fec271c8036e3a4e45"
+      sha256: "31cfd13d779fb6461b29d6cc81fe931f23629a051b4639bfc78b55e5908604a1"
       url: "https://pub.dev"
     source: hosted
-    version: "25.2.4"
+    version: "25.2.5"
   syncfusion_pdfviewer_macos:
     dependency: transitive
     description:

@@ -21,7 +21,7 @@ class ManualStudentCreation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> createStudentListWidget = [
-       const TextFontWidget(
+      const TextFontWidget(
         text: 'Add New Student',
         fontsize: 18,
         fontWeight: FontWeight.bold,
@@ -42,7 +42,7 @@ class ManualStudentCreation extends StatelessWidget {
                 validator: checkFieldEmailIsValid,
                 widget: Row(
                   children: [
-                     const TextFontWidget(
+                    const TextFontWidget(
                         text: 'Student have no email ID?', fontsize: 10.5),
                     SizedBox(
                       height: 05,
@@ -63,7 +63,7 @@ class ManualStudentCreation extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                         const TextFontWidget(
+                        const TextFontWidget(
                             text: '  Student have no email ID?',
                             fontsize: 10.5),
                         SizedBox(
@@ -88,7 +88,7 @@ class ManualStudentCreation extends StatelessWidget {
                         color: themeColorBlue,
                         border: Border.all(color: cBlack.withOpacity(0.4)),
                       ),
-                      child:  const Center(
+                      child: const Center(
                         child: TextFontWidget(
                           text: "Auto - Creation",
                           fontsize: 12.5,
@@ -112,7 +112,7 @@ class ManualStudentCreation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             const TextFontWidget(
+            const TextFontWidget(
               text: 'Gender *',
               fontsize: 12.5,
             ),
@@ -145,7 +145,7 @@ class ManualStudentCreation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             const TextFontWidget(text: 'Select Class *', fontsize: 12.5),
+            const TextFontWidget(text: 'Select Class *', fontsize: 12.5),
             const SizedBox(
               height: 05,
             ),
@@ -162,13 +162,11 @@ class ManualStudentCreation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           const TextFontWidget(text: 'Date of birth 🗓️ *', fontsize: 12.5),
-            
+            const TextFontWidget(text: 'Date of birth 🗓️ *', fontsize: 12.5),
             const SizedBox(
               height: 05,
             ),
             GestureDetector(
-              
               onTap: () => studentController.selectToDateofBirth(context),
               child: Container(
                 height: 40,
@@ -179,16 +177,14 @@ class ManualStudentCreation extends StatelessWidget {
                 width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Obx(() => TextFontWidget(
-                    validator: checkFieldEmpty,
-                    
-                      text: studentController.dateofbithController.value == ''
-                          ? 'DD/MM/YYYY *'
-                          : studentController.dateofbithController.value,
-                      fontsize: 12.5
-                      ),
-                        
-                      ),
+                  child: Obx(
+                    () => TextFontWidget(
+                        validator: checkFieldEmpty,
+                        text: studentController.dateofbithController.value == ''
+                            ? 'DD/MM/YYYY *'
+                            : studentController.dateofbithController.value,
+                        fontsize: 12.5),
+                  ),
                 ),
               ),
             ),
@@ -214,6 +210,12 @@ class ManualStudentCreation extends StatelessWidget {
       const RouteSelectedTextContainer(
           width: 140, title: 'Create Student'), ////10
       const RouteNonSelectedTextContainer(title: 'Home'),
+      TextFormFiledBlueContainerWidget(
+        controller: studentController.stAdNoController,
+        hintText: " Enter Student Admission No",
+        title: 'Admission No',
+        validator: checkFieldEmpty,
+      )
 
       ///11
     ];
@@ -244,6 +246,14 @@ class ManualStudentCreation extends StatelessWidget {
                                       right: 20, left: 10, top: 10),
                                   child:
                                       createStudentListWidget[1] ///////////name
+                                  ),
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 20,
+                                    left: 10,
+                                  ),
+                                  child: createStudentListWidget[
+                                      12] ////////email............
                                   ),
                               Padding(
                                   padding: const EdgeInsets.only(
@@ -291,7 +301,7 @@ class ManualStudentCreation extends StatelessWidget {
                             decoration: BoxDecoration(
                                 border:
                                     Border.all(color: cBlack.withOpacity(0.3))),
-                            child:  const Column(
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
@@ -340,7 +350,7 @@ class ManualStudentCreation extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: cWhite,
-                  height: 550,
+                  height: 600,
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -350,7 +360,15 @@ class ManualStudentCreation extends StatelessWidget {
                           child: createStudentListWidget[0] ///////////name
                           ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.only(
+                              right: 20, left: 10, top: 10),
+                          child: SizedBox(
+                            height: 75,
+                            width: 200,
+                            child: createStudentListWidget[12]) ///////////
+                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0),
                         child: Row(
                           children: [
                             Expanded(
@@ -422,7 +440,7 @@ class ManualStudentCreation extends StatelessWidget {
                           decoration: BoxDecoration(
                               border:
                                   Border.all(color: cBlack.withOpacity(0.3))),
-                          child:  const Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
