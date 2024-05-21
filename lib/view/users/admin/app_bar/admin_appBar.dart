@@ -166,7 +166,7 @@ class AppBarAdminPanel extends StatelessWidget {
                                       );
                                     } else {
                                       return const Center(
-                                          child: Text("No data available"));
+                                          child: Text("--"));
                                     }
                                   }
                                 },
