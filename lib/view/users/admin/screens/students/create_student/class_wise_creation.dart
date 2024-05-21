@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/admin_section/student_controller/student_controller.dart';
-
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/drop_down/select_class.dart';
@@ -19,7 +18,7 @@ class ClassWiseStudentCreation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final classSWiseCreationList = [
-      TextFontWidget(
+      const TextFontWidget(
         text: 'Add New Student',
         fontsize: 18,
         fontWeight: FontWeight.bold,
@@ -30,7 +29,7 @@ class ClassWiseStudentCreation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFontWidget(text: 'Class *', fontsize: 12.5),
+            const TextFontWidget(text: 'Class *', fontsize: 12.5),
             const SizedBox(
               height: 05,
             ),
@@ -41,12 +40,7 @@ class ClassWiseStudentCreation extends StatelessWidget {
           ],
         ),
       ), //////////////////...........1
-      TextFormFiledBlueContainerWidget(
-        controller: studentController.stAdNoController,
-        hintText: "Enter Student Admission ID",
-        title: 'Admission No',
-        validator: checkFieldEmpty,
-      ),
+
       TextFormFiledBlueContainerWidget(
         controller: studentController.stNameController,
         hintText: "Enter Student Name",
@@ -76,6 +70,12 @@ class ClassWiseStudentCreation extends StatelessWidget {
           },
           buttonstate: studentController.buttonstate.value,
           text: 'Create Student')), ////////////////////////////.............4
+      TextFormFiledBlueContainerWidget(
+        controller: studentController.stAdNoController,
+        hintText: "Enter Student Admission ID",
+        title: 'Admission No',
+        validator: checkFieldEmpty,
+      ),
     ];
     return Form(
       key: _formKey,
@@ -102,6 +102,8 @@ class ClassWiseStudentCreation extends StatelessWidget {
                                   : 30),
                           child: classSWiseCreationList[1], ////.....class
                         ),
+                         classSWiseCreationList[
+                            5],
                         classSWiseCreationList[
                             2], ////////////..............enter name
                         classSWiseCreationList[
@@ -128,6 +130,10 @@ class ClassWiseStudentCreation extends StatelessWidget {
                                 child:
                                     classSWiseCreationList[1]), ////.....class
                           ),
+                                SizedBox(
+                            width: 370,
+                            child: classSWiseCreationList[5],
+                          ), 
                           SizedBox(
                             width: 370,
                             child: classSWiseCreationList[2],

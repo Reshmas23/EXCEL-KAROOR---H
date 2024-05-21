@@ -211,7 +211,7 @@ class ManualStudentCreation extends StatelessWidget {
           width: 140, title: 'Create Student'), ////10
       const RouteNonSelectedTextContainer(title: 'Home'),
       TextFormFiledBlueContainerWidget(
-        controller: studentController.stNameController,
+        controller: studentController.stAdNoController,
         hintText: " Enter Student Admission No",
         title: 'Admission No',
         validator: checkFieldEmpty,

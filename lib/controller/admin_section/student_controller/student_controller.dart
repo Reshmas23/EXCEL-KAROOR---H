@@ -86,6 +86,7 @@ class StudentController extends GetxController {
           .then((value) async {
         stNameController.clear();
         stPhoneController.clear();
+          stAdNoController.clear();
         buttonstate.value = ButtonState.success;
         showToast(msg: "Student Added Successfully");
         await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
@@ -205,6 +206,7 @@ class StudentController extends GetxController {
                 stNameController.clear();
                 stPhoneController.clear();
                 stEmailController.clear();
+                stAdNoController.clear();
                 dateofbithController.value = '';
                 automaticmail.value = false;
               });
