@@ -288,4 +288,5 @@ class RegistrationController extends GetxController {
         .map((doc) => StudentModel.fromMap(doc.data()))
         .toList();
   }
+
 }
