@@ -43,6 +43,7 @@ class ClassController extends GetxController {
   RxBool ontapClass = false.obs;
   RxBool ontapClassStudents = false.obs;
   RxString ontapClassDocID = 'dd'.obs;
+    RxString ontapClassName= 'dd'.obs;
   RxString ontapClassWiseStudentDocID = 'dd'.obs;
   RxBool ontapStudentsDetail = false.obs;
     RxBool ontapStudentCreation = false.obs;

@@ -17,7 +17,7 @@ import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/rout
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
 
 class AllClassStudentListContainer extends StatelessWidget {
-   AllClassStudentListContainer({super.key});
+  AllClassStudentListContainer({super.key});
   final StudentController studentController = Get.put(StudentController());
   final ExcelFileController excelController = Get.put(ExcelFileController());
   @override
@@ -198,9 +198,12 @@ class AllClassStudentListContainer extends StatelessWidget {
                                             snaPS.data!.docs[index].data());
                                         return GestureDetector(
                                           onTap: () {
-                                            studentController.studentModelData.value=data;
-                              
-                                           Get.find<ClassController>().ontapStudentsDetail.value = true;
+                                            studentController
+                                                .studentModelData.value = data;
+
+                                            Get.find<ClassController>()
+                                                .ontapStudentsDetail
+                                                .value = true;
                                           },
                                           child: AllClassStudentDataList(
                                             index: index,
@@ -229,8 +232,9 @@ class AllClassStudentListContainer extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10, right: 20),
                         child: GestureDetector(
                           onTap: () async {
-                            Get.find<ClassController>().ontapStudentCreation.value=true;
-                      
+                            Get.find<ClassController>()
+                                .ontapStudentCreation
+                                .value = true;
                           },
                           child: const SizedBox(
                             height: 30,
@@ -243,7 +247,7 @@ class AllClassStudentListContainer extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10, right: 20),
                         child: GestureDetector(
                           onTap: () async {
-                         await   excelController.pickExcelForStudent();
+                            await excelController.pickExcelForStudent();
                           },
                           child: const SizedBox(
                             height: 30,
@@ -267,11 +271,61 @@ class AllClassStudentListContainer extends StatelessWidget {
                           ),
                         ),
                       ),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 20),
+                        child: GestureDetector(
+                          onTap: () async {
+                            showReportMenu(context);
+                          },
+                          child: const SizedBox(
+                            height: 30,
+                            child: RouteSelectedTextContainer(
+                                title: 'Get Credentials Report 📃'),
+                          ),
+                        ),
+                      ),
                     ],
                   ))
                 ],
               ),
             ),
           ));
+  }
+
+  void showReportMenu(BuildContext context) {
+    showMenu(
+        context: context,
+        position: const RelativeRect.fromLTRB(150, double.infinity, 115, 10),
+        items: [
+          PopupMenuItem(
+              child: GestureDetector(
+            onTap: () async{
+              Get.back();
+              await excelController.getAllStudentCredentialsReport();
+            }
+                ,
+            child: const SizedBox(
+              height: 30,
+              child: RouteSelectedTextContainer(
+                  title: 'Get All Students Report 📃'),
+            ),
+          )),
+          PopupMenuItem(
+              child: GestureDetector(
+            onTap: () async {
+                     Get.back();
+                await excelController.getClassWiseStudentCredentialsReport();
+
+            },
+            child: SizedBox(
+              height: 30,
+              child: RouteSelectedTextContainer(
+                  title:
+                      'Get ${Get.find<ClassController>().ontapClassName.value} Students Report 📃'),
+            ),
+          )),
+        ],
+        elevation: 1.0);
   }
 }

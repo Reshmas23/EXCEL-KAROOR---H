@@ -147,6 +147,8 @@ class AllClassListContainer extends StatelessWidget {
                                               onTap: () {
                                                 classController.ontapClassDocID
                                                     .value = data.docid;
+                                                classController.ontapClassName
+                                                    .value = data.className;
                                                 classController
                                                     .ontapClassStudents
                                                     .value = true;
