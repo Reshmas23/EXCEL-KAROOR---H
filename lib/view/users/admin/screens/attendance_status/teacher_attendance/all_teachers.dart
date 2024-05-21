@@ -30,7 +30,7 @@ class AllTeachersAttendance extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     SizedBox(
+                     const SizedBox(
                       height: 60,
                       width: double.infinity,
                       child: Row(

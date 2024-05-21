@@ -77,7 +77,7 @@ class TeacherAttendenceHistoryInfo extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 15),
                                 child: SizedBox(
-                                  height: 30,
+                                  height: 60,
                                   child: Obx(() => Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -95,9 +95,12 @@ class TeacherAttendenceHistoryInfo extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          const RouteSelectedTextContainer(
-                                            title: 'Attendence List',
-                                            width: 200,
+                                          const SizedBox(
+                                            height: 30,
+                                            child: RouteSelectedTextContainer(
+                                              title: 'Attendence List',
+                                              width: 200,
+                                            ),
                                           ),
                                           const Spacer(),
                                           teacherController

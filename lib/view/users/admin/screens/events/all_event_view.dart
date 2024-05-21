@@ -35,7 +35,7 @@ class AllEventsList extends StatelessWidget {
               ),
               child: GooglePoppinsWidgets(
                 text: 'Events ',
-                fontsize: ResponsiveWebSite.isMobile(context) ? 18 : 24,
+                fontsize: ResponsiveWebSite.isMobile(context) ? 18 : 20,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -23,7 +23,7 @@ class CreateMeetinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> meetingListWidget = [
-       TextFontWidget(
+       const TextFontWidget(
         text: "SCHEDULE MEETING",
         fontsize: 19,
         fontWeight: FontWeight.bold,
@@ -140,17 +140,17 @@ class CreateMeetinPage extends StatelessWidget {
               value: true,
               onChanged: (value) {},
             ),
-            TextFontWidget(text: "Students", fontsize: 12),
+            const TextFontWidget(text: "Students", fontsize: 12),
             Checkbox(
               value: true,
               onChanged: (value) {},
             ),
-            TextFontWidget(text: "Parents", fontsize: 12),
+            const TextFontWidget(text: "Parents", fontsize: 12),
             Checkbox(
               value: true,
               onChanged: (value) {},
             ),
-            TextFontWidget(text: "Teachers", fontsize: 12),
+            const TextFontWidget(text: "Teachers", fontsize: 12),
           ],
         ),
       ) ///////////////////14
@@ -159,12 +159,12 @@ class CreateMeetinPage extends StatelessWidget {
     //  scrollDirection: Axis.horizontal,
       child: Container(
         color: screenContainerbackgroundColor,
-        height: 800,
+        height: 700,
         width: 1200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Padding(
+             const Padding(
               padding: EdgeInsets.only(left: 25, top: 25),
               child: TextFontWidget(
                 text: 'Create Meeting',
