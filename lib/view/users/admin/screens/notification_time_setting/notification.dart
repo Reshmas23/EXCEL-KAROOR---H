@@ -11,7 +11,7 @@ await showMenu(
   position: const RelativeRect.fromLTRB(150, 50, 115, 10),
   items: [
      PopupMenuItem(
-      child: TextFontWidget(text: "Settings",
+      child: const TextFontWidget(text: "Settings",
        fontsize: 14,fontWeight: FontWeight.w500,),
       onTap: () {
         notificationFunction(context);

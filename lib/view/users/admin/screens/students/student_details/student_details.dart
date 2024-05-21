@@ -53,6 +53,9 @@ class StudentDetailsContainer extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 0),
                           child: Column(
                             children: [
+                              Get.find<ClassController>()
+                                              .ontapStudentsDetail
+                                              .value == true?
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Row(
@@ -98,7 +101,38 @@ class StudentDetailsContainer extends StatelessWidget {
                                         width: 140, title: 'Student Deatils'),
                                   ],
                                 ),
-                              ),
+                              ):
+                               Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 08,
+                                        right: 05,
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                                Get.find<ClassController>()
+                                              .ontapStudentsDetail
+                                              .value = false;
+                                          Get.find<ClassController>()
+                                              .ontapClassStudents
+                                              .value = false;
+                                          studentController.ontapStudent.value =
+                                              false;
+                                        },
+                                        child:
+                                            const RouteNonSelectedTextContainer(
+                                                title: 'Home'),
+                                      ),
+                                    ),
+                                    
+                                    const RouteSelectedTextContainer(
+                                        width: 140, title: 'Student Deatils'),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),
