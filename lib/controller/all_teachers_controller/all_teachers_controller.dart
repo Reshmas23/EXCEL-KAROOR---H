@@ -9,7 +9,7 @@ class Allteacherscontroller extends GetxController {
   RxString teacherDocId = ''.obs;
   Stream<QuerySnapshot> getTeacherSubjectsStream() {
     // Reference to the specific class collection
-    final classCollectionRef = server
+    final classCollectionRef = server 
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection(UserCredentialsController.batchId!)

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:vidyaveechi_website/controller/all_teachers_controller/all_teachers_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
-import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
-import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 
 class TeacherDataList extends StatelessWidget {
@@ -13,6 +9,7 @@ class TeacherDataList extends StatelessWidget {
     required this.data,
     required this.status,
     required this.currentclass,
+    required this.classname,
     required this.subjectFeefortr,
     required this.subjectName,
   });
@@ -21,11 +18,11 @@ class TeacherDataList extends StatelessWidget {
   final dynamic data;
   final bool status;
   final String currentclass;
+  final String classname;
   final String subjectFeefortr;
   final String subjectName;
   @override
   Widget build(BuildContext context) {
-    final allteacherscontroller = Get.put(Allteacherscontroller());
     return Container(
       height: 45,
       color: index % 2 == 0 ? const Color.fromARGB(255, 246, 246, 246) : Colors.blue[50],
@@ -48,43 +45,11 @@ class TeacherDataList extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Center(
-              child: data['classID'] == null || data['classID'] == ""
-                  ? DataContainerWidget(
-                      rowMainAccess: MainAxisAlignment.center,
-                      color: cWhite,
-                      index: index,
-                      headerTitle: 'No class assigned',
-                    )
-                  : StreamBuilder(
-                      stream: server
-                          .collection('SchoolListCollection')
-                          .doc(UserCredentialsController.schoolId)
-                          .collection('classes')
-                          .where('classId', isEqualTo: data['classID'])
-                          .snapshots(),
-                      builder: (context, classsnapshot) {
-                        if (classsnapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator()); // Loading state
-                        } else if (classsnapshot.hasError) {
-                          return Center(
-                              child: Text('Error: ${classsnapshot.error}')); // Error state
-                        } else if (!classsnapshot.hasData || classsnapshot.data!.docs.isEmpty) {
-                          return DataContainerWidget(
-                              rowMainAccess: MainAxisAlignment.center,
-                              color: cWhite,
-                              index: index,
-                              headerTitle: '--');
-                        } else {
-                          final classname = classsnapshot.data!.docs.first;
-                          allteacherscontroller.className.value = classname['className'];
-                          return DataContainerWidget(
-                              rowMainAccess: MainAxisAlignment.center,
-                              color: cWhite,
-                              index: index,
-                              headerTitle: classname['className']);
-                        }
-                      }),
-            ),
+                child: DataContainerWidget(
+                    rowMainAccess: MainAxisAlignment.center,
+                    color: cWhite,
+                    index: index,
+                    headerTitle: classname)),
           ), //................................................. Months
           const SizedBox(
             width: 02,
