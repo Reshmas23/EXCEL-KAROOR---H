@@ -15,6 +15,7 @@ import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_creden
 import 'package:vidyaveechi_website/view/widgets/drop_DownList/schoolDropDownList.dart';
 
 class ClassController extends GetxController {
+  final TextEditingController classTeacherController = TextEditingController();
   final TextEditingController classNameController = TextEditingController();
   final TextEditingController classNameEditController = TextEditingController();
   final TextEditingController classIdController = TextEditingController();
@@ -37,8 +38,14 @@ class ClassController extends GetxController {
   RxString classDocID = 'dd'.obs;
   RxString studentName = ''.obs;
   RxString studentDocID = ''.obs;
-  RxBool ontapClass = false.obs;
 
+  // Register UI Part
+  RxBool ontapClass = false.obs;
+  RxBool ontapClassStudents = false.obs;
+  RxString ontapClassDocID = 'dd'.obs;
+  RxString ontapClassWiseStudentDocID = 'dd'.obs;
+  RxBool ontapStudentsDetail = false.obs;
+    RxBool ontapStudentCreation = false.obs;
   // final server.collection(collectionPath) = server
   //     .collection('SchoolListCollection')
   //     .doc(UserCredentialsController.schoolId);
@@ -48,13 +55,15 @@ class ClassController extends GetxController {
     buttonstate.value = ButtonState.loading;
     try {
       final data = ClassModel(
-          workingDaysCount: 0,
-          classfee: int.parse(classFeeController.text.trim()),
-          feeeditoption: false,
-          editoption: false,
-          docid: classNameController.text.trim() + uuid.v1(),
-          className: classNameController.text.trim(),
-          classId: classIdController.text.trim());
+        workingDaysCount: 0,
+        classfee: int.parse(classFeeController.text.trim()),
+        feeeditoption: false,
+        editoption: false,
+        docid: classNameController.text.trim() + uuid.v1(),
+        className: classNameController.text.trim(),
+        classId: classIdController.text.trim(),
+        classTeacherName: classTeacherController.text.trim(),
+      );
       server
           .collection('SchoolListCollection')
           .doc(UserCredentialsController.schoolId)
@@ -62,6 +71,7 @@ class ClassController extends GetxController {
           .doc(data.docid)
           .set(data.toMap())
           .then((value) async {
+        classTeacherController.clear();
         classNameController.clear();
         classIdController.clear();
         classFeeController.clear();
@@ -85,13 +95,14 @@ class ClassController extends GetxController {
     }
   }
 
-  setClassForbatchYear(
-      String className, String classId, String docid, int classfee) async {
+  setClassForbatchYear(String classTeacherName, String className,
+      String classId, String docid, int classfee) async {
     try {
       final data = ClassModel(
           workingDaysCount: 0,
           docid: docid,
           className: className,
+          classTeacherName: classTeacherName,
           classId: classId,
           editoption: false,
           feeeditoption: false,
@@ -475,8 +486,9 @@ class ClassController extends GetxController {
         .collection('Subjects')
         .get()
         .then((value) {
-    firstSubjectId.value =  value.docs[0].data()['docid'] ;  ///////////////////error on the index
-      log("dddd ${firstSubjectId.value }");
+      firstSubjectId.value =
+          value.docs[0].data()['docid']; ///////////////////error on the index
+      log("dddd ${firstSubjectId.value}");
     });
-  } 
+  }
 }

@@ -75,18 +75,18 @@ class ImageController extends GetxController {
       // Update data in collection 1
       try {
         await collection1.update(updateData);
-        showToast(msg: 'Profile updated');
+        showToast(msg: 'Profile photo updated');
       } catch (e) {
-        log('Error updating profile: $e');
-        showToast(msg: 'Failed to update profile');
+        log('Error updating profile photo: $e');
+        showToast(msg: 'Failed to update profile photo');
       }
     } else if (collection2Snapshot.exists) {
       try {
         await collection2.update(updateData);
-        showToast(msg: 'Profile updated');
+        showToast(msg: 'Profile photo updated');
       } catch (e) {
-        log('Error updating profile: $e');
-        showToast(msg: 'Failed to update profile');
+        log('Error updating profile photo: $e');
+        showToast(msg: 'Failed to update profile photo');
       }
     } else {
       // Handle the case where the user is not found in either collection

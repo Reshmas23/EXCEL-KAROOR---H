@@ -10,18 +10,18 @@ import 'package:vidyaveechi_website/view/widgets/custom_showDilog/show_dialoge_b
 import 'package:vidyaveechi_website/view/widgets/progess_button/progress_button.dart';
 import 'package:vidyaveechi_website/view/widgets/textformFiledContainer/textformFiledBlueContainer.dart';
 
-createTeacherFunction(BuildContext context) {
+createTeacherFunction(BuildContext context, String userName) {
   final TeacherController teacherController = Get.put(TeacherController());
   final createTeacherList = [
     TextFormFiledBlueContainerWidgetWithOutColor(
       controller: teacherController.teacherNameController,
-      hintText: " Enter Teacher Name",
-      title: 'Teacher Name',
+      hintText: " Enter $userName Name",
+      title: '$userName  Name',
       validator: checkFieldEmpty,
     ), /////////////////////////...........................0....................name
     TextFormFiledBlueContainerWidgetWithOutColor(
       controller: teacherController.teacherPhoneNumeber,
-      hintText: " Enter Teacher Ph",
+      hintText: " Enter $userName  Ph",
       title: 'Phone Number',
       validator: checkFieldPhoneNumberIsValid,
     ), //////////////////1....................number...................
@@ -111,6 +111,7 @@ createTeacherFunction(BuildContext context) {
                               teacherController.teacherPhoneNumeber.text.trim(),
                           password: subStringEmployeID + subStringPhoneNO,
                         ),
+                        'TempTeacherList'
                       ).then((value) => Get.back());
                     },
                     child: const TextFontWidget(
@@ -132,20 +133,20 @@ createTeacherFunction(BuildContext context) {
           }
         },
         buttonstate: teacherController.buttonstate.value,
-        text: 'Create Teacher')),
+        text: 'Create $userName ')),
   ];
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Column(
+        title:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BackButtonContainerWidget(),
+            const BackButtonContainerWidget(),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: TextFontWidget(
-                text: "Create Teacher",
+                text: "Create $userName ",
                 fontsize: 15,
                 fontWeight: FontWeight.w500,
               ),

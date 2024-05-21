@@ -27,12 +27,12 @@ createClassFunction(BuildContext context) {
       // t
       body: Column(
         children: [
-           const Row(
+            Row(
             children: [
-              BackButton(),
+              const BackButton(),
               Padding(
-                padding: EdgeInsets.all(8.0),
-                child: TextFontWidget(text: "Batch 2024 - 2025", fontsize: 19),
+                padding: const EdgeInsets.all(8.0),
+                child: TextFontWidget(text: "${UserCredentialsController.batchId}", fontsize: 19),
               ),
             ],
           ),
@@ -60,6 +60,7 @@ createClassFunction(BuildContext context) {
            Padding(
             padding: const EdgeInsets.only(left: 08, right: 08),
             child: TextFormFiledBlueContainerWidget(
+              controller:  Get.find<ClassController>().classTeacherController,
               hintText: "  Enter Class Teacher",
               title: 'Class Teacher',
              // validator: checkFieldEmpty,
@@ -182,6 +183,7 @@ createClassFunction(BuildContext context) {
                                                             onTap: () => Get.find<
                                                                     ClassController>()
                                                                 .setClassForbatchYear(
+                                                                  data.classTeacherName??'',
                                                                     data.className,
                                                                     data.classId,
                                                                     data.docid,

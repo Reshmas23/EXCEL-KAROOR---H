@@ -40,7 +40,7 @@ class AllClassListView extends StatelessWidget {
                         height: 40,
                         width: double.infinity,
                         child: TextFontWidget(
-                          text: 'All Classes List',
+                          text: 'All Classes ',
                           fontsize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -172,7 +172,7 @@ class AllClassListView extends StatelessWidget {
                                                   .classModelData.value = data;
                                               classController.ontapClass.value =
                                                   true;
-                                                    await classController.getFirstSubjectId();
+                                                    // await classController.getFirstSubjectId();
                                             },
                                             child: ClassDataListWidget(
                                               classStatus: snaps,

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/admin_section/teacher_controller/teacher_controller.dart';
-import 'package:vidyaveechi_website/model/teacher_model/teacher_model.dart';
+import 'package:vidyaveechi_website/model/student_model/student_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/list_of_teacher/edit_teacherDetails.dart';
 import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 
-class AllTeachersDataList extends StatelessWidget {
+class AllClassStudentDataList extends StatelessWidget {
   final int index;
-  final TeacherModel data;
-  const AllTeachersDataList({
+  final StudentModel data;
+  const AllClassStudentDataList({
     required this.index,
     required this.data,
     super.key,
@@ -41,7 +41,7 @@ class AllTeachersDataList extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: data.employeeID == ''
+                child: data.admissionNumber == ''
                     ? const TeacherDetailEditWidget(
                         docid: '',
                       )
@@ -53,14 +53,14 @@ class AllTeachersDataList extends StatelessWidget {
                                   rowMainAccess: MainAxisAlignment.center,
                                   color: cWhite,
                                   index: index,
-                                  headerTitle: "${data.employeeID}"),
+                                  headerTitle: data.admissionNumber),
                               Padding(
                                 padding: const EdgeInsets.only(left: 05),
                                 child: IconButton(
                                     onPressed: () async {
                                       await Get.find<TeacherController>()
                                           .editTeacherDetails(
-                                              teacherDocID: data.docid!,
+                                              teacherDocID: data.docid,
                                               key:'employeeID',
                                               value: '');
                                     },
@@ -76,7 +76,7 @@ class AllTeachersDataList extends StatelessWidget {
                             rowMainAccess: MainAxisAlignment.center,
                             color: cWhite,
                             index: index,
-                            headerTitle: "${data.employeeID}"),
+                            headerTitle: data.admissionNumber),
               ), //................................................. teacher ID
               const SizedBox(
                 width: 01,
@@ -87,7 +87,7 @@ class AllTeachersDataList extends StatelessWidget {
                     rowMainAccess: MainAxisAlignment.center,
                     color: cWhite,
                     index: index,
-                    headerTitle: "${data.employeeID}"),
+                    headerTitle: data.admissionNumber),
               ), //................................................. teacher ID
               const SizedBox(
                 width: 01,
@@ -112,7 +112,7 @@ class AllTeachersDataList extends StatelessWidget {
                           ? Row(
                               children: [
                                 TextFontWidget(
-                                  text: "  ${data.teacherName}",
+                                  text: "  ${data.studentName}",
                                   fontsize: 12,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -129,7 +129,7 @@ class AllTeachersDataList extends StatelessWidget {
                               ],
                             )
                           : TextFontWidget(
-                              text: "  ${data.teacherName}",
+                              text: "  ${data.studentName}",
                               fontsize: 12,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -154,7 +154,7 @@ class AllTeachersDataList extends StatelessWidget {
                     ),
                     Expanded(
                         child: TextFontWidget(
-                      text: "  ${data.teacherEmail}",
+                      text: "  ${data.studentemail}",
                       fontsize: 12,
                       overflow: TextOverflow.ellipsis,
                     )),
@@ -184,7 +184,7 @@ class AllTeachersDataList extends StatelessWidget {
                           ? Row(
                               children: [
                                 TextFontWidget(
-                                  text: "  ${data.teacherPhNo}",
+                                  text: "  ${data.parentPhoneNumber}",
                                   fontsize: 12,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -201,7 +201,7 @@ class AllTeachersDataList extends StatelessWidget {
                               ],
                             )
                           : TextFontWidget(
-                              text: "  ${data.teacherPhNo}",
+                              text: "  ${data.parentPhoneNumber}",
                               fontsize: 12,
                               overflow: TextOverflow.ellipsis,
                             ),

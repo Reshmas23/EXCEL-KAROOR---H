@@ -6,6 +6,7 @@ import 'package:vidyaveechi_website/model/teacher_model/teacher_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/teacher/create_teacher/create_newteachers.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/list_of_teacher/table_of_tr.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/teachers_details/teachers_details.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
@@ -14,10 +15,10 @@ import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.d
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
-class AllTeacherRegistrationListContainer extends StatelessWidget {
+class AllTeacherRegistrationList extends StatelessWidget {
   final TeacherController teacherController = Get.put(TeacherController());
   final ExcelFileController excelController = Get.put(ExcelFileController());
-  AllTeacherRegistrationListContainer({super.key});
+  AllTeacherRegistrationList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +199,7 @@ class AllTeacherRegistrationListContainer extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 10, right: 20),
                             child: GestureDetector(
                               onTap: () async {
-                              //  await excelController.pickExcelForTeachers();
+                                await excelController.pickExcelForTeachers(userCollection: 'Teachers',userRole: 'teacher');
                               },
                               child: const SizedBox(
                                 height: 30,
@@ -209,7 +210,7 @@ class AllTeacherRegistrationListContainer extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                          //    createTeacherFunction(context);
+                              createTeacherFunction(context,'Teacher');
                             },
                             child: const SizedBox(
                               height: 30,

@@ -38,7 +38,7 @@ class NoticeEditRemove extends StatelessWidget {
             const Text(
               'Notice ',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),

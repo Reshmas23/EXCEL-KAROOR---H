@@ -6,7 +6,6 @@ import 'package:vidyaveechi_website/controller/user_login_Controller/user_login_
 import 'package:vidyaveechi_website/firebase_options.dart';
 import 'package:vidyaveechi_website/view/home/screens/footer/privacypolicy.dart';
 import 'package:vidyaveechi_website/view/splash_screen/splash_screen.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/registration_users/list_of_classes_registration.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/scroll_on_web_widget.dart';
 

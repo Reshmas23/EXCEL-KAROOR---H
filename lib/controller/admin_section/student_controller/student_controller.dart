@@ -71,7 +71,7 @@ class StudentController extends GetxController {
           studentName: stNameController.text.trim(),
           password: '123456',
           studentemail: '',
-          userRole: 'student');
+          userRole: 'student', nameofParent: '', nameofClass: '');
       await _fbServer
           .collection(UserCredentialsController.batchId!)
           .doc(UserCredentialsController.batchId!)
@@ -136,7 +136,7 @@ class StudentController extends GetxController {
           studentemail: automaticmail.value == true
               ? camelCaseText
               : stEmailController.text.trim(),
-          userRole: 'student');
+          userRole: 'student', nameofParent: '', nameofClass: '');
       await serverAuth
           .createUserWithEmailAndPassword(
               email: automaticmail.value == true
@@ -148,75 +148,62 @@ class StudentController extends GetxController {
         studentDetail.docid = value.user!.uid;
         log("Student creation    ................${studentDetail.docid}");
 
-        await getAdmissionNumber().then((value) async {
-          await increaseAdNo().then((value) async {
-            studentDetail.admissionNumber = '000${stAdNumber.value}';
-
-            await Get.find<ParentController>()
-                .createParentForStudent()
+        await Get.find<ParentController>()
+            .createParentForStudent()
+            .then((value) async {
+          await _fbServer
+              .collection('AllStudents')
+              .doc(stUID.value)
+              .set(studentDetail.toMap())
+              .then((value) async {
+            await _fbServer
+                .collection(UserCredentialsController.batchId!)
+                .doc(UserCredentialsController.batchId!)
+                .collection('classes')
+                .doc(studentDetail.classId)
+                .collection('Students')
+                .doc(stUID.value)
+                .set(
+                  studentDetail.toMap(),
+                )
                 .then((value) async {
               await _fbServer
-                  .collection('AllStudents')
-                  .doc(stUID.value)
-                  .set(studentDetail.toMap())
-                  .then((value) async {
+                  .collection(UserCredentialsController.batchId!)
+                  .doc(UserCredentialsController.batchId!)
+                  .collection('classes')
+                  .doc(Get.find<ClassController>().classDocID.value)
+                  .collection('Students')
+                  .doc(Get.find<StudentController>().stUID.value)
+                  .update(
+                {'parentId': Get.find<ParentController>().stParentUID.value},
+              ).then((value) async {
                 await _fbServer
-                    .collection(UserCredentialsController.batchId!)
-                    .doc(UserCredentialsController.batchId!)
-                    .collection('classes')
-                    .doc(studentDetail.classId)
-                    .collection('Students')
-                    .doc(stUID.value)
-                    .set(
-                      studentDetail.toMap(),
-                    )
-                    .then((value) async {
-                  await _fbServer
-                      .collection(UserCredentialsController.batchId!)
-                      .doc(UserCredentialsController.batchId!)
-                      .collection('classes')
-                      .doc(Get.find<ClassController>().classDocID.value)
-                      .collection('Students')
-                      .doc(Get.find<StudentController>().stUID.value)
-                      .update(
-                    {
-                      'parentId': Get.find<ParentController>().stParentUID.value
-                    },
-                  ).then((value) async {
-                    await _fbServer
-                        .collection('AllStudents')
-                        .doc(Get.find<StudentController>().stUID.value)
-                        .update(
-                      {
-                        'parentId':
-                            Get.find<ParentController>().stParentUID.value
-                      },
-                    );
-                    return null;
-                  }).then((value) async {
-                    manuvalAfterStudentCreateGmailSender(
-                        sendingmails: [stEmailController.text.trim()],
-                        parentemail:
-                            Get.find<ParentController>().stParnetEmail.value,
-                        parentpassword: '123456',
-                        studentemail: stEmailController.text.trim(),
-                        studentpassword: _randomstring,
-                      schoolName:   UserCredentialsController.schoolName??'',
-                        );
-                  }).then((value) async {
-                    buttonstate.value = ButtonState.success;
-                    showToast(msg: "Student Added Successfully");
-                    await Future.delayed(const Duration(seconds: 2))
-                        .then((vazlue) {
-                      buttonstate.value = ButtonState.idle;
-                    });
-                    stNameController.clear();
-                    stPhoneController.clear();
-                    stEmailController.clear();
-                    dateofbithController.value = '';
-                    automaticmail.value = false;
-                  });
+                    .collection('AllStudents')
+                    .doc(Get.find<StudentController>().stUID.value)
+                    .update(
+                  {'parentId': Get.find<ParentController>().stParentUID.value},
+                );
+                return null;
+              }).then((value) async {
+                manuvalAfterStudentCreateGmailSender(
+                  sendingmails: [stEmailController.text.trim()],
+                  parentemail: Get.find<ParentController>().stParnetEmail.value,
+                  parentpassword: '123456',
+                  studentemail: stEmailController.text.trim(),
+                  studentpassword: _randomstring,
+                  schoolName: UserCredentialsController.schoolName ?? '',
+                );
+              }).then((value) async {
+                buttonstate.value = ButtonState.success;
+                showToast(msg: "Student Added Successfully");
+                await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
+                  buttonstate.value = ButtonState.idle;
                 });
+                stNameController.clear();
+                stPhoneController.clear();
+                stEmailController.clear();
+                dateofbithController.value = '';
+                automaticmail.value = false;
               });
             });
           });
@@ -239,33 +226,33 @@ class StudentController extends GetxController {
     }
   }
 
-  Future<String> increaseAdNo() async {
-    final int newAdNo = stAdNumber.value + 1;
+  // Future<String> increaseAdNo() async {
+  //   final int newAdNo = stAdNumber.value + 1;
 
-    await _fbServer
-        .collection('AdmissionNumber')
-        .doc('AdNo')
-        .update({'AdNumber': newAdNo});
+  //   await _fbServer
+  //       .collection('AdmissionNumber')
+  //       .doc('AdNo')
+  //       .update({'AdNumber': newAdNo});
 
-    return '000$newAdNo';
-  }
+  //   return '000$newAdNo';
+  // }
 
-  Future<int> getAdmissionNumber() async {
-    final result =
-        await _fbServer.collection('AdmissionNumber').doc('AdNo').get();
+  // Future<int> getAdmissionNumber() async {
+  //   final result =
+  //       await _fbServer.collection('AdmissionNumber').doc('AdNo').get();
 
-    if (result.data() == null) {
-      await _fbServer
-          .collection('AdmissionNumber')
-          .doc('AdNo')
-          .set({'AdNumber': stAdNumber.value});
-    } else {
-      print('.....................');
-      stAdNumber.value = result.data()?['AdNumber'] ?? 0;
-    }
+  //   if (result.data() == null) {
+  //     await _fbServer
+  //         .collection('AdmissionNumber')
+  //         .doc('AdNo')
+  //         .set({'AdNumber': stAdNumber.value});
+  //   } else {
+  //     print('.....................');
+  //     stAdNumber.value = result.data()?['AdNumber'] ?? 0;
+  //   }
 
-    return stAdNumber.value;
-  }
+  //   return stAdNumber.value;
+  // }
 
   selectToDateofBirth(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -299,8 +286,7 @@ class StudentController extends GetxController {
     required String parentpassword,
     required String studentemail,
     required String studentpassword,
-      required String schoolName,
-
+    required String schoolName,
   }) async {
     try {
       Map<String, dynamic> emailData = {
@@ -396,7 +382,7 @@ class StudentController extends GetxController {
   @override
   void onReady() async {
     print("On Ready");
-    await getAdmissionNumber();
+    // await getAdmissionNumber();
     await fetchAllStudents();
 
     super.onReady();
