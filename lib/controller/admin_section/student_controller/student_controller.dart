@@ -71,7 +71,7 @@ class StudentController extends GetxController {
           studentName: stNameController.text.trim(),
           password: '123456',
           studentemail: '',
-          userRole: 'student');
+          userRole: 'student', nameofParent: '', nameofClass: '');
       await _fbServer
           .collection(UserCredentialsController.batchId!)
           .doc(UserCredentialsController.batchId!)
@@ -136,7 +136,7 @@ class StudentController extends GetxController {
           studentemail: automaticmail.value == true
               ? camelCaseText
               : stEmailController.text.trim(),
-          userRole: 'student');
+          userRole: 'student', nameofParent: '', nameofClass: '');
       await serverAuth
           .createUserWithEmailAndPassword(
               email: automaticmail.value == true

@@ -26,6 +26,8 @@ class StudentModel {
   String password;
   String studentemail;
   String userRole = 'student';
+  String nameofParent;
+  String nameofClass;
   StudentModel({
     required this.admissionNumber,
     required this.alPhoneNumber,
@@ -47,6 +49,8 @@ class StudentModel {
     required this.password,
     required this.studentemail,
     required this.userRole,
+    required this.nameofParent,
+    required this.nameofClass,
   });
 
   StudentModel copyWith({
@@ -70,6 +74,8 @@ class StudentModel {
     String? password,
     String? studentemail,
     String? userRole,
+    String? nameofParent,
+    String? nameofClass,
   }) {
     return StudentModel(
       admissionNumber: admissionNumber ?? this.admissionNumber,
@@ -92,6 +98,8 @@ class StudentModel {
       password: password ?? this.password,
       studentemail: studentemail ?? this.studentemail,
       userRole: userRole ?? this.userRole,
+      nameofParent: nameofParent ?? this.nameofParent,
+      nameofClass: nameofClass ?? this.nameofClass,
     );
   }
 
@@ -117,6 +125,8 @@ class StudentModel {
       'password': password,
       'studentemail': studentemail,
       'userRole': userRole,
+      'nameofParent': nameofParent,
+      'nameofClass': nameofClass,
     };
   }
 
@@ -142,6 +152,8 @@ class StudentModel {
       password: map['password'] ?? '',
       studentemail: map['studentemail'] ?? '',
       userRole: map['userRole'] ?? '',
+      nameofParent: map['nameofParent'] ?? '',
+      nameofClass: map['nameofClass'] ?? '',
     );
   }
 
@@ -152,56 +164,61 @@ class StudentModel {
 
   @override
   String toString() {
-    return 'StudentModel(admissionNumber: $admissionNumber, alPhoneNumber: $alPhoneNumber, bloodgroup: $bloodgroup, classId: $classId, createDate: $createDate, dateofBirth: $dateofBirth, district: $district, docid: $docid, gender: $gender, guardianId: $guardianId, houseName: $houseName, parentId: $parentId, parentPhoneNumber: $parentPhoneNumber, place: $place, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, studentName: $studentName, password: $password, studentemail: $studentemail, userRole: $userRole)';
+    return 'StudentModel(admissionNumber: $admissionNumber, alPhoneNumber: $alPhoneNumber, bloodgroup: $bloodgroup, classId: $classId, createDate: $createDate, dateofBirth: $dateofBirth, district: $district, docid: $docid, gender: $gender, guardianId: $guardianId, houseName: $houseName, parentId: $parentId, parentPhoneNumber: $parentPhoneNumber, place: $place, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, studentName: $studentName, password: $password, studentemail: $studentemail, userRole: $userRole, nameofParent: $nameofParent, nameofClass: $nameofClass)';
   }
 
   @override
   bool operator ==(covariant StudentModel other) {
     if (identical(this, other)) return true;
-
-    return other.admissionNumber == admissionNumber &&
-        other.alPhoneNumber == alPhoneNumber &&
-        other.bloodgroup == bloodgroup &&
-        other.classId == classId &&
-        other.createDate == createDate &&
-        other.dateofBirth == dateofBirth &&
-        other.district == district &&
-        other.docid == docid &&
-        other.gender == gender &&
-        other.guardianId == guardianId &&
-        other.houseName == houseName &&
-        other.parentId == parentId &&
-        other.parentPhoneNumber == parentPhoneNumber &&
-        other.place == place &&
-        other.profileImageId == profileImageId &&
-        other.profileImageUrl == profileImageUrl &&
-        other.studentName == studentName &&
-        other.password == password &&
-        other.studentemail == studentemail &&
-        other.userRole == userRole;
+  
+    return 
+      other.admissionNumber == admissionNumber &&
+      other.alPhoneNumber == alPhoneNumber &&
+      other.bloodgroup == bloodgroup &&
+      other.classId == classId &&
+      other.createDate == createDate &&
+      other.dateofBirth == dateofBirth &&
+      other.district == district &&
+      other.docid == docid &&
+      other.gender == gender &&
+      other.guardianId == guardianId &&
+      other.houseName == houseName &&
+      other.parentId == parentId &&
+      other.parentPhoneNumber == parentPhoneNumber &&
+      other.place == place &&
+      other.profileImageId == profileImageId &&
+      other.profileImageUrl == profileImageUrl &&
+      other.studentName == studentName &&
+      other.password == password &&
+      other.studentemail == studentemail &&
+      other.userRole == userRole &&
+      other.nameofParent == nameofParent &&
+      other.nameofClass == nameofClass;
   }
 
   @override
   int get hashCode {
     return admissionNumber.hashCode ^
-        alPhoneNumber.hashCode ^
-        bloodgroup.hashCode ^
-        classId.hashCode ^
-        createDate.hashCode ^
-        dateofBirth.hashCode ^
-        district.hashCode ^
-        docid.hashCode ^
-        gender.hashCode ^
-        guardianId.hashCode ^
-        houseName.hashCode ^
-        parentId.hashCode ^
-        parentPhoneNumber.hashCode ^
-        place.hashCode ^
-        profileImageId.hashCode ^
-        profileImageUrl.hashCode ^
-        studentName.hashCode ^
-        password.hashCode ^
-        studentemail.hashCode ^
-        userRole.hashCode;
+      alPhoneNumber.hashCode ^
+      bloodgroup.hashCode ^
+      classId.hashCode ^
+      createDate.hashCode ^
+      dateofBirth.hashCode ^
+      district.hashCode ^
+      docid.hashCode ^
+      gender.hashCode ^
+      guardianId.hashCode ^
+      houseName.hashCode ^
+      parentId.hashCode ^
+      parentPhoneNumber.hashCode ^
+      place.hashCode ^
+      profileImageId.hashCode ^
+      profileImageUrl.hashCode ^
+      studentName.hashCode ^
+      password.hashCode ^
+      studentemail.hashCode ^
+      userRole.hashCode ^
+      nameofParent.hashCode ^
+      nameofClass.hashCode;
   }
 }

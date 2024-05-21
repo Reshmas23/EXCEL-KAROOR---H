@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:progress_state_button/progress_button.dart';
@@ -14,7 +15,10 @@ import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_creden
 import 'package:vidyaveechi_website/view/widgets/custom_showDilog/custom_showdilog.dart';
 import 'package:vidyaveechi_website/view/widgets/drop_DownList/schoolDropDownList.dart';
 
+import '../class_controller/class_controller.dart';
+
 class RegistrationController extends GetxController {
+    final classController = Get.put(ClassController());
   int notifierCounter = 0;
   RxBool ontapRegiStudentList = false.obs;
   List<ClassModel> allclassList = [];
@@ -136,6 +140,7 @@ class RegistrationController extends GetxController {
   final TextEditingController stNameController = TextEditingController();
   final TextEditingController stEmailController = TextEditingController();
   final TextEditingController stPhoneController = TextEditingController();
+    final TextEditingController stParentNameController = TextEditingController();
 
   Future<void> classWiseStudentCreation() async {
     buttonstate.value = ButtonState.loading;
@@ -161,7 +166,7 @@ class RegistrationController extends GetxController {
           studentName: stNameController.text.trim(),
           password: '123456',
           studentemail: stEmailController.text.trim(),
-          userRole: 'student');
+          userRole: 'student', nameofParent:  stParentNameController.text.trim(), nameofClass: className.value, );
       await server
           .collection('SchoolListCollection')
           .doc(schoolListValue?['docid'])
@@ -259,5 +264,27 @@ class RegistrationController extends GetxController {
     });
 
     return allClasswiseRegStudents;
+  }
+
+
+  Future<List<StudentModel>> fetchStudentData() async {
+    final firebase = FirebaseFirestore.instance;
+    final querySnapshot = await firebase
+        .collection('SchoolListCollection')
+        .doc(UserCredentialsController.schoolId)
+        .collection(UserCredentialsController.batchId!)
+        .doc(UserCredentialsController.batchId!)
+        .collection('classes')
+        .doc(Get.find<ClassController>().classDocID.value)
+        .collection('RegTemp_Students')
+        .get();
+
+    print(UserCredentialsController.schoolId);
+    print(UserCredentialsController.batchId!);
+    print(classController.className.value);
+
+    return querySnapshot.docs
+        .map((doc) => StudentModel.fromMap(doc.data()))
+        .toList();
   }
 }
