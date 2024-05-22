@@ -111,7 +111,7 @@ class _GenerateExcelState extends State<GenerateExcel> {
         sheet.getRangeByIndex(i + 2, 3).setText(classUsers[i].studentemail);
         sheet.getRangeByIndex(i + 2, 4).setText(classUsers[i].parentPhoneNumber);
        
-        sheet.getRangeByIndex(i + 2, 5).setText(classUsers[i].nameofParent);
+       
       }
 
       // Save and launch the excel.

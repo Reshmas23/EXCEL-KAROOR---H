@@ -142,13 +142,14 @@ class RegistrationController extends GetxController {
   final TextEditingController stPhoneController = TextEditingController();
     final TextEditingController stParentNameController = TextEditingController();
         final TextEditingController stadNoController = TextEditingController();
+        RxString gender='Select gender'.obs;
 
   Future<void> classWiseStudentCreation() async {
     buttonstate.value = ButtonState.loading;
     try {
       final uid = uuid.v1();
       final studentDetail = StudentModel(
-          admissionNumber: '',
+          admissionNumber: stadNoController.text.trim(),
           alPhoneNumber:stadNoController.text.trim(),
           bloodgroup: '',
           classId: classDocID.value,
@@ -156,7 +157,7 @@ class RegistrationController extends GetxController {
           dateofBirth: '',
           district: '',
           docid: uid,
-          gender: '',
+          gender: gender.value,
           guardianId: '',
           houseName: '',
           parentId: '',
@@ -167,7 +168,7 @@ class RegistrationController extends GetxController {
           studentName: stNameController.text.trim(),
           password: '123456',
           studentemail: stEmailController.text.trim(),
-          userRole: 'student', nameofParent:  stParentNameController.text.trim(), nameofClass: className.value, );
+          userRole: 'student', nameofClass: className.value, );
       await server
           .collection('SchoolListCollection')
           .doc(schoolListValue?['docid'])
@@ -284,9 +285,13 @@ class RegistrationController extends GetxController {
     print(UserCredentialsController.batchId!);
     print(Get.find<ClassController>().ontapClassDocID.value);
 
-    return querySnapshot.docs
+   final studentDetails=querySnapshot.docs
         .map((doc) => StudentModel.fromMap(doc.data()))
         .toList();
+        if(studentDetails.isEmpty){
+           showToast(msg: 'No registered students,fail to generate excel ');
+        }
+        return studentDetails;
   }
 
 }

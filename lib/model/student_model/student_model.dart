@@ -6,6 +6,7 @@
 import 'dart:convert';
 
 class StudentModel {
+  
   String admissionNumber;
   String alPhoneNumber;
   String bloodgroup;
@@ -26,7 +27,7 @@ class StudentModel {
   String password;
   String studentemail;
   String userRole = 'student';
-  String nameofParent;
+ 
   String nameofClass;
   StudentModel({
     required this.admissionNumber,
@@ -49,7 +50,6 @@ class StudentModel {
     required this.password,
     required this.studentemail,
     required this.userRole,
-    required this.nameofParent,
     required this.nameofClass,
   });
 
@@ -74,7 +74,6 @@ class StudentModel {
     String? password,
     String? studentemail,
     String? userRole,
-    String? nameofParent,
     String? nameofClass,
   }) {
     return StudentModel(
@@ -98,7 +97,6 @@ class StudentModel {
       password: password ?? this.password,
       studentemail: studentemail ?? this.studentemail,
       userRole: userRole ?? this.userRole,
-      nameofParent: nameofParent ?? this.nameofParent,
       nameofClass: nameofClass ?? this.nameofClass,
     );
   }
@@ -125,7 +123,6 @@ class StudentModel {
       'password': password,
       'studentemail': studentemail,
       'userRole': userRole,
-      'nameofParent': nameofParent,
       'nameofClass': nameofClass,
     };
   }
@@ -152,7 +149,6 @@ class StudentModel {
       password: map['password'] ?? '',
       studentemail: map['studentemail'] ?? '',
       userRole: map['userRole'] ?? '',
-      nameofParent: map['nameofParent'] ?? '',
       nameofClass: map['nameofClass'] ?? '',
     );
   }
@@ -164,7 +160,7 @@ class StudentModel {
 
   @override
   String toString() {
-    return 'StudentModel(admissionNumber: $admissionNumber, alPhoneNumber: $alPhoneNumber, bloodgroup: $bloodgroup, classId: $classId, createDate: $createDate, dateofBirth: $dateofBirth, district: $district, docid: $docid, gender: $gender, guardianId: $guardianId, houseName: $houseName, parentId: $parentId, parentPhoneNumber: $parentPhoneNumber, place: $place, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, studentName: $studentName, password: $password, studentemail: $studentemail, userRole: $userRole, nameofParent: $nameofParent, nameofClass: $nameofClass)';
+    return 'StudentModel(admissionNumber: $admissionNumber, alPhoneNumber: $alPhoneNumber, bloodgroup: $bloodgroup, classId: $classId, createDate: $createDate, dateofBirth: $dateofBirth, district: $district, docid: $docid, gender: $gender, guardianId: $guardianId, houseName: $houseName, parentId: $parentId, parentPhoneNumber: $parentPhoneNumber, place: $place, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, studentName: $studentName, password: $password, studentemail: $studentemail, userRole: $userRole, nameofClass: $nameofClass)';
   }
 
   @override
@@ -192,7 +188,6 @@ class StudentModel {
       other.password == password &&
       other.studentemail == studentemail &&
       other.userRole == userRole &&
-      other.nameofParent == nameofParent &&
       other.nameofClass == nameofClass;
   }
 
@@ -218,7 +213,6 @@ class StudentModel {
       password.hashCode ^
       studentemail.hashCode ^
       userRole.hashCode ^
-      nameofParent.hashCode ^
       nameofClass.hashCode;
-}
+  }
 }

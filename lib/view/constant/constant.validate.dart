@@ -204,3 +204,22 @@ String timeConvert(DateTime date) {
   }
   return '';
 }
+
+
+
+String timeToDateConvert(String date) {
+  //String dateandtime convert to "dd-mm-yyyy hh:mm" this format
+  try {
+    final DateTime dateFormat = DateTime.parse(date);
+    final DateFormat formatter = DateFormat('d-M-yyyy h:mm');
+    return formatter.format(dateFormat);
+  } catch (e) {
+    if (kDebugMode) {
+      print(e);
+    }
+  }
+  return '';
+}
+
+
+
