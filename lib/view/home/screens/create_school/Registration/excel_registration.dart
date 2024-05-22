@@ -28,7 +28,7 @@ class _GenerateExcelState extends State<GenerateExcel> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             GooglePoppinsWidgets(text: 'Select class', fontsize: 16),
-            SizedBox(height: 80,width: 300,child: SelectClassDropDown(),),
+            ////SizedBox(height: 80,width: 300,child: SelectClassDropDown(),),
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,

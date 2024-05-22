@@ -43,7 +43,7 @@ createTeacherFunction(BuildContext context, String userName) {
               ),
               children: [
                 const SizedBox(
-                  height: 111,
+                  height: 115,
                   width: 350,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,11 +77,14 @@ createTeacherFunction(BuildContext context, String userName) {
                 )
               ],
               actions: [
-                const TextFontWidget(
-                  color: cred,
-                  text: "Cancel ",
-                  fontsize: 14,
-                  fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap:  () => Get.back(),
+                  child: const TextFontWidget(
+                    color: cred,
+                    text: "Cancel ",
+                    fontsize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),

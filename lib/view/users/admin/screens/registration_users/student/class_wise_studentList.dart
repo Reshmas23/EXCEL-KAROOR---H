@@ -1,7 +1,12 @@
+import 'dart:html';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' hide Column,Row,Border;
 import 'package:vidyaveechi_website/controller/admin_section/student_controller/student_controller.dart';
 import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
+import 'package:vidyaveechi_website/controller/registration_controller/registation_controller.dart';
 import 'package:vidyaveechi_website/excel_File_Controller/excel_fileController.dart';
 import 'package:vidyaveechi_website/model/student_model/student_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
@@ -17,7 +22,7 @@ import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/rout
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
 
 class AllClassStudentListContainer extends StatelessWidget {
-   AllClassStudentListContainer({super.key});
+  AllClassStudentListContainer({super.key});
   final StudentController studentController = Get.put(StudentController());
   final ExcelFileController excelController = Get.put(ExcelFileController());
   @override
@@ -198,9 +203,12 @@ class AllClassStudentListContainer extends StatelessWidget {
                                             snaPS.data!.docs[index].data());
                                         return GestureDetector(
                                           onTap: () {
-                                            studentController.studentModelData.value=data;
-                              
-                                           Get.find<ClassController>().ontapStudentsDetail.value = true;
+                                            studentController
+                                                .studentModelData.value = data;
+
+                                            Get.find<ClassController>()
+                                                .ontapStudentsDetail
+                                                .value = true;
                                           },
                                           child: AllClassStudentDataList(
                                             index: index,
@@ -229,8 +237,9 @@ class AllClassStudentListContainer extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10, right: 20),
                         child: GestureDetector(
                           onTap: () async {
-                            Get.find<ClassController>().ontapStudentCreation.value=true;
-                      
+                            Get.find<ClassController>()
+                                .ontapStudentCreation
+                                .value = true;
                           },
                           child: const SizedBox(
                             height: 30,
@@ -243,7 +252,7 @@ class AllClassStudentListContainer extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10, right: 20),
                         child: GestureDetector(
                           onTap: () async {
-                         await   excelController.pickExcelForStudent();
+                            await excelController.pickExcelForStudent();
                           },
                           child: const SizedBox(
                             height: 30,
@@ -260,10 +269,29 @@ class AllClassStudentListContainer extends StatelessWidget {
                             //     userCollection: 'Teachers',
                             //     userRole: 'teacher');
                           },
+                          child: GestureDetector(
+                            onTap: () async{
+                              await generateExcel();
+                            },
+                            child: const SizedBox(
+                              height: 30,
+                              child: RouteSelectedTextContainer(
+                                  title: 'Download From Web Data'),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 20),
+                        child: GestureDetector(
+                          onTap: () async {
+                            showReportMenu(context);
+                          },
                           child: const SizedBox(
                             height: 30,
                             child: RouteSelectedTextContainer(
-                                title: 'Upload From Web Data'),
+                                title: 'Get Credentials Report 📃'),
                           ),
                         ),
                       ),
@@ -273,5 +301,123 @@ class AllClassStudentListContainer extends StatelessWidget {
               ),
             ),
           ));
+  }
+    Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
+    final blob = Blob([Uint8List.fromList(bytes)]);
+    final url = Url.createObjectUrlFromBlob(blob);
+    AnchorElement(href: url)
+      ..target = 'webbrowser'
+      ..download = fileName
+      ..click();
+    Url.revokeObjectUrl(url);
+  }
+
+  Future<void> generateExcel() async {
+    final RegistrationController excelcontroller = Get.put(RegistrationController());
+    
+
+    // Fetch all users
+    final List<StudentModel> users = await excelcontroller.fetchStudentData();
+
+    // Debug: Print fetched users
+    print('Fetched users: ${users.length}');
+    for (var user in users) {
+      print('User: ${user.studentName}, Class: ${user.classId}');
+    }
+
+    // Group users by class
+    Map<String, List<StudentModel>> usersByClass = {};
+    for (var user in users) {
+      if (!usersByClass.containsKey(user.nameofClass)) {
+        usersByClass[user.nameofClass] = [];
+      }
+      usersByClass[user.nameofClass]!.add(user);
+    }
+
+    // Debug: Print grouped users by class
+    usersByClass.forEach((nameofClass, users) {
+      print('Class: $nameofClass, Students: ${users.length}');
+    });
+
+    // Create Excel files for each class
+    for (var entry in usersByClass.entries) {
+      final nameofClass = entry.key;
+      final classUsers = entry.value;
+
+      // Debug: Print class details before creating Excel
+      print('Creating Excel for Class: $nameofClass with ${classUsers.length} students');
+
+      // Creating a workbook.
+      final Workbook workbook = Workbook();
+      // Accessing via index
+      final Worksheet sheet = workbook.worksheets[0];
+      sheet.showGridlines = true;
+
+      // Enable calculation for worksheet.
+      sheet.enableSheetCalculations();
+
+      sheet.getRangeByName('A1').setText('Name');
+      sheet.getRangeByName('B1').setText('Class');
+      sheet.getRangeByName('C1').setText('Email');
+      sheet.getRangeByName('D1').setText('Phone');
+      
+      sheet.getRangeByName('E1').setText('Parent Name');
+
+      for (int i = 0; i < classUsers.length; i++) {
+        sheet.getRangeByIndex(i + 2, 1).setText(classUsers[i].studentName);
+        sheet.getRangeByIndex(i + 2, 2).setText(classUsers[i].nameofClass);
+        sheet.getRangeByIndex(i + 2, 3).setText(classUsers[i].studentemail);
+        sheet.getRangeByIndex(i + 2, 4).setText(classUsers[i].parentPhoneNumber);
+       
+        sheet.getRangeByIndex(i + 2, 5).setText(classUsers[i].nameofParent);
+      }
+
+      // Save and launch the excel.
+      final List<int> bytes = workbook.saveAsStream();
+      // Dispose the document.
+      workbook.dispose();
+
+      // Save and launch the file.
+      await saveAndLaunchFile(bytes, '$nameofClass.xlsx');
+    }
+
+    // Debug: Completed
+    print('Excel generation completed.');
+}
+
+  void showReportMenu(BuildContext context) {
+    showMenu(
+        context: context,
+        position: const RelativeRect.fromLTRB(150, double.infinity, 115, 10),
+        items: [
+          PopupMenuItem(
+              child: GestureDetector(
+            onTap: () async{
+              Get.back();
+              await excelController.getAllStudentCredentialsReport();
+            }
+                ,
+            child: const SizedBox(
+              height: 30,
+              child: RouteSelectedTextContainer(
+                  title: 'Get All Students Report 📃'),
+            ),
+          )),
+          PopupMenuItem(
+              child: GestureDetector(
+            onTap: () async {
+                     Get.back();
+                await excelController.getClassWiseStudentCredentialsReport();
+
+            },
+            child: SizedBox(
+              height: 30,
+              child: RouteSelectedTextContainer(
+                  title:
+                      'Get ${Get.find<ClassController>().ontapClassName.value} Students Report 📃'),
+            ),
+          )),
+        ],
+        elevation: 1.0);
   }
 }

@@ -10,6 +10,7 @@ import 'package:vidyaveechi_website/controller/admin_section/parent_controller/p
 import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
 import 'package:vidyaveechi_website/model/student_model/student_model.dart';
 import 'package:vidyaveechi_website/view/constant/const.dart';
+import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 
@@ -17,6 +18,7 @@ class StudentController extends GetxController {
   final ParentController parentController = Get.put(ParentController());
   Rx<ButtonState> buttonstate = ButtonState.idle.obs;
   final TextEditingController stNameController = TextEditingController();
+  final TextEditingController stAdNoController = TextEditingController();
   final TextEditingController stEmailController = TextEditingController();
   final TextEditingController stPhoneController = TextEditingController();
   final TextEditingController phoneNumberStdEditController =
@@ -48,18 +50,19 @@ class StudentController extends GetxController {
 
   RxBool automaticmail = false.obs;
 
-  Future<void> classWiseStudentCreation() async {
+  Future<void> classWiseStudentCreation({required String password}) async {
+    final docid = uuid.v1();
     buttonstate.value = ButtonState.loading;
     try {
       final studentDetail = StudentModel(
-          admissionNumber: '',
+          admissionNumber: stAdNoController.text.trim(),
           alPhoneNumber: '',
           bloodgroup: '',
           classId: Get.find<ClassController>().classDocID.value,
           createDate: '',
           dateofBirth: '',
           district: '',
-          docid: '',
+          docid: docid,
           gender: '',
           guardianId: '',
           houseName: '',
@@ -69,7 +72,7 @@ class StudentController extends GetxController {
           profileImageId: '',
           profileImageUrl: '',
           studentName: stNameController.text.trim(),
-          password: '123456',
+          password:password ,
           studentemail: '',
           userRole: 'student', nameofParent: '', nameofClass: '');
       await _fbServer
@@ -78,11 +81,12 @@ class StudentController extends GetxController {
           .collection('classes')
           .doc(Get.find<ClassController>().classDocID.value)
           .collection('Temp_Students')
-          .doc()
+          .doc(docid)
           .set(studentDetail.toMap())
           .then((value) async {
         stNameController.clear();
         stPhoneController.clear();
+          stAdNoController.clear();
         buttonstate.value = ButtonState.success;
         showToast(msg: "Student Added Successfully");
         await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
@@ -115,7 +119,7 @@ class StudentController extends GetxController {
     String camelCaseText = studentEmail.split(" ").join();
     try {
       final StudentModel studentDetail = StudentModel(
-          admissionNumber: '',
+          admissionNumber: stAdNoController.text.trim(),
           alPhoneNumber: '',
           bloodgroup: '',
           classId: Get.find<ClassController>().classDocID.value,
@@ -202,6 +206,7 @@ class StudentController extends GetxController {
                 stNameController.clear();
                 stPhoneController.clear();
                 stEmailController.clear();
+                stAdNoController.clear();
                 dateofbithController.value = '';
                 automaticmail.value = false;
               });

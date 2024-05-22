@@ -1,10 +1,14 @@
 import 'dart:developer';
+import 'dart:html' as html;
 
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:progress_state_button/progress_button.dart';
 import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
+import 'package:vidyaveechi_website/excel_File_Controller/studentCredentialReport.dart';
+import 'package:vidyaveechi_website/excel_File_Controller/teacherCredentialReport.dart';
 import 'package:vidyaveechi_website/model/parent_model/parent_model.dart';
 import 'package:vidyaveechi_website/model/student_model/student_model.dart';
 import 'package:vidyaveechi_website/model/teacher_model/teacher_model.dart';
@@ -13,6 +17,7 @@ import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 
 class ExcelFileController extends GetxController {
+  Rx<ButtonState> buttonstate = ButtonState.idle.obs;
   // RxBool excelisLoading = false.obs;
   List<StudentModel> excelStudentList = [];
   List<StudentModel> serverStudentList = [];
@@ -282,8 +287,8 @@ class ExcelFileController extends GetxController {
                   firstRow[2]?.value != null) {
                 //creating objects and upload to firebase
                 final StudentModel studentModel = StudentModel(
-                  nameofParent: '',
-                  nameofClass: '',
+                    nameofParent: '',
+                    nameofClass: '',
                     admissionNumber: firstRow[0]?.value.toString() ?? '',
                     alPhoneNumber: '',
                     bloodgroup: '',
@@ -303,7 +308,7 @@ class ExcelFileController extends GetxController {
                     studentName: firstRow[1]?.value.toString() ?? '',
                     password: '',
                     studentemail: '',
-                    userRole: 'student');
+                    userRole: 'student',);
                 excelStudentList.add(studentModel);
               }
             }
@@ -362,5 +367,287 @@ class ExcelFileController extends GetxController {
       return null;
     }
     return null;
+  }
+
+  Future<void> getClassWiseStudentCredentialsReport() async {
+    List<StudentCredentialReport> credentialReport = [];
+    try {
+      buttonstate.value = ButtonState.loading;
+      credentialReport.clear();
+      await server
+          .collection('SchoolListCollection')
+          .doc(UserCredentialsController.schoolId)
+          .collection(UserCredentialsController.batchId ?? "")
+          .doc(UserCredentialsController.batchId)
+          .collection('classes')
+          .doc(Get.find<ClassController>().ontapClassDocID.value)
+          .collection('Students')
+          .orderBy('admissionNumber', descending: false)
+          .get()
+          .then((allStudentvalue) async {
+        for (var i = 0; i < allStudentvalue.docs.length; i++) {
+          final studentData = allStudentvalue.docs[i].data();
+          await server
+              .collection('SchoolListCollection')
+              .doc(UserCredentialsController.schoolId)
+              .collection('AllParents')
+              .doc(allStudentvalue.docs[i].data()['parentId'] == ''
+                  ? 'dd'
+                  : allStudentvalue.docs[i].data()['parentId'])
+              .get()
+              .then((parentvalue) {
+            final parentData = parentvalue.data();
+            final StudentCredentialReport result = StudentCredentialReport(
+                adminNo: studentData['admissionNumber'] ?? 'Not Found',
+                studentName: studentData['studentName'] ?? 'Not Found',
+                studentEmail: studentData['studentemail'] ?? 'Not Found',
+                studentPassword: studentData['password'] == ''
+                    ? 'Authorized'
+                    : studentData['password'] ?? 'Not Found',
+                parentEmail: parentData?['parentEmail'] ?? 'Not Found',
+                parentPassword: parentData?['password'] ?? 'Not Found');
+            credentialReport.add(result);
+          });
+        }
+        // Create Excel workbook and sheet
+        final excel = Excel.createExcel();
+        final sheet = excel['Sheet1'];
+
+        // Add header row
+        sheet.appendRow([
+          const TextCellValue('Ad.No'),
+          const TextCellValue('Student Name'),
+          const TextCellValue('Student Email'),
+          const TextCellValue('Student.Password'),
+          const TextCellValue('Parent Email'),
+          const TextCellValue('Parent.Password')
+        ]);
+
+        for (var report in credentialReport) {
+          sheet.appendRow([
+            TextCellValue(report.adminNo),
+            TextCellValue(report.studentName),
+            TextCellValue(report.studentEmail),
+            TextCellValue(report.studentPassword),
+            TextCellValue(report.parentEmail),
+            TextCellValue(report.parentPassword)
+          ]);
+        }
+
+        // Save Excel file
+        // excel.encode().then((bytes) {
+        //   // Save the Excel file with a name
+        //   File('student_credential_report.xlsx').writeAsBytes(bytes);
+        //   print('Excel report generated successfully.');
+        // });
+        final List<int>? byts = excel.encode();
+        final blob = html.Blob([byts]);
+        final url = html.Url.createObjectUrlFromBlob(blob);
+
+        final anchor = html.document.createElement('a') as html.AnchorElement
+          ..href = url
+          ..style.display = 'none'
+          ..download = '${Get.find<ClassController>().ontapClassName}.csv';
+
+        html.document.body?.children.add(anchor);
+        anchor.click();
+
+        html.document.body?.children.remove(anchor);
+        html.Url.revokeObjectUrl(url);
+        buttonstate.value = ButtonState.success;
+        await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
+          buttonstate.value = ButtonState.idle;
+        });
+      });
+    } catch (e) {
+      showToast(msg: 'Somthing went wrong please try again');
+      buttonstate.value = ButtonState.fail;
+      await Future.delayed(const Duration(seconds: 2)).then((value) {
+        buttonstate.value = ButtonState.idle;
+      });
+      if (kDebugMode) {
+        log(e.toString());
+      }
+    }
+  }
+
+  Future<void> getAllStudentCredentialsReport() async {
+    List<StudentCredentialReport> credentialReport = [];
+    try {
+      buttonstate.value = ButtonState.loading;
+      credentialReport.clear();
+      await server
+          .collection('SchoolListCollection')
+          .doc(UserCredentialsController.schoolId)
+          .collection('AllStudents')
+          .orderBy('admissionNumber', descending: false)
+          .get()
+          .then((allStudentvalue) async {
+        for (var i = 0; i < allStudentvalue.docs.length; i++) {
+          final studentData = allStudentvalue.docs[i].data();
+          await server
+              .collection('SchoolListCollection')
+              .doc(UserCredentialsController.schoolId)
+              .collection('AllParents')
+              .doc(allStudentvalue.docs[i].data()['parentId'] == ''
+                  ? 'dd'
+                  : allStudentvalue.docs[i].data()['parentId'])
+              .get()
+              .then((parentvalue) {
+            final parentData = parentvalue.data();
+            final StudentCredentialReport result = StudentCredentialReport(
+                adminNo: studentData['admissionNumber'] ?? 'Not Found',
+                studentName: studentData['studentName'] ?? 'Not Found',
+                studentEmail: studentData['studentemail'] ?? 'Not Found',
+                studentPassword: studentData['password'] == ''
+                    ? 'Authorized'
+                    : studentData['password'] ?? 'Not Found',
+                parentEmail: parentData?['parentEmail'] ?? 'Not Found',
+                parentPassword: parentData?['password'] ?? 'Not Found');
+            credentialReport.add(result);
+          });
+        }
+        // Create Excel workbook and sheet
+        final excel = Excel.createExcel();
+        final sheet = excel['Sheet1'];
+
+        // Add header row
+        sheet.appendRow([
+          const TextCellValue('Ad.No'),
+          const TextCellValue('Student Name'),
+          const TextCellValue('Student Email'),
+          const TextCellValue('Student.Password'),
+          const TextCellValue('Parent Email'),
+          const TextCellValue('Parent.Password')
+        ]);
+
+        for (var report in credentialReport) {
+          sheet.appendRow([
+            TextCellValue(report.adminNo),
+            TextCellValue(report.studentName),
+            TextCellValue(report.studentEmail),
+            TextCellValue(report.studentPassword),
+            TextCellValue(report.parentEmail),
+            TextCellValue(report.parentPassword)
+          ]);
+        }
+
+        // Save Excel file
+        // excel.encode().then((bytes) {
+        //   // Save the Excel file with a name
+        //   File('student_credential_report.xlsx').writeAsBytes(bytes);
+        //   print('Excel report generated successfully.');
+        // });
+        final List<int>? byts = excel.encode();
+        final blob = html.Blob([byts]);
+        final url = html.Url.createObjectUrlFromBlob(blob);
+
+        final anchor = html.document.createElement('a') as html.AnchorElement
+          ..href = url
+          ..style.display = 'none'
+          ..download = 'AllStudents.csv';
+
+        html.document.body?.children.add(anchor);
+        anchor.click();
+
+        html.document.body?.children.remove(anchor);
+        html.Url.revokeObjectUrl(url);
+        buttonstate.value = ButtonState.success;
+        await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
+          buttonstate.value = ButtonState.idle;
+        });
+      });
+    } catch (e) {
+      showToast(msg: 'Somthing went wrong please try again');
+      buttonstate.value = ButtonState.fail;
+      await Future.delayed(const Duration(seconds: 2)).then((value) {
+        buttonstate.value = ButtonState.idle;
+      });
+      if (kDebugMode) {
+        log(e.toString());
+      }
+    }
+  }
+
+  Future<void> getAllTeacherCredentialsReport() async {
+    List<TeacherCredentialReport> credentialReport = [];
+    try {
+      buttonstate.value = ButtonState.loading;
+      credentialReport.clear();
+      await server
+          .collection('SchoolListCollection')
+          .doc(UserCredentialsController.schoolId)
+          .collection('Teachers')
+          .orderBy('employeeID', descending: false)
+          .get()
+          .then((allTeachervalue) async {
+        for (var i = 0; i < allTeachervalue.docs.length; i++) {
+          final teacherData = allTeachervalue.docs[i].data();
+          final TeacherCredentialReport result = TeacherCredentialReport(
+            employeeID: teacherData['employeeID'] ?? 'Not Found',
+            teacherEmail: teacherData['teacherEmail'] ?? 'Not Found',
+            teacherName: teacherData['teacherName'] ?? 'Not Found',
+            teacherPassword: teacherData['password'] == ''
+                ? 'Authorized'
+                : teacherData['password'] ?? 'Not Found',
+          );
+          credentialReport.add(result);
+        }
+        // Create Excel workbook and sheet
+        final excel = Excel.createExcel();
+        final sheet = excel['Sheet1'];
+
+        // Add header row
+        sheet.appendRow([
+          const TextCellValue('Employee.ID'),
+          const TextCellValue('Teacher Name'),
+          const TextCellValue('Teacher Email'),
+          const TextCellValue('Teacher.Password'),
+        ]);
+
+        for (var report in credentialReport) {
+          sheet.appendRow([
+            TextCellValue(report.employeeID),
+            TextCellValue(report.teacherName),
+            TextCellValue(report.teacherEmail),
+            TextCellValue(report.teacherPassword),
+          ]);
+        }
+
+        // Save Excel file
+        // excel.encode().then((bytes) {
+        //   // Save the Excel file with a name
+        //   File('student_credential_report.xlsx').writeAsBytes(bytes);
+        //   print('Excel report generated successfully.');
+        // });
+        final List<int>? byts = excel.encode();
+        final blob = html.Blob([byts]);
+        final url = html.Url.createObjectUrlFromBlob(blob);
+
+        final anchor = html.document.createElement('a') as html.AnchorElement
+          ..href = url
+          ..style.display = 'none'
+          ..download = 'AllTeacher.csv';
+
+        html.document.body?.children.add(anchor);
+        anchor.click();
+
+        html.document.body?.children.remove(anchor);
+        html.Url.revokeObjectUrl(url);
+        buttonstate.value = ButtonState.success;
+        await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
+          buttonstate.value = ButtonState.idle;
+        });
+      });
+    } catch (e) {
+      showToast(msg: 'Somthing went wrong please try again');
+      buttonstate.value = ButtonState.fail;
+      await Future.delayed(const Duration(seconds: 2)).then((value) {
+        buttonstate.value = ButtonState.idle;
+      });
+      if (kDebugMode) {
+        log(e.toString());
+      }
+    }
   }
 }

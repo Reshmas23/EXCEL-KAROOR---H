@@ -141,6 +141,7 @@ class RegistrationController extends GetxController {
   final TextEditingController stEmailController = TextEditingController();
   final TextEditingController stPhoneController = TextEditingController();
     final TextEditingController stParentNameController = TextEditingController();
+        final TextEditingController stadNoController = TextEditingController();
 
   Future<void> classWiseStudentCreation() async {
     buttonstate.value = ButtonState.loading;
@@ -148,7 +149,7 @@ class RegistrationController extends GetxController {
       final uid = uuid.v1();
       final studentDetail = StudentModel(
           admissionNumber: '',
-          alPhoneNumber: '',
+          alPhoneNumber:stadNoController.text.trim(),
           bloodgroup: '',
           classId: classDocID.value,
           createDate: '',
@@ -275,16 +276,17 @@ class RegistrationController extends GetxController {
         .collection(UserCredentialsController.batchId!)
         .doc(UserCredentialsController.batchId!)
         .collection('classes')
-        .doc(Get.find<ClassController>().classDocID.value)
+        .doc(Get.find<ClassController>().ontapClassDocID.value)
         .collection('RegTemp_Students')
         .get();
 
     print(UserCredentialsController.schoolId);
     print(UserCredentialsController.batchId!);
-    print(classController.className.value);
+    print(Get.find<ClassController>().ontapClassDocID.value);
 
     return querySnapshot.docs
         .map((doc) => StudentModel.fromMap(doc.data()))
         .toList();
   }
+
 }

@@ -22,15 +22,18 @@ class RegisrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(iconTheme: IconThemeData(color: cWhite),
-      flexibleSpace: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("webassets/images/login-bg.jpg"),
-                  fit: BoxFit.cover,
-                ),
-              ),) ,),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: cWhite),
+        flexibleSpace: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("webassets/images/login-bg.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -55,16 +58,18 @@ class RegisrationPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4)),
                       height: 600,
                       width: ResponsiveWebSite.isMobile(context) ? 300 : 400,
-                      child:  Form(
-                        key:regirationCrtl.formKey ,
+                      child: Form(
+                        key: regirationCrtl.formKey,
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 10),
                               child: GooglePoppinsWidgets(
                                 text: 'REGISTRATION',
-                                fontsize:
-                                    ResponsiveWebSite.isMobile(context) ? 18 : 25,
+                                fontsize: ResponsiveWebSite.isMobile(context)
+                                    ? 18
+                                    : 25,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -81,40 +86,52 @@ class RegisrationPage extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   left: 10, right: 10, top: 10),
                               child: TextFormFiledBlueContainerWidget1(
-                                validator: checkFieldEmpty,
+                                  validator: checkFieldEmpty,
+                                  controller: regirationCrtl.stadNoController,
+                                  hintText: 'Student Ad.No',
+                                  title: 'Admission No',
+                                  labelText: 'Student Admission no'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
+                              child: TextFormFiledBlueContainerWidget1(
+                                  validator: checkFieldEmpty,
                                   controller: regirationCrtl.stNameController,
                                   hintText: 'Student name',
                                   title: 'Student name',
                                   labelText: 'Student name'),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: TextFormFiledBlueContainerWidget1(
-                                validator: checkFieldEmailIsValid,
+                                  validator: checkFieldEmailIsValid,
                                   controller: regirationCrtl.stEmailController,
                                   hintText: 'Email',
                                   title: 'Email',
                                   labelText: 'Email'),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: TextFormFiledBlueContainerWidget1(
-                                validator: checkFieldPhoneNumberIsValid,
+                                  validator: checkFieldPhoneNumberIsValid,
                                   controller: regirationCrtl.stPhoneController,
                                   hintText: 'Phone number',
                                   title: 'Phone number',
                                   labelText: 'Phone number'),
-                                  
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: TextFormFiledBlueContainerWidget1(
-                                validator: checkFieldEmpty,
-                                  controller: regirationCrtl.stParentNameController,
+                                  validator: checkFieldEmpty,
+                                  controller:
+                                      regirationCrtl.stParentNameController,
                                   hintText: 'Parent name',
                                   title: 'Parent name',
                                   labelText: 'Parent name'),
-                                  
                             ),
                             Obx(() => Padding(
                                   padding: const EdgeInsets.only(top: 20),
@@ -129,7 +146,7 @@ class RegisrationPage extends StatelessWidget {
                                               .formKey.currentState!
                                               .validate()) {
                                             regirationCrtl
-                                              .classWiseStudentCreation();
+                                                .classWiseStudentCreation();
                                           }
                                           // regirationCrtl
                                           //     .classWiseStudentCreation();

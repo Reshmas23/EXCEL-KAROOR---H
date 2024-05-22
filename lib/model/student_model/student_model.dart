@@ -220,5 +220,5 @@ class StudentModel {
       userRole.hashCode ^
       nameofParent.hashCode ^
       nameofClass.hashCode;
-  }
+}
 }

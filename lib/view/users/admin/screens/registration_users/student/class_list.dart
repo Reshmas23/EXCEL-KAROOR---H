@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
@@ -147,6 +148,8 @@ class AllClassListContainer extends StatelessWidget {
                                               onTap: () {
                                                 classController.ontapClassDocID
                                                     .value = data.docid;
+                                                classController.ontapClassName
+                                                    .value = data.className;
                                                 classController
                                                     .ontapClassStudents
                                                     .value = true;
@@ -183,4 +186,5 @@ class AllClassListContainer extends StatelessWidget {
                 ),
     );
   }
+
 }

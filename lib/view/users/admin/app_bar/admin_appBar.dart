@@ -35,7 +35,7 @@ class AppBarAdminPanel extends StatelessWidget {
       preferredSize: const Size.fromHeight(100.0),
       child: Container(
         color: Colors.white24,
-        height: ResponsiveWebSite.isMobile(context) ? 105 : 70,
+        height: ResponsiveWebSite.isMobile(context) ? 112 : 70,
         width: double.infinity,
         child: Column(
           children: [
@@ -128,75 +128,73 @@ class AppBarAdminPanel extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 109,
-                  child: Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                FutureBuilder(
-                                  future: Get.put(AdminProfileController())
-                                      .fetchData(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
-                                    } else if (snapshot.hasError) {
-                                      return Center(
-                                          child:
-                                              Text('Error: ${snapshot.error}'));
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              FutureBuilder(
+                                future: Get.put(AdminProfileController())
+                                    .fetchData(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Center(
+                                        child: CircularProgressIndicator());
+                                  } else if (snapshot.hasError) {
+                                    return const Center(
+                                        child:
+                                            Text('Error'));
+                                  } else {
+                                    final data = snapshot.data;
+                                    if (data != null &&
+                                        data.containsKey('collection1')) {
+                                      return Text(
+                                        data['collection1']
+                                                ['adminUserName'] ??
+                                            '',
+                                        style: const TextStyle(fontSize: 12),
+                                      );
+                                    } else if (data != null &&
+                                        data.containsKey('collection2')) {
+                                      return Text(
+                                        data['collection2']['userName'] ?? '',
+                                        style: const TextStyle(fontSize: 12),
+                                      );
                                     } else {
-                                      final data = snapshot.data;
-                                      if (data != null &&
-                                          data.containsKey('collection1')) {
-                                        return Text(
-                                          data['collection1']
-                                                  ['adminUserName'] ??
-                                              '',
-                                          style: const TextStyle(fontSize: 12),
-                                        );
-                                      } else if (data != null &&
-                                          data.containsKey('collection2')) {
-                                        return Text(
-                                          data['collection2']['userName'] ?? '',
-                                          style: const TextStyle(fontSize: 12),
-                                        );
-                                      } else {
-                                        return const Center(
-                                            child: Text("No data available"));
-                                      }
+                                      return const Center(
+                                          child: Text("--"));
                                     }
-                                  },
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0),
-                                  child: Text(
-                                    'Admin',
-                                    style: TextStyle(
-                                        color: cBlack.withOpacity(0.5),
-                                        fontSize: 10.7),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            IconButton(
-                                focusNode: textButtonFocusNode2,
-                                onPressed: () {
-                                  showPopupMenu(context);
+                                  }
                                 },
-                                icon: const Icon(
-                                  Icons.arrow_drop_down,
-                                  size: 18,
-                                  color: cBlack,
-                                )),
-                          ],
-                        ),
-                      ],
-                    ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 0),
+                                child: Text(
+                                  'Admin',
+                                  style: TextStyle(
+                                      color: cBlack.withOpacity(0.5),
+                                      fontSize: 10.7),
+                                ),
+                              ),
+                            ],
+                          ),
+                          IconButton(
+                              focusNode: textButtonFocusNode2,
+                              onPressed: () {
+                                showPopupMenu(context);
+                              },
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                size: 18,
+                                color: cBlack,
+                              )),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
                 GestureDetector(
