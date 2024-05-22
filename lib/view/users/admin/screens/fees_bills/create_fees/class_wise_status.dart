@@ -20,6 +20,8 @@ import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
 
+import '../../../../../constant/constant.validate.dart';
+
 class ClassWiseFeesStatus extends StatelessWidget {
   const ClassWiseFeesStatus({super.key});
   @override
@@ -427,8 +429,8 @@ class ClassWiseFeesDataListContainer extends StatelessWidget {
                                           studentID: studentdata['docid'],
                                           icon: WarningNotifierSetup().icon,
                                           messageText:
-                                              ''' Your ${Get.find<FeesAndBillsController>().feetypeName.value} rupees $studentFee /- is due on ${Get.find<FeesAndBillsController>().feeDueDateName.value} ,Please pay on or before the due date.
-                                                   നിങ്ങളുടെ ${Get.find<FeesAndBillsController>().feetypeName.value} ആയ $studentFee /- രൂപ, ദയവായി ${Get.find<FeesAndBillsController>().feeDueDateName.value} തിയതിക്കുള്ളിൽ അടക്കേണ്ടതാണ്''',
+                                              ''' Your ${Get.find<FeesAndBillsController>().feetypeName.value} rupees $studentFee /- is due on ${stringTimeToDateConvert(Get.find<FeesAndBillsController>().feeDueDateName.value)} ,Please pay on or before the due date.
+                                                   നിങ്ങളുടെ ${Get.find<FeesAndBillsController>().feetypeName.value} ആയ $studentFee /- രൂപ, ദയവായി ${stringTimeToDateConvert(Get.find<FeesAndBillsController>().feeDueDateName.value)} തിയതിക്കുള്ളിൽ അടക്കേണ്ടതാണ്''',
                                           // ,
                                           headerText:
                                               "${Get.find<FeesAndBillsController>().feetypeName.value} Due Fee",
@@ -440,8 +442,8 @@ class ClassWiseFeesDataListContainer extends StatelessWidget {
                                               parentID: value['parentId'],
                                               icon: WarningNotifierSetup().icon,
                                               messageText:
-                                                  ''' Your ${Get.find<FeesAndBillsController>().feetypeName.value} rupees $studentFee /- is due on ${Get.find<FeesAndBillsController>().feeDueDateName.value} ,Please pay on or before the due date.${"\n"}
-                                                   നിങ്ങളുടെ ${Get.find<FeesAndBillsController>().feetypeName.value} ആയ $studentFee /- രൂപ, ദയവായി ${Get.find<FeesAndBillsController>().feeDueDateName.value} തിയതിക്കുള്ളിൽ അടക്കേണ്ടതാണ്''',
+                                                  ''' Your ${Get.find<FeesAndBillsController>().feetypeName.value} rupees $studentFee /- is due on ${stringTimeToDateConvert(Get.find<FeesAndBillsController>().feeDueDateName.value)} ,Please pay on or before the due date.${"\n"}
+                                                   നിങ്ങളുടെ ${Get.find<FeesAndBillsController>().feetypeName.value} ആയ $studentFee /- രൂപ, ദയവായി ${stringTimeToDateConvert(Get.find<FeesAndBillsController>().feeDueDateName.value)} തിയതിക്കുള്ളിൽ അടക്കേണ്ടതാണ്''',
                                               // ,
                                               headerText:
                                                   "${Get.find<FeesAndBillsController>().feetypeName.value} Due Fee",
