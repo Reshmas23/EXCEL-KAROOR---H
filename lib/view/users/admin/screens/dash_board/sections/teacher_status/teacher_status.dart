@@ -115,7 +115,7 @@ class AllTeacherStatusListView extends StatelessWidget {
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         final data = snapshot.data!.docs[index];
-                        allteacherscontroller.teacherDocId.value   = data['docid'];
+                       
                         return StreamBuilder(
                           stream: server
                               .collection('SchoolListCollection')
@@ -144,39 +144,52 @@ class AllTeacherStatusListView extends StatelessWidget {
                                 status: false,
                                 data: data,
                                 currentclass: "--",
-                                subjectFeefortr: "--",
-                                subjectName: '--',
+                                classname: "--",
+                                teacherId: data['docid'],
                               );
                             } else {
-                              return StreamBuilder(
-                                stream: allteacherscontroller.getTeacherSubjectsStream(),
-                                builder: (context, allteachersnapshot) {
-                                  if (allteachersnapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return const Center(
-                                        child: CircularProgressIndicator()); // Loading state
-                                  } else if (allteachersnapshot.hasError) {
-                                    return Center(
-                                        child: Text(
-                                            'Error: ${allteachersnapshot.error}')); // Error state
-                                  } else {
-                                    var subjects = allteachersnapshot.data!.docs.first;
-                                    // for (var i = 0; i < currentsnapshot.data!.docs.length; i++) {
-                                    //   allteacherscontroller.teacherList.add(
-                                    //     subjects[i]['subjectFeefortr'].toString(),
-                                    //   );
-                                    // }
-                                    return TeacherDataList(
+                              allteacherscontroller.className.value =
+                                  currentsnapshot.data!.docs.first['ClassName'];
+                              return data['classID'] == null || data['classID'] == ""
+                                  ? TeacherDataList(
                                       index: index,
                                       status: true,
                                       data: data,
                                       currentclass: currentsnapshot.data!.docs.first['ClassName'],
-                                      subjectFeefortr: subjects['subjectFeefortr'].toString(),
-                                      subjectName: subjects['subjectName'].toString(),
+                                      classname: "--",
+                                      teacherId: data['docid'],
+                                    )
+                                  : StreamBuilder(
+                                      stream: server
+                                          .collection('SchoolListCollection')
+                                          .doc(UserCredentialsController.schoolId)
+                                          .collection('classes')
+                                          .where('classId', isEqualTo: data['classID'])
+                                          .snapshots(),
+                                      builder: (context, allteachersnapshot) {
+                                        if (allteachersnapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const Center(
+                                              child: CircularProgressIndicator()); // Loading state
+                                        } else if (allteachersnapshot.hasError) {
+                                          return Center(
+                                              child: Text(
+                                                  'Error: ${allteachersnapshot.error}')); // Error state
+                                        } else {
+                                          final classname = allteachersnapshot.data!.docs.first;
+
+                                          return TeacherDataList(
+                                            index: index,
+                                            status: true,
+                                            data: data,
+                                            currentclass:
+                                                currentsnapshot.data!.docs.first['ClassName'],
+                                            classname: classname['className'],
+                                            teacherId:data['docid'] ,
+                                          );
+                                        }
+                                      },
                                     );
-                                  }
-                                },
-                              );
                             }
                           },
                         );
