@@ -4,6 +4,7 @@ import 'dart:convert';
 class StudentCredentialReport {
   String adminNo;
   String studentName;
+  String gender;
   String studentEmail;
   String studentPassword;
   String parentEmail;
@@ -11,6 +12,7 @@ class StudentCredentialReport {
   StudentCredentialReport({
     required this.adminNo,
     required this.studentName,
+    required this.gender,
     required this.studentEmail,
     required this.studentPassword,
     required this.parentEmail,
@@ -21,6 +23,7 @@ class StudentCredentialReport {
   StudentCredentialReport copyWith({
     String? adminNo,
     String? studentName,
+    String? gender,
     String? studentEmail,
     String? studentPassword,
     String? parentEmail,
@@ -29,6 +32,7 @@ class StudentCredentialReport {
     return StudentCredentialReport(
       adminNo: adminNo ?? this.adminNo,
       studentName: studentName ?? this.studentName,
+      gender: gender ?? this.gender,
       studentEmail: studentEmail ?? this.studentEmail,
       studentPassword: studentPassword ?? this.studentPassword,
       parentEmail: parentEmail ?? this.parentEmail,
@@ -40,6 +44,7 @@ class StudentCredentialReport {
     return <String, dynamic>{
       'adminNo': adminNo,
       'studentName': studentName,
+      'gender': gender,
       'studentEmail': studentEmail,
       'studentPassword': studentPassword,
       'parentEmail': parentEmail,
@@ -49,12 +54,13 @@ class StudentCredentialReport {
 
   factory StudentCredentialReport.fromMap(Map<String, dynamic> map) {
     return StudentCredentialReport(
-      adminNo: map['adminNo']??'',
-      studentName: map['studentName']??'',
-      studentEmail: map['studentEmail']??'',
-      studentPassword: map['studentPassword']??'',
-      parentEmail: map['parentEmail']??'',
-      parentPassword: map['parentPassword']??'',
+      adminNo: map['adminNo'] ??"",
+      studentName: map['studentName'] ??"",
+      gender: map['gender'] ??"",
+      studentEmail: map['studentEmail'] ??"",
+      studentPassword: map['studentPassword'] ??"",
+      parentEmail: map['parentEmail'] ??"",
+      parentPassword: map['parentPassword'] ??"",
     );
   }
 
@@ -64,7 +70,7 @@ class StudentCredentialReport {
 
   @override
   String toString() {
-    return 'StudentCredentialReport(adminNo: $adminNo, studentName: $studentName, studentEmail: $studentEmail, studentPassword: $studentPassword, parentEmail: $parentEmail, parentPassword: $parentPassword)';
+    return 'StudentCredentialReport(adminNo: $adminNo, studentName: $studentName, gender: $gender, studentEmail: $studentEmail, studentPassword: $studentPassword, parentEmail: $parentEmail, parentPassword: $parentPassword)';
   }
 
   @override
@@ -74,6 +80,7 @@ class StudentCredentialReport {
     return 
       other.adminNo == adminNo &&
       other.studentName == studentName &&
+      other.gender == gender &&
       other.studentEmail == studentEmail &&
       other.studentPassword == studentPassword &&
       other.parentEmail == parentEmail &&
@@ -84,6 +91,7 @@ class StudentCredentialReport {
   int get hashCode {
     return adminNo.hashCode ^
       studentName.hashCode ^
+      gender.hashCode ^
       studentEmail.hashCode ^
       studentPassword.hashCode ^
       parentEmail.hashCode ^

@@ -284,7 +284,8 @@ class ExcelFileController extends GetxController {
               //fetching data from excel cells
               if (firstRow[0]?.value != null &&
                   firstRow[1]?.value != null &&
-                  firstRow[2]?.value != null) {
+                  firstRow[2]?.value != null &&
+                  firstRow[3]?.value != null) {
                 //creating objects and upload to firebase
                 final StudentModel studentModel = StudentModel(
                     nameofParent: '',
@@ -297,11 +298,11 @@ class ExcelFileController extends GetxController {
                     dateofBirth: '',
                     district: '',
                     docid: '',
-                    gender: '',
+                    gender: firstRow[2]?.value.toString() ?? '',
                     guardianId: '',
                     houseName: '',
                     parentId: '',
-                    parentPhoneNumber: firstRow[2]?.value.toString() ?? '',
+                    parentPhoneNumber: firstRow[3]?.value.toString() ?? '',
                     place: '',
                     profileImageId: '',
                     profileImageUrl: '',
@@ -398,6 +399,7 @@ class ExcelFileController extends GetxController {
               .then((parentvalue) {
             final parentData = parentvalue.data();
             final StudentCredentialReport result = StudentCredentialReport(
+                gender: studentData['gender'] ?? 'Not Found',
                 adminNo: studentData['admissionNumber'] ?? 'Not Found',
                 studentName: studentData['studentName'] ?? 'Not Found',
                 studentEmail: studentData['studentemail'] ?? 'Not Found',
@@ -417,6 +419,7 @@ class ExcelFileController extends GetxController {
         sheet.appendRow([
           const TextCellValue('Ad.No'),
           const TextCellValue('Student Name'),
+          const TextCellValue('Gender'),
           const TextCellValue('Student Email'),
           const TextCellValue('Student.Password'),
           const TextCellValue('Parent Email'),
@@ -427,6 +430,7 @@ class ExcelFileController extends GetxController {
           sheet.appendRow([
             TextCellValue(report.adminNo),
             TextCellValue(report.studentName),
+            TextCellValue(report.gender),
             TextCellValue(report.studentEmail),
             TextCellValue(report.studentPassword),
             TextCellValue(report.parentEmail),
@@ -496,6 +500,7 @@ class ExcelFileController extends GetxController {
               .then((parentvalue) {
             final parentData = parentvalue.data();
             final StudentCredentialReport result = StudentCredentialReport(
+                gender: studentData['gender'] ?? 'Not Found',
                 adminNo: studentData['admissionNumber'] ?? 'Not Found',
                 studentName: studentData['studentName'] ?? 'Not Found',
                 studentEmail: studentData['studentemail'] ?? 'Not Found',
@@ -515,6 +520,7 @@ class ExcelFileController extends GetxController {
         sheet.appendRow([
           const TextCellValue('Ad.No'),
           const TextCellValue('Student Name'),
+          const TextCellValue('Gender'),
           const TextCellValue('Student Email'),
           const TextCellValue('Student.Password'),
           const TextCellValue('Parent Email'),
@@ -525,6 +531,7 @@ class ExcelFileController extends GetxController {
           sheet.appendRow([
             TextCellValue(report.adminNo),
             TextCellValue(report.studentName),
+            TextCellValue(report.gender),
             TextCellValue(report.studentEmail),
             TextCellValue(report.studentPassword),
             TextCellValue(report.parentEmail),
