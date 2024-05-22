@@ -212,7 +212,7 @@ class AllClassStudentListContainer extends StatelessWidget {
                                             studentController
                                                 .studentModelData.value = data;
 
-                                            Get.find<ClassController>()
+                                           classController
                                                 .ontapStudentsDetail
                                                 .value = true;
                                           },
