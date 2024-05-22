@@ -25,6 +25,7 @@ class AllClassStudentListContainer extends StatelessWidget {
   AllClassStudentListContainer({super.key});
   final StudentController studentController = Get.put(StudentController());
   final ExcelFileController excelController = Get.put(ExcelFileController());
+  final ClassController classController = Get.put(ClassController());
   @override
   Widget build(BuildContext context) {
     return Obx(() => Get.find<ClassController>().ontapStudentsDetail.value ==
@@ -66,7 +67,12 @@ class AllClassStudentListContainer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
+                   Padding(
+                     padding: const EdgeInsets.only(top: 10,left: 20),
+                     child: TextFontWidget(text:'Class Name : ${classController. ontapClassName.toString()}',
+                     // classController.classModelData.value?.className??'', 
+                     fontsize: 15,fontWeight: FontWeight.bold,),
+                   ),
                   // Row(
                   //   children: [
                   //     // const RouteSelectedTextContainer(
