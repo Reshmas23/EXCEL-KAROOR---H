@@ -6,6 +6,7 @@ import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/drop_down/select_class.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/auto_createmail_function/auto_create_credentail.dart';
 import 'package:vidyaveechi_website/view/widgets/progess_button/progress_button.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
@@ -195,7 +196,7 @@ class ManualStudentCreation extends StatelessWidget {
       Obx(() => ProgressButtonWidget(
           function: () async {
             if (_formKey.currentState!.validate()) {
-              studentController.manualCreateaNewStudent();
+              studentController.manualCreateaNewStudent(context);
             }
           },
           buttonstate: studentController.buttonstate.value,
