@@ -198,6 +198,9 @@ class StudentController extends GetxController {
                   schoolName: UserCredentialsController.schoolName ?? '',
                 );
               }).then((value) async {
+                if (automaticmail.value = true) {
+                  
+                }
                 buttonstate.value = ButtonState.success;
                 showToast(msg: "Student Added Successfully");
                 await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
