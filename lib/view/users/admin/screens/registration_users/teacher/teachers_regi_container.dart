@@ -220,6 +220,10 @@ class AllTeacherRegistrationList extends StatelessWidget {
                                   title: 'Create Teacher'),
                             ),
                           ),
+                             const Padding(
+                               padding: EdgeInsets.only(left: 10),
+                               child: TextFontWidget(text: "Excel formate should be in .xlsx,.csv", fontsize: 11),
+                             ),
                           const Spacer(),
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 20),

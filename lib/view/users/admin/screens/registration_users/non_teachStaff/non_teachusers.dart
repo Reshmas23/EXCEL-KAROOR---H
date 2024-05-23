@@ -206,7 +206,7 @@ class AllNonTeachStaffListContainer extends StatelessWidget {
                                     title: 'Upload Excel 📃'),
                               ),
                             ),
-                          ),
+                          ),   const TextFontWidget(text: "Excel formate should be in .xlsx,.csv", fontsize: 11),
                           // GestureDetector(
                           //   onTap: () {
                           //     createTeacherFunction(context,'Staff');
