@@ -7,7 +7,6 @@ import 'package:vidyaveechi_website/controller/admin_section/student_controller/
 import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/class_wise_creation.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/manual_creation.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
@@ -25,9 +24,11 @@ class CreateStudent extends StatelessWidget {
     log("SchoolID :  ${UserCredentialsController.schoolId}");
     log("BatchID :  ${UserCredentialsController.batchId}");
     log("userrole :  ${UserCredentialsController.userRole}");
-    return DefaultTabController(
-      length: 2,
-      child: Container(
+    return 
+    // DefaultTabController(
+    //   length: 2,
+    //  child:
+       Container(
         color: screenContainerbackgroundColor,
         height: ResponsiveWebSite.isMobile(context) ? 1200 : 820,
         child: Column(
@@ -78,22 +79,22 @@ class CreateStudent extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              SizedBox(
-                                width: 300,
-                                child: TabBar(
-                                    // indicatorSize: TabBarIndicatorSize.tab,
-                                    indicatorColor: Colors.red,
-                                    tabs: [
-                                      Tab(
-                                          height: 30,
-                                          child: RouteSelectedTextContainer(
-                                              width: 120, title: 'Manual')),
-                                      Tab(
-                                          height: 30,
-                                          child: RouteSelectedTextContainer(
-                                              width: 120, title: 'Class Wise')),
-                                    ]),
-                              )
+                              // SizedBox(
+                              //   width: 300,
+                              //   child: TabBar(
+                              //       // indicatorSize: TabBarIndicatorSize.tab,
+                              //       indicatorColor: Colors.red,
+                              //       tabs: [
+                              //         Tab(
+                              //             height: 30,
+                              //             child: RouteSelectedTextContainer(
+                              //                 width: 120, title: 'Manual')),
+                              //         Tab(
+                              //             height: 30,
+                              //             child: RouteSelectedTextContainer(
+                              //                 width: 120, title: 'Class Wise')),
+                              //       ]),
+                              // )
                             ],
                           ),
                         ),
@@ -119,36 +120,37 @@ class CreateStudent extends StatelessWidget {
                         const RouteSelectedTextContainer(
                             width: 140, title: 'Create Student'),
                         const Spacer(),
-                        SizedBox(
-                          width:
-                              ResponsiveWebSite.isTablet(context) ? 360 : 600,
-                          child: const TabBar(
-                              // indicatorSize: TabBarIndicatorSize.tab,
-                              indicatorColor: Colors.red,
-                              tabs: [
-                                Tab(
-                                    height: 30,
-                                    child: RouteSelectedTextContainer(
-                                        width: 140, title: ' Manual Creation')),
-                                Tab(
-                                    height: 30,
-                                    child: RouteSelectedTextContainer(
-                                        width: 140,
-                                        title: 'Class Wise Creation')),
-                              ]),
-                        )
+                        // SizedBox(
+                        //   width:
+                        //       ResponsiveWebSite.isTablet(context) ? 360 : 600,
+                        //   child: const TabBar(
+                        //       // indicatorSize: TabBarIndicatorSize.tab,
+                        //       indicatorColor: Colors.red,
+                        //       tabs: [
+                        //         Tab(
+                        //             height: 30,
+                        //             child: RouteSelectedTextContainer(
+                        //                 width: 140, title: ' Manual Creation')),
+                        //         Tab(
+                        //             height: 30,
+                        //             child: RouteSelectedTextContainer(
+                        //                 width: 140,
+                        //                 title: 'Class Wise Creation')),
+                        //       ]),
+                        // )
                       ],
                     ),
             ),
-            Expanded(
-              child: TabBarView(children: [
+            // Expanded(
+            //   child:
+              // TabBarView(children: [
                 ManualStudentCreation(), /////////////////////////////..................Create A New Student
-                ClassWiseStudentCreation(),
-              ]),
-            )
+              //  ClassWiseStudentCreation(),
+            //  ]),
+          //  )
           ],
         ),
-      ),
+     // ),
     );
   }
 }
