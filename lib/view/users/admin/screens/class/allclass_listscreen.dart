@@ -16,7 +16,7 @@ import 'package:vidyaveechi_website/view/widgets/button_container/button_contain
 
 class AllClassListView extends StatelessWidget {
   final ClassController classController = Get.put(ClassController());
-  AllClassListView({super.key});
+    AllClassListView({super.key});
 
   @override
   Widget build(BuildContext context) {

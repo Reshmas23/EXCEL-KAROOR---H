@@ -219,8 +219,8 @@ class ClassDetailsContainer extends StatelessWidget {
                                                   Row(
                                                     children: [
                                                       const Icon(Icons.person),
-                                                      const TextFontWidget(
-                                                        text: "class teacher ",
+                                                       TextFontWidget(
+                                                        text: " ${data.classTeacherName??''}",
                                                         fontsize: 12,
                                                         color: themeColorBlue,
                                                       ),
@@ -280,11 +280,11 @@ class ClassDetailsContainer extends StatelessWidget {
                                                       ),
                                                     ],
                                                   ),
-                                                  const Row(
+                                                   Row(
                                                     children: [
-                                                      Icon(Icons.call),
+                                                      const Icon(Icons.attach_money),
                                                       TextFontWidget(
-                                                        text: "9876456788",
+                                                        text: data.classfee.toString(),
                                                         fontsize: 12,
                                                         color: themeColorBlue,
                                                       )
