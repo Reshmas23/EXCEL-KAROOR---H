@@ -35,6 +35,9 @@ class UserAuthController extends GetxController {
         SharedPreferencesHelper.getString(SharedPreferencesHelper.classIdKey);
     UserCredentialsController.userloginKey =
         SharedPreferencesHelper.getString(SharedPreferencesHelper.userloginKey);
+    UserCredentialsController.currentUserDocid =
+        SharedPreferencesHelper.getString(
+            SharedPreferencesHelper.currentUserDocid);
 
     if (auth.currentUser == null) {
       if (kDebugMode) {
@@ -48,6 +51,7 @@ class UserAuthController extends GetxController {
         log("BatchID :  ${UserCredentialsController.batchId}");
         log("userrole :  ${UserCredentialsController.userRole}");
         log("userloginKey :  ${UserCredentialsController.userloginKey}");
+        log("currentUserDocid :  ${UserCredentialsController.currentUserDocid}");
         await checkAdmin();
         loginAuthState.value = true;
         if (Get.find<UserLoginController>().logined.value == true) {
@@ -77,7 +81,8 @@ Future<void> checkAdmin() async {
   if (UserCredentialsController.userRole == "" &&
       UserCredentialsController.batchId == "" &&
       UserCredentialsController.schoolId == "" &&
-      UserCredentialsController.userloginKey == "") {
+      UserCredentialsController.userloginKey == "" &&
+      UserCredentialsController.currentUserDocid == '') {
     logoutUser();
 
     Get.offAll(() => SplashScreen());

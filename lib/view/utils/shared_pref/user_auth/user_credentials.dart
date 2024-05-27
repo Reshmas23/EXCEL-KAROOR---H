@@ -14,6 +14,7 @@ class SharedPreferencesHelper {
   static String classIdKey = 'classId';
   static String userRoleKey = 'userRole';
   static String userloginKey = 'loginkey';
+  static String currentUserDocid = 'loginkey';
   static late SharedPreferences _prefs;
 
   static Future<void> clearSharedPreferenceData() async {
@@ -23,6 +24,7 @@ class SharedPreferencesHelper {
     await setString(classIdKey, "");
     await setString(userRoleKey, "");
     await setString(userloginKey, "");
+    await setString(currentUserDocid, "");
   }
 
   static Future<void> initPrefs() async {
@@ -58,6 +60,7 @@ class UserCredentialsController {
   static String? classId;
   static String? userRole;
   static String? userloginKey;
+  static String? currentUserDocid;
   static StudentModel? studentModel;
   static ParentModel? parentModel;
   static AdminModel? adminModel;
@@ -74,6 +77,7 @@ class UserCredentialsController {
     adminModel = null;
     teacherModel = null;
     userloginKey = null;
+    currentUserDocid = null;
   }
 }
 
