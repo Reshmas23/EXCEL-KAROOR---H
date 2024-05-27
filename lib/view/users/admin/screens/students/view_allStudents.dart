@@ -315,7 +315,18 @@ class AllStudentListContainer extends StatelessWidget {
                                     //   ));
                                     // }
                                         if (snaPS.hasData) {
-                                          return ListView.separated(
+                                          return snaPS.data!.docs.isEmpty
+                                            ? const Center(
+                                              child: Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  "Please create Students",
+                                                  style: TextStyle(fontWeight: FontWeight.w400),
+                                                ),
+                                              ),
+                                            )
+                                            : 
+                                          ListView.separated(
                                               itemBuilder: (context, index) {
                                                 final data =
                                                     StudentModel.fromMap(snaPS
