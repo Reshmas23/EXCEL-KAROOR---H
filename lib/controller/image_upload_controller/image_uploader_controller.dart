@@ -60,10 +60,10 @@ class ImageController extends GetxController {
     final Map<String, dynamic> updateData = {
       "image": uploadedImage,
     };
-    final DocumentReference collection1 = FirebaseFirestore.instance
+    final DocumentReference collection1 = server
         .collection('SchoolListCollection')
         .doc(serverAuth.currentUser!.uid);
-    final DocumentReference collection2 = FirebaseFirestore.instance
+    final DocumentReference collection2 = server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
@@ -122,10 +122,10 @@ class AdminProfileController extends GetxController {
       "email": emailController.text,
       "gender": gender.value,
     };
-    final DocumentReference collection1 = FirebaseFirestore.instance
+    final DocumentReference collection1 = server
         .collection('SchoolListCollection')
         .doc(serverAuth.currentUser!.uid);
-    final DocumentReference collection2 = FirebaseFirestore.instance
+    final DocumentReference collection2 = server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
@@ -161,11 +161,11 @@ class AdminProfileController extends GetxController {
   }
 
   Future<Map<String, dynamic>> fetchData() async {
-    final DocumentSnapshot collection1 = await FirebaseFirestore.instance
+    final DocumentSnapshot collection1 = await server
         .collection('SchoolListCollection')
         .doc(serverAuth.currentUser!.uid)
         .get();
-    final DocumentSnapshot collection2 = await FirebaseFirestore.instance
+    final DocumentSnapshot collection2 = await server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
@@ -207,7 +207,7 @@ class StudentProfileController extends GetxController {
     };
 
     try {
-      await FirebaseFirestore.instance
+      await server
           .collection('SchoolListCollection')
           .doc(UserCredentialsController.schoolId)
           .collection(UserCredentialsController.batchId ?? "")
