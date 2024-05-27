@@ -3,13 +3,10 @@ import 'package:get/get.dart';
 import 'package:sidebar_drawer/sidebar_drawer.dart';
 import 'package:vidyaveechi_website/controller/image_upload_controller/image_uploader_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
-import 'package:vidyaveechi_website/view/fonts/google_poppins_widget.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/app_bar/academic_year/academic_year.dart';
 import 'package:vidyaveechi_website/view/users/admin/app_bar/admin_profile/admin_profile.dart';
-import 'package:vidyaveechi_website/view/users/admin/app_bar/message_notication/notification_show.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/notification_time_setting/notification.dart';
-import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 
@@ -206,6 +203,9 @@ class AppBarAdminPanel extends StatelessWidget {
                     ),
                   ),
                 ),
+                 const SizedBox(
+                  width: 10,
+                ),
                 // SizedBox(
                 //   width: 70,
                 //   child: Column(
@@ -248,76 +248,76 @@ class AppBarAdminPanel extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
-                SizedBox(
-                  width: 50,
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15, right: 10),
-                            child: IconButton(
-                                focusNode: textButtonFocusNode1,
-                                onPressed: () {
-                                  notificationShowingFunctionOnAppBar(context);
-                                },
-                                icon: Tooltip(
-                                  message: 'Registered Student Requests',
-                                  child: Icon(
-                                    Icons.notifications_none_outlined,
-                                    color: cBlack.withOpacity(0.4),
-                                  ),
-                                )),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 07, left: 22),
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 12,
-                              child: CircleAvatar(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 255, 49, 49),
-                                radius: 10,
-                                child: StreamBuilder(
-                                    stream: server
-                                        .collection('SchoolListCollection')
-                                        .doc(UserCredentialsController.schoolId)
-                                        .collection(
-                                            UserCredentialsController.batchId!)
-                                        .doc(UserCredentialsController.batchId)
-                                        .collection(
-                                            'RegStudentsNotifierCounter')
-                                        .doc('count')
-                                        .snapshots(),
-                                    builder: (context, classSnap) {
-                                      if (classSnap.hasData) {
-                                        return classSnap.data?.data() == null
-                                            ? const SizedBox()
-                                            : classSnap.data
-                                                        ?.data()?['counter'] ==
-                                                    0
-                                                ? const SizedBox()
-                                                : GooglePoppinsWidgets(
-                                                    text:
-                                                        "${classSnap.data?.data()?['counter']}",
-                                                    fontsize: 11,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: cWhite,
-                                                  );
-                                      } else if (classSnap.data == null) {
-                                        return const SizedBox();
-                                      } else {
-                                        return const SizedBox();
-                                      }
-                                    }),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                // SizedBox(
+                //   width: 50,
+                //   child: Column(
+                //     children: [
+                //       Stack(
+                //         children: [
+                //           Padding(
+                //             padding: const EdgeInsets.only(top: 15, right: 10),
+                //             child: IconButton(
+                //                 focusNode: textButtonFocusNode1,
+                //                 onPressed: () {
+                //                   notificationShowingFunctionOnAppBar(context);
+                //                 },
+                //                 icon: Tooltip(
+                //                   message: 'Registered Student Requests',
+                //                   child: Icon(
+                //                     Icons.notifications_none_outlined,
+                //                     color: cBlack.withOpacity(0.4),
+                //                   ),
+                //                 )),
+                //           ),
+                //           Padding(
+                //             padding: const EdgeInsets.only(top: 07, left: 22),
+                //             child: CircleAvatar(
+                //               backgroundColor: Colors.white,
+                //               radius: 12,
+                //               child: CircleAvatar(
+                //                 backgroundColor:
+                //                     const Color.fromARGB(255, 255, 49, 49),
+                //                 radius: 10,
+                //                 child: StreamBuilder(
+                //                     stream: server
+                //                         .collection('SchoolListCollection')
+                //                         .doc(UserCredentialsController.schoolId)
+                //                         .collection(
+                //                             UserCredentialsController.batchId!)
+                //                         .doc(UserCredentialsController.batchId)
+                //                         .collection(
+                //                             'RegStudentsNotifierCounter')
+                //                         .doc('count')
+                //                         .snapshots(),
+                //                     builder: (context, classSnap) {
+                //                       if (classSnap.hasData) {
+                //                         return classSnap.data?.data() == null
+                //                             ? const SizedBox()
+                //                             : classSnap.data
+                //                                         ?.data()?['counter'] ==
+                //                                     0
+                //                                 ? const SizedBox()
+                //                                 : GooglePoppinsWidgets(
+                //                                     text:
+                //                                         "${classSnap.data?.data()?['counter']}",
+                //                                     fontsize: 11,
+                //                                     fontWeight: FontWeight.w600,
+                //                                     color: cWhite,
+                //                                   );
+                //                       } else if (classSnap.data == null) {
+                //                         return const SizedBox();
+                //                       } else {
+                //                         return const SizedBox();
+                //                       }
+                //                     }),
+                //               ),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
             ResponsiveWebSite.isMobile(context)

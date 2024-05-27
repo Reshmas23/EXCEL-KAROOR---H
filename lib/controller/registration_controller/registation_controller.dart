@@ -142,7 +142,8 @@ class RegistrationController extends GetxController {
   final TextEditingController stPhoneController = TextEditingController();
     final TextEditingController stParentNameController = TextEditingController();
         final TextEditingController stadNoController = TextEditingController();
-        RxString gender='Select gender'.obs;
+         final Rx<String> gender = ''.obs;
+      //  RxString gender='Select gender'.obs;
 
   Future<void> classWiseStudentCreation() async {
     buttonstate.value = ButtonState.loading;

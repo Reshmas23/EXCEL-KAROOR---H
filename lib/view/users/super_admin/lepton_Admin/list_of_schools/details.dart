@@ -10,6 +10,7 @@ import 'package:vidyaveechi_website/view/users/super_admin/lepton_Admin/temp_col
 import '../../controllers/super_admin_Controller/super_admin_controller.dart';
 import '../../widgets/buttonContainer.dart';
 
+// ignore: must_be_immutable
 class DetailsSchoolsScreen extends StatefulWidget {
   SuperAdminController superAdminController = Get.put(SuperAdminController());
   DetailsSchoolsScreen({super.key, required this.schoolSnap});
@@ -26,7 +27,7 @@ class _DetailsSchoolsScreenState extends State<DetailsSchoolsScreen> {
     log('School Idd${widget.schoolSnap['docid']}');
     int columnCount = 4;
     double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+   // double h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Center(

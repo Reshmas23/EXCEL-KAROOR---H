@@ -10,7 +10,6 @@ import 'package:vidyaveechi_website/view/users/admin/screens/parents/parent_deta
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
-import 'package:vidyaveechi_website/view/widgets/button_container/button_container.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
@@ -28,7 +27,7 @@ class AllParentsListContainer extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Container(
                   color: screenContainerbackgroundColor,
-                  height: 1000,
+                  height: 650,
                   width: 1150,
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -49,36 +48,36 @@ class AllParentsListContainer extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 20),
                           child: Row(
                             children: [
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.only(left: 20, right: 05),
                                 child: RouteSelectedTextContainer(title: 'All Parents'),
                               ),
-                              const Spacer(),
-                              GestureDetector(
-                                onTap: () {
-                                  parentController.ontapParent.value = true;
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 25, top: 5),
-                                  child: ButtonContainerWidget(
-                                      curving: 30,
-                                      colorindex: 0,
-                                      height: 35,
-                                      width: 150,
-                                      child: const Center(
-                                        child: TextFontWidgetRouter(
-                                          text: 'Create New Parent',
-                                          fontsize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          color: cWhite,
-                                        ),
-                                      )),
-                                ),
-                              )
+                              Spacer(),
+                              // GestureDetector(
+                              //   onTap: () {
+                              //     parentController.ontapParent.value = true;
+                              //   },
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.only(right: 25, top: 5),
+                              //     child: ButtonContainerWidget(
+                              //         curving: 30,
+                              //         colorindex: 0,
+                              //         height: 35,
+                              //         width: 150,
+                              //         child: const Center(
+                              //           child: TextFontWidgetRouter(
+                              //             text: 'Create New Parent',
+                              //             fontsize: 12,
+                              //             fontWeight: FontWeight.bold,
+                              //             color: cWhite,
+                              //           ),
+                              //         )),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),

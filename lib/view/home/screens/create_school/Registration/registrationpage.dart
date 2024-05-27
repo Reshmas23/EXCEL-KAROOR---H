@@ -114,35 +114,38 @@ class RegisrationPage extends StatelessWidget {
                             ),
                             Padding(
         padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-        child: Obx(() => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.7),
-                ),
-              ),
-              width: 450,
-              child: DropdownButton<String>(
-                underline: Container(),
-                isExpanded: true,
-                value: regirationCrtl.gender.value,
-                onChanged: (String? newValue) {
-                  regirationCrtl.gender.value = newValue ?? '';
+        child:  Container(
+        height: ResponsiveWebSite.isMobile(context) ? 80 : 100,
+        color: cWhite,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const TextFontWidget(
+              text: 'Gender *',
+              fontsize: 12.5,
+            ),
+            const SizedBox(
+              height: 05,
+            ),
+            SizedBox(
+              height: 40,
+              child: DropdownSearch(
+                validator: (item) {
+                  if (item == null) {
+                    return "Required field";
+                  } else {
+                    return null;
+                  }
                 },
-                items: <String>[
-                  'Select gender',
-                  'Female',
-                  'Male',
-                  'Others',
-                 
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+                items: const ['Male', 'Female'],
+                onChanged: (value) {
+                  regirationCrtl.gender.value = value ?? '';
+                },
               ),
-            )),
+            ),
+          ],
+        ),
+      ),
       ),
                            
                             Obx(() => Padding(

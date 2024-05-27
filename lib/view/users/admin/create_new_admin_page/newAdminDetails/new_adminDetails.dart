@@ -25,7 +25,7 @@ class AllAdminListPage extends StatelessWidget {
         ? CreateAdmin()
         : SingleChildScrollView(
             child: Container(
-              height: 1200,
+              height: 700,
               width: 1200,
               color: const Color.fromARGB(255, 242, 236, 236),
               child: Column(
@@ -118,7 +118,7 @@ class AllAdminListPage extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         child: SizedBox(
                           width: 1200,
-                          height: 600,
+                          height: 500,
                           child: Column(
                             children: [
                               const Row(
@@ -143,10 +143,10 @@ class AllAdminListPage extends StatelessWidget {
                                           itemBuilder: (context, index) {
                                             final data = AdminDetailsModel.fromMap(
                                                 snapshot.data!.docs[index].data());
-                                            print(data.username);
-                                            print(data.email);
-                                            print(data.phoneNumber);
-                                            print(data.active);
+                                            // print(data.username);
+                                            // print(data.email);
+                                            // print(data.phoneNumber);
+                                            // print(data.active);
                                             return AdminDataList(
                                               index: index,
                                               data: data,
