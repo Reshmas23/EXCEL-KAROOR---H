@@ -37,7 +37,7 @@ class AllTeachersAttendance extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           TextFontWidget(
-                            text: 'All Teacher Attendence History List  📃',
+                            text: 'All Teachers Attendence History List  📃',
                             fontsize: 18,
                             fontWeight: FontWeight.bold,
                           ),

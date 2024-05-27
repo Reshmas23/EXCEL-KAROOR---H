@@ -52,7 +52,7 @@ class AllStudentListContainer extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const TextFontWidget(
-                                    text: 'All Student List',
+                                    text: 'All Students List',
                                     fontsize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -306,6 +306,14 @@ class AllStudentListContainer extends StatelessWidget {
                                               .orderBy('admissionNumber')
                                               .snapshots(),
                                       builder: (context, snaPS) {
+                                         if (!snaPS.hasData || snaPS.data!.docs.isEmpty) {
+                                      return const Center(
+                                          child: Text(
+                                        'No Sudents Created',
+                                        style: TextStyle(
+                                            fontSize: 15, fontWeight: FontWeight.w500),
+                                      ));
+                                    }
                                         if (snaPS.hasData) {
                                           return ListView.separated(
                                               itemBuilder: (context, index) {

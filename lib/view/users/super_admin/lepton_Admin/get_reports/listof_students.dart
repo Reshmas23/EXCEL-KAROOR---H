@@ -10,12 +10,12 @@ import '../../widgets/buttonContainer.dart';
 
 
 class InvoiceScreen extends StatefulWidget {
-  String schoolID;
-  String batchID;
-  String classID;
-  double price;
+ final String schoolID;
+ final String batchID;
+ final String classID;
+ final double price;
 
-  InvoiceScreen(
+  const InvoiceScreen(
       {required this.schoolID,
       required this.batchID,
       required this.price,
