@@ -62,12 +62,12 @@ class ImageController extends GetxController {
     };
     final DocumentReference collection1 = server
         .collection('SchoolListCollection')
-        .doc(serverAuth.currentUser!.uid);
+        .doc(UserCredentialsController.currentUserDocid);
     final DocumentReference collection2 = server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
-        .doc(serverAuth.currentUser!.uid);
+        .doc(UserCredentialsController.currentUserDocid);
     final collection1Snapshot = await collection1.get();
     final collection2Snapshot = await collection2.get();
 
@@ -124,12 +124,12 @@ class AdminProfileController extends GetxController {
     };
     final DocumentReference collection1 = server
         .collection('SchoolListCollection')
-        .doc(serverAuth.currentUser!.uid);
+        .doc(UserCredentialsController.currentUserDocid);
     final DocumentReference collection2 = server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
-        .doc(serverAuth.currentUser!.uid);
+        .doc(UserCredentialsController.currentUserDocid);
     final collection1Snapshot = await collection1.get();
     final collection2Snapshot = await collection2.get();
 
@@ -161,15 +161,16 @@ class AdminProfileController extends GetxController {
   }
 
   Future<Map<String, dynamic>> fetchData() async {
+    log("admin uid ${UserCredentialsController.currentUserDocid}");
     final DocumentSnapshot collection1 = await server
         .collection('SchoolListCollection')
-        .doc(serverAuth.currentUser!.uid)
+        .doc(UserCredentialsController.currentUserDocid)
         .get();
     final DocumentSnapshot collection2 = await server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
-        .doc(serverAuth.currentUser!.uid)
+        .doc(UserCredentialsController.currentUserDocid)
         .get();
 
     if (collection1.exists) {

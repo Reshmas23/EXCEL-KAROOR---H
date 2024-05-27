@@ -14,7 +14,7 @@ class SharedPreferencesHelper {
   static String classIdKey = 'classId';
   static String userRoleKey = 'userRole';
   static String userloginKey = 'loginkey';
-  static String currentUserDocid = 'loginkey';
+  static String currentUserDocid = 'currentUserDocid';
   static late SharedPreferences _prefs;
 
   static Future<void> clearSharedPreferenceData() async {
