@@ -53,6 +53,8 @@ class UserLoginController extends GetxController {
               email: userEmailIDController.text.trim(),
               password: userPasswordController.text.trim())
           .then((value) async {
+        await SharedPreferencesHelper.setString(
+            SharedPreferencesHelper.currentUserDocid, value.user!.uid);
         final result = await server
             .collection('SchoolListCollection')
             .doc(schoolID)
@@ -105,6 +107,8 @@ class UserLoginController extends GetxController {
               email: userEmailIDController.text.trim(),
               password: userPasswordController.text.trim())
           .then((value) async {
+        await SharedPreferencesHelper.setString(
+            SharedPreferencesHelper.currentUserDocid, value.user!.uid);
         log("Admin ID $userUID");
         log("schoolID ID $schoolID");
         userUID.value = value.user!.uid;
