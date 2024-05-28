@@ -1,13 +1,17 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:progress_state_button/progress_button.dart';
 import 'package:vidyaveechi_website/model/class_model/class_model.dart';
+import 'package:vidyaveechi_website/model/student_model/student_model.dart';
 import 'package:vidyaveechi_website/view/constant/const.dart';
 import 'package:vidyaveechi_website/view/ioT_Card/model/cardStudentModel.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 
 class IoTCardController extends GetxController {
+  Rx<ButtonState> buttonstate = ButtonState.idle.obs;
   RxString className = ''.obs;
   RxString classId = ''.obs;
   RxString classDocID = 'dd'.obs;
@@ -16,6 +20,105 @@ class IoTCardController extends GetxController {
   RxString schoolDocID = 'dd'.obs;
   RxString batchDocID = ''.obs;
   RxString cardID = ''.obs;
+
+  RxInt classStudentCount = 0.obs;
+  RxBool classTaped = false.obs;
+  RxBool dataFetchFinished = false.obs;
+  List<StudentModel> registudentList = [];
+  List<StudentModel> classStudentList = [];
+  Future<void> registerCardForStudent() async {
+    try {
+      print("Started >>>>>>>>");
+      await server
+          .collection('StudentRegistration')
+          .doc('CardData')
+          .get()
+          .then((cardvalue) async {
+        cardList.add(cardvalue.data()?['CardID']);
+        comapareDuplicateCards().then((value) async {
+          final StudentModel student = classStudentList[0];
+          print('Student $student');
+          server
+              .collection('SchoolListCollection')
+              .doc(schoolDocID.value)
+              .collection('AllStudents')
+              .doc(student.docid)
+              .set({'cardID': cardList[0], 'cardTaken': true},
+                  SetOptions(merge: true)).then((value) async {
+            classStudentList[0].cardID = cardList[0];
+            await server
+                .collection('SchoolListCollection')
+                .doc(schoolDocID.value)
+                .collection(batchDocID.value)
+                .doc(batchDocID.value)
+                .collection('classes')
+                .doc(classDocID.value)
+                .collection('Students')
+                .doc(student.docid)
+                .set({'cardID': cardList[0], 'cardTaken': true},
+                    SetOptions(merge: true)).then((value) async {
+              await server
+                  .collection('StudentRegistration')
+                  .doc('CardData')
+                  .update({'CardID': ''}).then((value) async {
+                registudentList.add(student);
+
+                classStudentList.clear();
+                cardList.clear();
+                fetchClassAllStudents();
+                buttonstate.value = ButtonState.success;
+                await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
+                  buttonstate.value = ButtonState.idle;
+                });
+              });
+            });
+          });
+        });
+      });
+    } catch (e) {
+      showToast(msg: 'Somthing went wrong please try again');
+      buttonstate.value = ButtonState.fail;
+      await Future.delayed(const Duration(seconds: 2)).then((value) {
+        buttonstate.value = ButtonState.idle;
+      });
+      if (kDebugMode) {
+        log(e.toString());
+      }
+    }
+  }
+
+  Stream<List<StudentModel>> fetchClassAllStudents() async* {
+    dataFetchFinished.value = false;
+
+    try {
+      await server
+          .collection('SchoolListCollection')
+          .doc(schoolDocID.value)
+          .collection(batchDocID.value)
+          .doc(batchDocID.value)
+          .collection('classes')
+          .doc(classDocID.value)
+          .collection('Students')
+          .get()
+          .then((value) async {
+        for (var i = 0; i < value.docs.length; i++) {
+          if (value.docs[i].data()['cardID'] == '') {
+            final StudentModel student =
+                StudentModel.fromMap(value.docs[i].data());
+            classStudentList.add(student);
+          }
+        }
+        classTaped.value = false;
+        dataFetchFinished.value = true;
+      });
+
+      yield classStudentList;
+    } catch (error) {
+      print('Error fetching students: $error');
+    }
+
+    // Close the stream controller when done
+  }
 
   Future<void> fetchSchoolData() async {
     await server
@@ -38,7 +141,6 @@ class IoTCardController extends GetxController {
   List<CardStudentModel> allStudentList = [];
   List<String> cardList = [];
   Future<void> getAllCardID() async {
-    allStudentList.clear();
     await server
         .collection('SchoolListCollection')
         .doc(schoolDocID.value)

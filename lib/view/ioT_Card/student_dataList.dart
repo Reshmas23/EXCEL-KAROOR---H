@@ -6,14 +6,12 @@ import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_creden
 import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 
 class ClassWiseStudentDataList extends StatelessWidget {
-  final serverData;
   final StudentModel data;
   final int index;
   const ClassWiseStudentDataList({
     required this.data,
     required this.index,
     super.key,
-    this.serverData,
   });
 
   @override
