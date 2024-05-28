@@ -25,6 +25,7 @@ class AllClassStudentListContainer extends StatelessWidget {
   AllClassStudentListContainer({super.key});
   final StudentController studentController = Get.put(StudentController());
   final ExcelFileController excelController = Get.put(ExcelFileController());
+  final ClassController classController = Get.put(ClassController());
   @override
   Widget build(BuildContext context) {
     return Obx(() => Get.find<ClassController>().ontapStudentsDetail.value ==
@@ -66,7 +67,12 @@ class AllClassStudentListContainer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
+                   Padding(
+                     padding: const EdgeInsets.only(top: 10,left: 20),
+                     child: TextFontWidget(text:'Class Name : ${classController. ontapClassName.toString()}',
+                     // classController.classModelData.value?.className??'', 
+                     fontsize: 15,fontWeight: FontWeight.bold,),
+                   ),
                   // Row(
                   //   children: [
                   //     // const RouteSelectedTextContainer(
@@ -206,7 +212,7 @@ class AllClassStudentListContainer extends StatelessWidget {
                                             studentController
                                                 .studentModelData.value = data;
 
-                                            Get.find<ClassController>()
+                                           classController
                                                 .ontapStudentsDetail
                                                 .value = true;
                                           },
@@ -356,20 +362,22 @@ class AllClassStudentListContainer extends StatelessWidget {
       // Enable calculation for worksheet.
       sheet.enableSheetCalculations();
 
-      sheet.getRangeByName('A1').setText('Name');
-      sheet.getRangeByName('B1').setText('Class');
-      sheet.getRangeByName('C1').setText('Email');
-      sheet.getRangeByName('D1').setText('Phone');
+      sheet.getRangeByName('A1').setText('Admission Number');
+      sheet.getRangeByName('B1').setText('Student Name');
+     
+      sheet.getRangeByName('C1').setText('Gender');
+       sheet.getRangeByName('D1').setText('Parent Phone Number(10 digit)');
       
-      sheet.getRangeByName('E1').setText('Parent Name');
+      // sheet.getRangeByName('E1').setText('Parent Name');
 
       for (int i = 0; i < classUsers.length; i++) {
-        sheet.getRangeByIndex(i + 2, 1).setText(classUsers[i].studentName);
-        sheet.getRangeByIndex(i + 2, 2).setText(classUsers[i].nameofClass);
-        sheet.getRangeByIndex(i + 2, 3).setText(classUsers[i].studentemail);
+        sheet.getRangeByIndex(i + 2, 1).setText(classUsers[i].admissionNumber);
+        sheet.getRangeByIndex(i + 2, 2).setText(classUsers[i].studentName);
+          sheet.getRangeByIndex(i + 2, 3).setText(classUsers[i].gender);
         sheet.getRangeByIndex(i + 2, 4).setText(classUsers[i].parentPhoneNumber);
        
-        sheet.getRangeByIndex(i + 2, 5).setText(classUsers[i].nameofParent);
+       
+        // sheet.getRangeByIndex(i + 2, 5).setText(classUsers[i].nameofParent);
       }
 
       // Save and launch the excel.

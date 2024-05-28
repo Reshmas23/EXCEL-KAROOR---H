@@ -5,11 +5,10 @@ import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_creden
 
 class Allteacherscontroller extends GetxController {
   RxList teacherList = [].obs;
-  RxString className = ''.obs;
-  RxString teacherDocId = ''.obs;
-  Stream<QuerySnapshot> getTeacherSubjectsStream() {
+  RxString className = ''.obs; 
+  Stream<QuerySnapshot> getTeacherSubjectsStream({required String teacherDocId}) {
     // Reference to the specific class collection
-    final classCollectionRef = server
+    final classCollectionRef = server 
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection(UserCredentialsController.batchId!)
@@ -29,7 +28,7 @@ class Allteacherscontroller extends GetxController {
         final teacherSubjectCollectionRef = classCollectionRef
             .doc(classDocId)
             .collection('teachers')
-            .doc(teacherDocId.value)
+            .doc(teacherDocId)
             .collection('teacherSubject');
         // Return the stream of the teacherSubject subcollection
         return teacherSubjectCollectionRef.snapshots();

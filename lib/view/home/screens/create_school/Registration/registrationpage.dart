@@ -56,7 +56,7 @@ class RegisrationPage extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: cWhite,
                           borderRadius: BorderRadius.circular(4)),
-                      height: 600,
+                      height: 700,
                       width: ResponsiveWebSite.isMobile(context) ? 300 : 400,
                       child: Form(
                         key: regirationCrtl.formKey,
@@ -106,16 +106,6 @@ class RegisrationPage extends StatelessWidget {
                               padding:
                                   const EdgeInsets.only(left: 10, right: 10),
                               child: TextFormFiledBlueContainerWidget1(
-                                  validator: checkFieldEmailIsValid,
-                                  controller: regirationCrtl.stEmailController,
-                                  hintText: 'Email',
-                                  title: 'Email',
-                                  labelText: 'Email'),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
-                              child: TextFormFiledBlueContainerWidget1(
                                   validator: checkFieldPhoneNumberIsValid,
                                   controller: regirationCrtl.stPhoneController,
                                   hintText: 'Phone number',
@@ -123,16 +113,38 @@ class RegisrationPage extends StatelessWidget {
                                   labelText: 'Phone number'),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
-                              child: TextFormFiledBlueContainerWidget1(
-                                  validator: checkFieldEmpty,
-                                  controller:
-                                      regirationCrtl.stParentNameController,
-                                  hintText: 'Parent name',
-                                  title: 'Parent name',
-                                  labelText: 'Parent name'),
-                            ),
+        padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
+        child: Obx(() => Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: Colors.black.withOpacity(0.7),
+                ),
+              ),
+              width: 450,
+              child: DropdownButton<String>(
+                underline: Container(),
+                isExpanded: true,
+                value: regirationCrtl.gender.value,
+                onChanged: (String? newValue) {
+                  regirationCrtl.gender.value = newValue ?? '';
+                },
+                items: <String>[
+                  'Select gender',
+                  'Female',
+                  'Male',
+                  'Others',
+                 
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+            )),
+      ),
+                           
                             Obx(() => Padding(
                                   padding: const EdgeInsets.only(top: 20),
                                   child: SizedBox(

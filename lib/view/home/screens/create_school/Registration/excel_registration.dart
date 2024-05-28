@@ -28,7 +28,7 @@ class _GenerateExcelState extends State<GenerateExcel> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             GooglePoppinsWidgets(text: 'Select class', fontsize: 16),
-            SizedBox(height: 80,width: 300,child: SelectClassDropDown(),),
+            ////SizedBox(height: 80,width: 300,child: SelectClassDropDown(),),
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -111,7 +111,7 @@ class _GenerateExcelState extends State<GenerateExcel> {
         sheet.getRangeByIndex(i + 2, 3).setText(classUsers[i].studentemail);
         sheet.getRangeByIndex(i + 2, 4).setText(classUsers[i].parentPhoneNumber);
        
-        sheet.getRangeByIndex(i + 2, 5).setText(classUsers[i].nameofParent);
+       
       }
 
       // Save and launch the excel.
