@@ -106,6 +106,7 @@ dependencies:
   path_provider: 
   printing:
   csv: 
+  firebase_database:
 
 dev_dependencies:
   flutter_test:

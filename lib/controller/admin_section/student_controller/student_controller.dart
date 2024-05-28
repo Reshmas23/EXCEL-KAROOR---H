@@ -158,6 +158,10 @@ class StudentController extends GetxController {
           await _fbServer
               .collection('AllStudents')
               .doc(stUID.value)
+              .set(studentDetail.toMap());
+               await _fbServer
+              .collection('CurrentStudentAttendance')
+              .doc(stUID.value)
               .set(studentDetail.toMap())
               .then((value) async {
             await _fbServer
@@ -183,6 +187,12 @@ class StudentController extends GetxController {
               ).then((value) async {
                 await _fbServer
                     .collection('AllStudents')
+                    .doc(Get.find<StudentController>().stUID.value)
+                    .update(
+                  {'parentId': Get.find<ParentController>().stParentUID.value},
+                );
+                await _fbServer
+                    .collection('CurrentStudentAttendance')
                     .doc(Get.find<StudentController>().stUID.value)
                     .update(
                   {'parentId': Get.find<ParentController>().stParentUID.value},
