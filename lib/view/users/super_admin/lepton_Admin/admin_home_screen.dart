@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vidyaveechi_website/view/users/super_admin/id_cards/card_registration.dart';
+import 'package:vidyaveechi_website/view/ioT_Card/card_registation.dart';
 
 import '../widgets/buttonContainer.dart';
 
@@ -18,7 +18,7 @@ class LeptonHomePage extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                 Get.to(() =>  CardRegistration());
+                 Get.to(() =>  ClassWiseStudentListContainer());
                // Get.to(() => const SchoolsListScreen());
               },
               child: ButtonContainerWidget(

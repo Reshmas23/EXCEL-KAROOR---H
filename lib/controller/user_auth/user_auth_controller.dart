@@ -59,7 +59,7 @@ class UserAuthController extends GetxController {
               .loginSaveData()
               .then((value) => Get.offAll(() => SplashScreen()));
         } else {
-          Get.offAll(() => const AdminHomeScreen());
+          Get.offAll(() =>  AdminHomeScreen());
         }
       } else if (UserCredentialsController.userRole == 'student') {
         await checkStudent(auth);

@@ -18,7 +18,7 @@ import 'package:vidyaveechi_website/view/widgets/drop_DownList/schoolDropDownLis
 import '../class_controller/class_controller.dart';
 
 class RegistrationController extends GetxController {
-    final classController = Get.put(ClassController());
+  final classController = Get.put(ClassController());
   int notifierCounter = 0;
   RxBool ontapRegiStudentList = false.obs;
   List<ClassModel> allclassList = [];
@@ -28,7 +28,7 @@ class RegistrationController extends GetxController {
   Rx<ButtonState> buttonstate = ButtonState.idle.obs;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  
+
   Future<List<ClassModel>> fetchClass() async {
     await server
         .collection('SchoolListCollection')
@@ -47,7 +47,8 @@ class RegistrationController extends GetxController {
           .get()
           .then((value) {
         for (var i = 0; i < value.docs.length; i++) {
-          final list = value.docs.map((e) => ClassModel.fromMap(e.data())).toList();
+          final list =
+              value.docs.map((e) => ClassModel.fromMap(e.data())).toList();
           allclassList.add(list[i]);
         }
         allclassList.sort((a, b) => a.className.compareTo(b.className));
@@ -71,7 +72,8 @@ class RegistrationController extends GetxController {
           .get()
           .then((value) async {
         for (var i = 0; i < value.docs.length; i++) {
-          final list = value.docs.map((e) => StudentModel.fromMap(e.data())).toList();
+          final list =
+              value.docs.map((e) => StudentModel.fromMap(e.data())).toList();
           await server
               .collection('SchoolListCollection')
               .doc(UserCredentialsController.schoolId)
@@ -113,15 +115,17 @@ class RegistrationController extends GetxController {
     }
   }
 
-  Future<void> removeRegiStudent(BuildContext context, String classID, String studentDocID) async {
+  Future<void> removeRegiStudent(
+      BuildContext context, String classID, String studentDocID) async {
     customShowDilogBox2(
         context: context,
         title: "Alert",
         children: [
-          const TextFontWidget(text: "Do you want remove this student now?", fontsize: 12)
+          const TextFontWidget(
+              text: "Do you want remove this student now?", fontsize: 12)
         ],
         actiononTapfuction: () async {
-           server
+          server
               .collection('SchoolListCollection')
               .doc(UserCredentialsController.schoolId)
               .collection(UserCredentialsController.batchId!)
@@ -140,36 +144,40 @@ class RegistrationController extends GetxController {
   final TextEditingController stNameController = TextEditingController();
   final TextEditingController stEmailController = TextEditingController();
   final TextEditingController stPhoneController = TextEditingController();
-    final TextEditingController stParentNameController = TextEditingController();
-        final TextEditingController stadNoController = TextEditingController();
-         final Rx<String> gender = ''.obs;
-      //  RxString gender='Select gender'.obs;
+  final TextEditingController stParentNameController = TextEditingController();
+  final TextEditingController stadNoController = TextEditingController();
+  final Rx<String> gender = ''.obs;
+  //  RxString gender='Select gender'.obs;
 
   Future<void> classWiseStudentCreation() async {
     buttonstate.value = ButtonState.loading;
     try {
       final uid = uuid.v1();
       final studentDetail = StudentModel(
-          admissionNumber: stadNoController.text.trim(),
-          alPhoneNumber:'', 
-          bloodgroup: '',
-          classId: classDocID.value,
-          createDate: '',
-          dateofBirth: '',
-          district: '',
-          docid: uid,
-          gender: gender.value,
-          guardianId: '',
-          houseName: '',
-          parentId: '',
-          parentPhoneNumber: stPhoneController.text.trim(),
-          place: '',
-          profileImageId: '',
-          profileImageUrl: '',
-          studentName: stNameController.text.trim(),
-          password: '123456',
-          studentemail: stEmailController.text.trim(),
-          userRole: 'student', nameofClass: className.value, );
+        cardID: '',
+        cardTaken: false,
+        admissionNumber: stadNoController.text.trim(),
+        alPhoneNumber: '',
+        bloodgroup: '',
+        classId: classDocID.value,
+        createDate: '',
+        dateofBirth: '',
+        district: '',
+        docid: uid,
+        gender: gender.value,
+        guardianId: '',
+        houseName: '',
+        parentId: '',
+        parentPhoneNumber: stPhoneController.text.trim(),
+        place: '',
+        profileImageId: '',
+        profileImageUrl: '',
+        studentName: stNameController.text.trim(),
+        password: '123456',
+        studentemail: stEmailController.text.trim(),
+        userRole: 'student',
+        nameofClass: className.value,
+      );
       await server
           .collection('SchoolListCollection')
           .doc(schoolListValue?['docid'])
@@ -258,17 +266,17 @@ class RegistrationController extends GetxController {
             .doc(value.docs[i].data()['docid'])
             .collection('RegTemp_Students')
             .get();
-        final RegistrationStudentCountModel detail = RegistrationStudentCountModel(
-            className: value.docs[i].data()['className'],
-            classID: value.docs[i].data()['docid'],
-            studentCount: regiStudent.docs.length);
+        final RegistrationStudentCountModel detail =
+            RegistrationStudentCountModel(
+                className: value.docs[i].data()['className'],
+                classID: value.docs[i].data()['docid'],
+                studentCount: regiStudent.docs.length);
         allClasswiseRegStudents.add(detail);
       }
     });
 
     return allClasswiseRegStudents;
   }
-
 
   Future<List<StudentModel>> fetchStudentData() async {
     final firebase = FirebaseFirestore.instance;
@@ -286,13 +294,12 @@ class RegistrationController extends GetxController {
     print(UserCredentialsController.batchId!);
     print(Get.find<ClassController>().ontapClassDocID.value);
 
-   final studentDetails=querySnapshot.docs
+    final studentDetails = querySnapshot.docs
         .map((doc) => StudentModel.fromMap(doc.data()))
         .toList();
-        if(studentDetails.isEmpty){
-           showToast(msg: 'No registered students,fail to generate excel ');
-        }
-        return studentDetails;
+    if (studentDetails.isEmpty) {
+      showToast(msg: 'No registered students,fail to generate excel ');
+    }
+    return studentDetails;
   }
-
 }

@@ -295,7 +295,8 @@ class ExcelFileController extends GetxController {
                   firstRow[2]?.value != null &&
                   firstRow[3]?.value != null) {
                 //creating objects and upload to firebase
-                final StudentModel studentModel = StudentModel(
+                final StudentModel studentModel = StudentModel(  cardID: '',
+        cardTaken: false,
                     
                     nameofClass: '',
                     admissionNumber: firstRow[0]?.value.toString() ?? '',

@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sidebar_drawer/sidebar_drawer.dart';
 import 'package:vidyaveechi_website/info/info.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/google_poppins_widget.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
+import 'package:vidyaveechi_website/view/ioT_Card/card_registation.dart';
+import 'package:vidyaveechi_website/view/ioT_Card/controller/iotCardController.dart';
 import 'package:vidyaveechi_website/view/users/admin/app_bar/admin_appBar.dart';
 import 'package:vidyaveechi_website/view/users/admin/create_new_admin_page/newAdminDetails/new_adminDetails.dart';
 import 'package:vidyaveechi_website/view/users/admin/drawer/drawer_pages.dart';
@@ -35,7 +38,8 @@ import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.d
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 
 class AdminHomeScreen extends StatefulWidget {
-  const AdminHomeScreen({super.key});
+  final IoTCardController ioTCardController = Get.put(IoTCardController ());
+   AdminHomeScreen({super.key});
 
   @override
   State<AdminHomeScreen> createState() => _AdminHomeScreenState();
@@ -110,13 +114,16 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           left: 10, top: 12),
-                                      child: Text(
-                                        "Main Menu",
-                                        style: TextStyle(
-                                            color: cBlack.withOpacity(
-                                              0.4,
-                                            ),
-                                            fontSize: 12),
+                                      child: GestureDetector(
+                                  
+                                        child: Text(
+                                          "Main Menu",
+                                          style: TextStyle(
+                                              color: cBlack.withOpacity(
+                                                0.4,
+                                              ),
+                                              fontSize: 12),
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(

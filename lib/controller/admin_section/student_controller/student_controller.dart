@@ -55,6 +55,8 @@ class StudentController extends GetxController {
     buttonstate.value = ButtonState.loading;
     try {
       final studentDetail = StudentModel(
+        cardID: '',
+        cardTaken: false,
           admissionNumber: stAdNoController.text.trim(),
           alPhoneNumber: '',
           bloodgroup: '',
@@ -119,6 +121,8 @@ class StudentController extends GetxController {
     String camelCaseText = studentEmail.split(" ").join();
     try {
       final StudentModel studentDetail = StudentModel(
+          cardID: '',
+        cardTaken: false,
           admissionNumber: stAdNoController.text.trim(),
           alPhoneNumber: '',
           bloodgroup: '',

@@ -12,6 +12,8 @@ class StudentModel {
   String bloodgroup;
   String classId;
   String createDate;
+  bool cardTaken;
+  String cardID;
   String dateofBirth;
   String district;
   String docid;
@@ -35,6 +37,8 @@ class StudentModel {
     required this.bloodgroup,
     required this.classId,
     required this.createDate,
+    required this.cardTaken,
+    required this.cardID,
     required this.dateofBirth,
     required this.district,
     required this.docid,
@@ -59,6 +63,8 @@ class StudentModel {
     String? bloodgroup,
     String? classId,
     String? createDate,
+    bool? cardTaken,
+    String? cardID,
     String? dateofBirth,
     String? district,
     String? docid,
@@ -82,6 +88,8 @@ class StudentModel {
       bloodgroup: bloodgroup ?? this.bloodgroup,
       classId: classId ?? this.classId,
       createDate: createDate ?? this.createDate,
+      cardTaken: cardTaken ?? this.cardTaken,
+      cardID: cardID ?? this.cardID,
       dateofBirth: dateofBirth ?? this.dateofBirth,
       district: district ?? this.district,
       docid: docid ?? this.docid,
@@ -108,6 +116,8 @@ class StudentModel {
       'bloodgroup': bloodgroup,
       'classId': classId,
       'createDate': createDate,
+      'cardTaken': cardTaken,
+      'cardID': cardID,
       'dateofBirth': dateofBirth,
       'district': district,
       'docid': docid,
@@ -129,27 +139,29 @@ class StudentModel {
 
   factory StudentModel.fromMap(Map<String, dynamic> map) {
     return StudentModel(
-      admissionNumber: map['admissionNumber'] ?? '',
-      alPhoneNumber: map['alPhoneNumber'] ?? '',
-      bloodgroup: map['bloodgroup'] ?? '',
-      classId: map['classId'] ?? '',
-      createDate: map['createDate'] ?? '',
-      dateofBirth: map['dateofBirth'] ?? '',
-      district: map['district'] ?? '',
-      docid: map['docid'] ?? '',
-      gender: map['gender'] ?? '',
-      guardianId: map['guardianId'] ?? '',
-      houseName: map['houseName'] ?? '',
-      parentId: map['parentId'] ?? '',
-      parentPhoneNumber: map['parentPhoneNumber'] ?? '',
-      place: map['place'] ?? '',
-      profileImageId: map['profileImageId'] ?? '',
-      profileImageUrl: map['profileImageUrl'] ?? '',
-      studentName: map['studentName'] ?? '',
-      password: map['password'] ?? '',
-      studentemail: map['studentemail'] ?? '',
-      userRole: map['userRole'] ?? '',
-      nameofClass: map['nameofClass'] ?? '',
+      admissionNumber: map['admissionNumber'] ??'',
+      alPhoneNumber: map['alPhoneNumber'] ??'',
+      bloodgroup: map['bloodgroup'] ??'',
+      classId: map['classId'] ??'',
+      createDate: map['createDate'] ??'',
+      cardTaken: map['cardTaken']?? false,
+      cardID: map['cardID'] ??'',
+      dateofBirth: map['dateofBirth'] ??'',
+      district: map['district'] ??'',
+      docid: map['docid'] ??'',
+      gender: map['gender'] ??'',
+      guardianId: map['guardianId'] ??'',
+      houseName: map['houseName'] ??'',
+      parentId: map['parentId'] ??'',
+      parentPhoneNumber: map['parentPhoneNumber'] ??'',
+      place: map['place'] ??'',
+      profileImageId: map['profileImageId'] ??'',
+      profileImageUrl: map['profileImageUrl'] ??'',
+      studentName: map['studentName'] ??'',
+      password: map['password'] ??'',
+      studentemail: map['studentemail'] ??'',
+      userRole: map['userRole'] ??'',
+      nameofClass: map['nameofClass'] ??'',
     );
   }
 
@@ -160,7 +172,7 @@ class StudentModel {
 
   @override
   String toString() {
-    return 'StudentModel(admissionNumber: $admissionNumber, alPhoneNumber: $alPhoneNumber, bloodgroup: $bloodgroup, classId: $classId, createDate: $createDate, dateofBirth: $dateofBirth, district: $district, docid: $docid, gender: $gender, guardianId: $guardianId, houseName: $houseName, parentId: $parentId, parentPhoneNumber: $parentPhoneNumber, place: $place, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, studentName: $studentName, password: $password, studentemail: $studentemail, userRole: $userRole, nameofClass: $nameofClass)';
+    return 'StudentModel(admissionNumber: $admissionNumber, alPhoneNumber: $alPhoneNumber, bloodgroup: $bloodgroup, classId: $classId, createDate: $createDate, cardTaken: $cardTaken, cardID: $cardID, dateofBirth: $dateofBirth, district: $district, docid: $docid, gender: $gender, guardianId: $guardianId, houseName: $houseName, parentId: $parentId, parentPhoneNumber: $parentPhoneNumber, place: $place, profileImageId: $profileImageId, profileImageUrl: $profileImageUrl, studentName: $studentName, password: $password, studentemail: $studentemail, userRole: $userRole, nameofClass: $nameofClass)';
   }
 
   @override
@@ -173,6 +185,8 @@ class StudentModel {
       other.bloodgroup == bloodgroup &&
       other.classId == classId &&
       other.createDate == createDate &&
+      other.cardTaken == cardTaken &&
+      other.cardID == cardID &&
       other.dateofBirth == dateofBirth &&
       other.district == district &&
       other.docid == docid &&
@@ -198,6 +212,8 @@ class StudentModel {
       bloodgroup.hashCode ^
       classId.hashCode ^
       createDate.hashCode ^
+      cardTaken.hashCode ^
+      cardID.hashCode ^
       dateofBirth.hashCode ^
       district.hashCode ^
       docid.hashCode ^
