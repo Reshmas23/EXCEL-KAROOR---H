@@ -158,6 +158,10 @@ class StudentController extends GetxController {
           await _fbServer
               .collection('AllStudents')
               .doc(stUID.value)
+              .set(studentDetail.toMap());
+               await _fbServer
+              .collection('CurrentStudentAttendance')
+              .doc(stUID.value)
               .set(studentDetail.toMap())
               .then((value) async {
             await _fbServer
@@ -187,6 +191,12 @@ class StudentController extends GetxController {
                     .update(
                   {'parentId': Get.find<ParentController>().stParentUID.value},
                 );
+                await _fbServer
+                    .collection('CurrentStudentAttendance')
+                    .doc(Get.find<StudentController>().stUID.value)
+                    .update(
+                  {'parentId': Get.find<ParentController>().stParentUID.value},
+                );
                 return null;
               }).then((value) async {
                 manuvalAfterStudentCreateGmailSender(
@@ -198,6 +208,9 @@ class StudentController extends GetxController {
                   schoolName: UserCredentialsController.schoolName ?? '',
                 );
               }).then((value) async {
+                if (automaticmail.value = true) {
+                  
+                }
                 buttonstate.value = ButtonState.success;
                 showToast(msg: "Student Added Successfully");
                 await Future.delayed(const Duration(seconds: 2)).then((vazlue) {

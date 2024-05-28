@@ -195,6 +195,12 @@ class ExcelFileController extends GetxController {
               .doc(UserCredentialsController.schoolId)
               .collection('AllStudents')
               .doc(authvalue.user?.uid)
+              .set(excelStudentList[i].toMap());
+        await  server
+              .collection('SchoolListCollection')
+              .doc(UserCredentialsController.schoolId)
+              .collection('CurrentStudentAttendance')
+              .doc(authvalue.user?.uid)
               .set(excelStudentList[i].toMap())
               .then((value) async {
             await server
@@ -240,6 +246,8 @@ class ExcelFileController extends GetxController {
                     .collection('AllParents')
                     .doc(parentAuthvalue.user!.uid)
                     .set(parentDetail.toMap());
+                    
+                    
                 await server
                     .collection('SchoolListCollection')
                     .doc(UserCredentialsController.schoolId)
