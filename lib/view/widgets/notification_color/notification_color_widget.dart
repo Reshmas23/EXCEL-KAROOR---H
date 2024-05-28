@@ -23,3 +23,8 @@ class InfoNotifierSetup {
   final Color containerColor = const Color.fromARGB(255, 35, 105, 246);
   final IconData icon = Icons.info_outline_rounded;
 }
+class cardNotifierSetup {
+  final Color whiteshadeColor =  Color.fromARGB(255, 74, 6, 94);
+  final Color containerColor =  Color.fromARGB(255, 163, 34, 249);
+  final IconData icon = Icons.warning_amber_outlined;
+}

@@ -56,6 +56,8 @@ class StudentController extends GetxController {
     buttonstate.value = ButtonState.loading;
     try {
       final studentDetail = StudentModel(
+        cardID: '',
+        cardTaken: false,
           admissionNumber: stAdNoController.text.trim(),
           alPhoneNumber: '',
           bloodgroup: '',
@@ -122,6 +124,8 @@ class StudentController extends GetxController {
       
 
       final StudentModel studentDetail = StudentModel(
+          cardID: '',
+        cardTaken: false,
           admissionNumber: stAdNoController.text.trim(),
           alPhoneNumber: '',
           bloodgroup: '',
@@ -161,6 +165,10 @@ class StudentController extends GetxController {
           await _fbServer
               .collection('AllStudents')
               .doc(stUID.value)
+              .set(studentDetail.toMap());
+               await _fbServer
+              .collection('CurrentStudentAttendance')
+              .doc(stUID.value)
               .set(studentDetail.toMap())
               .then((value) async {
             await _fbServer
@@ -186,6 +194,12 @@ class StudentController extends GetxController {
               ).then((value) async {
                 await _fbServer
                     .collection('AllStudents')
+                    .doc(Get.find<StudentController>().stUID.value)
+                    .update(
+                  {'parentId': Get.find<ParentController>().stParentUID.value},
+                );
+                await _fbServer
+                    .collection('CurrentStudentAttendance')
                     .doc(Get.find<StudentController>().stUID.value)
                     .update(
                   {'parentId': Get.find<ParentController>().stParentUID.value},
