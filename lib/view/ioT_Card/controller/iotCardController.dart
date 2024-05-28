@@ -79,48 +79,49 @@ class IoTCardController extends GetxController {
         .then((value) async {
       cardList.add(value.data()?['CardID']);
     }).then((value) async {
-      await comapareDuplicateCards().then((value) async {
-        print("studentID $studentID");
-        print("CardList $cardList");
-        await server
-            .collection('SchoolListCollection')
-            .doc(schoolDocID.value)
-            .collection(batchDocID.value)
-            .doc(batchDocID.value)
-            .collection('classes')
-            .doc(classDocID.value)
-            .collection('Students')
-            .doc(studentID)
-            .get()
-            .then((studentData) {
-          if (studentData.data()?['cardID'] == '') {
-            print("cardID=='' $studentID");
-            server
+      print("studentID $studentID");
+      print("CardList $cardList");
+      await server
+          .collection('SchoolListCollection')
+          .doc(schoolDocID.value)
+          .collection(batchDocID.value)
+          .doc(batchDocID.value)
+          .collection('classes')
+          .doc(classDocID.value)
+          .collection('Students')
+          .doc(studentID)
+          .get()
+          .then((studentData) {
+        if (studentData.data()?['cardID'] == '') {
+          print("cardID=='' $studentID");
+          server
+              .collection('SchoolListCollection')
+              .doc(schoolDocID.value)
+              .collection('AllStudents')
+              .doc(studentID)
+              .set({'cardID': cardList[0], 'cardTaken': true},
+                  SetOptions(merge: true)).then((value) async {
+            await server
                 .collection('SchoolListCollection')
                 .doc(schoolDocID.value)
-                .collection('AllStudents')
+                .collection(batchDocID.value)
+                .doc(batchDocID.value)
+                .collection('classes')
+                .doc(classDocID.value)
+                .collection('Students')
                 .doc(studentID)
                 .set({'cardID': cardList[0], 'cardTaken': true},
                     SetOptions(merge: true)).then((value) async {
               await server
-                  .collection('SchoolListCollection')
-                  .doc(schoolDocID.value)
-                  .collection(batchDocID.value)
-                  .doc(batchDocID.value)
-                  .collection('classes')
-                  .doc(classDocID.value)
-                  .collection('Students')
-                  .doc(studentID)
-                  .set({'cardID': cardList[0], 'cardTaken': true},
-                      SetOptions(merge: true)).then((value) async {
-                await server
-                    .collection('StudentRegistration')
-                    .doc('CardData')
-                    .update({'CardID': ''});
+                  .collection('StudentRegistration')
+                  .doc('CardData')
+                  .update({'CardID': ''}).then((value) async {
+                cardList.clear();
+                allStudentList.clear();
               });
             });
-          }
-        });
+          });
+        }
       });
     });
   }

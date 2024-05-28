@@ -12,7 +12,7 @@ class StudentModel {
   String bloodgroup;
   String classId;
   String createDate;
-  bool cardTaken;
+  bool cardTaken=false;
   String cardID;
   String dateofBirth;
   String district;

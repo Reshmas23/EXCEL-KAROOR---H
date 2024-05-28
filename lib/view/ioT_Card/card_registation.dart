@@ -157,6 +157,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                                     .collection('classes')
                                     .doc(ioTCardController.classDocID.value)
                                     .collection('Students')
+                                    .orderBy('cardTaken')
                                     .snapshots(),
                                 builder: (context, snaPS) {
                                   if (snaPS.hasData) {
@@ -176,22 +177,24 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                                                   if (cardSnaps.data
                                                           ?.data()?['CardID'] !=
                                                       '') {
+                                                  
                                                     print("Calling...........");
                                                     Get.find<
                                                             IoTCardController>()
-                                                        .getAllCardID();
-                                                    for (var i = 0;
-                                                        i <
-                                                            snaPS.data!.docs
-                                                                .length;
-                                                        i++) {
-                                                          
+                                                        .getAllCardID()
+                                                        .then((value) async {
                                                       Get.find<
                                                               IoTCardController>()
-                                                          .cardAsignToStudent(
-                                                        snaPS.data?.docs[i].data()['docid'],
-                                                      );
-                                                    }
+                                                          .comapareDuplicateCards()
+                                                          .then((value) async {
+                                                        Get.find<
+                                                                IoTCardController>()
+                                                            .cardAsignToStudent(
+                                                          snaPS.data?.docs[0]
+                                                              .data()['docid'],
+                                                        );
+                                                      });
+                                                    });
                                                   }
                                                   return ClassWiseStudentDataList(
                                                     serverData: snaPS
