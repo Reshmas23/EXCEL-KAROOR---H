@@ -39,7 +39,7 @@ class ClassWiseFeesStatus extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(left: 25, top: 25),
-                child: TextFontWidget( 
+                child: TextFontWidget(
                   text: 'Fee Details',
                   fontsize: 18,
                   fontWeight: FontWeight.bold,
@@ -63,19 +63,19 @@ class ClassWiseFeesStatus extends StatelessWidget {
                     ),
                     const RouteSelectedTextContainer(width: 140, title: 'Fees Deatils'),
                     const Spacer(),
-                    GestureDetector( 
-                      onTap: () async { 
+                    GestureDetector(
+                      onTap: () async {
                         Get.find<FeesAndBillsController>()
                             .sendMessageForUnPaidStudentandParentsbool
                             .value = true;
                         await Get.find<FeesAndBillsController>()
                             .sendMessageForUnPaidStudentandParents();
                       },
-                      child: Obx(() => Padding( 
+                      child: Obx(() => Padding(
                             padding: const EdgeInsets.only(right: 10),
-                            child: Get.find<FeesAndBillsController>() 
-                                        .sendMessageForUnPaidStudentandParentsbool 
-                                        .value == 
+                            child: Get.find<FeesAndBillsController>()
+                                        .sendMessageForUnPaidStudentandParentsbool
+                                        .value ==
                                     true
                                 ? const SizedBox(
                                     child: CircularProgressIndicator.adaptive(),
@@ -131,6 +131,11 @@ class ClassWiseFeesStatus extends StatelessWidget {
                               ),
                               Expanded(
                                   flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'Fee')),
+                              SizedBox(
+                                width: 02,
+                              ),
+                              Expanded(
+                                  flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'status')),
                               SizedBox(
                                 width: 02,
                               ),
@@ -316,7 +321,35 @@ class ClassWiseFeesDataListContainer extends StatelessWidget {
                         fontsize: 12,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const Spacer(),
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 15,
+                        child: Image.asset(
+                          'webassets/png/active.png',
+                        ),
+                      ),
+                      const TextFontWidget(
+                        text: " Full Paid",
+                        fontsize: 12,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+          ),
+          Container(
+            color: cWhite,
+            width: 02,
+          ),
+          Expanded(
+            flex: 2,
+            child: studentdata['feepaid'] == false
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Obx(() => Padding(
                             padding: const EdgeInsets.only(bottom: 10),
                             child: Get.find<FeesAndBillsController>().feessendingMessage.value ==
@@ -393,19 +426,6 @@ class ClassWiseFeesDataListContainer extends StatelessWidget {
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      //
-                      SizedBox(
-                        width: 15,
-                        child: Image.asset(
-                          'webassets/png/active.png',
-                        ),
-                      ),
-                      const TextFontWidget(
-                        text: " Full Paid",
-                        fontsize: 12,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const Spacer(),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: IconButton(
