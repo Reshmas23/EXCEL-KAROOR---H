@@ -387,8 +387,9 @@ class TimeTableMainScreen extends StatelessWidget {
                                           timetableCtrl.buttonstate.value,
                                       text: 'Submit',
                                       function: () {
+
                                         timetableCtrl
-                                            .addTimeTableDataToFirebase();
+                                            .addTimeTableDataToFirebase(context);
                                       })
                                   //  NoticeButtonContainerWidget(
                                   //   text: 'Submit',
