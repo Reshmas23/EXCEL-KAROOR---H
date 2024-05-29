@@ -225,17 +225,17 @@ class CreateAdmin extends StatelessWidget {
           ),
         ),
       ), ///////////////////......................12
-      Obx(() =>  ProgressButtonWidget(
+      Obx(() => ProgressButtonWidget(
           function: () async {
-            if (UserCredentialsController.schoolId ==
-                FirebaseAuth.instance.currentUser!.uid) {
-                     if (adminController.formKey.currentState!.validate()) {
-              adminController.createNewAdmin(context);
-            }
-            }else{
+            final currentUser = UserCredentialsController.currentUserDocid;
+
+            if (UserCredentialsController.schoolId == currentUser) {
+              if (adminController.formKey.currentState!.validate()) {
+                adminController.createNewAdmin(context);
+              }
+            } else {
               showToast(msg: "You are not a SuperAdmin");
             }
-     
           },
           buttonstate: adminController.buttonstate.value,
           text: 'Create Admin')),
@@ -300,7 +300,6 @@ class CreateAdmin extends StatelessWidget {
               ),
             ),
           ),
-          
           ResponsiveWebSite.isMobile(context)
               ? Container(
                   color: screenContainerbackgroundColor,

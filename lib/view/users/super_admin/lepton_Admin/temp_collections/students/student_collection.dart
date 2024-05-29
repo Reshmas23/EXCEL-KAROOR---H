@@ -11,6 +11,7 @@ import '../../../model/add_student_model/add_student_model.dart';
 import '../../../widgets/buttonContainer.dart';
 import '../../../widgets/drop_down/get_class.dart';
 
+// ignore: must_be_immutable
 class StudenTempCollection extends StatelessWidget {
   List<AddStudentModel> studentModelList = [];
   TempStudentController tempStudentController =

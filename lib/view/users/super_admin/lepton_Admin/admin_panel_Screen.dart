@@ -9,6 +9,7 @@ import '../../../fonts/fonts.dart';
 import '../controllers/password_controller/password_controller.dart';
 import 'admin_home_screen.dart';
 
+// ignore: must_be_immutable
 class LeptonAdminLoginScreen extends StatelessWidget {
   LeptonAdminLoginScreen({Key? key}) : super(key: key);
 

@@ -22,7 +22,7 @@ class GeneralInsructions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 1000,
+      height: 800,
       color: screenContainerbackgroundColor,
       child: Padding(
         padding: const EdgeInsets.only(left: 10),

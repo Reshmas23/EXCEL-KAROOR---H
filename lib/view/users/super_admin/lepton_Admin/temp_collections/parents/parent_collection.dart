@@ -7,6 +7,7 @@ import 'package:vidyaveechi_website/view/users/super_admin/widgets/drop_down/sel
 
 import '../../../widgets/drop_down/get_class.dart';
 
+// ignore: must_be_immutable
 class ParentTempCollection extends StatelessWidget {
   TempParentController tempParentController = Get.put(TempParentController());
   String schoolID;

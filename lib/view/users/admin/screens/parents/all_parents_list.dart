@@ -27,7 +27,7 @@ class AllParentsListContainer extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Container(
                   color: screenContainerbackgroundColor,
-                  height: 1000,
+                  height: 650,
                   width: 1150,
                   child: Padding(
                     padding: const EdgeInsets.only(

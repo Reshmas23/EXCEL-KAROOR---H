@@ -149,8 +149,27 @@ class AllTeacherListContainer extends StatelessWidget {
                                     .collection('Teachers')
                                     .snapshots(),
                                 builder: (context, snaPS) {
+                                  //  if (!snaPS.hasData || snaPS.data!.docs.isEmpty) {
+                                  //     return const Center(
+                                  //         child: Text(
+                                  //       'No Teachers Added',
+                                  //       style: TextStyle(
+                                  //           fontSize: 15, fontWeight: FontWeight.w500),
+                                  //     ));
+                                  //   }
                                   if (snaPS.hasData) {
-                                    return ListView.separated(
+                                    return snaPS.data!.docs.length ==0
+                                            ? const Center(
+                                              child: Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  "Please create Teacher",
+                                                  style: TextStyle(fontWeight: FontWeight.w400),
+                                                ),
+                                              ),
+                                            )
+                                            : 
+                                    ListView.separated(
                                         itemBuilder: (context, index) {
                                           final data = TeacherModel.fromMap(
                                               snaPS.data!.docs[index].data());

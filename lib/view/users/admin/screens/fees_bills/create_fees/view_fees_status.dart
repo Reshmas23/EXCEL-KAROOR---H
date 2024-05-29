@@ -33,7 +33,7 @@ class CreatedFeesStatus extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Container(
               color: screenContainerbackgroundColor,
-              height: 1000,
+              height: 650,
               width: 1200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +93,8 @@ class CreatedFeesStatus extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10, right: 10, top: 25),
                     child: Container(
                         width: 1200,
-                        height: ResponsiveWebSite.isMobile(context) ? 800 : 500,
+                        height:// ResponsiveWebSite.isMobile(context) ? 800 : 
+                        500,
                         color: cWhite,
                         child: Column(
                           children: [

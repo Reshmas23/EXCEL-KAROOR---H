@@ -44,7 +44,7 @@ class AllClassListContainer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const TextFontWidget(
-                            text: 'All Class  List 📃',
+                            text: 'All Classes 📃',
                             fontsize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -93,14 +93,14 @@ class AllClassListContainer extends StatelessWidget {
                                       SizedBox(
                                         width: 01,
                                       ),
-                                      Expanded(
-                                          flex: 2,
-                                          child: CatrgoryTableHeaderWidget(
-                                              headerTitle:
-                                                  'New Registed Students')),
-                                      SizedBox(
-                                        width: 02,
-                                      ),
+                                      // Expanded(
+                                      //     flex: 2,
+                                      //     child: CatrgoryTableHeaderWidget(
+                                      //         headerTitle:
+                                      //             'New Registed Students')),
+                                      // SizedBox(
+                                      //   width: 02,
+                                      // ),
                                       Expanded(
                                           flex: 3,
                                           child: CatrgoryTableHeaderWidget(
@@ -139,6 +139,15 @@ class AllClassListContainer extends StatelessWidget {
                                       .collection('classes')
                                       .snapshots(),
                                   builder: (context, snaPS) {
+
+                                       if (!snaPS.hasData || snaPS.data!.docs.isEmpty) {
+                                      return const Center(
+                                          child: Text(
+                                        'Navigate to CLASSES and create all classes before proceeding',
+                                        style: TextStyle(
+                                            fontSize: 15, fontWeight: FontWeight.w500),
+                                      ));
+                                    }
                                     if (snaPS.hasData) {
                                       return ListView.separated(
                                           itemBuilder: (context, index) {
@@ -160,6 +169,7 @@ class AllClassListContainer extends StatelessWidget {
                                                 //     .ontapviewteacher.value = true;
                                               },
                                               child: AllClassDataList(
+                                                 classStatus: snaPS,
                                                 index: index,
                                                 data: data,
                                               ),
@@ -171,9 +181,12 @@ class AllClassListContainer extends StatelessWidget {
                                             );
                                           },
                                           itemCount: snaPS.data!.docs.length);
-                                    } else {
+                                    }
+                                
+                                     if (snaPS.connectionState == ConnectionState.waiting) {
                                       return const LoadingWidget();
                                     }
+                                   return const LoadingWidget();
                                   },
                                 ),
                               ),

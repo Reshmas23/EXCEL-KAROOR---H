@@ -6,6 +6,8 @@ import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/drop_down/select_class.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
+import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
+import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/progess_button/progress_button.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
@@ -195,7 +197,7 @@ class ManualStudentCreation extends StatelessWidget {
       Obx(() => ProgressButtonWidget(
           function: () async {
             if (_formKey.currentState!.validate()) {
-              studentController.manualCreateaNewStudent();
+              studentController.manualCreateaNewStudent(context);
             }
           },
           buttonstate: studentController.buttonstate.value,
@@ -252,8 +254,58 @@ class ManualStudentCreation extends StatelessWidget {
                                     right: 20,
                                     left: 10,
                                   ),
-                                  child: createStudentListWidget[
-                                      12] ////////email............
+                                  child: StreamBuilder(
+                                    stream: server
+                                        .collection("SchoolListCollection")
+                                        .doc(UserCredentialsController.schoolId)
+                                        .collection("AllStudents")
+                                        .snapshots(),
+                                    builder: (context, allStudentSnap) {
+                                      if (allStudentSnap.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return const CircularProgressIndicator();
+                                      }
+
+                                      if (allStudentSnap.hasError) {
+                                        return Text(
+                                            'Error: ${allStudentSnap.error}');
+                                      }
+
+                                      if (!allStudentSnap.hasData ||
+                                          allStudentSnap.data!.docs.isEmpty) {
+                                        return createStudentListWidget[12];
+                                      }
+
+                                      final admissionNumberToCheck =
+                                          studentController
+                                              .stAdNoController.text
+                                              .trim();
+                                      final students =
+                                          allStudentSnap.data!.docs;
+
+                                      final admissionExists =
+                                          students.any((element) {
+                                        final admissionNumber =
+                                            element.data()['admissionNumber'];
+                                        return admissionNumber ==
+                                            admissionNumberToCheck;
+                                      });
+
+                                      return admissionExists
+                                          ? Row(
+                                              children: [
+                                                createStudentListWidget[12],
+                                                Text(
+                                                  '${studentController.stAdNoController.text} Already exists',
+                                                  style: const TextStyle(
+                                                      color: Colors.red),
+                                                ),
+                                              ],
+                                            )
+                                          : createStudentListWidget[12];
+                                    },
+                                  )
+////////email............
                                   ),
                               Padding(
                                   padding: const EdgeInsets.only(
@@ -363,9 +415,9 @@ class ManualStudentCreation extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               right: 20, left: 10, top: 10),
                           child: SizedBox(
-                            height: 75,
-                            width: 200,
-                            child: createStudentListWidget[12]) ///////////
+                              height: 75,
+                              width: 200,
+                              child: createStudentListWidget[12]) ///////////
                           ),
                       Padding(
                         padding: const EdgeInsets.only(top: 0),
