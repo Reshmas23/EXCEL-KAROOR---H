@@ -151,7 +151,7 @@ class RegistrationController extends GetxController {
       final uid = uuid.v1();
       final studentDetail = StudentModel(
           admissionNumber: stadNoController.text.trim(),
-          alPhoneNumber:'',
+          alPhoneNumber:'', 
           bloodgroup: '',
           classId: classDocID.value,
           createDate: '',
