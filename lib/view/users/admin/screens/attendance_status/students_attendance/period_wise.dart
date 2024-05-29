@@ -18,7 +18,8 @@ import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import '../../../../../widgets/blue_Container_widget/blue_Container_widget.dart';
 
 class PeriodWiseStudentsAttendance extends StatelessWidget {
-  final AttendenceController attendenceController = Get.put(AttendenceController());
+  final AttendenceController attendenceController =
+      Get.put(AttendenceController());
   final ClassController classController = Get.put(ClassController());
   PeriodWiseStudentsAttendance({super.key});
   @override
@@ -34,11 +35,15 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
       () => attendenceController.ontapaddAttendence.value == true
           ? AttendanceAddingList()
           : SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: ResponsiveWebSite.isMobile(context)
+                  ? Axis.horizontal
+                  : Axis.vertical,
               child: Container(
                 color: screenContainerbackgroundColor,
                 height: ResponsiveWebSite.isMobile(context) ? 890 : 820,
-                width: 1200,
+                width: ResponsiveWebSite.isDesktop(context)
+                    ? double.infinity
+                    : 1200,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -81,33 +86,43 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                               height: 65,
                               width: 250,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const TextFontWidget(text: "Select Class *", fontsize: 12),
-                                  SizedBox(height: 40, child: SelectClassDropDown()),
+                                  const TextFontWidget(
+                                      text: "Select Class *", fontsize: 12),
+                                  SizedBox(
+                                      height: 40, child: SelectClassDropDown()),
                                 ],
                               )),
                         )
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: ResponsiveWebSite.isMobile(context) ? 20 : 10),
+                      padding: EdgeInsets.only(
+                          top: ResponsiveWebSite.isMobile(context) ? 20 : 10),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           color: cWhite,
-                          height: ResponsiveWebSite.isMobile(context) ? 750 : 680,
+                          height:
+                              ResponsiveWebSite.isMobile(context) ? 750 : 680,
                           width: double.infinity,
                           child: StreamBuilder(
-                              stream: attendenceController.todayAttendence.value == true
+                              stream: attendenceController
+                                          .todayAttendence.value ==
+                                      true
                                   ? server
                                       .collection('SchoolListCollection')
                                       .doc(UserCredentialsController.schoolId)
-                                      .collection(UserCredentialsController.batchId!)
+                                      .collection(
+                                          UserCredentialsController.batchId!)
                                       .doc(UserCredentialsController.batchId!)
                                       .collection('classes')
-                                      .doc(Get.find<ClassController>().classDocID.value)
+                                      .doc(Get.find<ClassController>()
+                                          .classDocID
+                                          .value)
                                       .collection('Attendence')
                                       .doc(monthwise)
                                       .collection(monthwise)
@@ -118,15 +133,20 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                   : server
                                       .collection('SchoolListCollection')
                                       .doc(UserCredentialsController.schoolId)
-                                      .collection(UserCredentialsController.batchId!)
+                                      .collection(
+                                          UserCredentialsController.batchId!)
                                       .doc(UserCredentialsController.batchId!)
                                       .collection('classes')
-                                      .doc(Get.find<ClassController>().classDocID.value)
+                                      .doc(Get.find<ClassController>()
+                                          .classDocID
+                                          .value)
                                       .collection('Attendence')
-                                      .doc(attendenceController.fetchClassWiseMonthvalue.value)
-                                      .collection(
-                                          attendenceController.fetchClassWiseMonthvalue.value)
-                                      .doc(attendenceController.fetchClassWiseDatevalue.value)
+                                      .doc(attendenceController
+                                          .fetchClassWiseMonthvalue.value)
+                                      .collection(attendenceController
+                                          .fetchClassWiseMonthvalue.value)
+                                      .doc(attendenceController
+                                          .fetchClassWiseDatevalue.value)
                                       .collection('Subjects')
                                       .orderBy('period')
                                       .snapshots(),
@@ -135,21 +155,28 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                   return DefaultTabController(
                                     length: snaps.data!.docs.length,
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           height: 80,
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               const Spacer(),
-                                              attendenceController.todayAttendence.value == true
+                                              attendenceController
+                                                          .todayAttendence
+                                                          .value ==
+                                                      true
                                                   ? Row(
                                                       children: [
                                                         BlueContainerWidget(
-                                                            title: "Today Status",
+                                                            title:
+                                                                "Today Status",
                                                             fontSize: 16,
-                                                            color: themeColorBlue,
+                                                            color:
+                                                                themeColorBlue,
                                                             width: 180),
                                                         const SizedBox(
                                                           width: 20,
@@ -158,7 +185,8 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                                           value: true,
                                                           onChanged: (value) {
                                                             attendenceController
-                                                                .todayAttendence.value = false;
+                                                                .todayAttendence
+                                                                .value = false;
                                                           },
                                                         )
                                                       ],
@@ -166,21 +194,27 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                                   : Row(
                                                       children: [
                                                         Padding(
-                                                          padding: const EdgeInsets.all(8.0),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
                                                           child: Container(
                                                             width: 250,
-                                                            height:
-                                                                ResponsiveWebSite.isMobile(context)
-                                                                    ? 80
-                                                                    : 100,
+                                                            height: ResponsiveWebSite
+                                                                    .isMobile(
+                                                                        context)
+                                                                ? 80
+                                                                : 100,
                                                             color: cWhite,
                                                             child: Column(
                                                               crossAxisAlignment:
-                                                                  CrossAxisAlignment.start,
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                               children: [
                                                                 const TextFontWidget(
-                                                                    text: 'Month *',
-                                                                    fontsize: 12.5),
+                                                                    text:
+                                                                        'Month *',
+                                                                    fontsize:
+                                                                        12.5),
                                                                 const SizedBox(
                                                                   height: 05,
                                                                 ),
@@ -194,20 +228,27 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                                           ),
                                                         ),
                                                         Padding(
-                                                          padding: const EdgeInsets.all(8.0),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
                                                           child: Container(
                                                             width: 200,
-                                                            height:
-                                                                ResponsiveWebSite.isMobile(context)
-                                                                    ? 80
-                                                                    : 100,
+                                                            height: ResponsiveWebSite
+                                                                    .isMobile(
+                                                                        context)
+                                                                ? 80
+                                                                : 100,
                                                             color: cWhite,
                                                             child: Column(
                                                               crossAxisAlignment:
-                                                                  CrossAxisAlignment.start,
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                               children: [
                                                                 const TextFontWidget(
-                                                                    text: 'Date *', fontsize: 12.5),
+                                                                    text:
+                                                                        'Date *',
+                                                                    fontsize:
+                                                                        12.5),
                                                                 const SizedBox(
                                                                   height: 05,
                                                                 ),
@@ -226,13 +267,15 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                                         BlueContainerWidget(
                                                             title: "Today ? ",
                                                             fontSize: 12,
-                                                            color: themeColorBlue,
+                                                            color:
+                                                                themeColorBlue,
                                                             width: 80),
                                                         Checkbox(
                                                           value: false,
                                                           onChanged: (value) {
                                                             attendenceController
-                                                                .todayAttendence.value = true;
+                                                                .todayAttendence
+                                                                .value = true;
                                                           },
                                                         )
                                                       ],
@@ -241,8 +284,8 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                           ),
                                         ),
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 0, left: 20, right: 20),
+                                          padding: const EdgeInsets.only(
+                                              top: 0, left: 20, right: 20),
                                           child: Column(
                                             children: [
                                               Container(
@@ -250,11 +293,14 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                                 height: 40,
                                                 child: TabBar(
                                                   indicatorColor: cWhite,
-                                                  tabAlignment: TabAlignment.start,
+                                                  tabAlignment:
+                                                      TabAlignment.start,
                                                   isScrollable: true,
                                                   labelColor: Colors.blue,
                                                   labelStyle: const TextStyle(
-                                                      fontWeight: FontWeight.w400, fontSize: 10),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 10),
                                                   tabs: List.generate(
                                                     snaps.data!.docs.length,
                                                     (index) => Tab(
@@ -269,15 +315,21 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                         ),
                                         // ),
                                         Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 0, left: 20, right: 20),
+                                            padding: const EdgeInsets.only(
+                                                top: 0, left: 20, right: 20),
                                             child: Container(
                                               height: 480,
                                               color: cWhite,
-                                              child: (attendenceController.todayAttendence.value &&
-                                                          classController.className.value == '') ||
+                                              child: (attendenceController
+                                                              .todayAttendence
+                                                              .value &&
+                                                          classController
+                                                                  .className
+                                                                  .value ==
+                                                              '') ||
                                                       (!attendenceController
-                                                              .todayAttendence.value &&
+                                                              .todayAttendence
+                                                              .value &&
                                                           (attendenceController
                                                                       .fetchClassWiseMonthvalue
                                                                       .value ==
@@ -289,18 +341,25 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                                   ? Column(
                                                       children: [
                                                         Padding(
-                                                          padding: const EdgeInsets.all(8.0),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
                                                           child: Row(
                                                             mainAxisAlignment:
-                                                                MainAxisAlignment.center,
+                                                                MainAxisAlignment
+                                                                    .center,
                                                             children: [
                                                               Text(
-                                                                classController.className.value ==
+                                                                classController
+                                                                            .className
+                                                                            .value ==
                                                                         ''
                                                                     ? "Please select the class"
                                                                     : "Please select month and date",
                                                                 style: const TextStyle(
-                                                                    fontWeight: FontWeight.w400),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
                                                               ),
                                                             ],
                                                           ),
@@ -312,34 +371,46 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                                           children: [
                                                             Row(
                                                               mainAxisAlignment:
-                                                                  MainAxisAlignment.center,
+                                                                  MainAxisAlignment
+                                                                      .center,
                                                               children: [
-                                                                Text("Please take attendence"),
+                                                                Text(
+                                                                    "Please take attendence"),
                                                               ],
                                                             ),
                                                           ],
                                                         )
                                                       : TabBarView(
-                                                          children: List.generate(
-                                                            snaps.data!.docs.length,
-                                                            (index) => StudentAttendanceDataList(
-                                                              subjectID: snaps.data!.docs[index]
-                                                                  .data()['docid'],
+                                                          children:
+                                                              List.generate(
+                                                            snaps.data!.docs
+                                                                .length,
+                                                            (index) =>
+                                                                StudentAttendanceDataList(
+                                                              subjectID: snaps
+                                                                      .data!
+                                                                      .docs[index]
+                                                                      .data()[
+                                                                  'docid'],
                                                               formatted: attendenceController
-                                                                          .todayAttendence.value ==
+                                                                          .todayAttendence
+                                                                          .value ==
                                                                       true
                                                                   ? formatted
                                                                   : attendenceController
                                                                       .fetchClassWiseDatevalue
                                                                       .value,
                                                               monthwise: attendenceController
-                                                                          .todayAttendence.value ==
+                                                                          .todayAttendence
+                                                                          .value ==
                                                                       true
                                                                   ? monthwise
                                                                   : attendenceController
                                                                       .fetchClassWiseMonthvalue
                                                                       .value,
-                                                              data: snaps.data!.docs[index].data(),
+                                                              data: snaps.data!
+                                                                  .docs[index]
+                                                                  .data(),
                                                             ),
                                                           ),
                                                         ),
@@ -349,7 +420,9 @@ class PeriodWiseStudentsAttendance extends StatelessWidget {
                                   );
                                 } else if (snaps.data == null) {
                                   return const Center(
-                                    child: TextFontWidget(text: "No recordes found", fontsize: 16),
+                                    child: TextFontWidget(
+                                        text: "No recordes found",
+                                        fontsize: 16),
                                   );
                                 } else {
                                   return const LoadingWidget();

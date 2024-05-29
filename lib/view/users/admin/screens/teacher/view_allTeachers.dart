@@ -10,6 +10,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/teacher/teachers_de
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class AllTeacherListContainer extends StatelessWidget {
@@ -24,11 +25,15 @@ class AllTeacherListContainer extends StatelessWidget {
           // : teacherController.ontapTeacher.value == true
           //     ? CreateTeacher()
           : SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: ResponsiveWebSite.isMobile(context)
+                  ? Axis.horizontal
+                  : Axis.vertical,
               child: Container(
                 color: screenContainerbackgroundColor,
                 height: 700,
-                width: 1200,
+                width: ResponsiveWebSite.isDesktop(context)
+                    ? double.infinity
+                    : 1200,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                   child: Column(
@@ -158,40 +163,44 @@ class AllTeacherListContainer extends StatelessWidget {
                                   //     ));
                                   //   }
                                   if (snaPS.hasData) {
-                                    return snaPS.data!.docs.length ==0
-                                            ? const Center(
-                                              child: Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  "Please create Teacher",
-                                                  style: TextStyle(fontWeight: FontWeight.w400),
-                                                ),
+                                    return snaPS.data!.docs.isEmpty
+                                        ? const Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text(
+                                                "Please create Teacher",
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
-                                            )
-                                            : 
-                                    ListView.separated(
-                                        itemBuilder: (context, index) {
-                                          final data = TeacherModel.fromMap(
-                                              snaPS.data!.docs[index].data());
-                                          return GestureDetector(
-                                            onTap: () {
-                                              teacherController.teacherModelData
-                                                  .value = data;
-                                              teacherController.ontapviewteacher
-                                                  .value = true;
-                                            },
-                                            child: AllTeachersDataList(
-                                              index: index,
-                                              data: data,
                                             ),
-                                          );
-                                        },
-                                        separatorBuilder: (context, index) {
-                                          return const SizedBox(
-                                            height: 02,
-                                          );
-                                        },
-                                        itemCount: snaPS.data!.docs.length);
+                                          )
+                                        : ListView.separated(
+                                            itemBuilder: (context, index) {
+                                              final data = TeacherModel.fromMap(
+                                                  snaPS.data!.docs[index]
+                                                      .data());
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  teacherController
+                                                      .teacherModelData
+                                                      .value = data;
+                                                  teacherController
+                                                      .ontapviewteacher
+                                                      .value = true;
+                                                },
+                                                child: AllTeachersDataList(
+                                                  index: index,
+                                                  data: data,
+                                                ),
+                                              );
+                                            },
+                                            separatorBuilder: (context, index) {
+                                              return const SizedBox(
+                                                height: 02,
+                                              );
+                                            },
+                                            itemCount: snaPS.data!.docs.length);
                                   } else {
                                     return const LoadingWidget();
                                   }

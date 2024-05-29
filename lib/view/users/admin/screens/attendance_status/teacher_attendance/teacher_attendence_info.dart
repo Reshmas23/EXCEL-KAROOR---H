@@ -18,7 +18,9 @@ import '../../../../../widgets/blue_Container_widget/blue_Container_widget.dart'
 
 class TeacherAttendenceHistoryInfo extends StatelessWidget {
   final TeacherController teacherController = Get.put(TeacherController());
-  TeacherAttendenceHistoryInfo({super.key, });
+  TeacherAttendenceHistoryInfo({
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     final date = DateTime.now();
@@ -29,15 +31,16 @@ class TeacherAttendenceHistoryInfo extends StatelessWidget {
     String formatted = formatter.format(parseDate);
 
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+      scrollDirection:
+          ResponsiveWebSite.isMobile(context) ? Axis.horizontal : Axis.vertical,
       child: Container(
         color: screenContainerbackgroundColor,
         height: ResponsiveWebSite.isMobile(context) ? 890 : 820,
-        width: 1200,
+        width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             const Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 20, top: 20),
               child: TextFontWidget(
                 text: 'All History Teacher Attendance with Info 📶',
@@ -171,16 +174,14 @@ class TeacherAttendenceHistoryInfo extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                     top: 0, left: 05, right: 05),
                                 child: Container(
-                                  height: 480,
-                                  color: cWhite,
-                          
-                                  child:TeacherAttendanceDataList()
-                                ),
+                                    height: 480,
+                                    color: cWhite,
+                                    child: TeacherAttendanceDataList()),
                               )
                             ],
                           );
                         } else if (snaps.data == null) {
-                          return  const Center(
+                          return const Center(
                             child: TextFontWidget(
                                 text: "No recordes found", fontsize: 16),
                           );

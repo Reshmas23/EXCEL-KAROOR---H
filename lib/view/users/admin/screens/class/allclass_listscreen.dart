@@ -13,10 +13,11 @@ import 'package:vidyaveechi_website/view/users/admin/screens/students/student_de
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/button_container/button_container.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 
 class AllClassListView extends StatelessWidget {
   final ClassController classController = Get.put(ClassController());
-    AllClassListView({super.key});
+  AllClassListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +27,21 @@ class AllClassListView extends StatelessWidget {
       () => classController.ontapClass.value == true
           ? ClassDetailsContainer()
           : SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: ResponsiveWebSite.isMobile(context)
+                  ? Axis.horizontal
+                  : Axis.vertical,
               child: Container(
                 color: screenContainerbackgroundColor,
                 height: 650,
-                width: 1200,
+                width: ResponsiveWebSite.isDesktop(context)
+                    ? double.infinity
+                    : 1200,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 25),
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 25),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       const SizedBox(
+                      const SizedBox(
                         height: 40,
                         width: double.infinity,
                         child: TextFontWidget(
@@ -151,7 +156,7 @@ class AllClassListView extends StatelessWidget {
                               builder: (context, snaps) {
                                 if (snaps.hasData) {
                                   if (snaps.data!.docs.isEmpty) {
-                                    return  const Center(
+                                    return const Center(
                                       child: TextFontWidget(
                                           text:
                                               "No class found add new classes",
@@ -163,13 +168,12 @@ class AllClassListView extends StatelessWidget {
                                           final data = ClassModel.fromMap(
                                               snaps.data!.docs[index].data());
                                           return GestureDetector(
-                                            onTap: ()async {
-                                           
+                                            onTap: () async {
                                               classController
                                                   .classModelData.value = data;
                                               classController.ontapClass.value =
                                                   true;
-                                                    // await classController.getFirstSubjectId();
+                                              // await classController.getFirstSubjectId();
                                             },
                                             child: ClassDataListWidget(
                                               classStatus: snaps,

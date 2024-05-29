@@ -8,6 +8,7 @@ import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/attendence_history_status/attendence_history_status.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/exam_history_status/exam_history_status.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/detail_tileContainer.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
 
@@ -22,11 +23,13 @@ class StudentDetailsContainer extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: ResponsiveWebSite.isMobile(context)
+            ? Axis.horizontal
+            : Axis.vertical,
         child: Container(
           color: screenContainerbackgroundColor,
           height: 1000,
-          width: 1200,
+          width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -54,85 +57,87 @@ class StudentDetailsContainer extends StatelessWidget {
                           child: Column(
                             children: [
                               Get.find<ClassController>()
-                                              .ontapStudentsDetail
-                                              .value == true?
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 08,
-                                        right: 05,
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
+                                          .ontapStudentsDetail
+                                          .value ==
+                                      true
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 08,
+                                              right: 05,
+                                            ),
+                                            child: GestureDetector(
+                                              onTap: () {
                                                 Get.find<ClassController>()
-                                              .ontapStudentsDetail
-                                              .value = false;
-                                          Get.find<ClassController>()
-                                              .ontapClassStudents
-                                              .value = false;
-                                          studentController.ontapStudent.value =
-                                              false;
-                                        },
-                                        child:
-                                            const RouteNonSelectedTextContainer(
-                                                title: 'Home'),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 08,
-                                        right: 05,
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Get.find<ClassController>()
-                                              .ontapStudentsDetail
-                                              .value = false;
-                                        },
-                                        child:
-                                            const RouteNonSelectedTextContainer(
-                                                title: 'Back'),
-                                      ),
-                                    ),
-                                    const RouteSelectedTextContainer(
-                                        width: 140, title: 'Student Deatils'),
-                                  ],
-                                ),
-                              ):
-                               Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 08,
-                                        right: 05,
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
+                                                    .ontapStudentsDetail
+                                                    .value = false;
                                                 Get.find<ClassController>()
-                                              .ontapStudentsDetail
-                                              .value = false;
-                                          Get.find<ClassController>()
-                                              .ontapClassStudents
-                                              .value = false;
-                                          studentController.ontapStudent.value =
-                                              false;
-                                        },
-                                        child:
-                                            const RouteNonSelectedTextContainer(
-                                                title: 'Home'),
+                                                    .ontapClassStudents
+                                                    .value = false;
+                                                studentController
+                                                    .ontapStudent.value = false;
+                                              },
+                                              child:
+                                                  const RouteNonSelectedTextContainer(
+                                                      title: 'Home'),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 08,
+                                              right: 05,
+                                            ),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Get.find<ClassController>()
+                                                    .ontapStudentsDetail
+                                                    .value = false;
+                                              },
+                                              child:
+                                                  const RouteNonSelectedTextContainer(
+                                                      title: 'Back'),
+                                            ),
+                                          ),
+                                          const RouteSelectedTextContainer(
+                                              width: 140,
+                                              title: 'Student Deatils'),
+                                        ],
                                       ),
-                                    ),
-                                    
-                                    const RouteSelectedTextContainer(
-                                        width: 140, title: 'Student Deatils'),
-                                  ],
-                                ),
-                              )
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 08,
+                                              right: 05,
+                                            ),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Get.find<ClassController>()
+                                                    .ontapStudentsDetail
+                                                    .value = false;
+                                                Get.find<ClassController>()
+                                                    .ontapClassStudents
+                                                    .value = false;
+                                                studentController
+                                                    .ontapStudent.value = false;
+                                              },
+                                              child:
+                                                  const RouteNonSelectedTextContainer(
+                                                      title: 'Home'),
+                                            ),
+                                          ),
+                                          const RouteSelectedTextContainer(
+                                              width: 140,
+                                              title: 'Student Deatils'),
+                                        ],
+                                      ),
+                                    )
                             ],
                           ),
                         ),

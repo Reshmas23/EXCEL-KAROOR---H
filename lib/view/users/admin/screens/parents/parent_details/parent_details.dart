@@ -7,6 +7,7 @@ import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/parents/add_parent/add_parent_functio.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/detail_tileContainer.dart';
 import 'package:vidyaveechi_website/view/widgets/blue_Container_widget/blue_Container_widget.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
 
@@ -21,15 +22,17 @@ class ParentDetailsContainer extends StatelessWidget {
     return DefaultTabController(
       length: 0,
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: ResponsiveWebSite.isMobile(context)
+            ? Axis.horizontal
+            : Axis.vertical,
         child: Container(
           color: screenContainerbackgroundColor,
           height: 1000,
-          width: 1200,
+          width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 25, top: 25),
                 child: TextFontWidget(
                   text: 'Parent Details',
@@ -63,8 +66,8 @@ class ParentDetailsContainer extends StatelessWidget {
                                       ),
                                       child: GestureDetector(
                                         onTap: () {
-                                          parentController.ontapviewParent.value =
-                                              false;
+                                          parentController
+                                              .ontapviewParent.value = false;
                                         },
                                         child:
                                             const RouteNonSelectedTextContainer(
@@ -173,7 +176,8 @@ class ParentDetailsContainer extends StatelessWidget {
                                   Expanded(
                                     // flex: 1,
                                     child: Padding(
-                                      padding: const EdgeInsets.only(left: 20),
+                                      padding: const EdgeInsets.only(
+                                          left: 20, right: 10),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -199,7 +203,7 @@ class ParentDetailsContainer extends StatelessWidget {
                                                     Icons.edit_square,
                                                     size: 21,
                                                   ))),
-                                                  const Spacer(),
+                                              const Spacer(),
                                               GestureDetector(
                                                 onTap: () {
                                                   addParentToClass(context);
