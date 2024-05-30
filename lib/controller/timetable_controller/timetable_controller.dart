@@ -4,13 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:progress_state_button/progress_button.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
 import 'package:vidyaveechi_website/controller/subject_controller/subject_controller.dart';
 import 'package:vidyaveechi_website/controller/teacher_controller/teacher_controller.dart';
 import 'package:vidyaveechi_website/model/timetable_model/timetable_model.dart';
 import 'package:vidyaveechi_website/view/constant/const.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
+
+import '../../view/widgets/progress indicator dialogue/progress_indicator_dialogue.dart';
 
 class TimeTableController extends GetxController {
   List<String> weekList = [
@@ -60,60 +61,11 @@ class TimeTableController extends GetxController {
 
   Future<void> addTimeTableDataToFirebase(BuildContext context) async {
     progressValue.value = 0.1;  // Update progress
+    progressValue.value = 0.1;  // Update progress
     showDialog(
       context: context,
       builder: (context) {
-        return Center(
-          child: SizedBox(
-            height: 200,
-            width: 300,
-            child: Obx(() => SfRadialGauge(
-              axes: <RadialAxis>[
-                RadialAxis( minimum: 0,
-                        maximum: 100,
-                        showLabels: false,
-                        showTicks: false,
-                        startAngle: 270,
-                        endAngle: 270,
-                        axisLineStyle: const AxisLineStyle(
-                          thickness: 1,
-                          color: Color.fromARGB(255, 0, 169, 181),
-                          thicknessUnit: GaugeSizeUnit.factor,
-                        ),
-                        pointers: <GaugePointer>[
-                          RangePointer(
-                            value:progressValue.value * 100,
-                            width: 0.15,
-                            color: Colors.white,
-                            pointerOffset: 0.1,
-                            cornerStyle: CornerStyle.bothCurve,
-                            sizeUnit: GaugeSizeUnit.factor,
-                          )
-                        ],
-                  // minimum: 0,
-                  // maximum: 100,
-                  // showLabels: false,
-                  // showTicks: false,
-                  // startAngle: 270,
-                  // endAngle: 270,
-                  // axisLineStyle: const AxisLineStyle(
-                  //   thickness: 0.05,
-                  //   color: Color.fromARGB(100, 0, 169, 181),
-                  //   thicknessUnit: GaugeSizeUnit.factor,
-                  // ),
-                  // pointers: <GaugePointer>[
-                  //   RangePointer(
-                  //     value: progressValue.value * 100,
-                  //     width: 0.95,
-                  //     pointerOffset: 0.05,
-                  //     sizeUnit: GaugeSizeUnit.factor,
-                  //   )
-                  // ],
-                ),
-              ],
-            )),
-          ),
-        );
+        return   ProgressDialog(progressValue: progressValue);
       },
     );
 
