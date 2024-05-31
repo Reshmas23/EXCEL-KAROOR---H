@@ -235,10 +235,6 @@ class AdminProfileEdit extends StatelessWidget {
               controller: profileCtr.phoneController,
               hintText: ' phone no.',
               title: 'phone no.'),
-          TextFormFiledBlueContainerWidgetWithOutColor(
-              controller: profileCtr.emailController,
-              hintText: ' Email',
-              title: 'Email'),
           const TextFontWidget(text: 'Gender *', fontsize: 12.5),
           const SizedBox(height: 5),
           Container(
@@ -318,8 +314,6 @@ class AdminProfileWidgetOne extends StatelessWidget {
                 data['collection1']['about'] ?? "";
             profileCtr.phoneController.text =
                 data['collection1']['phoneNumber'] ?? "";
-            profileCtr.emailController.text =
-                data['collection1']['email'] ?? "";
             profileCtr.gender.value = data['collection1']['gender'] ?? "";
             log("Image URL: ${data['collection1']['image']}");
 
@@ -513,8 +507,6 @@ class AdminProfileWidgetOne extends StatelessWidget {
                 data['collection2']['about'] ?? "";
             profileCtr.phoneController.text =
                 data['collection2']['phoneNumber'] ?? "";
-            profileCtr.emailController.text =
-                data['collection2']['email'] ?? "";
             profileCtr.gender.value = data['collection2']['gender'] ?? "";
             log("Image URL: ${data['collection2']['image']}");
 

@@ -103,7 +103,6 @@ class AdminProfileController extends GetxController {
   TextEditingController designationController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
 
   Future updateAdminProfile() async {
     final Map<String, dynamic> updateMainAdmin = {
@@ -111,7 +110,6 @@ class AdminProfileController extends GetxController {
       "designation": designationController.text,
       "about": aboutController.text,
       "phoneNumber": phoneController.text,
-      "email": emailController.text,
       "gender": gender.value,
     };
     final Map<String, dynamic> updateData = {
@@ -119,7 +117,6 @@ class AdminProfileController extends GetxController {
       "designation": designationController.text,
       "about": aboutController.text,
       "phoneNumber": phoneController.text,
-      "email": emailController.text,
       "gender": gender.value,
     };
     final DocumentReference collection1 = server

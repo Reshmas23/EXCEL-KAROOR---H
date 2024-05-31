@@ -104,6 +104,13 @@ class AllTeacherListContainer extends StatelessWidget {
                                   width: 01,
                                 ),
                                 Expanded(
+                                    flex: 2,
+                                    child: CatrgoryTableHeaderWidget(
+                                        headerTitle: 'Card ID')),
+                                SizedBox(
+                                  width: 01,
+                                ),
+                                Expanded(
                                     flex: 4,
                                     child: CatrgoryTableHeaderWidget(
                                         headerTitle: 'Name')),
