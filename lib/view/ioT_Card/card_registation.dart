@@ -11,6 +11,7 @@ import 'package:vidyaveechi_website/view/ioT_Card/student_dataList.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
+import 'package:vidyaveechi_website/view/widgets/progess_button/progress_button.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class ClassWiseStudentListContainer extends StatelessWidget {
@@ -20,212 +21,258 @@ class ClassWiseStudentListContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("Schhol Id ${ioTCardController.schoolDocID.value}");
-    log("batchDocID Id ${ioTCardController.batchDocID.value}");
+    ioTCardController.registudentList.clear();
+    ioTCardController.cardList.clear();
+    ioTCardController.classStudentList.clear();
+    ioTCardController.allStudentList.clear();
     return Scaffold(
       appBar: AppBar(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Container(
-            color: screenContainerbackgroundColor,
-            height: 1000,
-            width: 1200,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 60,
-                    width: double.infinity,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const TextFontWidget(
-                          text: 'Class wise StudentList 📃',
-                          fontsize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        const Spacer(),
-                        SizedBox(
-                            height: 60,
-                            width: 200,
-                            child: CardSelectClassDropDown()),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const Row(
+      body: Obx(() {
+        if (ioTCardController.classTaped.value == true) {
+          ioTCardController.registudentList.clear();
+          ioTCardController.cardList.clear();
+          ioTCardController.classStudentList.clear();
+          ioTCardController.allStudentList.clear();
+          ioTCardController.getAllCardID();
+
+        }
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 60,
+                  width: double.infinity,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      RouteSelectedTextContainer(
-                        title: 'All Students',
-                        width: 200,
+                      const TextFontWidget(
+                        text: 'Class wise StudentList 📃',
+                        fontsize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
+                      const Spacer(),
+                      ioTCardController.classDocID.value == 'dd'
+                          ? Container()
+                          : StreamBuilder(
+                              stream: server
+                                  .collection('SchoolListCollection')
+                                  .doc(ioTCardController.schoolDocID.value)
+                                  .collection(
+                                      ioTCardController.batchDocID.value)
+                                  .doc(ioTCardController.batchDocID.value)
+                                  .collection('classes')
+                                  .doc(ioTCardController.classDocID.value)
+                                  .collection('Students')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                return TextFontWidget(
+                                  text:
+                                      'Student Count : ${snapshot.data?.docs.length ?? 0}  ',
+                                  fontsize: 16,
+                                  fontWeight: FontWeight.bold,
+                                );
+                              }),
                       SizedBox(
-                        width: 20,
-                      ),
-                      Spacer(),
+                          height: 60,
+                          width: 200,
+                          child: CardSelectClassDropDown()),
                     ],
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    color: cWhite,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5),
-                      child: Container(
-                        color: cWhite,
-                        height: 40,
-                        child: const Row(
-                          children: [
-                            Expanded(
-                                flex: 1,
-                                child: CatrgoryTableHeaderWidget(
-                                    headerTitle: 'No')),
-                            SizedBox(
-                              width: 02,
-                            ),
-                            Expanded(
-                                flex: 2,
-                                child: CatrgoryTableHeaderWidget(
-                                    headerTitle: 'CardID')),
-                            SizedBox(
-                              width: 02,
-                            ),
-                            Expanded(
-                                flex: 2,
-                                child: CatrgoryTableHeaderWidget(
-                                    headerTitle: 'AD.No')),
-                            SizedBox(
-                              width: 02,
-                            ),
-                            Expanded(
-                                flex: 4,
-                                child: CatrgoryTableHeaderWidget(
-                                    headerTitle: 'Name')),
-                            SizedBox(
-                              width: 02,
-                            ),
-                            Expanded(
-                                flex: 4,
-                                child: CatrgoryTableHeaderWidget(
-                                    headerTitle: 'E mail')),
-                            SizedBox(
-                              width: 02,
-                            ),
-                            Expanded(
-                                flex: 3,
-                                child: CatrgoryTableHeaderWidget(
-                                    headerTitle: 'Ph.NO')),
-                            SizedBox(
-                              width: 02,
-                            ),
-                            Expanded(
-                                flex: 2,
-                                child: CatrgoryTableHeaderWidget(
-                                    headerTitle: 'Class')),
-                            SizedBox(
-                              width: 02,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      // width: 1200,
-                      decoration: BoxDecoration(
-                        color: cWhite,
-                        border: Border.all(color: cWhite),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 5, left: 5),
-                        child: SizedBox(
-                          // width: 1100,
-                          child: Obx(() => StreamBuilder(
-                                stream: server
-                                    .collection('SchoolListCollection')
-                                    .doc(ioTCardController.schoolDocID.value)
-                                    .collection(
-                                        ioTCardController.batchDocID.value)
-                                    .doc(ioTCardController.batchDocID.value)
-                                    .collection('classes')
-                                    .doc(ioTCardController.classDocID.value)
-                                    .collection('Students')
-                                    .snapshots(),
-                                builder: (context, snaPS) {
-                                  if (snaPS.hasData) {
-                                    return ListView.separated(
-                                        itemBuilder: (context, index) {
-                                          final data = StudentModel.fromMap(
-                                              snaPS.data!.docs[index].data());
-                                          return GestureDetector(
-                                            onTap: () {},
-                                            child: StreamBuilder(
-                                                stream: server
-                                                    .collection(
-                                                        'StudentRegistration')
-                                                    .doc('CardData')
-                                                    .snapshots(),
-                                                builder: (context, cardSnaps) {
-                                                  if (cardSnaps.data
-                                                          ?.data()?['CardID'] !=
-                                                      '') {
-                                                    print("Calling...........");
-                                                    Get.find<
-                                                            IoTCardController>()
-                                                        .getAllCardID();
-                                                    for (var i = 0;
-                                                        i <
-                                                            snaPS.data!.docs
-                                                                .length;
-                                                        i++) {
-                                                          
-                                                      Get.find<
-                                                              IoTCardController>()
-                                                          .cardAsignToStudent(
-                                                        snaPS.data?.docs[i].data()['docid'],
-                                                      );
-                                                    }
-                                                  }
-                                                  return ClassWiseStudentDataList(
-                                                    serverData: snaPS
-                                                        .data!.docs[0]
-                                                        .data(),
-                                                    data: data,
-                                                    index: index,
-                                                  );
-                                                }),
-                                          );
-                                        },
-                                        separatorBuilder: (context, index) {
-                                          return const SizedBox(
-                                            height: 02,
-                                          );
-                                        },
-                                        itemCount: snaPS.data!.docs.length);
-                                  } else if (snaPS.data == null) {
-                                    return const LoadingWidget();
-                                  } else {
-                                    return const LoadingWidget();
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ioTCardController.classDocID.value == 'dd'
+                    ? Container()
+                    : Row(
+                        children: [
+                          StreamBuilder(
+                              stream: server
+                                  .collection('SchoolListCollection')
+                                  .doc(ioTCardController.schoolDocID.value)
+                                  .collection(
+                                      ioTCardController.batchDocID.value)
+                                  .doc(ioTCardController.batchDocID.value)
+                                  .collection('classes')
+                                  .doc(ioTCardController.classDocID.value)
+                                  .collection('Students')
+                                  .snapshots(),
+                              builder: (context, ssnapshot) {
+                                return ssnapshot.hasData
+                                    ? RouteSelectedTextContainer(
+                                        title:
+                                            'Completed  ${ioTCardController.classStudentList.length} / ${ssnapshot.data?.docs.length ?? 0} ',
+                                        width: 160,
+                                      )
+                                    : const SizedBox();
+                              }),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          StreamBuilder(
+                              stream: server
+                                  .collection('StudentRegistration')
+                                  .doc('CardData')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  if (snapshot.data!.data()?['CardID'] != '') {
+                                    ioTCardController.registerCardForStudent();
                                   }
-                                },
-                              )),
-                        ),
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                        color: cWhite,
+                                        border: Border.all(
+                                            color: themeColorBlue
+                                                .withOpacity(0.2))),
+                                    height: 30,
+                                    width: 350,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        TextFontWidget(
+                                          text:
+                                              ' Current Card NO 💳 :  ${snapshot.data?.data()?['CardID']}',
+                                          fontsize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: cBlack,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  return const CircularProgressIndicator
+                                      .adaptive();
+                                }
+                              }),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          ProgressButtonWidget(
+                              buttonstate: ioTCardController.buttonstate.value,
+                              text: '🔗 Status',
+                              function: () {}),
+                          const Spacer(),
+                        ],
+                      ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  color: cWhite,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: Container(
+                      color: cWhite,
+                      height: 40,
+                      child: const Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child:
+                                  CatrgoryTableHeaderWidget(headerTitle: 'No')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'CardID')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'AD.No')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(
+                              flex: 4,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'Name')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(
+                              flex: 4,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'E mail')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(
+                              flex: 3,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'Ph.NO')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'Class')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                        ],
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    // width: 1200,
+                    decoration: BoxDecoration(
+                      color: cWhite,
+                      border: Border.all(color: cWhite),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 5, left: 5),
+                      child: SizedBox(
+                          // width: 1100,
+                          child: StreamBuilder<List<StudentModel>>(
+                        stream: ioTCardController.fetchClassAllStudents(),
+                        builder: (context, snaPS) {
+                        log("count ${ioTCardController.classStudentList.length}");
+                          if (snaPS.hasData) {
+                            return ListView.separated(
+                                itemBuilder: (context, index) {
+                                  return ClassWiseStudentDataList(
+                                    data: ioTCardController
+                                        .registudentList[index],
+                                    index: index,
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const SizedBox(
+                                    height: 02,
+                                  );
+                                },
+                                itemCount:
+                                    ioTCardController.registudentList.length);
+                          } else if (snaPS.data == null) {
+                            return const LoadingWidget();
+                          } else {
+                            return const LoadingWidget();
+                          }
+                        },
+                      )),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

@@ -42,6 +42,7 @@ class CardSelectClassDropDown extends StatelessWidget {
           classCtrl.className.value = value.className;
           classCtrl.classId.value = value.classId;
           classCtrl.classDocID.value = value.docid;
+          classCtrl.classTaped.value = true;
           log("message ${classCtrl.classDocID.value}");
         }
       },

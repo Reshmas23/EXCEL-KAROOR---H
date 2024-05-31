@@ -4,7 +4,7 @@ import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 
 class RouteNonSelectedTextContainer extends StatelessWidget {
   final String title;
-  final int? width;
+  final double? width;
   const RouteNonSelectedTextContainer({
     super.key,
     required this.title,
@@ -17,7 +17,7 @@ class RouteNonSelectedTextContainer extends StatelessWidget {
       decoration:
           BoxDecoration(color: cWhite, border: Border.all(color: themeColorBlue.withOpacity(0.2))),
       height: 30,
-      width: 120,
+      width:width ?? 120,
       child: Center(
         child: TextFontWidget(
           text: title,
