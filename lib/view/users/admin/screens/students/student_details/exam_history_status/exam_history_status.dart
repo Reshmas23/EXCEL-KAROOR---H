@@ -99,28 +99,28 @@ class PerStudentExamHistory extends StatelessWidget {
                       Expanded(
                           flex: 1,
                           child: CatrgoryTableHeaderWidget(
-                              headerTitle: 'Attended Exam')),
+                              headerTitle: 'Obtained Mark')),
                       SizedBox(
                         width: 02,
                       ),
                       Expanded(
                           flex: 1,
                           child: CatrgoryTableHeaderWidget(
-                              headerTitle: 'Missed Exam')),
+                              headerTitle: 'Obtained Grade')),
                       SizedBox(
                         width: 02,
                       ),
                       Expanded(
                           flex: 1,
                           child: CatrgoryTableHeaderWidget(
-                              headerTitle: 'Total Exam')),
+                              headerTitle: 'Pass Exam')),
                       SizedBox(
                         width: 02,
                       ),
                       Expanded(
                           flex: 1,
                           child: CatrgoryTableHeaderWidget(
-                              headerTitle: 'Present/Absent')),
+                              headerTitle: 'Pass/Fail')),
                       SizedBox(
                         width: 02,
                       ),
