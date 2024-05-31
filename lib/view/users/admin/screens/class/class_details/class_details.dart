@@ -233,18 +233,18 @@ class ClassDetailsContainer extends StatelessWidget {
                                                         color: themeColorBlue,
                                                       ),
                                                       const Spacer(),
-                                                      BlueContainerWidget(
-                                                        color: themeColorBlue,
-                                                        fontSize: 12,
-                                                        title:
-                                                            'Assign Class Teacher',
-                                                        width: 125,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 10,
-                                                      ),
+                                                      // BlueContainerWidget(
+                                                      //   color: themeColorBlue,
+                                                      //   fontSize: 12,
+                                                      //   title:
+                                                      //       'Assign Class Teacher',
+                                                      //   width: 125,
+                                                      //   fontWeight:
+                                                      //       FontWeight.w500,
+                                                      // ),
+                                                      // const SizedBox(
+                                                      //   width: 10,
+                                                      // ),
                                                       GestureDetector(
                                                         onTap: () {
                                                           classController
