@@ -9,6 +9,7 @@ import '../../model/add_student_model/add_student_model.dart';
 import '../../widgets/buttonContainer.dart';
 import '../get_reports/excel.dart';
 
+// ignore: must_be_immutable
 class AddStudentToFirebase extends StatelessWidget {
   List<AddStudentModel> studentModelList = [];
  final AddStudentToFirebaseController addStudentToFirebase =

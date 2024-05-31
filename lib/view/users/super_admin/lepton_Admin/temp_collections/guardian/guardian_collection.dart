@@ -7,6 +7,7 @@ import 'package:vidyaveechi_website/view/users/super_admin/widgets/drop_down/sel
 import '../../../controllers/temp_Collection_controller/temp_gurdian_cotroller/temp_guardian_controller.dart';
 import '../../../widgets/drop_down/get_class.dart';
 
+// ignore: must_be_immutable
 class GuardianTempCollection extends StatelessWidget {
   TempGuardianController tempGuardianController = Get.put(TempGuardianController());
   String schoolID;

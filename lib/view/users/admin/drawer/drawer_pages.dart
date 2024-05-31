@@ -69,28 +69,32 @@ class DrawerSelectedPagesSection extends StatelessWidget {
                 ),
               ),
             ), ////////////////////////////////........sub....7
-            ListTile(
-              tileColor: selectedIndex == 2
+            Container(
+              color: selectedIndex == 2
                   ? themeColorBlue.withOpacity(0.1)
                   : Colors.transparent,
-              onTap: () {
-                index = 2;
-                onTap.call(index);
-              },
-              title: DashboardTextFontWidget(
-                title: 'Teacher Registration',
+              child: ListTile(
+                onTap: () {
+                  index = 2;
+                  onTap.call(index);
+                },
+                title: DashboardTextFontWidget(
+                  title: 'Teacher Registration',
+                ),
               ),
             ),///////////////////////..........sub........
-            ListTile(
-              tileColor: selectedIndex == 3
+             Container(
+              color: selectedIndex == 3
                   ? themeColorBlue.withOpacity(0.1)
                   : Colors.transparent,
-              onTap: () {
-                index = 3;
-                onTap.call(index);
-              },
-              title: DashboardTextFontWidget(
-                title: 'Non Teaching Staff Registration',
+              child: ListTile(
+                onTap: () {
+                  index = 3;
+                  onTap.call(index);
+                },
+                title: DashboardTextFontWidget(
+                  title: 'Non Teaching Staff Registration',
+                ),
               ),
             ),////////////////////...........sub
           ],
@@ -146,52 +150,70 @@ class DrawerSelectedPagesSection extends StatelessWidget {
         //         }
         //       }),
         // ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/student.png')),
-          tileColor: selectedIndex == 4
+         Container(
+          color: selectedIndex == 4
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 4;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'All Students',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/student.png')),
+            onTap: () {
+              index = 4;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'All Students',
+                ),
+              ],
+            ),
           ),
-        ), //////////////////////////////////........................2
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/teacher_1.png')),
-          tileColor: selectedIndex == 5
+        ), //////////////////////////.............................5
+          Container(
+          color: selectedIndex == 5
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 5;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'All Teachers',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/teacher_1.png')),
+            onTap: () {
+              index = 5;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'All Teachers',
+                ),
+              ],
+            ),
           ),
-        ), /////////////////////////////......................
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/parents.png')),
-          tileColor: selectedIndex == 6
+        ),  /////////////////////////////......................
+          Container(
+          color: selectedIndex == 6
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 6;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'All Parents',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/parents.png')),
+            onTap: () {
+              index = 6;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'All Parents',
+                ),
+              ],
+            ),
           ),
         ), //////////////////////////////////////........................
 
@@ -216,22 +238,29 @@ class DrawerSelectedPagesSection extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/fees&bills.png')),
-          tileColor: selectedIndex == 8
+          Container(
+          color: selectedIndex == 8
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 8;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Fees and Bills',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/fees&bills.png')),
+            onTap: () {
+              index = 8;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Fees and Bills',
+                ),
+              ],
+            ),
           ),
-        ), ///////////////////////////////////////6
+        ),
+        ///////////////////////////////////////6
         const SizedBox(
           height: 10,
         ),
@@ -258,255 +287,298 @@ class DrawerSelectedPagesSection extends StatelessWidget {
                 ),
               ),
             ), ////////////////////////////////........sub....7
-            ListTile(
-              tileColor: selectedIndex == 10
+            Container(
+              color: selectedIndex == 10
                   ? themeColorBlue.withOpacity(0.1)
                   : Colors.transparent,
-              onTap: () {
-                index = 10;
-                onTap.call(index);
-              },
-              title: DashboardTextFontWidget(
-                title: 'Teachers',
+              child: ListTile(
+                onTap: () {
+                  index = 10;
+                  onTap.call(index);
+                },
+                title: DashboardTextFontWidget(
+                  title: 'Teachers',
+                ),
               ),
             ), ///////////////////////..........sub........
           ],
         ), ///////////////////////////////////.................................8
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/exam.png')),
-          tileColor: selectedIndex == 11
+         Container(
+          color: selectedIndex == 11
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 11;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Examinations',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/exam.png')),
+            onTap: () {
+              index = 11;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Examinations',
+                ),
+              ],
+            ),
           ),
-        ),
+        ), 
         ///////////////////////////////////////////////.....................................
         const SizedBox(
           height: 10,
         ),
-        // ListTile(
-        //   leading: SizedBox(
-        //       height: 20,
-        //       width: 20,
-        //       child: Image.asset('webassets/png/results.png')),
-        //   tileColor: selectedIndex == 10
-        //       ? themeColorBlue.withOpacity(0.1)
-        //       : Colors.transparent,
-        //   onTap: () {
-        //     index = 10;
-        //     onTap.call(index);
-        //   },
-        //   title: DashboardTextFontWidget(
-        //     title: 'Results',
-        //   ),
-        //  ),
-        /////////////////////////////////////////////////.................
-        const SizedBox(
-          height: 10,
-        ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/notice.png')),
-          tileColor: selectedIndex == 12
+         Container(
+          color: selectedIndex == 12
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 12;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Notices',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/notice.png')),
+            onTap: () {
+              index = 12;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Notices',
+                ),
+              ],
+            ),
           ),
-        ),
-        /////////////////////////////////////////////////................
+        ), 
         /////////////////////////////////////////////////.......................................
         const SizedBox(
           height: 10,
         ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/banner.png')),
-          tileColor: selectedIndex == 13
+         Container(
+          color: selectedIndex == 13
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 13;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Events',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/banner.png')),
+            onTap: () {
+              index = 13;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Events',
+                ),
+              ],
+            ),
           ),
         ),
-
         /////////////////////////////////..................................
         const SizedBox(
           height: 10,
         ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/meetings.png')),
-          tileColor: selectedIndex == 14
+        Container(
+          color: selectedIndex == 14
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 14;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Meetings',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/meetings.png')),
+            onTap: () {
+              index = 14;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Meetings',
+                ),
+              ],
+            ),
           ),
         ),
         //////////////////////////////...........................................
         const SizedBox(
           height: 10,
         ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/notification.png')),
-          tileColor: selectedIndex == 15
+        Container(
+          color: selectedIndex == 15
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 15;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Notifications',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/notification.png')),
+            onTap: () {
+              index = 15;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Notifications',
+                ),
+              ],
+            ),
           ),
         ), //////////////////////////////////.......................
         const SizedBox(
           height: 10,
         ),
-
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/createadmin.png')),
-          tileColor: selectedIndex == 16
+        Container(
+          color: selectedIndex == 16
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 16;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Create Admin',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/createadmin.png')),
+            onTap: () {
+              index = 16;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Create Admin',
+                ),
+              ],
+            ),
           ),
         ), //////////////////////////////////////.................................
         const SizedBox(
           height: 10,
         ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/generalinstruction.png')),
-          tileColor: selectedIndex == 17
+        Container(
+          color: selectedIndex == 17
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 17;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'General Instructions',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/generalinstruction.png')),
+            onTap: () {
+              index = 17;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'General Instructions',
+                ),
+              ],
+            ),
           ),
         ), ///////////////////////////////////...................
         const SizedBox(
           height: 10,
         ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/achive.png')),
-          tileColor: selectedIndex == 18
+        Container(
+          color: selectedIndex == 18
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 18;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Achievements',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/achive.png')),
+            onTap: () {
+              index = 18;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Achievements',
+                ),
+              ],
+            ),
           ),
         ), //////////////////////////////////////...........................
         const SizedBox(
           height: 10,
         ),
-        ///////////////////////////////////////...............................
-
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/batchhistory.png')),
-          tileColor: selectedIndex == 19
+         Container(
+          color: selectedIndex == 19
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 19;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Batch History',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/batchhistory.png')),
+            onTap: () {
+              index = 19;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Batch History',
+                ),
+              ],
+            ),
           ),
         ), ///////////////////////////////.............................
         const SizedBox(
           height: 10,
         ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/timetable.png')),
-          tileColor: selectedIndex == 20
+         Container(
+          color: selectedIndex == 20
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 20;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'TimeTable',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/timetable.png')),
+            onTap: () {
+              index = 20;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'TimeTable',
+                ),
+              ],
+            ),
           ),
-        ), ////////////////////////////////////........................
+        ),  ////////////////////////////////////........................
         const SizedBox(
           height: 10,
         ),
-        ListTile(
-          leading: SizedBox(
-              height: 20,
-              width: 20,
-              child: Image.asset('webassets/png/logout.png')),
-          tileColor: selectedIndex == 21
+         Container(
+          color: selectedIndex == 21
               ? themeColorBlue.withOpacity(0.1)
               : Colors.transparent,
-          onTap: () {
-            index = 21;
-            onTap.call(index);
-          },
-          title: DashboardTextFontWidget(
-            title: 'Login Histroy',
+          child: ListTile(
+            leading: SizedBox(
+                height: 20,
+                width: 20,
+                child: Image.asset('webassets/png/logout.png')),
+            onTap: () {
+              index = 21;
+              onTap.call(index);
+            },
+            title: Row(
+              children: [
+                DashboardTextFontWidget(
+                  title: 'Login Histroy',
+                ),
+              ],
+            ),
           ),
-        ),
+        ),  
         const SizedBox(
           height: 10,
         ),

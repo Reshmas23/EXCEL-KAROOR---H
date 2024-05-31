@@ -11,6 +11,7 @@ import 'package:vidyaveechi_website/controller/class_controller/class_controller
 import 'package:vidyaveechi_website/model/student_model/student_model.dart';
 import 'package:vidyaveechi_website/view/constant/const.dart';
 import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/students/create_student/auto_createmail_function/auto_create_credentail.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 
@@ -114,12 +115,14 @@ class StudentController extends GetxController {
         .update({'editoption': status});
   }
 
-  Future<void> manualCreateaNewStudent() async {
+  Future<void> manualCreateaNewStudent(BuildContext context) async {
     buttonstate.value = ButtonState.loading;
     final studentEmail =
         '${stNameController.text.trim() + _randomNum}@gmail.com';
     String camelCaseText = studentEmail.split(" ").join();
     try {
+      
+
       final StudentModel studentDetail = StudentModel(
           cardID: '',
         cardTaken: false,
@@ -212,7 +215,10 @@ class StudentController extends GetxController {
                   schoolName: UserCredentialsController.schoolName ?? '',
                 );
               }).then((value) async {
-                if (automaticmail.value = true) {
+
+                if (automaticmail.value == true) {
+                autoCreateMailDetails(context,studentDetail.studentemail,
+                _randomstring,Get.find<ParentController>().stParnetEmail.value,'123456') ;
                   
                 }
                 buttonstate.value = ButtonState.success;

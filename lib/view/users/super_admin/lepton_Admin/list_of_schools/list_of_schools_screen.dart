@@ -16,9 +16,10 @@ class SchoolsListScreen extends StatefulWidget {
 class _SchoolsListScreenState extends State<SchoolsListScreen> {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     int columnCount = 3;
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    // double w = MediaQuery.of(context).size.width;
+    // double h = MediaQuery.of(context).size.height;
     return Scaffold(
         body: SafeArea(
       child: Column(

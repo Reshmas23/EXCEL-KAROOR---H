@@ -28,7 +28,7 @@ class AllMeetingsListPage extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Container(
               color: screenContainerbackgroundColor,
-              height: 920,
+              height: 680,
               width: 1200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,185 +95,172 @@ class AllMeetingsListPage extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 25, left: 25),
                           child: Container(
                             color: cWhite,
-                            height: 700,
+                            height: 500,
                             width: 1200,
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  color: cWhite,
-                                  height: 650,
-                                  width: 1200,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        color: cWhite,
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 5, right: 5),
-                                          child: Container(
-                                            color: cWhite,
-                                            height: 40,
-                                            child: const Row(
-                                              children: [
-                                                Expanded(
-                                                    flex: 1,
-                                                    child:
-                                                        CatrgoryTableHeaderWidget(
-                                                            headerTitle: 'No')),
-                                                SizedBox(
-                                                  width: 01,
-                                                ),
-                                                // Expanded(
-                                                //     flex: 2,
-                                                //     child: CatrgoryTableHeaderWidget(
-                                                //         headerTitle: 'ID')),
-                                                // SizedBox(
-                                                //   width: 01,
-                                                // ),
-                                                Expanded(
-                                                    flex: 4,
-                                                    child:
-                                                        CatrgoryTableHeaderWidget(
-                                                            headerTitle:
-                                                                'Topic')),
-                                                SizedBox(
-                                                  width: 02,
-                                                ),
-                                                Expanded(
-                                                    flex: 3,
-                                                    child:
-                                                        CatrgoryTableHeaderWidget(
-                                                            headerTitle:
-                                                                'Time')),
-                                                SizedBox(
-                                                  width: 02,
-                                                ),
-                                                Expanded(
-                                                    flex: 3,
-                                                    child:
-                                                        CatrgoryTableHeaderWidget(
-                                                            headerTitle:
-                                                                'Date')),
-                                                SizedBox(
-                                                  width: 02,
-                                                ),
-                                                Expanded(
-                                                    flex: 4,
-                                                    child:
-                                                        CatrgoryTableHeaderWidget(
-                                                            headerTitle:
-                                                                'Venue')),
-                                                SizedBox(
-                                                  width: 02,
-                                                ),
-                                                Expanded(
-                                                    flex: 3,
-                                                    child:
-                                                        CatrgoryTableHeaderWidget(
-                                                            headerTitle:
-                                                                'Edit')),
-                                                SizedBox(
-                                                  width: 02,
-                                                ),
-
-                                                Expanded(
-                                                    flex: 3,
-                                                    child:
-                                                        CatrgoryTableHeaderWidget(
-                                                            headerTitle:
-                                                                'Delete')),
-                                                SizedBox(
-                                                  width: 02,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 5, right: 5),
+                                  child: Container(
+                                    color: cWhite,
+                                    height: 40,
+                                    child: const Row(
+                                      children: [
+                                        Expanded(
+                                            flex: 1,
+                                            child:
+                                                CatrgoryTableHeaderWidget(
+                                                    headerTitle: 'No')),
+                                        SizedBox(
+                                          width: 01,
                                         ),
-                                      ),
-                                      StreamBuilder(
-                                          stream: server
-                                              .collection(
-                                                  'SchoolListCollection')
-                                              .doc(UserCredentialsController
-                                                  .schoolId)
-                                              .collection(
-                                                  UserCredentialsController
-                                                      .batchId!)
-                                              .doc(UserCredentialsController
-                                                  .batchId!)
-                                              .collection('AdminMeetings')
-                                              .snapshots(),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return const Center(
-                                                  child:
-                                                      CircularProgressIndicator());
-                                            }
-                                            // ignore: prefer_is_empty
-                                            if (snapshot.data!.docs.length ==
-                                                0) {
-                                              return Center(
-                                                  child: Text(
-                                                'No Meetings',
-                                                style: GoogleFonts.poppins(
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ));
-                                            }
-                                            return
-                                                // Container(
-                                                // color: screenContainerbackgroundColor,
-                                                // height: 650,
-                                                // width: 1200,
-                                                //child:
-                                                Expanded(
-                                              child: Container(
-                                                width: 1200,
-                                                decoration: BoxDecoration(
-                                                  color: cWhite,
-                                                  border:
-                                                      Border.all(color: cWhite),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 5, right: 5),
-                                                  child: ListView.separated(
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        final data =
-                                                            MeetingModel.fromMap(
-                                                                snapshot.data!
-                                                                    .docs[index]
-                                                                    .data());
-                                                        return GestureDetector(
-                                                          onTap: () {},
-                                                          child:
-                                                              AllMeetingsDataList(
-                                                            index: index,
-                                                            data: data,
-                                                          ),
-                                                        ); ///////
-                                                      },
-                                                      separatorBuilder:
-                                                          (context, index) {
-                                                        return const SizedBox(
-                                                          height: 02,
-                                                        );
-                                                      },
-                                                      itemCount: snapshot
-                                                          .data!.docs.length),
-                                                ),
-                                              ),
-                                              //  ),
-                                            );
-                                          }),
-                                    ],
+                                        // Expanded(
+                                        //     flex: 2,
+                                        //     child: CatrgoryTableHeaderWidget(
+                                        //         headerTitle: 'ID')),
+                                        // SizedBox(
+                                        //   width: 01,
+                                        // ),
+                                        Expanded(
+                                            flex: 4,
+                                            child:
+                                                CatrgoryTableHeaderWidget(
+                                                    headerTitle:
+                                                        'Topic')),
+                                        SizedBox(
+                                          width: 02,
+                                        ),
+                                        Expanded(
+                                            flex: 3,
+                                            child:
+                                                CatrgoryTableHeaderWidget(
+                                                    headerTitle:
+                                                        'Time')),
+                                        SizedBox(
+                                          width: 02,
+                                        ),
+                                        Expanded(
+                                            flex: 3,
+                                            child:
+                                                CatrgoryTableHeaderWidget(
+                                                    headerTitle:
+                                                        'Date')),
+                                        SizedBox(
+                                          width: 02,
+                                        ),
+                                        Expanded(
+                                            flex: 4,
+                                            child:
+                                                CatrgoryTableHeaderWidget(
+                                                    headerTitle:
+                                                        'Venue')),
+                                        SizedBox(
+                                          width: 02,
+                                        ),
+                                        Expanded(
+                                            flex: 3,
+                                            child:
+                                                CatrgoryTableHeaderWidget(
+                                                    headerTitle:
+                                                        'Edit')),
+                                        SizedBox(
+                                          width: 02,
+                                        ),
+                                                          
+                                        Expanded(
+                                            flex: 3,
+                                            child:
+                                                CatrgoryTableHeaderWidget(
+                                                    headerTitle:
+                                                        'Delete')),
+                                        SizedBox(
+                                          width: 02,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
+                                StreamBuilder(
+                                    stream: server
+                                        .collection(
+                                            'SchoolListCollection')
+                                        .doc(UserCredentialsController
+                                            .schoolId)
+                                        .collection(
+                                            UserCredentialsController
+                                                .batchId!)
+                                        .doc(UserCredentialsController
+                                            .batchId!)
+                                        .collection('AdminMeetings')
+                                        .snapshots(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return const Center(
+                                            child:
+                                                CircularProgressIndicator());
+                                      }
+                                      // ignore: prefer_is_empty
+                                      if (snapshot.data!.docs.length ==
+                                          0) {
+                                        return Center(
+                                            child: Text(
+                                          'No Meetings',
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 20,
+                                              fontWeight:
+                                                  FontWeight.w500),
+                                        ));
+                                      }
+                                      return
+                                          // Container(
+                                          // color: screenContainerbackgroundColor,
+                                          // height: 650,
+                                          // width: 1200,
+                                          //child:
+                                          Expanded(
+                                        child: Container(
+                                          width: 1200,
+                                          decoration: BoxDecoration(
+                                            color: cWhite,
+                                            border:
+                                                Border.all(color: cWhite),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                            child: ListView.separated(
+                                                itemBuilder:
+                                                    (context, index) {
+                                                  final data =
+                                                      MeetingModel.fromMap(
+                                                          snapshot.data!
+                                                              .docs[index]
+                                                              .data());
+                                                  return GestureDetector(
+                                                    onTap: () {},
+                                                    child:
+                                                        AllMeetingsDataList(
+                                                      index: index,
+                                                      data: data,
+                                                    ),
+                                                  ); ///////
+                                                },
+                                                separatorBuilder:
+                                                    (context, index) {
+                                                  return const SizedBox(
+                                                    height: 02,
+                                                  );
+                                                },
+                                                itemCount: snapshot
+                                                    .data!.docs.length),
+                                          ),
+                                        ),
+                                        //  ),
+                                      );
+                                    }),
                               ],
                             ),
                           ),

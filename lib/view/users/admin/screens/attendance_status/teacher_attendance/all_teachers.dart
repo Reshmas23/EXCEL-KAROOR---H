@@ -23,7 +23,7 @@ class AllTeachersAttendance extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Container(
               color: screenContainerbackgroundColor,
-              height: 1000,
+              height: 650,
               width: 1200,
               child: Padding(
                 padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
@@ -37,7 +37,7 @@ class AllTeachersAttendance extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           TextFontWidget(
-                            text: 'All Teacher Attendence History List  📃',
+                            text: 'All Teachers Attendence History List  📃',
                             fontsize: 18,
                             fontWeight: FontWeight.bold,
                           ),
