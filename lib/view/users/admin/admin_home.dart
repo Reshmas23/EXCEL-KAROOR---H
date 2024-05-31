@@ -6,7 +6,6 @@ import 'package:vidyaveechi_website/info/info.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/google_poppins_widget.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
-import 'package:vidyaveechi_website/view/ioT_Card/card_registation.dart';
 import 'package:vidyaveechi_website/view/ioT_Card/controller/iotCardController.dart';
 import 'package:vidyaveechi_website/view/users/admin/app_bar/admin_appBar.dart';
 import 'package:vidyaveechi_website/view/users/admin/create_new_admin_page/newAdminDetails/new_adminDetails.dart';

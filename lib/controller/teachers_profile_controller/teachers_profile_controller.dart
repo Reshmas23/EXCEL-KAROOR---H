@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:vidyaveechi_website/view/constant/const.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
-import 'package:vidyaveechi_website/view/widgets/drop_DownList/schoolDropDownList.dart';
 
 class TeacherImageController extends GetxController {
   Rxn<Uint8List> image = Rxn();

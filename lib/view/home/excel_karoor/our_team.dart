@@ -183,8 +183,8 @@ class OurTutionCenterContainer extends StatelessWidget {
 // ];
 
 List<String> images =[
-  'webassets/excel_karror/exl (1).JPG',
-  'webassets/excel_karror/exl (2).JPG',
-  'webassets/excel_karror/exl (4).JPG',
-  'webassets/excel_karror/exl (3).JPG',
+  'https://firebasestorage.googleapis.com/v0/b/excel-karoor-48ae3.appspot.com/o/excelkaroor_images%2Fexl%20(1).JPG?alt=media&token=6a0a963a-ee95-4a2e-b495-e0fdab1bc299',
+  'https://firebasestorage.googleapis.com/v0/b/excel-karoor-48ae3.appspot.com/o/excelkaroor_images%2Fexl%20(2).JPG?alt=media&token=eef2ca7f-d661-4e42-b61a-494f4cbc7a3e',
+  'https://firebasestorage.googleapis.com/v0/b/excel-karoor-48ae3.appspot.com/o/excelkaroor_images%2Fexl%20(3).JPG?alt=media&token=d4098cee-4178-4c22-bce2-5f920f9da130',
+  'https://firebasestorage.googleapis.com/v0/b/excel-karoor-48ae3.appspot.com/o/excelkaroor_images%2Fexl%20(4).JPG?alt=media&token=ff5f07ee-11da-49f7-bcdd-5a272768721e',
 ];
