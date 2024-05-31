@@ -24,21 +24,25 @@ class AllAdminListPage extends StatelessWidget {
     return Obx(() => adminController.ontapCreateAdmin.value == true
         ? CreateAdmin()
         : SingleChildScrollView(
+            scrollDirection: ResponsiveWebSite.isMobile(context)
+                ? Axis.horizontal
+                : Axis.vertical,
             child: Container(
               height: 700,
-              width: 1200,
+              width:
+                  ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
               color: const Color.fromARGB(255, 242, 236, 236),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      left: 30,
-                      right: 30,
-                      top: 40,
-                      bottom: 30,
-                    ),
-                    child: Text(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 15,
+                  right: 15,
+                  top: 40,
+                  bottom: 30,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
                       'List Of Admins',
                       style: TextStyle(
                         decoration: TextDecoration.none,
@@ -47,60 +51,31 @@ class AllAdminListPage extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 05, bottom: 5),
-                            child: GestureDetector(
-                              onTap: () {},
-                              child:
-                                  const RouteSelectedTextContainer(width: 130, title: 'ALL ADMINS'),
-                            ),
-                          ),
-                          const Spacer(),
-                          ResponsiveWebSite.isMobile(context)
-                              ? Column(
-                                  children: [
-                                    const SizedBox(height: 100.0), // Add some spacing (optional)
-                                    GestureDetector(
-                                      onTap: () {
-                                        adminController.ontapCreateAdmin.value = true;
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(right: 25, bottom: 5),
-                                        child: ButtonContainerWidget(
-                                          curving: 30,
-                                          colorindex: 0,
-                                          height: 35,
-                                          width: 130,
-                                          child: const Center(
-                                            child: TextFontWidgetRouter(
-                                              text: 'Create Admin',
-                                              fontsize: 12,
-                                              fontWeight: FontWeight.bold,
-                                              color: cWhite,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : GestureDetector(
-                                  // Use GestureDetector on larger screens
-                                  onTap: () {
-                                    adminController.ontapCreateAdmin.value = true;
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 25, bottom: 5),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: const RouteSelectedTextContainer(
+                              width: 130, title: 'ALL ADMINS'),
+                        ),
+                        const Spacer(),
+                        ResponsiveWebSite.isMobile(context)
+                            ? Column(
+                                children: [
+                                  // Add some spacing (optional)
+                                  GestureDetector(
+                                    onTap: () {
+                                      adminController.ontapCreateAdmin.value =
+                                          true;
+                                    },
                                     child: ButtonContainerWidget(
                                       curving: 30,
                                       colorindex: 0,
                                       height: 35,
-                                      width: 150,
+                                      width: 130,
                                       child: const Center(
                                         child: TextFontWidgetRouter(
                                           text: 'Create Admin',
@@ -111,64 +86,86 @@ class AllAdminListPage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                ),
-                        ],
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SizedBox(
-                          width: 1200,
-                          height: 500,
-                          child: Column(
-                            children: [
-                              const Row(
-                                children: [
-                                  HeaderOfTable(text: "No.", flex: 2),
-                                  HeaderOfTable(text: "Admin Name", flex: 8),
-                                  HeaderOfTable(text: "Email", flex: 9),
-                                  HeaderOfTable(text: "Phone Number", flex: 8),
-                                  HeaderOfTable(text: "Active/Deactive", flex: 7),
                                 ],
+                              )
+                            : GestureDetector(
+                                // Use GestureDetector on larger screens
+                                onTap: () {
+                                  adminController.ontapCreateAdmin.value = true;
+                                },
+                                child: ButtonContainerWidget(
+                                  curving: 30,
+                                  colorindex: 0,
+                                  height: 35,
+                                  width: 150,
+                                  child: const Center(
+                                    child: TextFontWidgetRouter(
+                                      text: 'Create Admin',
+                                      fontsize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: cWhite,
+                                    ),
+                                  ),
+                                ),
                               ),
-                              Expanded(
-                                child: StreamBuilder(
-                                    stream: server
-                                        .collection('SchoolListCollection')
-                                        .doc(UserCredentialsController.schoolId)
-                                        .collection('Admins')
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        return ListView.separated(
-                                          itemBuilder: (context, index) {
-                                            final data = AdminDetailsModel.fromMap(
-                                                snapshot.data!.docs[index].data());
-                                            // print(data.username);
-                                            // print(data.email);
-                                            // print(data.phoneNumber);
-                                            // print(data.active);
-                                            return AdminDataList(
-                                              index: index,
-                                              data: data,
-                                            );
-                                          },
-                                          separatorBuilder: (context, index) => const SizedBox(
-                                            height: 1,
-                                          ),
-                                          itemCount: snapshot.data!.docs.length,
-                                        );
-                                      } else {
-                                        return const LoadingWidget();
-                                      }
-                                    }),
-                              ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      color: cWhite,
+                      height: 500,
+                      width: 1200,
+                      child: Column(
+                        children: [
+                          const Row(
+                            children: [
+                              HeaderOfTable(text: "No.", flex: 2),
+                              HeaderOfTable(text: "Admin Name", flex: 8),
+                              HeaderOfTable(text: "Email", flex: 9),
+                              HeaderOfTable(text: "Phone Number", flex: 8),
+                              HeaderOfTable(text: "Active/Deactive", flex: 7),
                             ],
                           ),
-                        ),
+                          Expanded(
+                            child: StreamBuilder(
+                                stream: server
+                                    .collection('SchoolListCollection')
+                                    .doc(UserCredentialsController.schoolId)
+                                    .collection('Admins')
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return ListView.separated(
+                                      itemBuilder: (context, index) {
+                                        final data = AdminDetailsModel.fromMap(
+                                            snapshot.data!.docs[index].data());
+                                        // print(data.username);
+                                        // print(data.email);
+                                        // print(data.phoneNumber);
+                                        // print(data.active);
+                                        return AdminDataList(
+                                          index: index,
+                                          data: data,
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                        height: 1,
+                                      ),
+                                      itemCount: snapshot.data!.docs.length,
+                                    );
+                                  } else {
+                                    return const LoadingWidget();
+                                  }
+                                }),
+                          ),
+                        ],
                       ),
-                    ],
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ));

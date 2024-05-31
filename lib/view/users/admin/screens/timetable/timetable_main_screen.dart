@@ -137,12 +137,15 @@ class TimeTableMainScreen extends StatelessWidget {
     ];
 
     return Obx(() => SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+          scrollDirection: ResponsiveWebSite.isMobile(context)
+              ? Axis.horizontal
+              : Axis.vertical,
           child: Container(
             color: screenContainerbackgroundColor,
-            height:// ResponsiveWebSite.isMobile(context) ? 890 :
-            650,
-            width: 1200,
+            height: // ResponsiveWebSite.isMobile(context) ? 890 :
+                650,
+            width:
+                ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
             padding: const EdgeInsets.only(top: 8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +208,7 @@ class TimeTableMainScreen extends StatelessWidget {
                     child: Container(
                       color: cWhite,
                       height: //ResponsiveWebSite.isMobile(context) ? 750 :
-                       540,
+                          540,
                       width: double.infinity,
                       child: StreamBuilder(
                           stream: server

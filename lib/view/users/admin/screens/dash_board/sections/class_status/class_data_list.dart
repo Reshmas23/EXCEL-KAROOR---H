@@ -48,7 +48,7 @@ class ClassDataList extends StatelessWidget {
                 rowMainAccess: MainAxisAlignment.center,
                 color: cWhite,
                 index: index,
-                headerTitle: classData['classTeacherName'] == null
+                headerTitle: classData['classTeacherName'] != null
                     ? '  ${classData['classTeacherName']}'
                     : 'not found',
               ),

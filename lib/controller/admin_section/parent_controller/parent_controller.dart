@@ -25,6 +25,7 @@ class ParentController extends GetxController {
   RxString stParnetEmail = ''.obs;
   RxBool ontapviewParent = false.obs;
   Rxn<ParentModel> parentModelData = Rxn<ParentModel>();
+  List<ParentModel> parentProfileList = [];
 
 //......................  Add Parent Section
 
@@ -107,6 +108,18 @@ class ParentController extends GetxController {
         buttonstate.value = ButtonState.idle;
       });
       log("Error .... $e");
+    }
+  }
+
+  Future<void> fetchAllParents() async {
+    try {
+      log("fetchAllParents......................");
+      final data = await _fbServer.collection('AllParents').get();
+      parentProfileList =
+          data.docs.map((e) => ParentModel.fromMap(e.data())).toList();
+      print(parentProfileList[0]);
+    } catch (e) {
+      showToast(msg: "User Data Error");
     }
   }
 }

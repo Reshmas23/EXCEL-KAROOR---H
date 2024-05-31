@@ -25,250 +25,205 @@ class AllMeetingsListPage extends StatelessWidget {
     return Obx(() => meetingController.ontapMeeting.value == true
         ? CreateMeetinPage()
         : SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
+            scrollDirection: ResponsiveWebSite.isMobile(context)
+                ? Axis.horizontal
+                : Axis.vertical,
             child: Container(
               color: screenContainerbackgroundColor,
               height: 680,
-              width: 1200,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 25, top: 25),
-                    child: TextFontWidget(
+              width:
+                  ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, top: 25, right: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TextFontWidget(
                       text: "Meeting",
                       fontsize: 21,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 40,
-                      left: 8,
-                      right: 8,
+                    const SizedBox(
+                      height: 20,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 05, bottom: 5),
-                              child: GestureDetector(
-                                onTap: () {
-                                  //   meetingController.ontapMeeting.value = true;
-                                },
-                                child: const RouteSelectedTextContainer(
-                                    width: 150, title: 'ALL MEETINGS'),
-                              ),
-                            ),
-                            const Spacer(),
-                            GestureDetector(
-                              onTap: () {
-                                meetingController.ontapMeeting.value = true;
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 25, bottom: 5),
-                                child: ButtonContainerWidget(
-                                    curving: 30,
-                                    colorindex: 0,
-                                    height: 35,
-                                    width: 150,
-                                    child: const Center(
-                                      child: TextFontWidgetRouter(
-                                        text: 'Create Meetings',
-                                        fontsize: 12,
-                                        fontWeight: FontWeight.bold,
-                                        color: cWhite,
-                                      ),
-                                    )),
-                              ),
-                            )
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            //   meetingController.ontapMeeting.value = true;
+                          },
+                          child: const RouteSelectedTextContainer(
+                              width: 150, title: 'ALL MEETINGS'),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 25, left: 25),
-                          child: Container(
-                            color: cWhite,
-                            height: 500,
-                            width: 1200,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 5, right: 5),
-                                  child: Container(
-                                    color: cWhite,
-                                    height: 40,
-                                    child: const Row(
-                                      children: [
-                                        Expanded(
-                                            flex: 1,
-                                            child:
-                                                CatrgoryTableHeaderWidget(
-                                                    headerTitle: 'No')),
-                                        SizedBox(
-                                          width: 01,
-                                        ),
-                                        // Expanded(
-                                        //     flex: 2,
-                                        //     child: CatrgoryTableHeaderWidget(
-                                        //         headerTitle: 'ID')),
-                                        // SizedBox(
-                                        //   width: 01,
-                                        // ),
-                                        Expanded(
-                                            flex: 4,
-                                            child:
-                                                CatrgoryTableHeaderWidget(
-                                                    headerTitle:
-                                                        'Topic')),
-                                        SizedBox(
-                                          width: 02,
-                                        ),
-                                        Expanded(
-                                            flex: 3,
-                                            child:
-                                                CatrgoryTableHeaderWidget(
-                                                    headerTitle:
-                                                        'Time')),
-                                        SizedBox(
-                                          width: 02,
-                                        ),
-                                        Expanded(
-                                            flex: 3,
-                                            child:
-                                                CatrgoryTableHeaderWidget(
-                                                    headerTitle:
-                                                        'Date')),
-                                        SizedBox(
-                                          width: 02,
-                                        ),
-                                        Expanded(
-                                            flex: 4,
-                                            child:
-                                                CatrgoryTableHeaderWidget(
-                                                    headerTitle:
-                                                        'Venue')),
-                                        SizedBox(
-                                          width: 02,
-                                        ),
-                                        Expanded(
-                                            flex: 3,
-                                            child:
-                                                CatrgoryTableHeaderWidget(
-                                                    headerTitle:
-                                                        'Edit')),
-                                        SizedBox(
-                                          width: 02,
-                                        ),
-                                                          
-                                        Expanded(
-                                            flex: 3,
-                                            child:
-                                                CatrgoryTableHeaderWidget(
-                                                    headerTitle:
-                                                        'Delete')),
-                                        SizedBox(
-                                          width: 02,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            meetingController.ontapMeeting.value = true;
+                          },
+                          child: ButtonContainerWidget(
+                              curving: 30,
+                              colorindex: 0,
+                              height: 35,
+                              width: 150,
+                              child: const Center(
+                                child: TextFontWidgetRouter(
+                                  text: 'Create Meetings',
+                                  fontsize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: cWhite,
                                 ),
-                                StreamBuilder(
-                                    stream: server
-                                        .collection(
-                                            'SchoolListCollection')
-                                        .doc(UserCredentialsController
-                                            .schoolId)
-                                        .collection(
-                                            UserCredentialsController
-                                                .batchId!)
-                                        .doc(UserCredentialsController
-                                            .batchId!)
-                                        .collection('AdminMeetings')
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return const Center(
-                                            child:
-                                                CircularProgressIndicator());
-                                      }
-                                      // ignore: prefer_is_empty
-                                      if (snapshot.data!.docs.length ==
-                                          0) {
-                                        return Center(
-                                            child: Text(
-                                          'No Meetings',
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 20,
-                                              fontWeight:
-                                                  FontWeight.w500),
-                                        ));
-                                      }
-                                      return
-                                          // Container(
-                                          // color: screenContainerbackgroundColor,
-                                          // height: 650,
-                                          // width: 1200,
-                                          //child:
-                                          Expanded(
-                                        child: Container(
-                                          width: 1200,
-                                          decoration: BoxDecoration(
-                                            color: cWhite,
-                                            border:
-                                                Border.all(color: cWhite),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(
-                                                    left: 5, right: 5),
-                                            child: ListView.separated(
-                                                itemBuilder:
-                                                    (context, index) {
-                                                  final data =
-                                                      MeetingModel.fromMap(
-                                                          snapshot.data!
-                                                              .docs[index]
-                                                              .data());
-                                                  return GestureDetector(
-                                                    onTap: () {},
-                                                    child:
-                                                        AllMeetingsDataList(
-                                                      index: index,
-                                                      data: data,
-                                                    ),
-                                                  ); ///////
-                                                },
-                                                separatorBuilder:
-                                                    (context, index) {
-                                                  return const SizedBox(
-                                                    height: 02,
-                                                  );
-                                                },
-                                                itemCount: snapshot
-                                                    .data!.docs.length),
-                                          ),
-                                        ),
-                                        //  ),
-                                      );
-                                    }),
-                              ],
-                            ),
-                          ),
-                        ),
+                              )),
+                        )
                       ],
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      color: cWhite,
+                      height: 500,
+                      width: 1200,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5, right: 5),
+                            child: Container(
+                              color: cWhite,
+                              height: 40,
+                              child: const Row(
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'No')),
+                                  SizedBox(
+                                    width: 01,
+                                  ),
+                                  // Expanded(
+                                  //     flex: 2,
+                                  //     child: CatrgoryTableHeaderWidget(
+                                  //         headerTitle: 'ID')),
+                                  // SizedBox(
+                                  //   width: 01,
+                                  // ),
+                                  Expanded(
+                                      flex: 4,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Topic')),
+                                  SizedBox(
+                                    width: 02,
+                                  ),
+                                  Expanded(
+                                      flex: 3,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Time')),
+                                  SizedBox(
+                                    width: 02,
+                                  ),
+                                  Expanded(
+                                      flex: 3,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Date')),
+                                  SizedBox(
+                                    width: 02,
+                                  ),
+                                  Expanded(
+                                      flex: 4,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Venue')),
+                                  SizedBox(
+                                    width: 02,
+                                  ),
+                                  Expanded(
+                                      flex: 3,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Edit')),
+                                  SizedBox(
+                                    width: 02,
+                                  ),
+
+                                  Expanded(
+                                      flex: 3,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Delete')),
+                                  SizedBox(
+                                    width: 02,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          StreamBuilder(
+                              stream: server
+                                  .collection('SchoolListCollection')
+                                  .doc(UserCredentialsController.schoolId)
+                                  .collection(
+                                      UserCredentialsController.batchId!)
+                                  .doc(UserCredentialsController.batchId!)
+                                  .collection('AdminMeetings')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                // ignore: prefer_is_empty
+                                if (snapshot.data!.docs.length == 0) {
+                                  return Center(
+                                      child: Text(
+                                    'No Meetings',
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ));
+                                }
+                                return
+                                    // Container(
+                                    // color: screenContainerbackgroundColor,
+                                    // height: 650,
+                                    // width: 1200,
+                                    //child:
+                                    Expanded(
+                                  child: Container(
+                                    width: 1200,
+                                    decoration: BoxDecoration(
+                                      color: cWhite,
+                                      border: Border.all(color: cWhite),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 5, right: 5),
+                                      child: ListView.separated(
+                                          itemBuilder: (context, index) {
+                                            final data = MeetingModel.fromMap(
+                                                snapshot.data!.docs[index]
+                                                    .data());
+                                            return GestureDetector(
+                                              onTap: () {},
+                                              child: AllMeetingsDataList(
+                                                index: index,
+                                                data: data,
+                                              ),
+                                            ); ///////
+                                          },
+                                          separatorBuilder: (context, index) {
+                                            return const SizedBox(
+                                              height: 02,
+                                            );
+                                          },
+                                          itemCount:
+                                              snapshot.data!.docs.length),
+                                    ),
+                                  ),
+                                  //  ),
+                                );
+                              }),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ));

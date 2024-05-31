@@ -142,16 +142,13 @@ class AppBarAdminPanel extends StatelessWidget {
                                     return const Center(
                                         child: CircularProgressIndicator());
                                   } else if (snapshot.hasError) {
-                                    return const Center(
-                                        child:
-                                            Text('Error'));
+                                    return const Center(child: Text('Error'));
                                   } else {
                                     final data = snapshot.data;
                                     if (data != null &&
                                         data.containsKey('collection1')) {
                                       return Text(
-                                        data['collection1']
-                                                ['adminUserName'] ??
+                                        data['collection1']['adminUserName'] ??
                                             '',
                                         style: const TextStyle(fontSize: 12),
                                       );
@@ -162,8 +159,7 @@ class AppBarAdminPanel extends StatelessWidget {
                                         style: const TextStyle(fontSize: 12),
                                       );
                                     } else {
-                                      return const Center(
-                                          child: Text("--"));
+                                      return const Center(child: Text("--"));
                                     }
                                   }
                                 },

@@ -13,6 +13,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/students/student_de
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/blue_Container_widget/blue_Container_widget.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
 
@@ -32,11 +33,15 @@ class ClassDetailsContainer extends StatelessWidget {
         return classController.ontapLeaveApplication.value == true
             ? LeaveApplicationList()
             : SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: ResponsiveWebSite.isMobile(context)
+                    ? Axis.horizontal
+                    : Axis.vertical,
                 child: Container(
                   color: screenContainerbackgroundColor,
                   height: 1000,
-                  width: 1200,
+                  width: ResponsiveWebSite.isDesktop(context)
+                      ? double.infinity
+                      : 1200,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -214,25 +219,30 @@ class ClassDetailsContainer extends StatelessWidget {
                                             child: Padding(
                                               padding: const EdgeInsets.only(left: 20),
                                               child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
                                                   Row(
                                                     children: [
                                                       const Icon(Icons.person),
-                                                       TextFontWidget(
-                                                        text: " ${data.classTeacherName??''}",
+                                                      TextFontWidget(
+                                                        text:
+                                                            " ${data.classTeacherName ?? ''}",
                                                         fontsize: 12,
                                                         color: themeColorBlue,
                                                       ),
                                                       const Spacer(),
                                                       BlueContainerWidget(
-                                                          color: themeColorBlue,
-                                                          fontSize: 12,
-                                                          title: 'Assign Class Teacher',
-                                                          width: 125,
-                                                          fontWeight: FontWeight.w500,
-                                                        ),
-                                                        const SizedBox(
+                                                        color: themeColorBlue,
+                                                        fontSize: 12,
+                                                        title:
+                                                            'Assign Class Teacher',
+                                                        width: 125,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                      const SizedBox(
                                                         width: 10,
                                                       ),
                                                       GestureDetector(

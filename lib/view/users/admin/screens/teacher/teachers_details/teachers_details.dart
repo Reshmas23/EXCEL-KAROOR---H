@@ -7,6 +7,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/teacher/asign_subje
 import 'package:vidyaveechi_website/view/users/admin/screens/teacher/teachers_details/widgets/detail_tileContainer.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/blue_Container_widget/blue_Container_widget.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
 
@@ -23,15 +24,17 @@ class TeachersDetailsContainer extends StatelessWidget {
       length: 0,
       //2,
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: ResponsiveWebSite.isMobile(context)
+            ? Axis.horizontal
+            : Axis.vertical,
         child: Container(
           color: screenContainerbackgroundColor,
           height: 1000,
-          width: 1200,
+          width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               const Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 25, top: 25),
                 child: TextFontWidget(
                   text: 'Teacher Details',
@@ -92,12 +95,12 @@ class TeachersDetailsContainer extends StatelessWidget {
                           // mainAxisAlignment: MainAxisAlignment.start,
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Padding(
+                            Padding(
                               padding: const EdgeInsets.only(top: 05, left: 10),
                               child: CircleAvatar(
                                 radius: 80,
                                 backgroundColor: Colors.grey,
-                                child:CircleAvatar(
+                                child: CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       UserCredentialsController
                                               .teacherModel?.imageUrl ??
