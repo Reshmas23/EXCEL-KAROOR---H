@@ -60,14 +60,14 @@ class ImageController extends GetxController {
     final Map<String, dynamic> updateData = {
       "image": uploadedImage,
     };
-    final DocumentReference collection1 = FirebaseFirestore.instance
+    final DocumentReference collection1 = server
         .collection('SchoolListCollection')
-        .doc(serverAuth.currentUser!.uid);
-    final DocumentReference collection2 = FirebaseFirestore.instance
+        .doc(UserCredentialsController.currentUserDocid);
+    final DocumentReference collection2 = server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
-        .doc(serverAuth.currentUser!.uid);
+        .doc(UserCredentialsController.currentUserDocid);
     final collection1Snapshot = await collection1.get();
     final collection2Snapshot = await collection2.get();
 
@@ -103,7 +103,6 @@ class AdminProfileController extends GetxController {
   TextEditingController designationController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
 
   Future updateAdminProfile() async {
     final Map<String, dynamic> updateMainAdmin = {
@@ -111,7 +110,6 @@ class AdminProfileController extends GetxController {
       "designation": designationController.text,
       "about": aboutController.text,
       "phoneNumber": phoneController.text,
-      "email": emailController.text,
       "gender": gender.value,
     };
     final Map<String, dynamic> updateData = {
@@ -119,17 +117,16 @@ class AdminProfileController extends GetxController {
       "designation": designationController.text,
       "about": aboutController.text,
       "phoneNumber": phoneController.text,
-      "email": emailController.text,
       "gender": gender.value,
     };
-    final DocumentReference collection1 = FirebaseFirestore.instance
+    final DocumentReference collection1 = server
         .collection('SchoolListCollection')
-        .doc(serverAuth.currentUser!.uid);
-    final DocumentReference collection2 = FirebaseFirestore.instance
+        .doc(UserCredentialsController.currentUserDocid);
+    final DocumentReference collection2 = server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
-        .doc(serverAuth.currentUser!.uid);
+        .doc(UserCredentialsController.currentUserDocid);
     final collection1Snapshot = await collection1.get();
     final collection2Snapshot = await collection2.get();
 
@@ -161,15 +158,16 @@ class AdminProfileController extends GetxController {
   }
 
   Future<Map<String, dynamic>> fetchData() async {
-    final DocumentSnapshot collection1 = await FirebaseFirestore.instance
+    log("admin uid ${UserCredentialsController.currentUserDocid}");
+    final DocumentSnapshot collection1 = await server
         .collection('SchoolListCollection')
-        .doc(serverAuth.currentUser!.uid)
+        .doc(UserCredentialsController.currentUserDocid)
         .get();
-    final DocumentSnapshot collection2 = await FirebaseFirestore.instance
+    final DocumentSnapshot collection2 = await server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('Admins')
-        .doc(serverAuth.currentUser!.uid)
+        .doc(UserCredentialsController.currentUserDocid)
         .get();
 
     if (collection1.exists) {
@@ -207,7 +205,7 @@ class StudentProfileController extends GetxController {
     };
 
     try {
-      await FirebaseFirestore.instance
+      await server
           .collection('SchoolListCollection')
           .doc(UserCredentialsController.schoolId)
           .collection(UserCredentialsController.batchId ?? "")

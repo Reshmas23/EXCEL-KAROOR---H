@@ -12,6 +12,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/students/student_de
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/button_container/button_container.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class AllExamNotificationListView extends StatelessWidget {
@@ -22,11 +23,15 @@ class AllExamNotificationListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+       scrollDirection: ResponsiveWebSite.isMobile(context)
+                        ? Axis.horizontal
+                        : Axis.vertical,
       child: Container(
         color: screenContainerbackgroundColor,
         height: 650,
-        width: 1000,
+        width: ResponsiveWebSite.isDesktop(context)
+                          ? double.infinity
+                          : 1200,
         child: Padding(
           padding: const EdgeInsets.only(
             top: 0,

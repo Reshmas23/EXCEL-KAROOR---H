@@ -6,6 +6,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/achievements/create
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class Achievements extends StatefulWidget {
@@ -19,11 +20,12 @@ class _AchievementsState extends State<Achievements> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+      scrollDirection:
+          ResponsiveWebSite.isMobile(context) ? Axis.horizontal : Axis.vertical,
       child: Container(
         color: screenContainerbackgroundColor,
         height: 650,
-        width: 1200,
+        width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
         padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +45,8 @@ class _AchievementsState extends State<Achievements> {
               padding: EdgeInsets.only(bottom: 10),
               child: Row(
                 children: [
-                  RouteSelectedTextContainer(width: 180, title: 'All Notices'),
+                  RouteSelectedTextContainer(
+                      width: 180, title: 'All Achievements'),
                   Spacer(),
                   CreateAchievement()
                 ],

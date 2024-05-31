@@ -52,9 +52,9 @@ class UserLoginController extends GetxController {
           .signInWithEmailAndPassword(
               email: userEmailIDController.text.trim(),
               password: userPasswordController.text.trim())
-          .then((value) async {
+          .then((authvalue) async {
         await SharedPreferencesHelper.setString(
-            SharedPreferencesHelper.currentUserDocid, value.user!.uid);
+            SharedPreferencesHelper.currentUserDocid, authvalue.user!.uid);
         final result = await server
             .collection('SchoolListCollection')
             .doc(schoolID)
@@ -106,12 +106,12 @@ class UserLoginController extends GetxController {
           .signInWithEmailAndPassword(
               email: userEmailIDController.text.trim(),
               password: userPasswordController.text.trim())
-          .then((value) async {
+          .then((authvalue) async {
         await SharedPreferencesHelper.setString(
-            SharedPreferencesHelper.currentUserDocid, value.user!.uid);
+            SharedPreferencesHelper.currentUserDocid, authvalue.user!.uid);
         log("Admin ID $userUID");
         log("schoolID ID $schoolID");
-        userUID.value = value.user!.uid;
+        userUID.value = authvalue.user!.uid;
         if (user.data()?['batchYear'] == '') {
           setBatchYear(context);
         } else {

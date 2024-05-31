@@ -21,8 +21,10 @@ import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class CreatedFeesStatus extends StatelessWidget {
-  final FeesAndBillsController feesAndBillsController = Get.put(FeesAndBillsController());
-  final StudentFeeController studentFeeController = Get.put(StudentFeeController());
+  final FeesAndBillsController feesAndBillsController =
+      Get.put(FeesAndBillsController());
+  final StudentFeeController studentFeeController =
+      Get.put(StudentFeeController());
   CreatedFeesStatus({super.key});
 
   @override
@@ -30,33 +32,40 @@ class CreatedFeesStatus extends StatelessWidget {
     return Obx(() => feesAndBillsController.ontapviewclasswiseFees.value == true
         ? const ClassWiseFeesStatus()
         : SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
+            scrollDirection: ResponsiveWebSite.isMobile(context)
+                ? Axis.horizontal
+                : Axis.vertical,
             child: Container(
               color: screenContainerbackgroundColor,
               height: 650,
-              width: 1200,
+              width:
+                  ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 25, top: 25, right: 25),
+                    padding:
+                        const EdgeInsets.only(left: 25, top: 25, right: 25),
                     child: Row(
                       children: [
                         const Padding(
                           padding: EdgeInsets.only(left: 05, right: 05),
-                          child: RouteSelectedTextContainer(title: 'All Fees & Bills'),
+                          child: RouteSelectedTextContainer(
+                              title: 'All Fees & Bills'),
                         ),
                         const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
                           child: SizedBox(
                             width: 250,
-                            height: ResponsiveWebSite.isMobile(context) ? 80 : 80,
+                            height:
+                                ResponsiveWebSite.isMobile(context) ? 80 : 80,
                             //color: cWhite,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const TextFontWidget(text: 'Month *', fontsize: 12.5),
+                                const TextFontWidget(
+                                    text: 'Month *', fontsize: 12.5),
                                 const SizedBox(
                                   height: 05,
                                 ),
@@ -90,73 +99,85 @@ class CreatedFeesStatus extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10, top: 25),
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, top: 25),
                     child: Container(
                         width: 1200,
-                        height:// ResponsiveWebSite.isMobile(context) ? 800 : 
-                        500,
+                        height: // ResponsiveWebSite.isMobile(context) ? 800 :
+                            500,
                         color: cWhite,
                         child: Column(
                           children: [
                             const Padding(
-                              padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                              padding:
+                                  EdgeInsets.only(top: 8, left: 8, right: 8),
                               child: Row(
                                 children: [
                                   Expanded(
-                                      flex: 1, child: CatrgoryTableHeaderWidget(headerTitle: 'No')),
+                                      flex: 1,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'No')),
                                   SizedBox(
                                     width: 01,
                                   ),
                                   Expanded(
                                       flex: 3,
-                                      child:
-                                          CatrgoryTableHeaderWidget(headerTitle: 'Fee Type Name')),
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Fee Type Name')),
                                   SizedBox(
                                     width: 01,
                                   ),
                                   Expanded(
                                       flex: 2,
-                                      child:
-                                          CatrgoryTableHeaderWidget(headerTitle: 'Created Date')),
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Created Date')),
                                   SizedBox(
                                     width: 01,
                                   ),
                                   Expanded(
                                       flex: 2,
-                                      child: CatrgoryTableHeaderWidget(headerTitle: 'Due Date')),
-                                  SizedBox(
-                                    width: 01,
-                                  ),                                
-                                  Expanded(
-                                      flex: 2,
-                                      child: CatrgoryTableHeaderWidget(headerTitle: 'Collected')),
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Due Date')),
                                   SizedBox(
                                     width: 01,
                                   ),
                                   Expanded(
                                       flex: 2,
-                                      child: CatrgoryTableHeaderWidget(headerTitle: 'Pending')),
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Collected')),
                                   SizedBox(
                                     width: 01,
                                   ),
                                   Expanded(
                                       flex: 2,
-                                      child: CatrgoryTableHeaderWidget(headerTitle: 'Total')),
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Pending')),
+                                  SizedBox(
+                                    width: 01,
+                                  ),
+                                  Expanded(
+                                      flex: 2,
+                                      child: CatrgoryTableHeaderWidget(
+                                          headerTitle: 'Total')),
                                 ],
                               ),
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
+                                padding: const EdgeInsets.only(
+                                    bottom: 8, left: 8, right: 8),
                                 child: StreamBuilder(
                                     stream: server
                                         .collection('SchoolListCollection')
                                         .doc(UserCredentialsController.schoolId)
-                                        .collection(UserCredentialsController.batchId!)
+                                        .collection(
+                                            UserCredentialsController.batchId!)
                                         .doc(UserCredentialsController.batchId!)
                                         .collection('FeesCollection')
-                                        .doc(feesAndBillsController.feeMonthData.value)
-                                        .collection(feesAndBillsController.feeMonthData.value)
+                                        .doc(feesAndBillsController
+                                            .feeMonthData.value)
+                                        .collection(feesAndBillsController
+                                            .feeMonthData.value)
                                         .snapshots(),
                                     builder: (context, snaps) {
                                       if (snaps.hasData) {
@@ -169,25 +190,34 @@ class CreatedFeesStatus extends StatelessWidget {
                                                   padding: EdgeInsets.all(8.0),
                                                   child: Text(
                                                     "Please select the Month",
-                                                    style: TextStyle(fontWeight: FontWeight.w400),
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400),
                                                   ),
                                                 ),
                                               );
                                             } else {
-                                              final data = snaps.data!.docs[index].data();
+                                              final data = snaps
+                                                  .data!.docs[index]
+                                                  .data();
                                               return GestureDetector(
                                                 onTap: () {
-                                                log("Fee IDD ${ feesAndBillsController.feeDateData.value}");
-                                                  feesAndBillsController.feeDateData.value =
-                                                      data['docid'];
+                                                  log("Fee IDD ${feesAndBillsController.feeDateData.value}");
                                                   feesAndBillsController
-                                                      .ontapviewclasswiseFees.value = true;
-                                                  feesAndBillsController.feetypeName.value =
+                                                      .feeDateData
+                                                      .value = data['docid'];
+                                                  feesAndBillsController
+                                                      .ontapviewclasswiseFees
+                                                      .value = true;
+                                                  feesAndBillsController
+                                                          .feetypeName.value =
                                                       data['feestypeName'];
-                                                  DateTime duedate =
-                                                      DateTime.fromMillisecondsSinceEpoch(
+                                                  DateTime duedate = DateTime
+                                                      .fromMillisecondsSinceEpoch(
                                                           data['dueDate']);
-                                                  feesAndBillsController.feeDueDateName.value =
+                                                  feesAndBillsController
+                                                          .feeDueDateName
+                                                          .value =
                                                       duedate.toString();
                                                 },
                                                 child: AllClassessFeesDataList(
@@ -236,12 +266,13 @@ class AllClassessFeesDataList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<FeesAndBillsController>().pendingAmountCalculate(data['docid']);
-    Get.find<FeesAndBillsController>()
-        .bugCalculateTotalamount(data['docid']??'', data['totalStudents']??0);
+    Get.find<FeesAndBillsController>().bugCalculateTotalamount(
+        data['docid'] ?? '', data['totalStudents'] ?? 0);
     Get.find<FeesAndBillsController>().collectedAmountCalculate(
       data['docid'],
     );
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(data['createdDate']);
+    DateTime dateTime =
+        DateTime.fromMillisecondsSinceEpoch(data['createdDate']);
     DateTime duedate = DateTime.fromMillisecondsSinceEpoch(data['dueDate']);
     return SizedBox(
       height: 45,

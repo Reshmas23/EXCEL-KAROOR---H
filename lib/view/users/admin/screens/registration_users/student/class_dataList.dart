@@ -1,12 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vidyaveechi_website/model/class_model/class_model.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
+import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
+import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 
 class AllClassDataList extends StatelessWidget {
+  final AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> classStatus;
   final int index;
   final ClassModel data;
   const AllClassDataList({
+    required this.classStatus,
     required this.index,
     required this.data,
     super.key,
@@ -59,17 +64,17 @@ class AllClassDataList extends StatelessWidget {
           const SizedBox(
             width: 01,
           ), //
-          Expanded(
-            flex: 2,
-            child: DataContainerWidget(
-                rowMainAccess: MainAxisAlignment.center,
-                color: cWhite,
-                index: index,
-                headerTitle: data.classId),
-          ), //
-          const SizedBox(
-            width: 01,
-          ), //
+          // Expanded(
+          //   flex: 2,
+          //   child: DataContainerWidget(
+          //       rowMainAccess: MainAxisAlignment.center,
+          //       color: cWhite,
+          //       index: index,
+          //       headerTitle: data.classId),
+          // ), //
+          // const SizedBox(
+          //   width: 01,
+          // ), //
           Expanded(
             flex: 3,
             child: DataContainerWidget(
@@ -83,11 +88,40 @@ class AllClassDataList extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: DataContainerWidget(
-                rowMainAccess: MainAxisAlignment.center,
-                color: cWhite,
-                index: index,
-                headerTitle: '80'),
+            child:  StreamBuilder(
+                stream: server
+                    .collection('SchoolListCollection')
+                    .doc(UserCredentialsController.schoolId)
+                    .collection(UserCredentialsController.batchId!)
+                    .doc(UserCredentialsController.batchId!)
+                    .collection("classes")
+                    .doc(data.docid)
+                    .collection('Students')
+                    .snapshots(),
+                builder: (context, studentSnaps) {
+                  if (studentSnaps.data == null) {
+                    return DataContainerWidget(
+                        rowMainAccess: MainAxisAlignment.center,
+                        color: cWhite,
+                        // width: 150,
+                        index: index,
+                        headerTitle: 'No Students is there');
+                  } else if (studentSnaps.hasData) {
+                    return DataContainerWidget(
+                        rowMainAccess: MainAxisAlignment.center,
+                        color: cWhite,
+                        // width: 150,
+                        index: index,
+                        headerTitle: '${studentSnaps.data!.docs.length}');
+                  } else {
+                    return DataContainerWidget(
+                        rowMainAccess: MainAxisAlignment.center,
+                        color: cWhite,
+                        // width: 150,
+                        index: index,
+                        headerTitle: '...');
+                  }
+                }),
           ), //
           const SizedBox(
             width: 01,

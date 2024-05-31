@@ -17,6 +17,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/students/widget/dat
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class AllStudentListContainer extends StatelessWidget {
@@ -34,31 +35,56 @@ class AllStudentListContainer extends StatelessWidget {
             : studentController.ontapCreateStudent.value == true
                 ? CreateStudent()
                 : SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: ResponsiveWebSite.isMobile(context)
+                        ? Axis.horizontal
+                        : Axis.vertical,
                     child: Container(
                       color: screenContainerbackgroundColor,
                       height: 650,
-                      width: 1200,
+                      width: ResponsiveWebSite.isDesktop(context)
+                          ? double.infinity
+                          : 1200,
                       child: Padding(
                         padding:
-                            const EdgeInsets.only(top: 10, right: 20, left: 20),
+                            const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              height: 60,
-                              width: double.infinity,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const TextFontWidget(
-                                    text: 'All Students List',
-                                    fontsize: 18,
-                                    fontWeight: FontWeight.bold,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const TextFontWidget(
+                                  text: 'All Students List',
+                                  fontsize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                const Spacer(),
+                                GestureDetector(
+                                  onTap: () => searchStudentsByName(context),
+                                  child: Container(
+                                    height: 40,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.grey.withOpacity(0.2)),
+                                    child: const Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Icon(Icons.search),
+                                        ),
+                                        TextFontWidget(
+                                            text: " Search By StudentName",
+                                            fontsize: 12)
+                                      ],
+                                    ),
                                   ),
-                                  const Spacer(),
-                                  GestureDetector(
-                                    onTap: () => searchStudentsByName(context),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: GestureDetector(
+                                    onTap: () => searchStudentsByID(context),
                                     child: Container(
                                       height: 40,
                                       width: 200,
@@ -73,88 +99,60 @@ class AllStudentListContainer extends StatelessWidget {
                                             child: Icon(Icons.search),
                                           ),
                                           TextFontWidget(
-                                              text: " Search By StudentName",
+                                              text: " Search By StudentID",
                                               fontsize: 12)
                                         ],
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, right: 10),
-                                    child: GestureDetector(
-                                      onTap: () => searchStudentsByID(context),
-                                      child: Container(
-                                        height: 40,
-                                        width: 200,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color:
-                                                Colors.grey.withOpacity(0.2)),
-                                        child: const Row(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Icon(Icons.search),
-                                            ),
-                                            TextFontWidget(
-                                                text: " Search By StudentID",
-                                                fontsize: 12)
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Obx(() => studentController
-                                              .onClassWiseSearch.value ==
-                                          true
-                                      ? Row(
-                                          children: [
-                                            SizedBox(
-                                                height: 40,
-                                                width: 200,
-                                                child: SelectClassDropDown()),
-                                            Checkbox(
-                                              value: studentController
-                                                  .onClassWiseSearch.value,
-                                              onChanged: (value) {
-                                                studentController
-                                                    .onClassWiseSearch
-                                                    .value = false;
-                                              },
-                                            )
-                                          ],
-                                        )
-                                      : GestureDetector(
-                                          onTap: () {
-                                            studentController
-                                                .onClassWiseSearch.value = true;
-                                          },
-                                          child: Container(
-                                            height: 40,
-                                            width: 200,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Colors.grey
-                                                    .withOpacity(0.2)),
-                                            child: const Row(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Icon(Icons.search),
-                                                ),
-                                                TextFontWidget(
-                                                    text:
-                                                        " Search By ClassWise",
-                                                    fontsize: 12),
-                                              ],
-                                            ),
+                                ),
+                                Obx(() => studentController
+                                            .onClassWiseSearch.value ==
+                                        true
+                                    ? Row(
+                                        children: [
+                                          SizedBox(
+                                              height: 40,
+                                              width: 200,
+                                              child: SelectClassDropDown()),
+                                          Checkbox(
+                                            value: studentController
+                                                .onClassWiseSearch.value,
+                                            onChanged: (value) {
+                                              studentController
+                                                  .onClassWiseSearch
+                                                  .value = false;
+                                            },
+                                          )
+                                        ],
+                                      )
+                                    : GestureDetector(
+                                        onTap: () {
+                                          studentController
+                                              .onClassWiseSearch.value = true;
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          width: 200,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color:
+                                                  Colors.grey.withOpacity(0.2)),
+                                          child: const Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Icon(Icons.search),
+                                              ),
+                                              TextFontWidget(
+                                                  text: " Search By ClassWise",
+                                                  fontsize: 12),
+                                            ],
                                           ),
-                                        )),
-                                ],
-                              ),
+                                        ),
+                                      )),
+                              ],
                             ),
                             const SizedBox(
                               height: 30,
@@ -267,6 +265,7 @@ class AllStudentListContainer extends StatelessWidget {
                             ),
                             Expanded(
                               child: Container(
+                                height: 400,
                                 // width: 1200,
                                 decoration: BoxDecoration(
                                   color: cWhite,
@@ -306,44 +305,59 @@ class AllStudentListContainer extends StatelessWidget {
                                               .orderBy('admissionNumber')
                                               .snapshots(),
                                       builder: (context, snaPS) {
-                                         if (!snaPS.hasData || snaPS.data!.docs.isEmpty) {
-                                      return const Center(
-                                          child: Text(
-                                        'No Sudents Created',
-                                        style: TextStyle(
-                                            fontSize: 15, fontWeight: FontWeight.w500),
-                                      ));
-                                    }
+                                        //      if (!snaPS.hasData || snaPS.data!.docs.isEmpty) {
+                                        //   return const Center(
+                                        //       child: Text(
+                                        //     'No Sudents Created',
+                                        //     style: TextStyle(
+                                        //         fontSize: 15, fontWeight: FontWeight.w500),
+                                        //   ));
+                                        // }
                                         if (snaPS.hasData) {
-                                          return ListView.separated(
-                                              itemBuilder: (context, index) {
-                                                final data =
-                                                    StudentModel.fromMap(snaPS
-                                                        .data!.docs[index]
-                                                        .data());
-                                                return GestureDetector(
-                                                  onTap: () {
-                                                    studentController
-                                                        .studentModelData
-                                                        .value = data;
-                                                    studentController
-                                                        .ontapStudent
-                                                        .value = true;
-                                                  },
-                                                  child: AllStudentDataList(
-                                                    data: data,
-                                                    index: index,
+                                          return snaPS.data!.docs.isEmpty
+                                              ? const Center(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text(
+                                                      "Please create Students",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
                                                   ),
-                                                );
-                                              },
-                                              separatorBuilder:
-                                                  (context, index) {
-                                                return const SizedBox(
-                                                  height: 02,
-                                                );
-                                              },
-                                              itemCount:
-                                                  snaPS.data!.docs.length);
+                                                )
+                                              : ListView.separated(
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    final data =
+                                                        StudentModel.fromMap(
+                                                            snaPS.data!
+                                                                .docs[index]
+                                                                .data());
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        studentController
+                                                            .studentModelData
+                                                            .value = data;
+                                                        studentController
+                                                            .ontapStudent
+                                                            .value = true;
+                                                      },
+                                                      child: AllStudentDataList(
+                                                        data: data,
+                                                        index: index,
+                                                      ),
+                                                    );
+                                                  },
+                                                  separatorBuilder:
+                                                      (context, index) {
+                                                    return const SizedBox(
+                                                      height: 02,
+                                                    );
+                                                  },
+                                                  itemCount:
+                                                      snaPS.data!.docs.length);
                                         } else if (snaPS.data == null) {
                                           return const LoadingWidget();
                                         } else {

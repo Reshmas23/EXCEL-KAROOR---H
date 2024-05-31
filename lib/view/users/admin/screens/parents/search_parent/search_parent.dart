@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vidyaveechi_website/controller/admin_section/student_controller/student_controller.dart';
-import 'package:vidyaveechi_website/model/student_model/student_model.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/students/search_students/studentdataList.dart';
+import 'package:vidyaveechi_website/controller/admin_section/parent_controller/parent_controller.dart';
+import 'package:vidyaveechi_website/model/parent_model/parent_model.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/parents/list_table/list_table_of_prnt.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 
 import '../../../../../fonts/google_poppins_widget.dart';
-import '../student_details/widgets/category_tableHeader.dart';
 
-class AllStudentSearchByName extends SearchDelegate {
+class AllParentSearchByName extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     IconButton(
@@ -32,15 +32,15 @@ class AllStudentSearchByName extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final List<StudentModel> suggestionList;
+    final List<ParentModel> suggestionList;
 
     if (query.isEmpty) {
-      suggestionList = Get.find<StudentController>().studentProfileList;
+      suggestionList = Get.find<ParentController>().parentProfileList;
     } else {
-      suggestionList = Get.find<StudentController>()
-          .studentProfileList
+      suggestionList = Get.find<ParentController>()
+          .parentProfileList
           .where((item) =>
-              item.studentName.toLowerCase().contains(query.toLowerCase()))
+              item.parentName!.toLowerCase().contains(query.toLowerCase()))
           .toList();
     }
     if (suggestionList.isEmpty) {
@@ -59,8 +59,8 @@ class AllStudentSearchByName extends SearchDelegate {
             final data = suggestionList[index];
             return GestureDetector(
               onTap: () async {
-                Get.find<StudentController>().studentModelData.value = data;
-                Get.find<StudentController>().ontapStudent.value = true;
+                Get.find<ParentController>().parentModelData.value = data;
+                Get.find<ParentController>().ontapviewParent.value = true;
                 Get.back();
               },
               child: Padding(
@@ -72,9 +72,9 @@ class AllStudentSearchByName extends SearchDelegate {
                       const Row(
                         children: [
                           Expanded(
-                              flex: 2,
-                              child:
-                                  CatrgoryTableHeaderWidget(headerTitle: 'ID')),
+                              flex: 1,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'No.')),
                           SizedBox(
                             width: 02,
                           ),
@@ -86,16 +86,9 @@ class AllStudentSearchByName extends SearchDelegate {
                             width: 02,
                           ),
                           Expanded(
-                              flex: 2,
-                              child: CatrgoryTableHeaderWidget(
-                                  headerTitle: 'Class')),
-                          SizedBox(
-                            width: 02,
-                          ),
-                          Expanded(
                               flex: 4,
                               child: CatrgoryTableHeaderWidget(
-                                  headerTitle: 'E mail')),
+                                  headerTitle: 'Email')),
                           SizedBox(
                             width: 02,
                           ),
@@ -103,9 +96,23 @@ class AllStudentSearchByName extends SearchDelegate {
                               flex: 3,
                               child: CatrgoryTableHeaderWidget(
                                   headerTitle: 'Ph.NO')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(
+                              flex: 4,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'Student Name')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: CatrgoryTableHeaderWidget(
+                                  headerTitle: 'Class')),
                         ],
                       ),
-                      SearchStudentDataList(data: data, index: index)
+                      AllParentsDataList(data: data, index: index)
                     ],
                   ),
                 ),

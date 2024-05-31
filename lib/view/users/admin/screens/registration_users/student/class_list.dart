@@ -93,14 +93,14 @@ class AllClassListContainer extends StatelessWidget {
                                       SizedBox(
                                         width: 01,
                                       ),
-                                      Expanded(
-                                          flex: 2,
-                                          child: CatrgoryTableHeaderWidget(
-                                              headerTitle:
-                                                  'New Registed Students')),
-                                      SizedBox(
-                                        width: 02,
-                                      ),
+                                      // Expanded(
+                                      //     flex: 2,
+                                      //     child: CatrgoryTableHeaderWidget(
+                                      //         headerTitle:
+                                      //             'New Registed Students')),
+                                      // SizedBox(
+                                      //   width: 02,
+                                      // ),
                                       Expanded(
                                           flex: 3,
                                           child: CatrgoryTableHeaderWidget(
@@ -169,6 +169,7 @@ class AllClassListContainer extends StatelessWidget {
                                                 //     .ontapviewteacher.value = true;
                                               },
                                               child: AllClassDataList(
+                                                 classStatus: snaPS,
                                                 index: index,
                                                 data: data,
                                               ),

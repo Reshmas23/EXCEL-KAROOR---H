@@ -33,11 +33,12 @@ class LeaveApplicationList extends StatelessWidget {
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     String formatted = formatter.format(parseDate);
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+      scrollDirection:
+          ResponsiveWebSite.isMobile(context) ? Axis.horizontal : Axis.vertical,
       child: Container(
         color: screenContainerbackgroundColor,
         height: 1000,
-        width: 1200,
+        width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
         child: Padding(
           padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
           child: Column(
@@ -78,9 +79,11 @@ class LeaveApplicationList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             // const Spacer(),
-                            leaveApplicationController.leaveApplication.value == true
+                            leaveApplicationController.leaveApplication.value ==
+                                    true
                                 ? Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       const Padding(
                                         padding: EdgeInsets.all(8.0),
@@ -97,10 +100,13 @@ class LeaveApplicationList extends StatelessWidget {
                                       Checkbox(
                                         value: true,
                                         onChanged: (value) {
-                                          leaveApplicationController.leaveApplication.value = false;
+                                          leaveApplicationController
+                                              .leaveApplication.value = false;
                                         },
                                       ),
-                                      const SizedBox(width: 8), // Adding some additional spacing
+                                      const SizedBox(
+                                          width:
+                                              8), // Adding some additional spacing
                                     ],
                                   )
                                 : Row(
@@ -109,10 +115,14 @@ class LeaveApplicationList extends StatelessWidget {
                                         padding: const EdgeInsets.all(8.0),
                                         child: SizedBox(
                                           width: 200,
-                                          height: ResponsiveWebSite.isMobile(context) ? 80 : 90,
+                                          height: ResponsiveWebSite.isMobile(
+                                                  context)
+                                              ? 80
+                                              : 90,
                                           // color: cWhite,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               const Text('Date *',
                                                   style: TextStyle(
@@ -123,7 +133,8 @@ class LeaveApplicationList extends StatelessWidget {
                                               ),
                                               SizedBox(
                                                 height: 40,
-                                                child: SelectLeaveApplicationDate(),
+                                                child:
+                                                    SelectLeaveApplicationDate(),
                                               ),
                                             ],
                                           ),
@@ -140,7 +151,8 @@ class LeaveApplicationList extends StatelessWidget {
                                       Checkbox(
                                         value: false,
                                         onChanged: (value) {
-                                          leaveApplicationController.leaveApplication.value = true;
+                                          leaveApplicationController
+                                              .leaveApplication.value = true;
                                         },
                                       )
                                     ],
@@ -162,25 +174,38 @@ class LeaveApplicationList extends StatelessWidget {
                     height: 40,
                     child: const Row(
                       children: [
-                        Expanded(flex: 1, child: CatrgoryTableHeaderWidget(headerTitle: 'No')),
-                        SizedBox(
-                          width: 02,
-                        ),
-                        Expanded(flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'ID')),
-                        SizedBox(
-                          width: 02,
-                        ),
-                        Expanded(flex: 4, child: CatrgoryTableHeaderWidget(headerTitle: 'Name')),
+                        Expanded(
+                            flex: 1,
+                            child:
+                                CatrgoryTableHeaderWidget(headerTitle: 'No')),
                         SizedBox(
                           width: 02,
                         ),
                         Expanded(
-                            flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'Total Leaves')),
+                            flex: 2,
+                            child:
+                                CatrgoryTableHeaderWidget(headerTitle: 'ID')),
                         SizedBox(
                           width: 02,
                         ),
                         Expanded(
-                            flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'Leave Date')),
+                            flex: 4,
+                            child:
+                                CatrgoryTableHeaderWidget(headerTitle: 'Name')),
+                        SizedBox(
+                          width: 02,
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: CatrgoryTableHeaderWidget(
+                                headerTitle: 'Total Leaves')),
+                        SizedBox(
+                          width: 02,
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: CatrgoryTableHeaderWidget(
+                                headerTitle: 'Leave Date')),
                         SizedBox(
                           width: 02,
                         ),
@@ -190,7 +215,9 @@ class LeaveApplicationList extends StatelessWidget {
                           width: 02,
                         ),
                         Expanded(
-                            flex: 3, child: CatrgoryTableHeaderWidget(headerTitle: 'Phone Number')),
+                            flex: 3,
+                            child: CatrgoryTableHeaderWidget(
+                                headerTitle: 'Phone Number')),
                         SizedBox(
                           width: 02,
                         ),
@@ -211,14 +238,19 @@ class LeaveApplicationList extends StatelessWidget {
                     child: SizedBox(
                       child: Builder(builder: (context) {
                         return Obx(() => StreamBuilder(
-                              stream: leaveApplicationController.leaveApplication.value == true
+                              stream: leaveApplicationController
+                                          .leaveApplication.value ==
+                                      true
                                   ? server
                                       .collection('SchoolListCollection')
                                       .doc(UserCredentialsController.schoolId)
-                                      .collection(UserCredentialsController.batchId!)
+                                      .collection(
+                                          UserCredentialsController.batchId!)
                                       .doc(UserCredentialsController.batchId!)
                                       .collection('classes')
-                                      .doc(Get.find<ClassController>().classDocID.value)
+                                      .doc(Get.find<ClassController>()
+                                          .classDocID
+                                          .value)
                                       .collection('LeaveApplication')
                                       .doc(formatted)
                                       .collection('StudentsList')
@@ -226,24 +258,31 @@ class LeaveApplicationList extends StatelessWidget {
                                   : server
                                       .collection('SchoolListCollection')
                                       .doc(UserCredentialsController.schoolId)
-                                      .collection(UserCredentialsController.batchId!)
+                                      .collection(
+                                          UserCredentialsController.batchId!)
                                       .doc(UserCredentialsController.batchId!)
                                       .collection('classes')
-                                      .doc(Get.find<ClassController>().classDocID.value)
+                                      .doc(Get.find<ClassController>()
+                                          .classDocID
+                                          .value)
                                       .collection('LeaveApplication')
-                                      .doc(leaveApplicationController.fetchClassWiseDatevalue.value)
+                                      .doc(leaveApplicationController
+                                          .fetchClassWiseDatevalue.value)
                                       .collection('StudentsList')
                                       .snapshots(),
                               builder: (context, snapshot) {
-                                if (snapshot.hasData) { 
+                                if (snapshot.hasData) {
                                   // Data is available, proceed with ListView
                                   return ListView.separated(
                                     itemBuilder: (context, index) {
-                                      final data = snapshot.data!.docs[index].data();
-                                      final DateTime dfromdate =
-                                          DateTime.parse(data['dleaveFromDate']);
-                                      final DateTime dtodate = DateTime.parse(data['dleaveToDate']);
-                                      final int compare = dtodate.difference(dfromdate).inDays;
+                                      final data =
+                                          snapshot.data!.docs[index].data();
+                                      final DateTime dfromdate = DateTime.parse(
+                                          data['dleaveFromDate']);
+                                      final DateTime dtodate =
+                                          DateTime.parse(data['dleaveToDate']);
+                                      final int compare =
+                                          dtodate.difference(dfromdate).inDays;
                                       return LeaveApplicationData(
                                         compare: compare,
                                         index: index,
@@ -257,21 +296,27 @@ class LeaveApplicationList extends StatelessWidget {
                                     },
                                     itemCount: snapshot.data!.docs.length,
                                   );
-                                } else if (snapshot.connectionState == ConnectionState.waiting) {
+                                } else if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
                                   return const Center(
-                                    child: CircularProgressIndicator(), // Show loading indicator
+                                    child:
+                                        CircularProgressIndicator(), // Show loading indicator
                                   );
                                 } else if (snapshot.hasError) {
                                   return Center(
-                                    child: Text('Error: ${snapshot.error}'), // Show error message
+                                    child: Text(
+                                        'Error: ${snapshot.error}'), // Show error message
                                   );
-                                } else if (!snapshot.hasData || snapshot.data == null) {
+                                } else if (!snapshot.hasData ||
+                                    snapshot.data == null) {
                                   return const Center(
-                                    child: Text('No data available'), // Show message when no data
+                                    child: Text(
+                                        'No data available'), // Show message when no data
                                   );
                                 } else {
                                   return const Center(
-                                    child: Text('No data available'), // Show message when no data
+                                    child: Text(
+                                        'No data available'), // Show message when no data
                                   );
                                 }
                               },
