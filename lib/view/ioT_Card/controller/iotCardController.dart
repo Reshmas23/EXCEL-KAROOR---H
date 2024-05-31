@@ -20,6 +20,8 @@ class IoTCardController extends GetxController {
   RxString schoolDocID = 'dd'.obs;
   RxString batchDocID = ''.obs;
   RxString cardID = ''.obs;
+  RxString pastStudentName = ''.obs;
+  RxString pastStudentAdNO = ''.obs;
 
   RxInt classStudentCount = 0.obs;
   RxBool classTaped = false.obs;
@@ -28,16 +30,15 @@ class IoTCardController extends GetxController {
   List<StudentModel> classStudentList = [];
   Future<void> registerCardForStudent() async {
     try {
-      print("Started >>>>>>>>");
       await server
           .collection('StudentRegistration')
           .doc('CardData')
           .get()
           .then((cardvalue) async {
         cardList.add(cardvalue.data()?['CardID']);
+        cardList = cardList.toSet().toList();
         comapareDuplicateCards().then((value) async {
           final StudentModel student = classStudentList[0];
-          print('Student $student');
           server
               .collection('SchoolListCollection')
               .doc(schoolDocID.value)
@@ -46,6 +47,9 @@ class IoTCardController extends GetxController {
               .set({'cardID': cardList[0], 'cardTaken': true},
                   SetOptions(merge: true)).then((value) async {
             classStudentList[0].cardID = cardList[0];
+            cardID.value = cardList[0];
+            pastStudentName.value = classStudentList[0].studentName;
+            pastStudentAdNO.value = classStudentList[0].admissionNumber;
             await server
                 .collection('SchoolListCollection')
                 .doc(schoolDocID.value)
@@ -62,10 +66,11 @@ class IoTCardController extends GetxController {
                   .doc('CardData')
                   .update({'CardID': ''}).then((value) async {
                 registudentList.add(student);
-
+                registudentList = registudentList.toSet().toList();
                 classStudentList.clear();
                 cardList.clear();
                 fetchClassAllStudents();
+               await getAllCardID();
                 buttonstate.value = ButtonState.success;
                 await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
                   buttonstate.value = ButtonState.idle;
@@ -106,6 +111,7 @@ class IoTCardController extends GetxController {
             final StudentModel student =
                 StudentModel.fromMap(value.docs[i].data());
             classStudentList.add(student);
+            classStudentList = classStudentList.toSet().toList();
           }
         }
         classTaped.value = false;
@@ -114,7 +120,9 @@ class IoTCardController extends GetxController {
 
       yield classStudentList;
     } catch (error) {
-      print('Error fetching students: $error');
+      if (kDebugMode) {
+        log('Error fetching students: $error');
+      }
     }
 
     // Close the stream controller when done
@@ -154,6 +162,7 @@ class IoTCardController extends GetxController {
             studentName: value.docs[i].data()['studentName'],
             admissionNumber: value.docs[i].data()['admissionNumber']);
         allStudentList.add(result);
+        allStudentList = allStudentList.toSet().toList();
       }
     });
   }
@@ -181,8 +190,6 @@ class IoTCardController extends GetxController {
         .then((value) async {
       cardList.add(value.data()?['CardID']);
     }).then((value) async {
-      print("studentID $studentID");
-      print("CardList $cardList");
       await server
           .collection('SchoolListCollection')
           .doc(schoolDocID.value)
@@ -195,7 +202,6 @@ class IoTCardController extends GetxController {
           .get()
           .then((studentData) {
         if (studentData.data()?['cardID'] == '') {
-          print("cardID=='' $studentID");
           server
               .collection('SchoolListCollection')
               .doc(schoolDocID.value)
