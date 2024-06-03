@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/google_monstre.dart';
 import 'package:vidyaveechi_website/view/fonts/google_poppins_widget.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/home/screens/create_school/Registration/registrationpage.dart';
+import 'package:vidyaveechi_website/view/home/screens/create_school/create_school.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 
 class ExcelKaroorHOmeScreen extends StatelessWidget {
@@ -70,7 +70,7 @@ class ExcelKaroorHOmeScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       alignment: Alignment.center,
-                                      child:  TextFontWidget(
+                                      child:  const TextFontWidget(
                                         text: "REGISTER",
                                         fontsize: 13,
                                         fontWeight: FontWeight.bold,
@@ -155,9 +155,9 @@ class ExcelKaroorHOmeScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 50,
-                                      ),
+                                      // const SizedBox(
+                                      //   width: 50,
+                                      // ),
                                       // SizedBox(
                                       //   height: 40,
                                       //   width: 130,

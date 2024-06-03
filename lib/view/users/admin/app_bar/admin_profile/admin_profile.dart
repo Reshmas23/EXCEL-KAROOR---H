@@ -299,9 +299,11 @@ class AdminProfileWidgetOne extends StatelessWidget {
             child: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasError) {
-          return Padding(
-            padding: const EdgeInsets.all(20),
-            child: Center(child: Text('Error: ${snapshot.error}')),
+          return const Padding(
+            padding: EdgeInsets.all(20),
+            child: Center(child: Text('Error:'
+           //  ${snapshot.error}'
+             )),
           );
         } else {
           final data = snapshot.data;
@@ -334,7 +336,9 @@ class AdminProfileWidgetOne extends StatelessWidget {
                               : const AssetImage('webassets/png/avathar.png')
                                   as ImageProvider,
                           onBackgroundImageError: (error, stackTrace) {
-                            log('Image load error: $error');
+                            log('Image load error: '
+                          //  $error'
+                            );
                           },
                         ),
                       ),
@@ -527,7 +531,7 @@ class AdminProfileWidgetOne extends StatelessWidget {
                               : const AssetImage('webassets/png/avathar.png')
                                   as ImageProvider,
                           onBackgroundImageError: (error, stackTrace) {
-                            log('Image load error: $error');
+                            log('Image load error:');
                           },
                         ),
                       ),
