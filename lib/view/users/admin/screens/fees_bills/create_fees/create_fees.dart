@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/fees_N_bills_Controller/fees_bills_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
+import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/blue_Container_widget/blue_Container_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/custom_showDilog/custom_showdilog.dart';
@@ -170,6 +171,7 @@ Future<void> createFeesFunction(BuildContext context) async {
 }
 
 genrateFeesForClasses(BuildContext context) async {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FeesAndBillsController feesAndBillsController = Get.find<FeesAndBillsController>();
   return customShowDilogBox2(
       context: context,
@@ -178,47 +180,56 @@ genrateFeesForClasses(BuildContext context) async {
         const SizedBox(
           height: 10,
         ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            controller: feesAndBillsController.feestypeNameContoller,
-            hintText: " Enter Fee Type",
-            title: 'Fee Type',
+      Form(
+        key: formKey,
+        child: Column(children: [
+            SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              controller: feesAndBillsController.feestypeNameContoller,
+              hintText: " Enter Fee Type",
+              title: 'Fee Type',
+           
+            ),
           ),
-        ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            onTap: () => feesAndBillsController.selectMonth(context),
-            controller: feesAndBillsController.selectedFeeMonthContoller,
-            hintText: " 🗓️ Select Month",
-            title: 'Select Month',
-            keyboardType: TextInputType.number,
+          SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              onTap: () => feesAndBillsController.selectMonth(context),
+              controller: feesAndBillsController.selectedFeeMonthContoller,
+              hintText: " 🗓️ Select Month",
+              title: 'Select Month',
+              
+              keyboardType: TextInputType.number,
+                 validator: checkFieldEmpty,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            onTap: () => feesAndBillsController.selectDate(context),
-            controller: feesAndBillsController.seletedFeeDateContoller,
-            hintText: " 🗓️ Select Date",
-            title: 'Select Date',
-            keyboardType: TextInputType.number,
+          SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              onTap: () => feesAndBillsController.selectDate(context),
+              controller: feesAndBillsController.seletedFeeDateContoller,
+              hintText: " 🗓️ Select Date",
+              title: 'Select Date',
+                 validator: checkFieldEmpty,
+              keyboardType: TextInputType.number,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            controller: feesAndBillsController.feesDueContoller,
-            hintText: " Enter Due Date in days eg 30,60..",
-            title: 'Due Date',
-            keyboardType: TextInputType.number,
+          SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              controller: feesAndBillsController.feesDueContoller,
+              hintText: " Enter Due Date in days eg 30,60..",
+              title: 'Due Date',
+              keyboardType: TextInputType.number,
+                 validator: checkFieldEmpty,
+            ),
           ),
-        ),
+     
         Padding(
           padding: const EdgeInsets.only(top: 10),
           child: SizedBox(
@@ -264,13 +275,17 @@ genrateFeesForClasses(BuildContext context) async {
             buttonstate: feesAndBillsController.buttonstate.value,
             text: 'Generate Fees',
             function: () async {
-              await feesAndBillsController.addFessAsignToClass();
-            }))
+             if(formKey.currentState!.validate()){
+               await feesAndBillsController.addFessAsignToClass();
+             }
+            }))   ],),
+      ),
       ],
       doyouwantActionButton: false);
 }
 
 createCustomFeesForClasses(BuildContext context) async {
+   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FeesAndBillsController feesAndBillsController = Get.find<FeesAndBillsController>();
   return customShowDilogBox2(
       context: context,
@@ -279,102 +294,113 @@ createCustomFeesForClasses(BuildContext context) async {
         const SizedBox(
           height: 10,
         ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            controller: feesAndBillsController.feestypeNameContoller,
-            hintText: " Enter Fee Type",
-            title: 'Fee Type',
+        Form(key: formKey,
+          child: Column(children: [SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              controller: feesAndBillsController.feestypeNameContoller,
+              hintText: " Enter Fee Type",
+              title: 'Fee Type',
+                 validator: checkFieldEmpty,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            controller: feesAndBillsController.feesContoller,
-            hintText: " Enter Fee Amount",
-            title: 'Fee Amount',
-            keyboardType: TextInputType.number,
+          SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              controller: feesAndBillsController.feesContoller,
+              hintText: " Enter Fee Amount",
+              title: 'Fee Amount',
+              keyboardType: TextInputType.number,
+                 validator: checkFieldEmpty,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            onTap: () => feesAndBillsController.selectMonth(context),
-            controller: feesAndBillsController.selectedFeeMonthContoller,
-            hintText: " 🗓️ Select Month",
-            title: 'Select Month',
-            keyboardType: TextInputType.number,
+          SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              onTap: () => feesAndBillsController.selectMonth(context),
+              controller: feesAndBillsController.selectedFeeMonthContoller,
+              hintText: " 🗓️ Select Month",
+              title: 'Select Month',  
+               validator: checkFieldEmpty,
+              keyboardType: TextInputType.number,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            onTap: () => feesAndBillsController.selectDate(context),
-            controller: feesAndBillsController.seletedFeeDateContoller,
-            hintText: " 🗓️ Select Date",
-            title: 'Select Date',
-            keyboardType: TextInputType.number,
+          SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              onTap: () => feesAndBillsController.selectDate(context),
+              controller: feesAndBillsController.seletedFeeDateContoller,
+              hintText: " 🗓️ Select Date",
+              title: 'Select Date',
+              keyboardType: TextInputType.number,
+                 validator: checkFieldEmpty,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 71,
-          child: TextFormFiledBlueContainerWidget(
-            color: Colors.transparent,
-            controller: feesAndBillsController.feesDueContoller,
-            hintText: " Enter Due Date in days eg 30,60..",
-            title: 'Due Date',
-            keyboardType: TextInputType.number,
+          SizedBox(
+            height: 71,
+            child: TextFormFiledBlueContainerWidget(
+              color: Colors.transparent,
+              controller: feesAndBillsController.feesDueContoller,
+              hintText: " Enter Due Date in days eg 30,60..",
+              title: 'Due Date',
+                 validator: checkFieldEmpty,
+              keyboardType: TextInputType.number,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: SizedBox(
-              height: 150,
-              width: 400,
-              child: Obx(
-                () => ListView.separated(
-                    itemBuilder: (context, index) {
-                      return Container(
-                        color: Colors.green.withOpacity(0.1),
-                        height: 35,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              TextFontWidget(
-                                  text: feesAndBillsController.selectedClassList[index].className,
-                                  fontsize: 12),
-                              const Spacer(),
-                              Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: cBlack.withOpacity(0.1))),
-                                  height: 30,
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        feesAndBillsController.selectedClassList.removeAt(index);
-                                      },
-                                      child: const TextFontWidget(text: "Remove", fontsize: 12)))
-                            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: SizedBox(
+                height: 150,
+                width: 400,
+                child: Obx(
+                  () => ListView.separated(
+                      itemBuilder: (context, index) {
+                        return Container(
+                          color: Colors.green.withOpacity(0.1),
+                          height: 35,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                TextFontWidget(
+                                    text: feesAndBillsController.selectedClassList[index].className,
+                                    fontsize: 12),
+                                const Spacer(),
+                                Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: cBlack.withOpacity(0.1))),
+                                    height: 30,
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          feesAndBillsController.selectedClassList.removeAt(index);
+                                        },
+                                        child: const TextFontWidget(text: "Remove", fontsize: 12)))
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        height: 05,
-                      );
-                    },
-                    itemCount: feesAndBillsController.selectedClassList.length),
-              )),
-        ),
-        Obx(() => ProgressButtonWidget(
-            buttonstate: feesAndBillsController.buttonstate.value,
-            text: 'Generate Fees',
-            function: () => feesAndBillsController.addCustomFessAsignToClass()))
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 05,
+                        );
+                      },
+                      itemCount: feesAndBillsController.selectedClassList.length),
+                )),
+          ),
+          Obx(() => ProgressButtonWidget(
+              buttonstate: feesAndBillsController.buttonstate.value,
+              text: 'Generate Fees',
+              function: (){
+                if(formKey.currentState!.validate()){
+                   feesAndBillsController.addCustomFessAsignToClass();
+                }
+              }))],),
+        )
       ],
       doyouwantActionButton: false);
 }
