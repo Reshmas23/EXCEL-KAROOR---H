@@ -134,10 +134,13 @@ class AllClassListContainer extends StatelessWidget {
                                 // width: 1100,
                                 child: StreamBuilder(
                                   stream: server
-                                      .collection('SchoolListCollection')
-                                      .doc(UserCredentialsController.schoolId)
-                                      .collection('classes')
-                                      .snapshots(),
+                                       .collection('SchoolListCollection')
+                                  .doc(UserCredentialsController.schoolId)
+                                  .collection(
+                                      UserCredentialsController.batchId!)
+                                  .doc(UserCredentialsController.batchId!)
+                                  .collection('classes')
+                                  .snapshots(),
                                   builder: (context, snaPS) {
 
                                        if (!snaPS.hasData || snaPS.data!.docs.isEmpty) {

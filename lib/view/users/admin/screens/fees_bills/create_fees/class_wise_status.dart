@@ -34,7 +34,7 @@ class ClassWiseFeesStatus extends StatelessWidget {
             : Axis.vertical,
         child: Container(
           color: screenContainerbackgroundColor,
-          height: 1000,
+          height:   650,
           width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +110,7 @@ class ClassWiseFeesStatus extends StatelessWidget {
                 child: Container(
                   color: cWhite,
                   width: double.infinity,
-                  height: ResponsiveWebSite.isMobile(context) ? 800 : 500,
+                  height:  500,
                   child: Column(
                     children: [
                       Padding(
