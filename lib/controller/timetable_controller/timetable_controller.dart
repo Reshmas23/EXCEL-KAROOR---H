@@ -61,7 +61,7 @@ class TimeTableController extends GetxController {
 
   Future<void> addTimeTableDataToFirebase(BuildContext context) async {
     progressValue.value = 0.1;  // Update progress
-    progressValue.value = 0.1;  // Update progress
+    
     showDialog(
       context: context,
       builder: (context) {

@@ -86,16 +86,16 @@ String? checkFieldEmailIsValid(String? fieldContent) {
   }
 }
 
-String? checkFieldPhoneNumberIsValid(String? fieldContent) {
-  if (fieldContent == null) {
-    return 'null';
-  }
-  if (fieldContent.length >= 10) {
-    return null;
-  } else {
-    return 'Please enter 10 digit number';
-  }
-}
+// String? checkFieldPhoneNumberIsValid(String? fieldContent) {
+//   if (fieldContent == null) {
+//     return 'null';
+//   }
+//   if (fieldContent.length >= 10) {
+//     return null;
+//   } else {
+//     return 'Please enter 10 digit number';
+//   }
+// }
 
 String? checkFieldPasswordIsValid(String? fieldContent) {
   if (fieldContent == null) {
@@ -105,6 +105,22 @@ String? checkFieldPasswordIsValid(String? fieldContent) {
     return null;
   } else {
     return 'Minimum 6 Charaters is required';
+  }
+}
+
+
+String? checkFieldPhoneNumberIsValid(String? fieldContent) {
+  // Check if the input is null
+  if (fieldContent == null) {
+    return 'null';
+  }
+
+  // Check if the input contains only digits
+  final validDigits = RegExp(r'^\d{10}$');
+  if (validDigits.hasMatch(fieldContent)) {
+    return null; // The input is valid
+  } else {
+    return 'Please enter a valid 10 digit number';
   }
 }
 
