@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
-import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
+import 'package:vidyaveechi_website/view/constantvalidate.dart';
 import 'package:vidyaveechi_website/view/drop_down/select_class.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/timetable/period_wise_timetable.dart';
@@ -33,47 +33,57 @@ class TimeTableMainScreen extends StatelessWidget {
       ),
       Padding(
           padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-
           child: SelectClassDropDown()),
       const Padding(
         padding: EdgeInsets.only(top: 15, left: 10, right: 10),
         child: TextFontWidget(text: 'Select Day *', fontsize: 12.5),
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-        child: Obx(() => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.7),
-                ),
-              ),
-              width: 450,
-              child: DropdownButton<String>(
-                underline: Container(),
-                isExpanded: true,
-                value: timetableCtrl.dayName.value,
-                onChanged: (String? newValue) {
-                  timetableCtrl.dayName.value = newValue ?? '';
-                },
-                items: <String>[
-                  'Select Day',
-                  'Monday',
-                  'Tuesday',
-                  'Wednesday',
-                  'Thursday',
-                  'Friday',
-                  'Saturday',
-                  'Sunday',
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-            )),
-      ),
+     Padding(
+  padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
+  child: Obx(() => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+            color: Colors.black.withOpacity(0.7),
+          ),
+        ),
+        width: 450,
+        child: DropdownButtonFormField<String>(
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+          ),
+          isExpanded: true,
+          value: timetableCtrl.dayName.value,
+          onChanged: (String? newValue) {
+            timetableCtrl.dayName.value = newValue ?? '';
+          },
+          validator: (item) {
+            if (item == null || item == 'Select Day') {
+              return "Select Class";
+            } else {
+              return null;
+            }
+          },
+          items: <String>[
+            'Select Day',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday',
+          ].map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      )),
+),
+
+      
       ////////////////////////////////////////////////////////1
       const Padding(
         padding: EdgeInsets.only(top: 15, left: 10, right: 10),
@@ -86,11 +96,11 @@ class TimeTableMainScreen extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
         child: TextFormFiledBlueContainerWidget(
-          validator: checkFieldEmpty,
           controller: timetableCtrl.periodController,
           width: ResponsiveWebSite.isMobile(context) ? double.infinity : 400,
           hintText: 'Period',
           title: 'Period',
+          validator: checkFieldEmpty,
           // onTap: () async {
 
           // },
@@ -104,13 +114,14 @@ class TimeTableMainScreen extends StatelessWidget {
           width: ResponsiveWebSite.isMobile(context) ? double.infinity : 400,
           hintText: 'Start time',
           title: 'Start time',
-          validator: (value) {
-            if (timetableCtrl.startTimeController.text.isEmpty) {
-              return "Please select Time";
-            } else {
-              return null;
-            }
-          },
+          validator: checkFieldEmpty,
+          // validator: (value) {
+          //   if (timetableCtrl.startTimeController.text.isEmpty) {
+          //     return "Please select Time";
+          //   } else {
+          //     return null;
+          //   }
+          // },
           onTap: () async {
             await timetableCtrl.selectTimesec(
                 context, timetableCtrl.startTimeController);
@@ -128,6 +139,7 @@ class TimeTableMainScreen extends StatelessWidget {
           width: ResponsiveWebSite.isMobile(context) ? double.infinity : 400,
           hintText: 'End time',
           title: 'End time',
+          validator: checkFieldEmpty,
           onTap: () async {
             await timetableCtrl.selectTimesec(
                 context, timetableCtrl.endTimeController);
@@ -340,6 +352,7 @@ class TimeTableMainScreen extends StatelessWidget {
   Future<void> timetable_Creation(
       BuildContext context, List<Widget> textformWidget) {
          final GlobalKey<FormState> formKey = GlobalKey<FormState>();  
+
     final timetableCtrl = Get.put(TimeTableController());
     return aweSideSheet(
         context: context,
@@ -370,8 +383,7 @@ class TimeTableMainScreen extends StatelessWidget {
                       child:
                           //  Obx(() {
                           // return
-                          Form(
-                            key: formKey,
+                          Form(key: formKey,
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,

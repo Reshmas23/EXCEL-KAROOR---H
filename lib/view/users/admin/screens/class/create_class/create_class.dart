@@ -90,7 +90,7 @@ createClassFunction(BuildContext context) {
                   buttonstate: Get.find<ClassController>().buttonstate.value,
                   text: 'Create Class')),
             ),
-          ),
+          ),const TextFontWidget(text: "Click on ' + ' symbol to add classes to this batch year", fontsize: 11,fontWeight: FontWeight.w500,),
           Expanded(
             child: SizedBox(
               child: StreamBuilder(
@@ -133,10 +133,16 @@ createClassFunction(BuildContext context) {
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
-                                                  child: TextFontWidget(
-                                                    text: data.className,
-                                                    fontsize: 13,
-                                                    fontWeight: FontWeight.w600,
+                                                  child: SizedBox(
+                                                    width: 150,
+                                                    child: SingleChildScrollView(
+                                                      scrollDirection: Axis.horizontal,
+                                                      child: TextFontWidget(
+                                                        text: data.className,
+                                                        fontsize: 13,
+                                                        fontWeight: FontWeight.w600,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                                 Padding(

@@ -32,7 +32,7 @@ class IoTCardController extends GetxController {
     try {
       await server
           .collection('StudentRegistration')
-          .doc('CardData')
+          .doc('MsRK8bvGM7hvpoXAvtbVo3KsB6H2')
           .get()
           .then((cardvalue) async {
         cardList.add(cardvalue.data()?['CardID']);
@@ -63,7 +63,7 @@ class IoTCardController extends GetxController {
                     SetOptions(merge: true)).then((value) async {
               await server
                   .collection('StudentRegistration')
-                  .doc('CardData')
+                  .doc('MsRK8bvGM7hvpoXAvtbVo3KsB6H2')
                   .update({'CardID': ''}).then((value) async {
                 registudentList.add(student);
                 registudentList = registudentList.toSet().toList();
@@ -185,7 +185,7 @@ class IoTCardController extends GetxController {
     cardList.clear();
     await server
         .collection('StudentRegistration')
-        .doc('CardData')
+        .doc('MsRK8bvGM7hvpoXAvtbVo3KsB6H2')
         .get()
         .then((value) async {
       cardList.add(value.data()?['CardID']);
@@ -222,7 +222,7 @@ class IoTCardController extends GetxController {
                     SetOptions(merge: true)).then((value) async {
               await server
                   .collection('StudentRegistration')
-                  .doc('CardData')
+                  .doc('MsRK8bvGM7hvpoXAvtbVo3KsB6H2')
                   .update({'CardID': ''}).then((value) async {
                 cardList.clear();
                 allStudentList.clear();

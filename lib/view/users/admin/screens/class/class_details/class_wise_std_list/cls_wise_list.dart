@@ -107,7 +107,7 @@ class ClassWiseStudentList extends StatelessWidget {
                                       .collection('classes')
                                       .doc(classController
                                           .classModelData.value!.docid)
-                                      .collection("Students")
+                                      .collection("Students").orderBy('studentName')
                                       .snapshots(),
                                   builder: (context, clsStdsnaps) {
                                     //   print(classController.classModelData.value!.docid);

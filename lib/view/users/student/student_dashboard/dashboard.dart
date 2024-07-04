@@ -17,7 +17,7 @@ class StudentDashBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: ResponsiveWebSite.isMobile(context) ? 2000 : 1500,
+      height: ResponsiveWebSite.isMobile(context) ? 1800 : 1000,
       color: const Color.fromARGB(255, 240, 241, 243),
       child: ResponsiveWebSite.isMobile(context)
           ? SingleChildScrollView(
@@ -27,7 +27,7 @@ class StudentDashBoardScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: studentDashBordWidgets[3],
-                  ), /////.............................My progressBar
+                  ), /////.............................notifications
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(height: 360, color: cWhite, child: studentDashBordWidgets[2]),
@@ -35,8 +35,8 @@ class StudentDashBoardScreen extends StatelessWidget {
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(height: 450, color: cWhite, child: studentDashBordWidgets[1]),
-                  ), /////............................Calendar
+                    child: Container(height: 250, color: cWhite, child: studentDashBordWidgets[1]),
+                  ), /////............................My progressBar
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -144,7 +144,7 @@ class StudentDashBoardScreen extends StatelessWidget {
 }
 
 List<Widget> studentDashBordWidgets = [
-   StudentsDetailsPart(),
+   const StudentsDetailsPart(),
   const MyStudyProgressStdContainerWidget(),
   const SubjectWiseProgressBarStd(),
   const StdNoticeBoardContainer(),

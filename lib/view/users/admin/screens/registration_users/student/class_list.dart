@@ -13,7 +13,6 @@ import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
-import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 
 class AllClassListContainer extends StatelessWidget {
   final ClassController classController = Get.put(ClassController());
@@ -48,18 +47,18 @@ class AllClassListContainer extends StatelessWidget {
                             fontsize: 18,
                             fontWeight: FontWeight.bold,
                           ),
-                          Row(
-                            children: [
-                              // const RouteSelectedTextContainer(
-                              //     width: 150, title: 'All Teacher'),
-                              const Spacer(),
-                              GestureDetector(
-                                onTap: () {},
-                                child: const RouteSelectedTextContainer(
-                                    title: 'Edit Deatils'),
-                              )
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     // const RouteSelectedTextContainer(
+                          //     //     width: 150, title: 'All Teacher'),
+                          //     const Spacer(),
+                          //     GestureDetector(
+                          //       onTap: () {},
+                          //       child: const RouteSelectedTextContainer(
+                          //           title: 'Edit Deatils'),
+                          //     )
+                          //   ],
+                          // ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Container(
@@ -134,10 +133,9 @@ class AllClassListContainer extends StatelessWidget {
                                 // width: 1100,
                                 child: StreamBuilder(
                                   stream: server
-                                       .collection('SchoolListCollection')
+                                  .collection('SchoolListCollection')
                                   .doc(UserCredentialsController.schoolId)
-                                  .collection(
-                                      UserCredentialsController.batchId!)
+                                  .collection( UserCredentialsController.batchId!)
                                   .doc(UserCredentialsController.batchId!)
                                   .collection('classes')
                                   .snapshots(),

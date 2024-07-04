@@ -142,14 +142,15 @@ class AppBarAdminPanel extends StatelessWidget {
                                     return const Center(
                                         child: CircularProgressIndicator());
                                   } else if (snapshot.hasError) {
-                                    return const Center(child: Text('Error'));
+                                    return const Center(
+                                        child:
+                                            Text('Error'));
                                   } else {
                                     final data = snapshot.data;
                                     if (data != null &&
                                         data.containsKey('collection1')) {
                                       return Text(
-                                        data['collection1']['adminUserName'] ??
-                                            '',
+                                        data['collection1'] ['adminUserName'] ??'',
                                         style: const TextStyle(fontSize: 12),
                                       );
                                     } else if (data != null &&
@@ -159,7 +160,8 @@ class AppBarAdminPanel extends StatelessWidget {
                                         style: const TextStyle(fontSize: 12),
                                       );
                                     } else {
-                                      return const Center(child: Text("--"));
+                                      return const Center(
+                                          child: Text("--"));
                                     }
                                   }
                                 },
@@ -175,24 +177,30 @@ class AppBarAdminPanel extends StatelessWidget {
                               ),
                             ],
                           ),
-                          IconButton(
-                              focusNode: textButtonFocusNode2,
-                              onPressed: () {
-                                showPopupMenu(context);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_drop_down,
-                                size: 18,
-                                color: cBlack,
-                              )),
+                        //  const SizedBox(width: 10,),
+                          SizedBox(
+                            width: 15,
+                            child: IconButton(
+                                focusNode: textButtonFocusNode2,
+                                onPressed: () {
+                                  showPopupMenu(context);
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  size: 18,
+                                  color: cBlack,
+                                )),
+                          ),
                         ],
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(width: 10,),
                 GestureDetector(
                   onTap: () {
-                    adminProfileshowlist(context);
+                       //   Get.to(()=>ClassWiseStudentListContainer());
+                     adminProfileshowlist(context);
                   },
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent,
@@ -202,9 +210,6 @@ class AppBarAdminPanel extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                ),
-                 const SizedBox(
-                  width: 10,
                 ),
                 // SizedBox(
                 //   width: 70,
@@ -248,6 +253,7 @@ class AppBarAdminPanel extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
+                const SizedBox(width: 10,)
                 // SizedBox(
                 //   width: 50,
                 //   child: Column(
@@ -259,15 +265,18 @@ class AppBarAdminPanel extends StatelessWidget {
                 //             child: IconButton(
                 //                 focusNode: textButtonFocusNode1,
                 //                 onPressed: () {
-                //                   notificationShowingFunctionOnAppBar(context);
+                //                 //  adminProfileshowlist(context);
+                //                  // notificationShowingFunctionOnAppBar(context);
                 //                 },
                 //                 icon: Tooltip(
-                //                   message: 'Registered Student Requests',
+                //                   message: '',
+                //                   //'Registered Student Requests',
                 //                   child: Icon(
                 //                     Icons.notifications_none_outlined,
                 //                     color: cBlack.withOpacity(0.4),
                 //                   ),
-                //                 )),
+                //                 )
+                //                 ),
                 //           ),
                 //           Padding(
                 //             padding: const EdgeInsets.only(top: 07, left: 22),

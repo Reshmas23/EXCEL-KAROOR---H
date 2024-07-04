@@ -60,17 +60,7 @@ class TeacherClassExamDetailsGraph extends StatelessWidget {
             // pointColorMapper: (data, index) => data.color,
             color: Colors.greenAccent,
           ),
-          // ColumnSeries<ChartData, String>(
-          //   dataLabelSettings: const DataLabelSettings(
-
-          //       // Renders the data label
-          //       isVisible: true),
-          //   dataSource: chartData,
-          //   xValueMapper: (ChartData data, _) => data.x,
-          //   // yValueMapper: (ChartData data, _) => data.y2,
-          //   // pointColorMapper: (data, index) => data.color,
-          //   // color: const Color.fromARGB(255, 251, 65, 65),
-          // )
+        
         ]);
   }
 }

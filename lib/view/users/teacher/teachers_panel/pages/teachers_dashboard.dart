@@ -14,7 +14,7 @@ class TeacherDashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> teacherDashboardWidget = [
-      const SingleChildScrollView(
+       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
           padding: EdgeInsets.only(bottom: 10),

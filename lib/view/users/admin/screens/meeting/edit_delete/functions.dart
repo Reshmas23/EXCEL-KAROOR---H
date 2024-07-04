@@ -36,7 +36,11 @@ editFunctionOfMeeting(BuildContext context, MeetingModel data) {
                 hintText: data.date,
                 title: 'Date🗓️ '),
             TextFormFiledHeightnoColor(
-                validator: checkFieldEmpty,
+                onTap: () {
+                  meetingController.selectTimesec(
+                      context, meetingController.edittimeController);
+                },
+                validator: checkFieldTimeIsValid,
                 controller: meetingController.edittimeController,
                 hintText: data.time,
                 title: 'Time '),

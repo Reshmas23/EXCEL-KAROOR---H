@@ -82,7 +82,7 @@ class AllMeetingsListPage extends StatelessWidget {
                     Container(
                       color: cWhite,
                       height: 500,
-                      width: 1200,
+                      width: ResponsiveWebSite.isDesktop(context) ? double.infinity: 1200,
                       child: Column(
                         children: [
                           Padding(
@@ -186,7 +186,7 @@ class AllMeetingsListPage extends StatelessWidget {
                                     //child:
                                     Expanded(
                                   child: Container(
-                                    width: 1200,
+                                    width:  ResponsiveWebSite.isDesktop(context) ? double.infinity:1200,
                                     decoration: BoxDecoration(
                                       color: cWhite,
                                       border: Border.all(color: cWhite),

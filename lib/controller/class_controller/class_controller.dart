@@ -56,6 +56,7 @@ class ClassController extends GetxController {
     buttonstate.value = ButtonState.loading;
     try {
       final data = ClassModel(
+        lastClassDay: '',
         workingDaysCount: 0,
         classfee: int.parse(classFeeController.text.trim()),
         feeeditoption: false,
@@ -100,6 +101,7 @@ class ClassController extends GetxController {
       String classId, String docid, int classfee) async {
     try {
       final data = ClassModel(
+        lastClassDay: '',
           workingDaysCount: 0,
           docid: docid,
           className: className,

@@ -40,19 +40,20 @@ class CatrgoryTableHeaderColorWidget extends StatelessWidget {
   final double? width;
   final Color color;
   final Color textcolor;
+  final double? height;
 
   const CatrgoryTableHeaderColorWidget({
     this.width,
     required this.headerTitle,
     required this.color,
     required this.textcolor,
-    super.key,
+    super.key, this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35,
+      height:height?? 35,
       width: width,
       decoration: BoxDecoration(
           color: color,

@@ -294,7 +294,7 @@ class AllStudentListContainer extends StatelessWidget {
                                               .doc(Get.find<ClassController>()
                                                   .classDocID
                                                   .value)
-                                              .collection('Students')
+                                              .collection('Students').orderBy('studentName')
                                               .snapshots()
                                           : server
                                               .collection(

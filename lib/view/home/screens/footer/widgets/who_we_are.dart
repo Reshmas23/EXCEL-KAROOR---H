@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../view/colors/colors.dart';
-import '../../../../../view/fonts/google_monstre.dart';
+import '../../../../colors/colors.dart';
+import '../../../../fonts/google_monstre.dart';
 
 class WhoWeAre extends StatelessWidget {
   const WhoWeAre({super.key});

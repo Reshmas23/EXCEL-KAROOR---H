@@ -12,23 +12,23 @@ class MyStudyProgressStdContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height:  250,
       //width: ResponsiveWebSite.isTablet(context)?MediaQuery.of(context).size.width/3.2 :ResponsiveWebSite.isMobile(context)? double.infinity: 300,
        color: Colors.white,
       
       child:
         AspectRatio(
           aspectRatio: ResponsiveWebSite.isMobile(context)? 2/1 : 1/1,
-          child: Column(
+          child: const Column(
            children: [
             Padding(
-              padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
+              padding: EdgeInsets.only(left: 5,top: 10,bottom: 10),
               child: TextFontWidget(text: "My Study Progress", 
               fontsize: 16,
               fontWeight: FontWeight.w700,
-              color: const Color.fromARGB(255, 57,87,254,),),
+              color: Color.fromARGB(255, 57,87,254,),),
             ),
-             const Padding(
+             Padding(
                padding: EdgeInsets.all(10),
                child: StudentTotalExamResultProgressChart(),
              ),

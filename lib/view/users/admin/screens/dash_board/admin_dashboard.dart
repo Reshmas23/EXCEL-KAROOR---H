@@ -8,6 +8,7 @@ import 'package:vidyaveechi_website/view/users/admin/screens/dash_board/sections
 import 'package:vidyaveechi_website/view/users/admin/screens/dash_board/sections/exam_status/exam_status.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/dash_board/sections/teacher_status/teacher_status.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
+import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 
 import 'sections/total_members/total_members_section.dart';
@@ -19,7 +20,7 @@ class AdminDashBoardSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: server.collection('Attendance').doc('CardData').snapshots(),
+        stream: server.collection('Attendance').doc(UserCredentialsController.schoolId).snapshots(),
         builder: (context, cardSnaps) {
           if (cardSnaps.hasData) {
             if (cardSnaps.data?.data()?['CardID'] == '') {

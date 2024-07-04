@@ -9,20 +9,17 @@ import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/textformFiledContainer/textformFiledBlueContainer.dart';
 
 editFunctionOfExam(BuildContext context, ExamNotificationModel data) {
-  ExamNotificationController getExamNotificationCtr =
-      ExamNotificationController();
+  ExamNotificationController getExamNotificationCtr = ExamNotificationController();
   final GlobalKey<FormState> fkey = GlobalKey<FormState>();
   getExamNotificationCtr.examNameCtr.text = data.examName;
-  getExamNotificationCtr.startDateCtr.text =
-      dateConvert(DateTime.parse(data.startDate));
-  getExamNotificationCtr.endDateCtr.text =
-      dateConvert(DateTime.parse(data.endDate));
+  getExamNotificationCtr.startDateCtr.text = dateConvert(DateTime.parse(data.startDate));
+  getExamNotificationCtr.endDateCtr.text = dateConvert(DateTime.parse(data.endDate));
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
         backgroundColor: cWhite,
-        title:  Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             BackButton(),
@@ -44,8 +41,7 @@ editFunctionOfExam(BuildContext context, ExamNotificationModel data) {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       TextFontWidget(
-                          text: ' Exam Name *', fontsize: 12.5),
+                      TextFontWidget(text: ' Exam Name *', fontsize: 12.5),
                       const SizedBox(
                         height: 05,
                       ),
@@ -53,8 +49,7 @@ editFunctionOfExam(BuildContext context, ExamNotificationModel data) {
                           height: 40,
                           decoration: BoxDecoration(
                               border: Border.all(width: 1),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5))),
+                              borderRadius: const BorderRadius.all(Radius.circular(5))),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
@@ -202,8 +197,8 @@ editFunctionOfExam(BuildContext context, ExamNotificationModel data) {
                       //     getExamNotificationCtr.startDateCtr.text);
                       print('start');
                       print(getExamNotificationCtr.startDateCtr.text);
-                      DateTime dateTime = DateFormat("dd-MM-yyyy")
-                          .parse(getExamNotificationCtr.startDateCtr.text);
+                      DateTime dateTime =
+                          DateFormat("dd-MM-yyyy").parse(getExamNotificationCtr.startDateCtr.text);
                       print(dateTime);
                       getExamNotificationCtr.editExamNotification(
                           examName: getExamNotificationCtr.examNameCtr.text,
@@ -215,6 +210,7 @@ editFunctionOfExam(BuildContext context, ExamNotificationModel data) {
                               .toString(),
                           docId: data.docId);
                     }
+                    Navigator.pop(context);
                   },
                   child: Container(
                     height: 40,
@@ -223,7 +219,7 @@ editFunctionOfExam(BuildContext context, ExamNotificationModel data) {
                         color: themeColorBlue,
                         border: Border.all(color: themeColorBlue),
                         borderRadius: BorderRadius.circular(05)),
-                    child:  Center(
+                    child: Center(
                       child: TextFontWidget(
                         text: "Edit",
                         fontsize: 14,

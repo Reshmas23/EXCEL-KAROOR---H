@@ -33,9 +33,9 @@ class GeneralInstructionsModel {
 
   factory GeneralInstructionsModel.fromMap(Map<String, dynamic> map) {
     return GeneralInstructionsModel(
-      instruction: map['instruction'] as String,
-      instructionId: map['instructionId'] as String,
-      time: map['time'] as String,
+      instruction: map['instruction'] ?? "",
+      instructionId: map['instructionId'] ?? "",
+      time: map['time'] ?? "",
     );
   }
 

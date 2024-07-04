@@ -6,6 +6,7 @@ import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/fonts/google_monstre.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
+import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 
 // import '../../../../../../../../colors/colors.dart';
 
@@ -24,12 +25,12 @@ class ParentProfileWidget extends StatelessWidget {
         child: Row(
           children: [
              Padding(
-              padding: EdgeInsets.only(
-                left: 10,
+              padding:  EdgeInsets.only(
+                left: ResponsiveWebSite.isMobile(context) ?5: 10,
                 top: 10,
               ),
               child: CircleAvatar(
-                radius: 60,
+                radius:ResponsiveWebSite.isMobile(context) ?50: 60,
                  backgroundImage: NetworkImage(UserCredentialsController
                                   .parentModel!.profileImageURL ??
                               ''),

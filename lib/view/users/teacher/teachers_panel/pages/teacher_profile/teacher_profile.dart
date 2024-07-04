@@ -312,6 +312,7 @@ class TeacherProfileView extends StatelessWidget {
           profileCtr.phoneController.text = data['teacherPhNo'] ?? "";
           profileCtr.emailController.text = data['teacherEmail'] ?? "";
           profileCtr.gender.value = data['gender'] ?? "";
+          
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

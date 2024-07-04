@@ -116,7 +116,7 @@ class AllAdminListPage extends StatelessWidget {
                     Container(
                       color: cWhite,
                       height: 500,
-                      width: 1200,
+                      width:  ResponsiveWebSite.isDesktop(context) ? double.infinity:1200,
                       child: Column(
                         children: [
                           const Row(

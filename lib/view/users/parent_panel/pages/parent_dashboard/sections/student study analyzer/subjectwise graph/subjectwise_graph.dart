@@ -19,7 +19,7 @@ class SubjectWiseGraphState extends State<SubjectWiseGraph> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children:[
             SizedBox(
               height: 40,
             child:  TextFontWidget(text: 'Student Study Progress', fontsize:18 ,fontWeight: FontWeight.bold,)

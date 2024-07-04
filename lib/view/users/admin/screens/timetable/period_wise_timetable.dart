@@ -174,6 +174,18 @@ class PeriodWiseTimeTable extends StatelessWidget {
                                             flex: 2,
                                             child: GestureDetector(
                                               onTap: () {
+                                                timeTableController
+                                                    .periodController
+                                                    .text = data.periodNumber!;
+                                                timeTableController
+                                                    .subjectNamecontroller
+                                                    .text = data.subjectName!;
+                                                timeTableController
+                                                    .startTimeviewController
+                                                    .text = data.startTime!;
+                                                timeTableController
+                                                    .endTimeviewController
+                                                    .text = data.endTime!;
                                                 customShowDilogBox(
                                                     context: context,
                                                     title: 'Edit',
@@ -217,7 +229,7 @@ class PeriodWiseTimeTable extends StatelessWidget {
                                                                 ),
                                                                 TextFormFiledBlueContainerWidgetWithOutColor(
                                                                   validator:
-                                                                      checkFieldEmpty,
+                                                                      checkFieldTimeIsValid,
                                                                   onTap:
                                                                       () async {
                                                                     await timeTableController.selectTimesec(
@@ -238,7 +250,7 @@ class PeriodWiseTimeTable extends StatelessWidget {
                                                                 ),
                                                                 TextFormFiledBlueContainerWidgetWithOutColor(
                                                                   validator:
-                                                                      checkFieldEmpty,
+                                                                      checkFieldTimeIsValid,
                                                                   onTap:
                                                                       () async {
                                                                     await timeTableController.selectTimesec(
@@ -322,7 +334,7 @@ class PeriodWiseTimeTable extends StatelessWidget {
                                   ),
                                 );
                         } else if (snapshot.data == null) {
-                          return Center(
+                          return const Center(
                             child: TextFontWidget(
                                 text: "No result found", fontsize: 12),
                           );

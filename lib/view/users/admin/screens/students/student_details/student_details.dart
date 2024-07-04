@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import 'package:vidyaveechi_website/controller/admin_section/student_controller/student_controller.dart';
 import 'package:vidyaveechi_website/controller/class_controller/class_controller.dart';
 import 'package:vidyaveechi_website/view/colors/colors.dart';
-import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
+import 'package:vidyaveechi_website/view/ioT_Card/code.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/attendence_history_status/attendence_history_status.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/exam_history_status/exam_history_status.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/detail_tileContainer.dart';
+import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/route_NonSelectedContainer.dart';
@@ -103,7 +104,7 @@ class StudentDetailsContainer extends StatelessWidget {
                                           ),
                                           const RouteSelectedTextContainer(
                                               width: 140,
-                                              title: 'Student Deatils'),
+                                              title: 'Student Details'),
                                         ],
                                       ),
                                     )
@@ -134,7 +135,7 @@ class StudentDetailsContainer extends StatelessWidget {
                                           ),
                                           const RouteSelectedTextContainer(
                                               width: 140,
-                                              title: 'Student Deatils'),
+                                              title: 'Student Details'),
                                         ],
                                       ),
                                     )
@@ -158,10 +159,9 @@ class StudentDetailsContainer extends StatelessWidget {
                                 radius: 80,
                                 backgroundColor: Colors.grey,
                                 child: CircleAvatar(
-                                  radius: 78,
-                                  backgroundImage:
-                                      AssetImage('webassets/png/student.png'),
-                                ),
+                                    radius: 78,
+                                    backgroundImage: AssetImage(
+                                        'webassets/png/student.png')),
                               ),
                             ),
                             Expanded(
@@ -218,13 +218,28 @@ class StudentDetailsContainer extends StatelessWidget {
                                                     subtitle:
                                                         data.admissionNumber,
                                                   ),
-                                                  StudentDetailTileContainer(
-                                                    flex: 1,
-                                                    title: 'Join Date',
-                                                    subtitle:
-                                                        stringTimeToDateConvert(
-                                                            data.createDate),
-                                                  ),
+                                                  StreamBuilder(
+                                                      stream: server
+                                                          .collection('SchoolListCollection')
+                                                          .doc( UserCredentialsController.schoolId)
+                                                          .collection('classes')
+                                                          .doc(data.classId)
+                                                          .snapshots(),
+                                                      builder: (context, snap) {
+                                                        if (snap.hasData) {
+                                                          return StudentDetailTileContainer(
+                                                              flex: 1,
+                                                              title:
+                                                                  'Class Name',
+                                                              subtitle:
+                                                                  '${snap.data?['className'] ?? ""}'
+                                                              // stringTimeToDateConvert(
+                                                              //     data.createDate),
+                                                              );
+                                                        } else {
+                                                          return const Text("Not Found");
+                                                        }
+                                                      }),
                                                 ],
                                               ),
                                             ),

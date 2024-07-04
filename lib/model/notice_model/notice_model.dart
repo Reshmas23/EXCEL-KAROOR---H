@@ -69,15 +69,15 @@ class NoticeModel {
 
   factory NoticeModel.fromMap(Map<String, dynamic> map) {
     return NoticeModel(
-      publishedDate: map['publishedDate'] as String,
-      subject: map['subject'] as String,
-      heading: map['heading'] as String,
-      dateofoccation: map['dateofoccation'] as String,
-      venue: map['venue'] as String,
-      chiefGuest: map['chiefGuest'] as String,
-      dateOfSubmission: map['dateOfSubmission'] as String,
-      signedBy: map['signedBy'] as String,
-      noticeId: map['noticeId'] as String,
+      publishedDate: map['publishedDate'] ?? "",
+      subject: map['subject'] ?? "",
+      heading: map['heading'] ?? "",
+      dateofoccation: map['dateofoccation'] ?? "",
+      venue: map['venue'] ?? "",
+      chiefGuest: map['chiefGuest'] ?? "",
+      dateOfSubmission: map['dateOfSubmission'] ?? "",
+      signedBy: map['signedBy'] ?? "",
+      noticeId: map['noticeId'] ?? "",
     );
   }
 

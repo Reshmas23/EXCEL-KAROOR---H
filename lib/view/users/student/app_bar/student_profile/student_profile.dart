@@ -37,7 +37,7 @@ studentProfileshowlist(BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const BackButton(),
-                    TextFontWidget(
+                    const TextFontWidget(
                       text: "Profile",
                       fontsize: 17,
                       fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ studentProfileshowlist(BuildContext context) {
                       child: IconButton(
                           onPressed: () async {
                             if (kDebugMode) {
-                              print("logoutUser");
+                              //print("logoutUser");
                             }
                             await Get.find<UserLoginController>()
                                 .logoutSaveData()
@@ -106,7 +106,7 @@ studentProfileshowlist(BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const BackButton(),
-                    TextFontWidget(
+                    const TextFontWidget(
                       text: "Profile",
                       fontsize: 17,
                       fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ studentProfileshowlist(BuildContext context) {
                       child: IconButton(
                           onPressed: () async {
                             if (kDebugMode) {
-                              print("logoutUser");
+                              //print("logoutUser");
                             }
                             await Get.find<UserLoginController>()
                                 .logoutSaveData()
@@ -235,7 +235,7 @@ class StudentProfileEdit extends StatelessWidget {
               controller: profileCtr.emailController,
               hintText: ' Email',
               title: 'Email'),
-          TextFontWidget(text: 'Gender *', fontsize: 12.5),
+          const TextFontWidget(text: 'Gender *', fontsize: 12.5),
           const SizedBox(height: 5),
           Container(
             color: screenContainerbackgroundColor,

@@ -49,12 +49,12 @@ class EventModel {
 
   factory EventModel.fromMap(Map<String, dynamic> map) {
     return EventModel(
-      eventName: map['eventName'] as String,
-      eventDate: map['eventDate'] as String,
-      eventDescription: map['eventDescription'] as String,
-      venue: map['venue'] as String,
-      signedBy: map['signedBy'] as String,
-      id: map['id'] as String,
+      eventName: map['eventName'] ?? "",
+      eventDate: map['eventDate'] ?? "",
+      eventDescription: map['eventDescription'] ?? "",
+      venue: map['venue'] ?? "",
+      signedBy: map['signedBy'] ?? "",
+      id: map['id'] ?? "",
     );
   }
 

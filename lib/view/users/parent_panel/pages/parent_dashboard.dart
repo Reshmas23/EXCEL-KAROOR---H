@@ -9,6 +9,7 @@ import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/users/parent_panel/pages/parent_dashboard/sections/attendance/circularprogress.dart';
 import 'package:vidyaveechi_website/view/users/parent_panel/pages/parent_dashboard/sections/parent%20profile/parent_profile_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
+
 // import 'package:vidyaveechi_website/view/users/parent_panel/pages/parent_dashboard/sections/table%20calender/table_calender.dart';
 
 import 'parent_dashboard/sections/notification/notification.dart';
@@ -31,7 +32,8 @@ class ParentDashBoardContainer extends StatelessWidget {
       const StudentStudyProgress(), //3
       const SubjectWiseGraph(), //4
       const ParentNotification(), //5
-      const ParentDataTable(), //6
+      StudentExamHistoryToParent()
+      //const ParentDataTable(), //6
       // const TableCalender(), //7
     ];
     return Container(
@@ -44,6 +46,13 @@ class ParentDashBoardContainer extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
                       child: parentDashBoardWidgets[0], /////parent profile
+                    ),
+                     Padding(
+                      padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                      child: Container(
+                          height: 150,
+                          color: cWhite,
+                          child: parentDashBoardWidgets[1]), ////// points
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -58,15 +67,9 @@ class ParentDashBoardContainer extends StatelessWidget {
                       child: Container(
                           color: cWhite, child: parentDashBoardWidgets[3]), /////subjectwise graph
                     ),
+                   
                     Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-                      child: Container(
-                          height: 400,
-                          color: cWhite,
-                          child: parentDashBoardWidgets[1]), ////// table calender
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                      padding: const EdgeInsets.only(top: 10, left: 10, right: 10,bottom: 10),
                       child: Container(
                         color: cWhite,
                         height: 600,
@@ -162,10 +165,10 @@ class ParentDashBoardContainer extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 5, left: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10,bottom: 10),
                             child: Container(
                               color: cWhite,
-                              height: 400,
+                              height: 500,
                               child: parentDashBoardWidgets[5],
                             ),
                           ),

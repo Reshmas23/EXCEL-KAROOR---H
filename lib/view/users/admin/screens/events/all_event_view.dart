@@ -26,7 +26,9 @@ class AllEventsList extends StatelessWidget {
       child: Container(
         color: screenContainerbackgroundColor,
         height: 650,
-        width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
+        width: 
+        ResponsiveWebSite.isDesktop(context) ? double.infinity : 
+        1200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -77,12 +79,13 @@ class AllEventsList extends StatelessWidget {
             //   child: CreateEvent(),
             // ),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
+              padding: const EdgeInsets.only(left: 10, right: 25, top: 15),
               child: Container(
                 color: cWhite,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  padding: const EdgeInsets.only(left: 5, right: 0),
                   child: Container(
+                    width: ResponsiveWebSite.isDesktop(context) ? double.infinity: 1200,
                     color: cWhite,
                     height: 40,
                     child: const Row(
@@ -138,15 +141,15 @@ class AllEventsList extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 25),
                 child: Container(
-                  width: 1200,
+                  width:  ResponsiveWebSite.isDesktop(context) ? double.infinity:1200,
                   decoration: BoxDecoration(
                     color: cWhite,
                     border: Border.all(color: cWhite),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    padding: const EdgeInsets.only(left: 5, right: 0),
                     child: SizedBox(
                         // width: 1100,
                         child: StreamBuilder(

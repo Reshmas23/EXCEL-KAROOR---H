@@ -11,6 +11,8 @@ class AppColors {
   static const Color blackColore = Color.fromARGB(255, 0, 0, 0);
 }
 
+const Color cGrey = Colors.grey;
+
 const Color themeColorGreen = Color(0xFF26A69A);
 const Color themeColorBlue = Color.fromARGB(255, 6, 71, 157);
 const Color adminePrimayColor = Color.fromARGB(255, 27, 92, 176);
@@ -26,4 +28,4 @@ const Color dujothemeColor = Color(0xFF26A69A);
 const Color screenContainerbackgroundColor = Color.fromARGB(255, 240, 241, 243);
 const Color white = Colors.white;
 
-const Color excelkaroorThemeColor =Color.fromARGB(255, 3, 9, 75);
+const Color excelkaroorThemeColor = Color.fromARGB(255, 3, 9, 75);

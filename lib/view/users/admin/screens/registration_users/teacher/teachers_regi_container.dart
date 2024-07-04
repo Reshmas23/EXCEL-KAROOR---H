@@ -45,37 +45,37 @@ class AllTeacherRegistrationList extends StatelessWidget {
                         fontsize: 18,
                         fontWeight: FontWeight.bold,
                       ),
-                      Row(
-                        children: [
-                          // const RouteSelectedTextContainer(
-                          //     width: 150, title: 'All Teacher'),
-                          const Spacer(),
-                          teacherController.teacherEditDetail.value == true
-                              ? Row(
-                                  children: [
-                                    const RouteSelectedTextContainer(
-                                        title: 'Ready to Edit now !'),
-                                    Checkbox(
-                                      checkColor: cWhite,
-                                      activeColor: cgreen,
-                                      value: true,
-                                      onChanged: (value) {
-                                        teacherController
-                                            .teacherEditDetail.value = false;
-                                      },
-                                    ),
-                                  ],
-                                )
-                              : GestureDetector(
-                                  onTap: () {
-                                    teacherController.teacherEditDetail.value =
-                                        true;
-                                  },
-                                  child: const RouteSelectedTextContainer(
-                                      title: 'Edit Deatils'),
-                                )
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     // const RouteSelectedTextContainer(
+                      //     //     width: 150, title: 'All Teacher'),
+                      //     const Spacer(),
+                      //     teacherController.teacherEditDetail.value == true
+                      //         ? Row(
+                      //             children: [
+                      //               const RouteSelectedTextContainer(
+                      //                   title: 'Ready to Edit now !'),
+                      //               Checkbox(
+                      //                 checkColor: cWhite,
+                      //                 activeColor: cgreen,
+                      //                 value: true,
+                      //                 onChanged: (value) {
+                      //                   teacherController
+                      //                       .teacherEditDetail.value = false;
+                      //                 },
+                      //               ),
+                      //             ],
+                      //           )
+                      //         : GestureDetector(
+                      //             onTap: () {
+                      //               teacherController.teacherEditDetail.value =
+                      //                   true;
+                      //             },
+                      //             child: const RouteSelectedTextContainer(
+                      //                 title: 'Edit Deatils'),
+                      //           )
+                      //   ],
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Container(
@@ -160,14 +160,6 @@ class AllTeacherRegistrationList extends StatelessWidget {
                                   .collection('Teachers')
                                   .snapshots(),
                               builder: (context, snaPS) {
-                                 if (!snaPS.hasData || snaPS.data!.docs.isEmpty) {
-                                      return const Center(
-                                          child: Text(
-                                        'Add Teachers',
-                                        style: TextStyle(
-                                            fontSize: 15, fontWeight: FontWeight.w500),
-                                      ));
-                                    }
                                 if (snaPS.hasData) {
                                   return ListView.separated(
                                       itemBuilder: (context, index) {
@@ -228,10 +220,10 @@ class AllTeacherRegistrationList extends StatelessWidget {
                                   title: 'Create Teacher'),
                             ),
                           ),
-                             const Padding(
-                               padding: EdgeInsets.only(left: 10),
-                               child: TextFontWidget(text: "Excel formate should be in .xlsx,.csv", fontsize: 11),
-                             ),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: TextFontWidget(text: "Excel formate should be in .xlsx,", fontsize: 11),
+                            ),
                           const Spacer(),
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 20),

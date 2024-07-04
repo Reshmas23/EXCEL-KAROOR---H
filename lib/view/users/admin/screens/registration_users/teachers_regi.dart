@@ -44,37 +44,37 @@ class AllTeacherRegistrationListContainer extends StatelessWidget {
                         fontsize: 18,
                         fontWeight: FontWeight.bold,
                       ),
-                      Row(
-                        children: [
-                          // const RouteSelectedTextContainer(
-                          //     width: 150, title: 'All Teacher'),
-                          const Spacer(),
-                          teacherController.teacherEditDetail.value == true
-                              ? Row(
-                                  children: [
-                                    const RouteSelectedTextContainer(
-                                        title: 'Ready to Edit now !'),
-                                    Checkbox(
-                                      checkColor: cWhite,
-                                      activeColor: cgreen,
-                                      value: true,
-                                      onChanged: (value) {
-                                        teacherController
-                                            .teacherEditDetail.value = false;
-                                      },
-                                    ),
-                                  ],
-                                )
-                              : GestureDetector(
-                                  onTap: () {
-                                    teacherController.teacherEditDetail.value =
-                                        true;
-                                  },
-                                  child: const RouteSelectedTextContainer(
-                                      title: 'Edit Deatils'),
-                                )
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     // const RouteSelectedTextContainer(
+                      //     //     width: 150, title: 'All Teacher'),
+                      //     const Spacer(),
+                      //     teacherController.teacherEditDetail.value == true
+                      //         ? Row(
+                      //             children: [
+                      //               const RouteSelectedTextContainer(
+                      //                   title: 'Ready to Edit now !'),
+                      //               Checkbox(
+                      //                 checkColor: cWhite,
+                      //                 activeColor: cgreen,
+                      //                 value: true,
+                      //                 onChanged: (value) {
+                      //                   teacherController
+                      //                       .teacherEditDetail.value = false;
+                      //                 },
+                      //               ),
+                      //             ],
+                      //           )
+                      //         : GestureDetector(
+                      //             onTap: () {
+                      //               teacherController.teacherEditDetail.value =
+                      //                   true;
+                      //             },
+                      //             child: const RouteSelectedTextContainer(
+                      //                 title: 'Edit Deatils'),
+                      //           )
+                      //   ],
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Container(

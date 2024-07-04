@@ -14,12 +14,12 @@ var schoolBatchYearListValue;
 // ignore: must_be_immutable
 class GetBatchYearListDropDownButton extends StatefulWidget {
   var schoolID;
-  TempStudentController tempStudentController =
+final  TempStudentController tempStudentController =
       Get.put(TempStudentController());
-  TempGuardianController tempGuardianController =
+ final TempGuardianController tempGuardianController =
       Get.put(TempGuardianController());
-  AddStudentToFirebaseController addStudentToFirebase = Get.put(AddStudentToFirebaseController());
-  TempParentController tempParentController = Get.put(TempParentController());
+ final AddStudentToFirebaseController addStudentToFirebase = Get.put(AddStudentToFirebaseController());
+ final TempParentController tempParentController = Get.put(TempParentController());
   GetBatchYearListDropDownButton({required this.schoolID, Key? key})
       : super(key: key);
 

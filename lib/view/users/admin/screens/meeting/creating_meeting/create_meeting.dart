@@ -23,7 +23,7 @@ class CreateMeetinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> meetingListWidget = [
-       const TextFontWidget(
+      const TextFontWidget(
         text: "SCHEDULE MEETING",
         fontsize: 19,
         fontWeight: FontWeight.bold,
@@ -43,20 +43,25 @@ class CreateMeetinPage extends StatelessWidget {
                   : 450), //////////topic field......2
 
       const ContainerTitleWidget(text: "When"), //////.3
-       TextFormFiledContainerWidget(
-        onTap: () {
-          meetingController.selectDate(context,  meetingController.dateController);
-        },
+      TextFormFiledContainerWidget(
+          onTap: () {
+            meetingController.selectDate(
+                context, meetingController.dateController);
+          },
           controller: meetingController.dateController,
           validator: checkFieldDateIsValid,
           hintText: "Date",
           title: '',
-          width: ResponsiveWebSite.isTablet(context) ? 140 : 210), 
-      
+          width: ResponsiveWebSite.isTablet(context) ? 140 : 210),
+
       /////////////////////////////////////////////////////////////////////...4
       TextFormFiledContainerWidget(
+          onTap: () {
+            meetingController.selectTimesec(
+                context, meetingController.timeController);
+          },
           controller: meetingController.timeController,
-          validator: checkFieldEmpty,
+          validator: checkFieldTimeIsValid,
           hintText: "Time",
           title: '',
           width: ResponsiveWebSite.isTablet(context) ? 140 : 210), /////....5
@@ -104,7 +109,7 @@ class CreateMeetinPage extends StatelessWidget {
 
       Obx(() => ProgressButtonWidget(
           function: () async {
-            if (meetingController .formKey .currentState! .validate()) {
+            if (meetingController.formKey.currentState!.validate()) {
               meetingController.createMeeting();
             }
           },
@@ -156,7 +161,7 @@ class CreateMeetinPage extends StatelessWidget {
       ) ///////////////////14
     ];
     return SingleChildScrollView(
-    //  scrollDirection: Axis.horizontal,
+      //  scrollDirection: Axis.horizontal,
       child: Container(
         color: screenContainerbackgroundColor,
         height: 700,
@@ -164,7 +169,7 @@ class CreateMeetinPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             const Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 25, top: 25),
               child: TextFontWidget(
                 text: 'Create Meeting',
@@ -330,7 +335,8 @@ class CreateMeetinPage extends StatelessWidget {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Padding(
-                                          padding: const EdgeInsets.only(top: 20),
+                                          padding:
+                                              const EdgeInsets.only(top: 20),
                                           child: meetingListWidget[
                                               1] //////////////////topic.........................1
                                           ),
@@ -342,7 +348,8 @@ class CreateMeetinPage extends StatelessWidget {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Padding(
-                                          padding: const EdgeInsets.only(top: 20),
+                                          padding:
+                                              const EdgeInsets.only(top: 20),
                                           child: meetingListWidget[
                                               3] ///////.......whwn
                                           ),
@@ -355,7 +362,8 @@ class CreateMeetinPage extends StatelessWidget {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Padding(
-                                          padding: const EdgeInsets.only(top: 20),
+                                          padding:
+                                              const EdgeInsets.only(top: 20),
                                           child: meetingListWidget[
                                               6] ////.....category
                                           ),
@@ -368,7 +376,8 @@ class CreateMeetinPage extends StatelessWidget {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Padding(
-                                          padding: const EdgeInsets.only(top: 20),
+                                          padding:
+                                              const EdgeInsets.only(top: 20),
                                           child: meetingListWidget[
                                               8] ///////////////////............member
                                           ),
@@ -384,14 +393,15 @@ class CreateMeetinPage extends StatelessWidget {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(top: 20),
-                                        child: meetingListWidget[11], ///////venue
+                                        child:
+                                            meetingListWidget[11], ///////venue
                                       ),
                                       meetingListWidget[
                                           12] /////////////////venu field
                                     ],
                                   ),
                                   //  meetingListWidget[14],
-                              
+
                                   Align(
                                     alignment: Alignment.center,
                                     child: Padding(

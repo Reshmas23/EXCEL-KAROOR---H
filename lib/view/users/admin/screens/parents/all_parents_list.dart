@@ -7,7 +7,7 @@ import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/parents/create_parent/create_parent.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/parents/list_table/list_table_of_prnt.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/parents/parent_details/parent_details.dart';
-import 'package:vidyaveechi_website/view/users/admin/screens/parents/search_parent/search_parent.dart';
+import 'package:vidyaveechi_website/view/users/admin/screens/parents/search_parents/search_parents.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
 import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';

@@ -58,14 +58,14 @@ class MeetingModel {
 
   factory MeetingModel.fromMap(Map<String, dynamic> map) {
     return MeetingModel(
-      topic: map['topic'] as String,
-      date: map['date'] as String,
-      time: map['time'] as String,
-      category: map['category'] as String,
-      members: map['members'] as String,
-      specialGuest: map['specialGuest'] as String,
-      venue: map['venue'] as String,
-      meetingId: map['meetingId'] as String,
+      topic: map['topic'] ?? "",
+      date: map['date'] ?? "",
+      time: map['time'] ?? "",
+      category: map['category'] ?? "",
+      members: map['members'] ?? "",
+      specialGuest: map['specialGuest'] ?? "",
+      venue: map['venue'] ?? "",
+      meetingId: map['meetingId'] ?? "",
     );
   }
 

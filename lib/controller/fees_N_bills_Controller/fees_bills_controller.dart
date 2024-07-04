@@ -240,7 +240,7 @@ class FeesAndBillsController extends GetxController {
     if (picked != null) {
       _selectedMonth.value = picked;
       DateTime parseDate = DateTime.parse(_selectedMonth.value.toString());
-      final DateFormat formatter = DateFormat('yyyy-MMMM');
+      final DateFormat formatter = DateFormat('dd-MM-yyyy');
       String formatted = formatter.format(parseDate);
 
       selectedFeeMonthContoller.text = formatted.toString();

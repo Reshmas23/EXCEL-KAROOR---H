@@ -113,7 +113,7 @@ class _AchievementsState extends State<Achievements> {
             ),
             Expanded(
               child: Container(
-                width: 1200,
+                width:  ResponsiveWebSite.isDesktop(context) ? double.infinity:1200,
                 padding: const EdgeInsets.only(left: 5, right: 5),
                 decoration: BoxDecoration(
                   color: cWhite,

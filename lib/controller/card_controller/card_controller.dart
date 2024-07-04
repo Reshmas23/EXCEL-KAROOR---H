@@ -7,44 +7,56 @@ import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_creden
 class CardController extends GetxController {
   final notificationCntrl = Get.put(NotificationController());
   Future<void> streamCard() async {
-    print("object>>>>>>>>>>>>>");
+    print("calling");
     await server
         .collection('Attendance')
-        .doc('CardData')
+        .doc(UserCredentialsController.schoolId)
         .get()
         .then((cardvalue) async {
-      // final String cardId = cardvalue.data()?['CardID'];
-      // final String dateTime = cardvalue.data()?['TappedTime'];
-      // final String attendenceTaked = cardvalue.data()?['AttendanceTaken'];
-      await fetchParents().then((value) async {
-        print("Update Details>>>>>>>>>>>>>");
-        await server.collection('Attendance').doc('CardData').update({
-          "AttendanceTaken": "true",
-          'CardID': '',
-        }).then((value) async {
-          await server.collection('Attendance').doc('CardData').update({
-            "AttendanceTaken": "false",
-            'CardID': '',
-          });
-        });
-      });
+      await fetchCardDataStudents(cardID: cardvalue.data()?['CardID']);
     });
   }
 
-  Future<void> fetchParents() async {
-    print("fetchParents>>>>>>>>>>>>>");
+  Future<void> fetchCardDataStudents({required String cardID}) async {
+    await server
+        .collection('SchoolListCollection')
+        .doc(UserCredentialsController.schoolId)
+        .collection('AllStudents')
+        .get()
+        .then((studentvalue) async {
+      for (var i = 0; i < studentvalue.docs.length; i++) {
+        if (studentvalue.docs[i].data()['cardID'] == cardID) {
+          await fetchParents(
+            parentID: studentvalue.docs[i].data()['parentId'],
+            studentName: studentvalue.docs[i].data()['studentName'],
+          );
+        }
+      }
+    });
+  }
+
+  Future<void> fetchParents(
+      {required String parentID, required String studentName}) async {
     await server
         .collection('SchoolListCollection')
         .doc(UserCredentialsController.schoolId)
         .collection('AllUsersDeviceID')
+        .doc(parentID)
         .get()
-        .then((value) {
-      for (var i = 0; i < value.docs.length; i++) {
-        notificationCntrl.sendPushMessage(
-            value.docs[i].data()['devideID'],
-            'Attendence Taked ${timeConvert(DateTime.now())} ${dateConvert(DateTime.now())} ',
-            'Card Attendece 💳');
-      }
+        .then((value) async {
+      await notificationCntrl
+          .sendPushMessage(
+        value.data()?['devideID'],
+        'Sir/Madam, your child $studentName was present on ${dateConvert(DateTime.now())} \n സർ/മാഡം, ${dateConvert(DateTime.now())} തീയതി ${timeConvert(DateTime.now())} നിങ്ങളുടെ കുട്ടി ഹാജരായി',
+        'Attendence Notification from ${UserCredentialsController.schoolName}',
+      )
+          .then((cardvalue) async {
+        await server
+            .collection('Attendance')
+            .doc(UserCredentialsController.schoolId)
+            .update({'CardID': ''});
+      });
     });
   }
+  
 }

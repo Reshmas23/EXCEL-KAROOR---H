@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +9,6 @@ import 'package:vidyaveechi_website/view/users/super_admin/widgets/drop_down/sel
 
 import '../../../widgets/drop_down/get_class.dart';
 
-// ignore: must_be_immutable
 class ParentTempCollection extends StatelessWidget {
   TempParentController tempParentController = Get.put(TempParentController());
   String schoolID;

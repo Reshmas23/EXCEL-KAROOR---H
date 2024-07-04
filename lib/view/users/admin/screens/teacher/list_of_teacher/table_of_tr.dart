@@ -18,6 +18,7 @@ class AllTeachersDataList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final teacherController = Get.put(TeacherController());
     return Obx(() => Container(
           height: 45,
           decoration: BoxDecoration(
@@ -45,7 +46,7 @@ class AllTeachersDataList extends StatelessWidget {
                     ? const TeacherDetailEditWidget(
                         docid: '',
                       )
-                    : Get.find<TeacherController>().teacherEditDetail.value ==
+                    : teacherController.teacherEditDetail.value ==
                             true
                         ? Row(
                             children: [
@@ -58,7 +59,7 @@ class AllTeachersDataList extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 05),
                                 child: IconButton(
                                     onPressed: () async {
-                                      await Get.find<TeacherController>()
+                                      await teacherController
                                           .editTeacherDetails(
                                               teacherDocID: data.docid!,
                                               key:'employeeID',
@@ -105,7 +106,7 @@ class AllTeachersDataList extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Get.find<TeacherController>()
+                      child: teacherController
                                   .teacherEditDetail
                                   .value ==
                               true
@@ -177,7 +178,7 @@ class AllTeachersDataList extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Get.find<TeacherController>()
+                      child: teacherController
                                   .teacherEditDetail
                                   .value ==
                               true

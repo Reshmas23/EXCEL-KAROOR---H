@@ -28,7 +28,7 @@ class AllClassStudentListContainer extends StatelessWidget {
   final ClassController classController = Get.put(ClassController());
   @override
   Widget build(BuildContext context) {
-    return Obx(() => classController.ontapStudentsDetail.value ==
+    return Obx(() => Get.find<ClassController>().ontapStudentsDetail.value ==
             true
         ? StudentDetailsContainer()
         : SingleChildScrollView(
@@ -45,7 +45,7 @@ class AllClassStudentListContainer extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      classController.ontapClassStudents.value =
+                      Get.find<ClassController>().ontapClassStudents.value =
                           false;
                     },
                     child: const SizedBox(
@@ -59,21 +59,21 @@ class AllClassStudentListContainer extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Padding(
-                    padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10, right: 20, left: 20),
                     child: TextFontWidget(
-                      text: '${classController. ontapClassName.toString()} Students List 📃',
+                      text: 'All Class Student List 📃',
                       fontsize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  //  Padding(
-                  //    padding: const EdgeInsets.only(top: 10,left: 20),
-                  //    child: TextFontWidget(text:'Class Name : ${classController. ontapClassName.toString()}',
-                  //    // classController.classModelData.value?.className??'', 
-                  //    fontsize: 15,fontWeight: FontWeight.bold,),
-                  //  ),
-                  // // Row(
+                   Padding(
+                     padding: const EdgeInsets.only(top: 10,left: 20),
+                     child: TextFontWidget(text:'Class Name : ${classController. ontapClassName.toString()}',
+                     // classController.classModelData.value?.className??'', 
+                     fontsize: 15,fontWeight: FontWeight.bold,),
+                   ),
+                  // Row(
                   //   children: [
                   //     // const RouteSelectedTextContainer(
                   //     //     wid)th: 150, title: 'All Teacher'),
@@ -188,10 +188,10 @@ class AllClassStudentListContainer extends StatelessWidget {
                               .collection(UserCredentialsController.batchId!)
                               .doc(UserCredentialsController.batchId)
                               .collection('classes')
-                              .doc(classController
+                              .doc(Get.find<ClassController>()
                                   .ontapClassDocID
                                   .value)
-                              .collection('Students')
+                              .collection('Students').orderBy('studentName')
                               .snapshots(),
                           builder: (context, snaPS) {
                             if (snaPS.hasData) {
@@ -243,7 +243,7 @@ class AllClassStudentListContainer extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10, right: 20),
                         child: GestureDetector(
                           onTap: () async {
-                            classController
+                            Get.find<ClassController>()
                                 .ontapStudentCreation
                                 .value = true;
                           },
@@ -287,8 +287,7 @@ class AllClassStudentListContainer extends StatelessWidget {
                           ),
                         ),
                       ),
-                      
-                             const TextFontWidget(text: "Excel formate should be in .xlsx,", fontsize: 11),
+                        const TextFontWidget(text: "Excel formate should be in .xlsx,", fontsize: 11),
                       const Spacer(),
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 20),
@@ -424,7 +423,7 @@ class AllClassStudentListContainer extends StatelessWidget {
               height: 30,
               child: RouteSelectedTextContainer(
                   title:
-                      'Get ${classController.ontapClassName.value} Students Report 📃'),
+                      'Get ${Get.find<ClassController>().ontapClassName.value} Students Report 📃'),
             ),
           )),
         ],

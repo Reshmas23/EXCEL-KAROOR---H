@@ -23,15 +23,12 @@ class AllExamNotificationListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-       scrollDirection: ResponsiveWebSite.isMobile(context)
-                        ? Axis.horizontal
-                        : Axis.vertical,
+      scrollDirection:
+          ResponsiveWebSite.isMobile(context) ? Axis.horizontal : Axis.vertical,
       child: Container(
         color: screenContainerbackgroundColor,
         height: 650,
-        width: ResponsiveWebSite.isDesktop(context)
-                          ? double.infinity
-                          : 1200,
+        width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
         child: Padding(
           padding: const EdgeInsets.only(
             top: 0,
@@ -39,7 +36,7 @@ class AllExamNotificationListView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               const Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 25, top: 25),
                 child: SizedBox(
                   height: 60,
@@ -81,31 +78,44 @@ class AllExamNotificationListView extends StatelessWidget {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
+               Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 child: SizedBox(
                   // color: cWhite,
-                  width: 1200,
-                  child: Row(
+                  width: ResponsiveWebSite.isDesktop(context) ? double.infinity: 1200,
+                  child: const Row(
                     children: [
-                      Expanded(flex: 1, child: CatrgoryTableHeaderWidget(headerTitle: 'No')),
-                      SizedBox(
-                        width: 01,
-                      ),
-                      Expanded(flex: 4, child: CatrgoryTableHeaderWidget(headerTitle: 'Exam Name')),
+                      Expanded(
+                          flex: 1,
+                          child: CatrgoryTableHeaderWidget(headerTitle: 'No')),
                       SizedBox(
                         width: 01,
                       ),
                       Expanded(
-                          flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'Total Days')),
+                          flex: 4,
+                          child: CatrgoryTableHeaderWidget(
+                              headerTitle: 'Exam Name')),
                       SizedBox(
                         width: 01,
                       ),
-                      Expanded(flex: 3, child: CatrgoryTableHeaderWidget(headerTitle: 'Starting')),
+                      Expanded(
+                          flex: 2,
+                          child: CatrgoryTableHeaderWidget(
+                              headerTitle: 'Total Days')),
                       SizedBox(
                         width: 01,
                       ),
-                      Expanded(flex: 1, child: CatrgoryTableHeaderWidget(headerTitle: 'Ending')),
+                      Expanded(
+                          flex: 3,
+                          child: CatrgoryTableHeaderWidget(
+                              headerTitle: 'Starting')),
+                      SizedBox(
+                        width: 01,
+                      ),
+                      Expanded(
+                          flex: 1,
+                          child:
+                              CatrgoryTableHeaderWidget(headerTitle: 'Ending')),
                       SizedBox(
                         width: 01,
                       ),
@@ -115,7 +125,7 @@ class AllExamNotificationListView extends StatelessWidget {
               ),
               Expanded(
                 child: SizedBox(
-                  width: 1200,
+                 width:  ResponsiveWebSite.isDesktop(context) ? double.infinity:1200,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: StreamBuilder(
@@ -129,15 +139,16 @@ class AllExamNotificationListView extends StatelessWidget {
                       builder: (context, snaps) {
                         if (snaps.hasData) {
                           if (snaps.data!.docs.isEmpty) {
-                            return  const Center(
+                            return const Center(
                               child: TextFontWidget(
-                                  text: "No exam found, add new exams", fontsize: 12.5),
+                                  text: "No exam found, add new exams",
+                                  fontsize: 12.5),
                             );
                           } else {
                             return ListView.separated(
                                 itemBuilder: (context, index) {
-                                  final data =
-                                      ExamNotificationModel.fromMap(snaps.data!.docs[index].data());
+                                  final data = ExamNotificationModel.fromMap(
+                                      snaps.data!.docs[index].data());
                                   return
                                       // GestureDetector(
                                       //   onTap: () => classController
@@ -148,14 +159,19 @@ class AllExamNotificationListView extends StatelessWidget {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
-                                          getExamNotificationCtr.startDateCtr.text = '';
-                                          getExamNotificationCtr.endDateCtr.text = '';
-                                          getExamNotificationCtr.startTimeCtr.text = '';
-                                          getExamNotificationCtr.endTimeCtr.text = '';
+                                          getExamNotificationCtr
+                                              .startDateCtr.text = '';
+                                          getExamNotificationCtr
+                                              .endDateCtr.text = '';
+                                          getExamNotificationCtr
+                                              .startTimeCtr.text = '';
+                                          getExamNotificationCtr
+                                              .endTimeCtr.text = '';
                                           return ExamTimeTableAddWidget(
                                               examId: data.docId,
                                               size: size,
-                                              getExamNotificationCtr: getExamNotificationCtr);
+                                              getExamNotificationCtr:
+                                                  getExamNotificationCtr);
                                         },
                                       );
                                     },

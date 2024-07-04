@@ -4,8 +4,10 @@ import 'package:vidyaveechi_website/controller/admin_section/parent_controller/p
 import 'package:vidyaveechi_website/view/colors/colors.dart';
 import 'package:vidyaveechi_website/view/constant/constant.validate.dart';
 import 'package:vidyaveechi_website/view/fonts/text_widget.dart';
+import 'package:vidyaveechi_website/view/ioT_Card/code.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/parents/add_parent/add_parent_functio.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/detail_tileContainer.dart';
+import 'package:vidyaveechi_website/view/utils/shared_pref/user_auth/user_credentials.dart';
 import 'package:vidyaveechi_website/view/widgets/blue_Container_widget/blue_Container_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/responsive/responsive.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
@@ -165,6 +167,64 @@ class ParentDetailsContainer extends StatelessWidget {
                                                         stringTimeToDateConvert(
                                                             "${data.createdate}"),
                                                   ),
+                                                  StreamBuilder(
+                                                      stream: server
+                                                          .collection( 'SchoolListCollection')
+                                                          .doc( UserCredentialsController.schoolId)
+                                                          .collection('AllStudents')
+                                                          .doc(data.studentID)
+                                                          .snapshots(),
+                                                      builder:
+                                                          (context, snapshots) {
+                                                        if (snapshots.hasData) {
+                                                          return StudentDetailTileContainer(
+                                                            flex: 1,
+                                                            title:'Student Name',
+                                                            subtitle:' ${snapshots.data?.data()?['studentName'] ?? 'Not Found'}',
+                                                          );
+                                                        } else {
+                                                          return const TextFontWidget(
+                                                            text: " No Data",
+                                                            fontsize: 12,
+                                                            overflow:TextOverflow.ellipsis,
+                                                          );
+                                                        }
+                                                      }),
+                                                  StreamBuilder(
+                                                      stream: server
+                                                          .collection( 'SchoolListCollection')
+                                                          .doc( UserCredentialsController.schoolId)
+                                                          .collection('AllStudents')
+                                                          .doc(data.studentID)
+                                                          .snapshots(),
+                                                      builder:
+                                                          (context, stsnaps) {
+                                                        if (stsnaps.hasData) {
+                                                          return StreamBuilder(
+                                                              stream: server
+                                                                  .collection( 'SchoolListCollection')
+                                                                  .doc(UserCredentialsController.schoolId)
+                                                                  .collection('classes')
+                                                                  .doc(stsnaps .data ?.data()?['classId'])
+                                                                  .snapshots(),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                return StudentDetailTileContainer(
+                                                                  flex: 1,
+                                                                  title:
+                                                                      'Class Name',
+                                                                  subtitle:
+                                                                      ' ${snapshot.data?.data()?['className'] ?? 'Not Found'}',
+                                                                );
+                                                              });
+                                                        } else if (stsnaps
+                                                            .hasError) {
+                                                          return const Text(
+                                                              'Class');
+                                                        } else {
+                                                          return const Text('');
+                                                        }
+                                                      }),
                                                 ],
                                               ),
                                             ),

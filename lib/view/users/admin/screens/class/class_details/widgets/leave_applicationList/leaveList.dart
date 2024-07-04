@@ -257,9 +257,12 @@ class LeaveApplicationData extends StatelessWidget {
                         return TextFontWidget(
                             fontsize: 12,
                             index: index,
-                            text: snapshot.data!.docs[index]['parentPhoneNumber'] == null
-                                ? 'Phone Number not available'
-                                : snapshot.data!.docs[index]['parentPhoneNumber'].toString());
+                            text:(snapshot.data?.docs[index]['parentPhoneNumber'] ?? 'Phone Number not available').toString()
+
+                            //  snapshot.data!.docs[index]['parentPhoneNumber'] == null
+                            //     ? 'Phone Number not available'
+                            //     : snapshot.data!.docs[index]['parentPhoneNumber'].toString()
+                                );
                       }),
                 ],
               ),

@@ -54,7 +54,7 @@ class AllLoginLogoutDataList extends StatelessWidget {
             ),
           ), //........................................... Parent Name
           const SizedBox(
-            width: 01,
+            width: 02,
           ),
           Expanded(
             flex: 4,
@@ -72,7 +72,7 @@ class AllLoginLogoutDataList extends StatelessWidget {
             ),
           ), // ................................... Parent Email
           const SizedBox(
-            width: 01,
+            width: 02,
           ),
           Expanded(
             flex: 3,
@@ -89,7 +89,7 @@ class AllLoginLogoutDataList extends StatelessWidget {
             ),
           ), //....................................... parent Phone Number
           const SizedBox(
-            width: 01,
+            width: 02,
           ),
           Expanded(
             flex: 3,
@@ -107,7 +107,7 @@ class AllLoginLogoutDataList extends StatelessWidget {
           ), //............................. Student Class
 
           const SizedBox(
-            width: 01,
+            width: 02,
           ),
         ],
       ),

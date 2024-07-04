@@ -97,8 +97,8 @@ class MeetingController extends GetxController {
           'date': editdateController.text,
           'time': edittimeController.text,
           'category': editcategoryController.text,
-          'member': editmemberController.text,
-          'specialguest': editspecialguestController.text,
+          'members': editmemberController.text,
+          'specialGuest': editspecialguestController.text,
           'venue': editvenueController.text,
         })
         .then((value) => Navigator.pop(context))
@@ -131,6 +131,19 @@ class MeetingController extends GetxController {
     if (pickedDate != null) {
       String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
       controller.text = formattedDate;
+    }
+  }
+
+  Future<void> selectTimesec(
+      BuildContext context, TextEditingController controller) async {
+    final TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (selectedTime != null) {
+      final String formattedTime = selectedTime.format(context);
+      controller.text = formattedTime;
     }
   }
 }

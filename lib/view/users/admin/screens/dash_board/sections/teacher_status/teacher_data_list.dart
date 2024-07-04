@@ -71,11 +71,10 @@ class TeacherDataList extends StatelessWidget {
             flex: 7,
             child: Center(
               child: StreamBuilder(
-                stream: allteacherscontroller.getTeacherSubjectsStream(teacherDocId: teacherId), // Pass teacherId
+                stream: allteacherscontroller.getTeacherSubjectsStream(
+                    teacherDocId: teacherId), // Pass teacherId
                 builder: (context, classsnapshot) {
-                  if (classsnapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (classsnapshot.hasError) {
+                  if (classsnapshot.hasError) {
                     return Center(child: Text('Error: ${classsnapshot.error}'));
                   } else if (!classsnapshot.hasData || classsnapshot.data!.docs.isEmpty) {
                     return DataContainerWidget(
@@ -106,11 +105,10 @@ class TeacherDataList extends StatelessWidget {
               color: index % 2 == 0 ? const Color.fromARGB(255, 246, 246, 246) : Colors.blue[50],
               child: Center(
                 child: StreamBuilder(
-                  stream: allteacherscontroller.getTeacherSubjectsStream(teacherDocId: teacherId), // Pass teacherId
+                  stream: allteacherscontroller.getTeacherSubjectsStream(
+                      teacherDocId: teacherId), // Pass teacherId
                   builder: (context, classsnapshot) {
-                    if (classsnapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (classsnapshot.hasError) {
+                    if (classsnapshot.hasError) {
                       return Center(child: Text('Error: ${classsnapshot.error}'));
                     } else if (!classsnapshot.hasData || classsnapshot.data!.docs.isEmpty) {
                       return DataContainerWidget(
@@ -120,7 +118,8 @@ class TeacherDataList extends StatelessWidget {
                         headerTitle: '--',
                       );
                     } else {
-                      var subjectFeefortr = classsnapshot.data!.docs.first['subjectFeefortr'].toString();
+                      var subjectFeefortr =
+                          classsnapshot.data!.docs.first['subjectFeefortr'].toString();
                       return DataContainerWidget(
                         rowMainAccess: MainAxisAlignment.center,
                         color: cWhite,

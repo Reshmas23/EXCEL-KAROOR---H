@@ -34,7 +34,7 @@ class ClassWiseFeesStatus extends StatelessWidget {
             : Axis.vertical,
         child: Container(
           color: screenContainerbackgroundColor,
-          height:   650,
+          height: 1000,
           width: ResponsiveWebSite.isDesktop(context) ? double.infinity : 1200,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +110,7 @@ class ClassWiseFeesStatus extends StatelessWidget {
                 child: Container(
                   color: cWhite,
                   width: double.infinity,
-                  height:  500,
+                  height: ResponsiveWebSite.isMobile(context) ? 800 : 500,
                   child: Column(
                     children: [
                       Padding(
@@ -146,6 +146,13 @@ class ClassWiseFeesStatus extends StatelessWidget {
                                   flex: 2,
                                   child: CatrgoryTableHeaderWidget(
                                       headerTitle: 'Fee')),
+                              SizedBox(
+                                width: 02,
+                              ),
+                              Expanded(
+                                  flex: 2,
+                                  child: CatrgoryTableHeaderWidget(
+                                      headerTitle: 'status')),
                               SizedBox(
                                 width: 02,
                               ),
@@ -344,7 +351,35 @@ class ClassWiseFeesDataListContainer extends StatelessWidget {
                         fontsize: 12,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const Spacer(),
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 15,
+                        child: Image.asset(
+                          'webassets/png/active.png',
+                        ),
+                      ),
+                      const TextFontWidget(
+                        text: " Full Paid",
+                        fontsize: 12,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+          ),
+          Container(
+            color: cWhite,
+            width: 02,
+          ),
+          Expanded(
+            flex: 2,
+            child: studentdata['feepaid'] == false
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Obx(() => Padding(
                             padding: const EdgeInsets.only(bottom: 10),
                             child: Get.find<FeesAndBillsController>()
@@ -435,19 +470,6 @@ class ClassWiseFeesDataListContainer extends StatelessWidget {
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      //
-                      SizedBox(
-                        width: 15,
-                        child: Image.asset(
-                          'webassets/png/active.png',
-                        ),
-                      ),
-                      const TextFontWidget(
-                        text: " Full Paid",
-                        fontsize: 12,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const Spacer(),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: IconButton(

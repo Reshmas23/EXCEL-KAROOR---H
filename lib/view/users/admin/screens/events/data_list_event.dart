@@ -34,7 +34,7 @@ class AllEventsDataList extends StatelessWidget {
                 headerTitle: '${index + 1}'), //....................No
           ),
           const SizedBox(
-            width: 01,
+            width: 02,
           ),
           Expanded(
             flex: 4,
@@ -45,7 +45,7 @@ class AllEventsDataList extends StatelessWidget {
                 headerTitle: data.eventName),
           ), //.............................Event Name
           const SizedBox(
-            width: 01,
+            width: 02,
           ),
           Expanded(
             flex: 4,
@@ -85,7 +85,7 @@ class AllEventsDataList extends StatelessWidget {
             ),
           ), // ...................................Event Description
           const SizedBox(
-            width: 01,
+            width: 02,
           ),
           Expanded(
             flex: 2,
@@ -136,7 +136,7 @@ class AllEventsDataList extends StatelessWidget {
             ),
           ), //....................................... Edit
           const SizedBox(
-            width: 01,
+            width: 02,
           ),
           Expanded(
             flex: 2,

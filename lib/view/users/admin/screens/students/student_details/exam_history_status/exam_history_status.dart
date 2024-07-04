@@ -113,7 +113,7 @@ class PerStudentExamHistory extends StatelessWidget {
                       Expanded(
                           flex: 1,
                           child: CatrgoryTableHeaderWidget(
-                              headerTitle: 'Pass Exam')),
+                              headerTitle: 'Pass Mark')),
                       SizedBox(
                         width: 02,
                       ),

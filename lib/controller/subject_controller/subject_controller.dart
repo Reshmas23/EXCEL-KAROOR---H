@@ -20,7 +20,7 @@ class SubjectController extends GetxController {
   RxString subjectName = ''.obs;
   RxString subjectID = ''.obs;
   Rx<ButtonState> buttonstate = ButtonState.idle.obs;
-  Rx<Color> subjectColor = Rx(Colors.amber);
+  Rx<Color> subjectColor = Colors.amber.obs;
   final _firebase = server
       .collection('SchoolListCollection')
       .doc(UserCredentialsController.schoolId)

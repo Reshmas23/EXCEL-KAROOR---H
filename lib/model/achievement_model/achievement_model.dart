@@ -43,11 +43,11 @@ class AchievementModel {
 
   factory AchievementModel.fromMap(Map<String, dynamic> map) {
     return AchievementModel(
-      studentName: map['studentName'] as String,
-      dateofAchievement: map['dateofAchievement'] as String,
-      achievementHead: map['achievementHead'] as String,
-      admissionNumber: map['admissionNumber'] as String,
-      uid: map['uid'] as String,
+      studentName: map['studentName'] ?? "",
+      dateofAchievement: map['dateofAchievement'] ?? "",
+      achievementHead: map['achievementHead'] ?? "",
+      admissionNumber: map['admissionNumber'] ?? "",
+      uid: map['uid'] ?? "",
     );
   }
 

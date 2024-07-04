@@ -102,7 +102,7 @@ class CreatedFeesStatus extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(left: 10, right: 10, top: 25),
                     child: Container(
-                        width: 1200,
+                        width: ResponsiveWebSite.isDesktop(context) ? double.infinity: 1200,
                         height: // ResponsiveWebSite.isMobile(context) ? 800 :
                             500,
                         color: cWhite,

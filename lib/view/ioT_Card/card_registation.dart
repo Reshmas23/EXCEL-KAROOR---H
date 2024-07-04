@@ -10,6 +10,7 @@ import 'package:vidyaveechi_website/view/ioT_Card/select_class_DropDown/select_c
 import 'package:vidyaveechi_website/view/ioT_Card/student_dataList.dart';
 import 'package:vidyaveechi_website/view/users/admin/screens/students/student_details/widgets/category_tableHeader.dart';
 import 'package:vidyaveechi_website/view/utils/firebase/firebase.dart';
+import 'package:vidyaveechi_website/view/widgets/data_list_widgets/data_container.dart';
 import 'package:vidyaveechi_website/view/widgets/loading_widget/loading_widget.dart';
 import 'package:vidyaveechi_website/view/widgets/progess_button/progress_button.dart';
 import 'package:vidyaveechi_website/view/widgets/routeSelectedTextContainer/routeSelectedTextContainer.dart';
@@ -59,8 +60,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                               stream: server
                                   .collection('SchoolListCollection')
                                   .doc(ioTCardController.schoolDocID.value)
-                                  .collection(
-                                      ioTCardController.batchDocID.value)
+                                  .collection(ioTCardController.batchDocID.value)
                                   .doc(ioTCardController.batchDocID.value)
                                   .collection('classes')
                                   .doc(ioTCardController.classDocID.value)
@@ -68,16 +68,12 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                                   .snapshots(),
                               builder: (context, snapshot) {
                                 return TextFontWidget(
-                                  text:
-                                      'Student Count : ${snapshot.data?.docs.length ?? 0}  ',
+                                  text: 'Student Count : ${snapshot.data?.docs.length ?? 0}  ',
                                   fontsize: 16,
                                   fontWeight: FontWeight.bold,
                                 );
                               }),
-                      SizedBox(
-                          height: 60,
-                          width: 200,
-                          child: CardSelectClassDropDown()),
+                      SizedBox(height: 60, width: 200, child: CardSelectClassDropDown()),
                     ],
                   ),
                 ),
@@ -101,9 +97,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                               child: Container(
                                 decoration: BoxDecoration(
                                     color: cWhite,
-                                    border: Border.all(
-                                        color:
-                                            themeColorBlue.withOpacity(0.2))),
+                                    border: Border.all(color: themeColorBlue.withOpacity(0.2))),
                                 height: 30,
                                 width: 350,
                                 child: Row(
@@ -126,9 +120,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                               child: Container(
                                 decoration: BoxDecoration(
                                     color: cWhite,
-                                    border: Border.all(
-                                        color:
-                                            themeColorBlue.withOpacity(0.2))),
+                                    border: Border.all(color: themeColorBlue.withOpacity(0.2))),
                                 height: 30,
                                 width: 120,
                                 child: Row(
@@ -136,8 +128,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     TextFontWidget(
-                                      text:
-                                          ' Ad No :  ${ioTCardController.pastStudentAdNO.value}',
+                                      text: ' Ad No :  ${ioTCardController.pastStudentAdNO.value}',
                                       fontsize: 12,
                                       fontWeight: FontWeight.w500,
                                       color: cBlack,
@@ -157,18 +148,15 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                               stream: server
                                   .collection('SchoolListCollection')
                                   .doc(ioTCardController.schoolDocID.value)
-                                  .collection(
-                                      ioTCardController.batchDocID.value)
+                                  .collection(ioTCardController.batchDocID.value)
                                   .doc(ioTCardController.batchDocID.value)
                                   .collection('classes')
                                   .doc(ioTCardController.classDocID.value)
                                   .collection('Students')
                                   .snapshots(),
                               builder: (context, ssnapshot) {
-                                final int studentLength =
-                                    ssnapshot.data?.docs.length ?? 0;
-                                final list =
-                                    ioTCardController.classStudentList.length;
+                                final int studentLength = ssnapshot.data?.docs.length ?? 0;
+                                final list = ioTCardController.classStudentList.length;
                                 print("studentLength $studentLength");
                                 print("list $list");
                                 return ssnapshot.hasData
@@ -185,7 +173,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                           StreamBuilder(
                               stream: server
                                   .collection('StudentRegistration')
-                                  .doc('CardData')
+                                  .doc('MsRK8bvGM7hvpoXAvtbVo3KsB6H2')
                                   .snapshots(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
@@ -195,16 +183,12 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                                   return Container(
                                     decoration: BoxDecoration(
                                         color: cWhite,
-                                        border: Border.all(
-                                            color: themeColorBlue
-                                                .withOpacity(0.2))),
+                                        border: Border.all(color: themeColorBlue.withOpacity(0.2))),
                                     height: 30,
                                     width: 350,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         TextFontWidget(
                                           text:
@@ -217,8 +201,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                                     ),
                                   );
                                 } else {
-                                  return const CircularProgressIndicator
-                                      .adaptive();
+                                  return const CircularProgressIndicator.adaptive();
                                 }
                               }),
                           const SizedBox(
@@ -228,8 +211,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                             height: 40,
                             width: 180,
                             child: ProgressButtonWidget(
-                                buttonstate:
-                                    ioTCardController.buttonstate.value,
+                                buttonstate: ioTCardController.buttonstate.value,
                                 text: '🔗 Status',
                                 function: () {}),
                           ),
@@ -248,52 +230,33 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                       height: 40,
                       child: const Row(
                         children: [
-                          Expanded(
-                              flex: 1,
-                              child:
-                                  CatrgoryTableHeaderWidget(headerTitle: 'No')),
+                          Expanded(flex: 1, child: CatrgoryTableHeaderWidget(headerTitle: 'No')),
                           SizedBox(
                             width: 02,
                           ),
                           Expanded(
-                              flex: 2,
-                              child: CatrgoryTableHeaderWidget(
-                                  headerTitle: 'CardID')),
+                              flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'CardID')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'AD.No')),
+                          SizedBox(
+                            width: 02,
+                          ),
+                          Expanded(flex: 4, child: CatrgoryTableHeaderWidget(headerTitle: 'Name')),
                           SizedBox(
                             width: 02,
                           ),
                           Expanded(
-                              flex: 2,
-                              child: CatrgoryTableHeaderWidget(
-                                  headerTitle: 'AD.No')),
+                              flex: 4, child: CatrgoryTableHeaderWidget(headerTitle: 'E mail')),
                           SizedBox(
                             width: 02,
                           ),
-                          Expanded(
-                              flex: 4,
-                              child: CatrgoryTableHeaderWidget(
-                                  headerTitle: 'Name')),
+                          Expanded(flex: 3, child: CatrgoryTableHeaderWidget(headerTitle: 'Ph.NO')),
                           SizedBox(
                             width: 02,
                           ),
-                          Expanded(
-                              flex: 4,
-                              child: CatrgoryTableHeaderWidget(
-                                  headerTitle: 'E mail')),
-                          SizedBox(
-                            width: 02,
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: CatrgoryTableHeaderWidget(
-                                  headerTitle: 'Ph.NO')),
-                          SizedBox(
-                            width: 02,
-                          ),
-                          Expanded(
-                              flex: 2,
-                              child: CatrgoryTableHeaderWidget(
-                                  headerTitle: 'Class')),
+                          Expanded(flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'Class')),
                           SizedBox(
                             width: 02,
                           ),
@@ -321,8 +284,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                             return ListView.separated(
                                 itemBuilder: (context, index) {
                                   return ClassWiseStudentDataList(
-                                    data: ioTCardController
-                                        .registudentList[index],
+                                    data: ioTCardController.registudentList[index],
                                     index: index,
                                   );
                                 },
@@ -331,8 +293,7 @@ class ClassWiseStudentListContainer extends StatelessWidget {
                                     height: 02,
                                   );
                                 },
-                                itemCount:
-                                    ioTCardController.registudentList.length);
+                                itemCount: ioTCardController.registudentList.length);
                           } else if (snaPS.data == null) {
                             return const LoadingWidget();
                           } else {
@@ -351,13 +312,93 @@ class ClassWiseStudentListContainer extends StatelessWidget {
       floatingActionButton: GestureDetector(
         onTap: () {
           Get.bottomSheet(
-              Container(
-                constraints: const BoxConstraints(maxHeight: 300),
-                color: cWhite));
+            Container(
+              height: 400,
+              width: 600,
+              color: cWhite,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 5, right: 5, top: 10),
+                child: Column(children: [
+                  const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(flex: 1, child: CatrgoryTableHeaderWidget(headerTitle: 'Name')),
+                      SizedBox(
+                        width: 02,
+                      ),
+                      Expanded(flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'CardID')),
+                      SizedBox(
+                        width: 02,
+                      ),
+                      Expanded(flex: 2, child: CatrgoryTableHeaderWidget(headerTitle: 'AD.No')),
+                      SizedBox(
+                        width: 02,
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                      child: ListView.separated(
+                    itemCount: 5,
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 1,
+                    ),
+                    itemBuilder: (context, indexx) {
+                      return Container(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: DataContainerWidget(
+                                  rowMainAccess: MainAxisAlignment.center,
+                                  color: cWhite,
+                                  // width: 150,
+                                  index: indexx,
+                                  headerTitle: '44'), //....................No
+                            ),
+                            const SizedBox(
+                              width: 02,
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: DataContainerWidget(
+                                  rowMainAccess: MainAxisAlignment.center,
+                                  color: cWhite,
+                                  // width: 150,
+                                  index: indexx,
+                                  headerTitle: 'rahul'), //....................No
+                            ),
+                            const SizedBox(
+                              width: 02,
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: DataContainerWidget(
+                                  rowMainAccess: MainAxisAlignment.center,
+                                  color: cWhite,
+                                  // width: 150,
+                                  index: indexx,
+                                  headerTitle: '11'), //....................No
+                            ),
+                            const SizedBox(
+                              width: 02,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ))
+                ]),
+              ),
+            ),
+          );
         },
         child: const SizedBox(
-          height: 40,
-          child: RouteSelectedTextContainer(title: 'Registered Students',width: 150,)),
+            height: 40,
+            child: RouteSelectedTextContainer(
+              title: 'Registered Students',
+              width: 150,
+            )),
       ),
     );
   }

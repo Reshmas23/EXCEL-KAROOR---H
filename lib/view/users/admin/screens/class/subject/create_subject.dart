@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awesome_side_sheet/Enums/sheet_position.dart';
 import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
@@ -67,9 +65,9 @@ createSubjectFunction(BuildContext context, String classId) {
                   ),
                   value: subjectController.subjectColor.value,
                   onChanged: (Color? newValue) {
-                    subjectController.subjectColor.value = newValue ??
-                        Colors.amber; // Update selectColor in controller
-                    log('COL :${newValue?.value.toRadixString(16)}');
+                    subjectController.subjectColor.value = newValue??Colors.amber;
+                       // Colors.amber; // Update selectColor in controller
+                  
                   },
                   items: [
                     Colors.amber,

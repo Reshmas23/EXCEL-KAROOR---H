@@ -26,8 +26,26 @@ class RegistrationController extends GetxController {
   RxString className = ''.obs;
   RxString classDocID = ''.obs;
   Rx<ButtonState> buttonstate = ButtonState.idle.obs;
+  var showTextField = true.obs; // Add this line
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  var generatedAdmissionNumber = ''.obs;
+  void generateCustomText() {
+    String schoolInitial = schoolListValue?['schoolName'][0] ?? '';
+    String classEnding = className.value.length >= 2
+        ? className.value.substring(className.value.length - 2)
+        : className.value;
+    String nameInitials = stNameController.text.length >= 2
+        ? stNameController.text.substring(0, 2)
+        : stNameController.text;
+    String phoneEnding = stPhoneController.text.length >= 2
+        ? stPhoneController.text.substring(stPhoneController.text.length - 2)
+        : stPhoneController.text;
+
+    generatedAdmissionNumber.value =
+        '$schoolInitial$classEnding$nameInitials$phoneEnding';
+  }
 
   Future<List<ClassModel>> fetchClass() async {
     await server
@@ -150,13 +168,17 @@ class RegistrationController extends GetxController {
   //  RxString gender='Select gender'.obs;
 
   Future<void> classWiseStudentCreation() async {
+    final admissionNumber = stadNoController.text.trim().isNotEmpty
+        ? stadNoController.text.trim()
+        : generatedAdmissionNumber.value;
+
     buttonstate.value = ButtonState.loading;
     try {
       final uid = uuid.v1();
       final studentDetail = StudentModel(
         cardID: '',
         cardTaken: false,
-        admissionNumber: stadNoController.text.trim(),
+        admissionNumber: admissionNumber,
         alPhoneNumber: '',
         bloodgroup: '',
         classId: classDocID.value,
@@ -190,11 +212,9 @@ class RegistrationController extends GetxController {
           .set(studentDetail.toMap())
           .then((value) async {
         await notificationCounter();
-        stNameController.clear();
-        stPhoneController.clear();
-        stEmailController.clear();
+        clearForm();
         buttonstate.value = ButtonState.success;
-        showToast(msg: "Account requested to Tuition Center");
+        showToast(msg: "Account requested is successfully send");
         await Future.delayed(const Duration(seconds: 2)).then((vazlue) {
           buttonstate.value = ButtonState.idle;
         });
@@ -207,7 +227,15 @@ class RegistrationController extends GetxController {
       log("Error .... $e");
     }
   }
-
+ void clearForm() {
+    stNameController.clear();
+    stPhoneController.clear();
+    stEmailController.clear();
+    stadNoController.clear();
+    gender.value = '';
+    showTextField.value = true;
+    generatedAdmissionNumber.value = '';
+  }
   Future<void> notificationCounter() async {
     await server
         .collection('SchoolListCollection')
